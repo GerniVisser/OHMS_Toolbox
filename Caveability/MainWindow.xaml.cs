@@ -21,9 +21,30 @@ namespace Caveability
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private WallControle Footwall;
+        private WallControle Hangwall;
+        private WallControle StopEBack;
+        private WallControle StrikeEnd;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            Footwall = new WallControle(true);
+            Hangwall = new WallControle();
+            StopEBack = new WallControle();
+            StrikeEnd = new WallControle();
+        }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+
+            tabFootwall.Content = Footwall;
+            tabHangwall.Content = Hangwall;
+            tabStopeBack.Content = StopEBack;
+            tabStrikeEnds.Content = StrikeEnd;
         }
     }
 }

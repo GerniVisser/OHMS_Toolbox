@@ -27,16 +27,17 @@ namespace Caveability
 
         private Wall _wall;
 
-        public WallControle()
+        public WallControle(bool isFootwall = false)
         {
+            if (isFootwall) _wall = new Wall(isFootwall);
+            else _wall = new Wall();
+
             InitializeComponent();
         }
 
         public override void EndInit()
         {
             base.EndInit();
-
-            _wall = new Wall();
 
             PropertyGrid.SelectedObject = _wall;
 

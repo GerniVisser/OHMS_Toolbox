@@ -138,17 +138,20 @@
                 TabStripPlacement="Left">
 
                 <syncfusion:TabItemExt 
-                    Header="Footwall" >
-                    <local:WallControle/>
+                    Header="Footwall" 
+                    x:Name="tabFootwall">
                 </syncfusion:TabItemExt>
                 <syncfusion:TabItemExt 
-                    Header="Hangwall">
+                    Header="Hangwall"
+                    x:Name="tabHangwall">
                 </syncfusion:TabItemExt>
                 <syncfusion:TabItemExt 
-                    Header="Stope Back">
+                    Header="Stope Back"
+                    x:Name="tabStopeBack">
                 </syncfusion:TabItemExt>
                 <syncfusion:TabItemExt 
-                    Header="Strike Ends">
+                    Header="Strike Ends"
+                    x:Name="tabStrikeEnds">
                 </syncfusion:TabItemExt>
             </syncfusion:TabControlExt>
         </Grid>
