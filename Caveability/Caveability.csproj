@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Syncfusion.Licensing" Version="19.3.0.48" />
+    <PackageReference Include="Syncfusion.PropertyGrid.WPF" Version="19.3.0.48" />
+    <PackageReference Include="Syncfusion.SfChart.WPF" Version="19.3.0.48" />
+    <PackageReference Include="Syncfusion.Shared.WPF" Version="19.3.0.48" />
+    <PackageReference Include="Syncfusion.Tools.WPF" Version="19.3.0.48" />
+  </ItemGroup>
+
+</Project>
