@@ -102,9 +102,9 @@
                 TabScrollButtonVisibility="Hidden">
 
                 <syncfusion:TabItemExt
-                    Header="A Graph"
-                    Height="30">
-
+                    Height="30"
+                    Header="A Graph">
+                    
                     <DockPanel>
                         <chart:SfChart 
                             Header="Stress Factor A"
@@ -154,7 +154,7 @@
                             </chart:SfChart.Behaviors>
 
                             <chart:LineSeries
-                                ItemsSource="{Binding ACoordSerries}"
+                                Name="A_LineSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
                                 Interior="#f0602b"
@@ -162,7 +162,7 @@
                             
                                 />
                             <chart:ScatterSeries
-                                ItemsSource="{Binding APoint}"
+                                Name="A_PointSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
                                 ScatterHeight="12"
@@ -174,8 +174,8 @@
 
                 </syncfusion:TabItemExt>
                 <syncfusion:TabItemExt
-                    Header="B Graph"
-                    Height="30">
+                    Height="30"
+                    Header="B Graph">
 
                     <DockPanel>
                         <chart:SfChart 
@@ -226,7 +226,7 @@
                             </chart:SfChart.Behaviors>
 
                             <chart:LineSeries
-                                ItemsSource="{Binding BCoordSerries}"
+                                Name="B_LineSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
                                 Interior="#f0602b"
@@ -234,7 +234,7 @@
                             
                                 />
                             <chart:ScatterSeries
-                                ItemsSource="{Binding BPoint}"
+                                Name="B_PointSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
                                 ScatterHeight="12"
@@ -246,8 +246,8 @@
 
                 </syncfusion:TabItemExt>
                 <syncfusion:TabItemExt
-                    Header="C Graph"
-                    Height="30">
+                    Height="30"
+                    Header="C Graph">
 
                     <DockPanel>
                         <chart:SfChart 
@@ -298,7 +298,7 @@
                             </chart:SfChart.Behaviors>
 
                             <chart:LineSeries
-                                ItemsSource="{Binding CCoordSerries}"
+                                Name="C_LineSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
                                 Interior="#f0602b"
@@ -306,7 +306,7 @@
                             
                                 />
                             <chart:ScatterSeries
-                                ItemsSource="{Binding CPoint}"
+                                Name="C_PointSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
                                 ScatterHeight="12"
@@ -317,8 +317,8 @@
                     </DockPanel>
                 </syncfusion:TabItemExt>
                 <syncfusion:TabItemExt
-                    Header="HR Graph"
-                    Height="30">
+                    Height="30"
+                    Header="HR Graph">
 
                     <DockPanel>
                         <chart:SfChart 
@@ -344,7 +344,7 @@
                             </chart:SfChart.SecondaryAxis>
 
                             <chart:AreaSeries
-                                ItemsSource="{Binding HRTopCoordSerries}"
+                                Name="HRTopAreSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
                                 Interior="#e0e0e0"
@@ -353,14 +353,14 @@
                                 />
 
                             <chart:AreaSeries
-                                ItemsSource="{Binding HRCoordSerries}"
+                                Name="HRBotAreSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
                                 Interior="White"
                                 StrokeThickness="2"
                                 />
                             <chart:ScatterSeries
-                                ItemsSource="{Binding HRPoint}"
+                                Name="HRmax_PointSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
                                 ScatterHeight="12"
@@ -368,7 +368,7 @@
                                 Interior="#f0602b"
                                 />
                             <chart:ScatterSeries
-                                ItemsSource="{Binding HRLinePoint}"
+                                Name="HR_PointSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
                                 ScatterHeight="12"
@@ -411,19 +411,19 @@
                 <TextBlock Text="Current Hydraulic Radius"
                                    Grid.Column="1"
                                    Grid.Row="1"/>
-                <TextBlock Text="{Binding CurrentHR}"
+                <TextBlock x:Name="txtCurrentHR"
                                    Grid.Column="3" 
                                    Grid.Row="1"/>
                 <TextBlock Text="Maximum allowed Hydraulic Radius"
                                    Grid.Column="1" 
                                    Grid.Row="2"/>
-                <TextBlock Text="{Binding MaxHR}"
+                <TextBlock x:Name="txtMaxHR"
                                    Grid.Column="3" 
                                    Grid.Row="2"/>
                 <TextBlock Text="Maximum allowed Length"
                                    Grid.Column="1" 
                                    Grid.Row="3"/>
-                <TextBlock Text="{Binding MaxLength}"
+                <TextBlock x:Name="txtMaxLength"
                                    Grid.Column="3" 
                                    Grid.Row="4"/>
                 <Button Command="{Binding ReportCommand}" CommandParameter="{Binding ElementName=A_Chart}" Content="Hello World"/>
@@ -442,6 +442,7 @@
                 DescriptionPanelVisibility="Collapsed"
                 EnableGrouping="True"
                 UpdateSourceMode="ReturnOrLostFocus" 
+                ValueChanged="PropertyGrid_ValueChanged"
                 PropertyExpandMode="FlatMode"  
                 />
         </Grid>
