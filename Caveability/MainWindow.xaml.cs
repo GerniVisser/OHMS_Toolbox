@@ -1,4 +1,7 @@
-﻿using Syncfusion.Windows.Shared;
+﻿using Caveability.Helper;
+using Caveability.Services;
+using Microsoft.Win32;
+using Syncfusion.Windows.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +48,19 @@ namespace Caveability
             tabHangwall.Content = Hangwall;
             tabStopeBack.Content = StopEBack;
             tabStrikeEnds.Content = StrikeEnd;
+        }
+
+        private void MenuItemAdv_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF document (*.pdf)|*.pdf";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                ChartStreamObject Footwall_chartStream = Footwall.ChartStreams();
+
+                Report.GenerateReport(Footwall_chartStream, saveFileDialog.FileName);
+            }
         }
     }
 }

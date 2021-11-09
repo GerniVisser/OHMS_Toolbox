@@ -1,9 +1,11 @@
 ﻿using Caveability.Helper;
 using Caveability.Models;
+using Syncfusion.UI.Xaml.Charts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -83,6 +86,43 @@ namespace Caveability
             txtCurrentHR.Text = Math.Round(_wall.HR.Calculate(), 2).ToString();
             txtMaxHR.Text = Math.Round(_wall.HR.CalculateXAxis(n), 2).ToString();
             txtMaxLength.Text = _wall.HR.GetMaxLenght(n).ToString();
+        }
+
+
+        // This method may perhaps have to be made async
+        public ChartStreamObject ChartStreams()
+        {
+            ChartStreamObject chartStream = new ChartStreamObject();
+
+            try
+            {
+                chartStream.A_chartStream = ChartStream(A_Chart);
+                chartStream.B_chartStream = ChartStream(B_Chart);
+                chartStream.C_chartStream = ChartStream(C_Chart);
+                chartStream.HR_chartStream = ChartStream(HR_Chart);
+            }
+            catch(Exception ex)
+            {
+                
+            }
+
+            return chartStream;
+        }
+
+        private Stream ChartStream(SfChart chart)
+        {
+
+            Stream outStream = new MemoryStream();
+
+            chart.Width = 824;
+            chart.Height = 474;
+            chart.Background = new SolidColorBrush(Colors.White);
+            chart.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            chart.Arrange(new Rect(0, 0, chart.Width, chart.Height));
+
+            chart.Save(outStream, new BmpBitmapEncoder());
+
+            return outStream;
         }
 
     }

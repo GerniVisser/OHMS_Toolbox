@@ -35,7 +35,7 @@ namespace Caveability.Models
         public List<Coord> GetGraphCoords()
         {
             int range = 10;
-            double interval = 0.05;
+            double interval = 0.07;
 
             double numPoints = range / interval;
 
