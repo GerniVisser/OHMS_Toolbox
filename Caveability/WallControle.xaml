@@ -175,7 +175,8 @@
                 </syncfusion:TabItemExt>
                 <syncfusion:TabItemExt
                     Height="30"
-                    Header="B Graph">
+                    Header="B Graph"
+                    x:Name="B_Tab">
 
                     <DockPanel>
                         <chart:SfChart 

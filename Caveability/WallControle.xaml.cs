@@ -28,7 +28,7 @@ namespace Caveability
     public partial class WallControle : UserControl
     {
 
-        private Wall _wall;
+        public Wall _wall;
 
         public WallControle(bool isFootwall = false)
         {
@@ -36,11 +36,6 @@ namespace Caveability
             else _wall = new Wall();
 
             InitializeComponent();
-        }
-
-        public override void EndInit()
-        {
-            base.EndInit();
 
             PropertyGrid.SelectedObject = _wall;
 
@@ -103,7 +98,7 @@ namespace Caveability
             }
             catch(Exception ex)
             {
-                
+                throw new Exception(ex.ToString());
             }
 
             return chartStream;
@@ -120,9 +115,22 @@ namespace Caveability
             chart.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             chart.Arrange(new Rect(0, 0, chart.Width, chart.Height));
 
+            HwndSourceParameters sourceParameters = new HwndSourceParameters();
+
+            sourceParameters.HwndSourceHook = ApplicationMessageFilter;
+
+            HwndSource source = new HwndSource(sourceParameters);
+
+            source.RootVisual = chart;
+
             chart.Save(outStream, new BmpBitmapEncoder());
 
             return outStream;
+        }
+
+        static IntPtr ApplicationMessageFilter(IntPtr hwnd, int message, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            return IntPtr.Zero;
         }
 
     }

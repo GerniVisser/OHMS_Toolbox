@@ -57,9 +57,14 @@ namespace Caveability
 
             if (saveFileDialog.ShowDialog() == true)
             {
-                ChartStreamObject Footwall_chartStream = Footwall.ChartStreams();
+                StopeStreamObject stopeStream = new StopeStreamObject();
 
-                Report.GenerateReport(Footwall_chartStream, saveFileDialog.FileName);
+                stopeStream.footwallStreamObject = Footwall.ChartStreams();
+                stopeStream.hangwallStreamObject = Hangwall.ChartStreams();
+                stopeStream.stopebackStreamObject = StopEBack.ChartStreams();
+                stopeStream.strikeendStreamObject = StrikeEnd.ChartStreams();
+
+                Report.GenerateReport(stopeStream, saveFileDialog.FileName);
             }
         }
     }
