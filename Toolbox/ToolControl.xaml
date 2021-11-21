@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="Toolbox.ToolControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Toolbox"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"  
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="PrimaryColour" Color="#f06e3e"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel 
+            Background="{StaticResource PrimaryColour}" 
+            Orientation="Horizontal">
+            <Image 
+                Margin="10"
+                Source="/Icons/calculator_white.png"
+                
+             />
+
+            <Label x:Name="headerLabel" 
+                    Height="50" 
+                    FontFamily="Calibri"
+                    HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" 
+                    Content="Caveabilty calculator" 
+                    FontSize="20" 
+                    Foreground="White" 
+                    Background="{StaticResource PrimaryColour}"/>
+        </StackPanel>
+
+        <DockPanel
+            Grid.Row="1"
+            Background="WhiteSmoke"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+
+                <TextBlock 
+                    Grid.Row="0" 
+                    Background="WhiteSmoke" 
+                    Text="{Binding Description}"
+                    />
+
+                <syncfusion:ButtonAdv 
+                    x:Name="btnLaunc"
+                    Margin="6"
+                    Label="Launch App"
+                    FontSize="14"
+                    FontFamily="Calibre"
+                    Foreground="White"
+                    Background="{StaticResource PrimaryColour}"
+                    SmallIcon="/Icons/calculator_white.png"
+                    Click="btnLaunc_Click"
+                    Grid.Row="1"/>
+            </Grid>
+
+        </DockPanel>
+
+        
+    </Grid>
+
+</UserControl>
