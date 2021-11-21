@@ -23,14 +23,14 @@
         ExpandedModeWidth="200">
 
         <syncfusion:NavigationItem
-                Header="asda"
-                Name="Home">
+                Header="Caveability Calculator"
+                Name="Caveability">
             <syncfusion:NavigationItem.Icon>
                 <Image Source="/Icons/calculator.png" />
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         <syncfusion:NavigationItem
-                Header="Hello">
+                Header="Rock">
             <syncfusion:NavigationItem.Icon>
                 <Image Source="/Icons/calculator.png" />
             </syncfusion:NavigationItem.Icon>

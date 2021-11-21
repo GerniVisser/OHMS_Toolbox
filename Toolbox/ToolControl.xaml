@@ -23,7 +23,7 @@
             Orientation="Horizontal">
             <Image 
                 Margin="10"
-                Source="/Icons/calculator_white.png"
+                Source="{Binding Icon}"
                 
              />
 
@@ -32,7 +32,7 @@
                     FontFamily="Calibri"
                     HorizontalContentAlignment="Center" 
                     VerticalContentAlignment="Center" 
-                    Content="Caveabilty calculator" 
+                    Content="{Binding Name}" 
                     FontSize="20" 
                     Foreground="White" 
                     Background="{StaticResource PrimaryColour}"/>
@@ -52,6 +52,7 @@
 
                 <TextBlock 
                     Grid.Row="0" 
+                    Margin="30"
                     Background="WhiteSmoke" 
                     Text="{Binding Description}"
                     />
@@ -64,8 +65,8 @@
                     FontFamily="Calibre"
                     Foreground="White"
                     Background="{StaticResource PrimaryColour}"
-                    SmallIcon="/Icons/calculator_white.png"
-                    Click="btnLaunc_Click"
+                    SmallIcon="{Binding Icon}"
+                    Click="btnLaunch_Click"
                     Grid.Row="1"/>
             </Grid>
 

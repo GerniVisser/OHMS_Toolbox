@@ -21,15 +21,14 @@ namespace Toolbox
     public partial class MainWindow : Window
     {
         private ToolControl CavabilityTool;
-        private ToolControl RockTool;
 
         public MainWindow()
         {
             CavabilityTool = new ToolControl();
-            RockTool = new ToolControl();
-            RockTool.ToolObject.Name = "Rock";
-            RockTool.ToolObject.Icon = "/Icons/calculator.png";
-            RockTool.ToolObject.Description = "Jho mah bro";
+
+            CavabilityTool.ToolObject.Name = "Caveability Calculator";
+            CavabilityTool.ToolObject.Icon = "/Icons/calculator_white.png";
+            CavabilityTool.ToolObject.Description = "Calculator tool to measure and assess Stress in a Stope";
 
             InitializeComponent();
 
@@ -38,8 +37,16 @@ namespace Toolbox
 
         private void navigationDrawer_ItemClicked(object sender, Syncfusion.UI.Xaml.NavigationDrawer.NavigationItemClickedEventArgs e)
         {
-            ContentView.Children.RemoveAt(0);
-            ContentView.Children.Add(RockTool);
+            if(ContentView.Children.Count != 0)
+            {
+                ContentView.Children.RemoveAt(0);
+            }
+
+            if (e.Item.Name == "Caveability")
+            {
+                ContentView.Children.Add(CavabilityTool);
+            }
+
         }
     }
 

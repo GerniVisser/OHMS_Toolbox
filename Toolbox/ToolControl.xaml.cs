@@ -46,7 +46,7 @@ namespace Toolbox
             this.DataContext = ToolObject;
         }
 
-        private void btnLaunc_Click(object sender, RoutedEventArgs e)
+        private void btnLaunch_Click(object sender, RoutedEventArgs e)
         {
             string temp = System.IO.Path.Combine(AppDomain.
                 CurrentDomain.BaseDirectory
