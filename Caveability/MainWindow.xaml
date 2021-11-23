@@ -97,12 +97,14 @@
 
             <syncfusion:MenuAdv
                 Grid.ColumnSpan="2"
-                Background="#ed916f"
+                Background="#f06e3e"
                 VerticalAlignment="Stretch"
                 FontWeight="Bold"
                 >
                 <syncfusion:MenuItemAdv
                     Header="File"
+                    
+                    Margin="20 0 0 0"
                     Foreground="White"
                     VerticalAlignment="Center">
 

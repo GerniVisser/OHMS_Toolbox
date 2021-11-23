@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Toolbox.Services;
 
 namespace Toolbox
 {
@@ -33,6 +35,8 @@ namespace Toolbox
             InitializeComponent();
 
             ContentView.Children.Add(CavabilityTool);
+
+            //LicensingService.ValidateLicense();
         }
 
         private void navigationDrawer_ItemClicked(object sender, Syncfusion.UI.Xaml.NavigationDrawer.NavigationItemClickedEventArgs e)

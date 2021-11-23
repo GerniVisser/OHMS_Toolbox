@@ -91,6 +91,7 @@
             </Grid.RowDefinitions>
 
             <syncfusion:TabControlExt
+                x:Name="TabContr"
                 BorderThickness="0"
                 CloseButtonType="Hide"
                 HorizontalAlignment="Center"

@@ -16,7 +16,7 @@ namespace Caveability.Models
         {
             if (point >= 0 && point < 30)
             {
-                return 8;
+                return 7.98;
             }
             else if (point >= 30 && point < 90)
             {

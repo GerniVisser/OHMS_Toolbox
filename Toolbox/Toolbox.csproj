@@ -9,26 +9,28 @@
       <ItemGroup>
         <None Remove="Icons\calculator.png" />
         <None Remove="Icons\Calculator_white.png" />
+        <None Remove="OHMS Toolbox 1.0.lw.xml" />
+        <None Remove="Services\OHMS Toolbox 1.0.lw.xml" />
       </ItemGroup>
 
       <ItemGroup>
-        <PackageReference Include="QLM.QlmLicenseLib4" Version="15.0.21306.3" />
+        <PackageReference Include="QLM.QlmLicenseLibNetCore" Version="15.0.21315.2" />
         <PackageReference Include="Syncfusion.Shared.WPF" Version="19.3.0.48" />
         <PackageReference Include="Syncfusion.Tools.WPF" Version="19.3.0.48" />
         <PackageReference Include="Syncfusion.UI.WPF.NET" Version="19.3.0.48" />
       </ItemGroup>
 
 	<ItemGroup>
-		<None Update="OHMS Toolbox 1.0.lw.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Resource Include="Icons\calculator.png" />
 	  <Resource Include="Icons\Calculator_white.png">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
+	  <Content Include="OHMS Toolbox 1.0.lw.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Services\OHMS Toolbox 1.0.lw.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 </Project>

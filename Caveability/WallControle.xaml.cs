@@ -89,12 +89,19 @@ namespace Caveability
         {
             ChartStreamObject chartStream = new ChartStreamObject();
 
+            int currentIndex = TabContr.SelectedIndex;
+
             try
             {
+                TabContr.SelectedIndex = 0;
                 chartStream.A_chartStream = ChartStream(A_Chart);
+                TabContr.SelectedIndex = 1;
                 chartStream.B_chartStream = ChartStream(B_Chart);
+                TabContr.SelectedIndex = 2;
                 chartStream.C_chartStream = ChartStream(C_Chart);
+                TabContr.SelectedIndex = 3;
                 chartStream.HR_chartStream = ChartStream(HR_Chart);
+                TabContr.SelectedIndex = currentIndex;
             }
             catch(Exception ex)
             {
@@ -114,14 +121,6 @@ namespace Caveability
             chart.Background = new SolidColorBrush(Colors.White);
             chart.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             chart.Arrange(new Rect(0, 0, chart.Width, chart.Height));
-
-            HwndSourceParameters sourceParameters = new HwndSourceParameters();
-
-            sourceParameters.HwndSourceHook = ApplicationMessageFilter;
-
-            HwndSource source = new HwndSource(sourceParameters);
-
-            source.RootVisual = chart;
 
             chart.Save(outStream, new BmpBitmapEncoder());
 
