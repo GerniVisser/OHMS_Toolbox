@@ -27,7 +27,7 @@ namespace Caveability
 
         private WallControle Footwall;
         private WallControle Hangwall;
-        private WallControle StopEBack;
+        private WallControle StopeBack;
         private WallControle StrikeEnd;
 
         public MainWindow()
@@ -36,7 +36,7 @@ namespace Caveability
 
             Footwall = new WallControle(true);
             Hangwall = new WallControle();
-            StopEBack = new WallControle();
+            StopeBack = new WallControle();
             StrikeEnd = new WallControle();
         }
 
@@ -46,26 +46,23 @@ namespace Caveability
 
             tabFootwall.Content = Footwall;
             tabHangwall.Content = Hangwall;
-            tabStopeBack.Content = StopEBack;
+            tabStopeBack.Content = StopeBack;
             tabStrikeEnds.Content = StrikeEnd;
         }
 
         private void MenuItemAdv_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "PDF document (*.pdf)|*.pdf";
+            StopeStreamObject stopeStream = new StopeStreamObject();
 
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                StopeStreamObject stopeStream = new StopeStreamObject();
+            stopeStream.footwallStreamObject = Footwall.ChartStreams();
+            stopeStream.hangwallStreamObject = Hangwall.ChartStreams();
+            stopeStream.stopebackStreamObject = StopeBack.ChartStreams();
+            stopeStream.strikeendStreamObject = StrikeEnd.ChartStreams();
 
-                stopeStream.footwallStreamObject = Footwall.ChartStreams();
-                stopeStream.hangwallStreamObject = Hangwall.ChartStreams();
-                stopeStream.stopebackStreamObject = StopEBack.ChartStreams();
-                stopeStream.strikeendStreamObject = StrikeEnd.ChartStreams();
+            //Report.GenerateReport(stopeStream, saveFileDialog.FileName);
+            Report report = new Report(stopeStream);
 
-                Report.GenerateReport(stopeStream, saveFileDialog.FileName);
-            }
+            report.GenerateReport(Footwall._wall, Hangwall._wall, StopeBack._wall, StrikeEnd._wall);
         }
     }
 }

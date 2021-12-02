@@ -46,6 +46,8 @@ namespace Caveability
             HRBotAreSerries.ItemsSource = _wall.HR.GetBottomGraphCoords();
 
             update(Catagory.All);
+
+            ChartStreams();
         }
 
         private void PropertyGrid_ValueChanged(object sender, Syncfusion.Windows.PropertyGrid.ValueChangedEventArgs args)
