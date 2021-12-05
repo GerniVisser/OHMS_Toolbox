@@ -12,18 +12,18 @@ namespace Caveability.Models
         {
         }
 
-        public override double graphCalcutation(double point)
+        public override float graphCalcutation(double point)
         {
             if (point >= 0 && point < 30)
             {
-                return 7.98;
+                return 7.98f;
             }
             else if (point >= 30 && point < 90)
             {
                 float single = -0.0667f;
                 float constant = 10f;
 
-                double result = single * point + constant;
+                float result = (float)(single * point + constant);
 
                 return result;
             }

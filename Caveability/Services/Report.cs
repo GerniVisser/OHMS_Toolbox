@@ -76,12 +76,14 @@ namespace Caveability.Services
         {
             int bodyTop = PageHeader(page, header);
 
-            float pageHeight = page.Graphics.ClientSize.Height - bodyTop;
+            int chartTop = StatsPanel(page, bodyTop, wall);
 
-            ChartPanel(page, bodyTop, (int)(pageHeight / 4) - 8, chartStreamObject.A_chartStream, wall, "Calculate A");
-            ChartPanel(page, bodyTop + (int)(pageHeight / 4) - 4, (int)(pageHeight / 4) - 6, chartStreamObject.B_chartStream, wall, "Calculate B");
-            ChartPanel(page, bodyTop + (int)(pageHeight / 2) - 6, (int)(pageHeight / 4) - 6, chartStreamObject.C_chartStream, wall, "Calculate C");
-            ChartPanel(page, bodyTop + (int)((pageHeight / 4) * 3) - 6, (int)(pageHeight / 4) - 6, chartStreamObject.HR_chartStream, wall, "Calculate HR");
+            float pageHeight = page.Graphics.ClientSize.Height - bodyTop - chartTop;
+
+            ChartPanel(page, bodyTop + chartTop, (int)(pageHeight / 4) - 8, chartStreamObject.A_chartStream, wall, "Calculate A");
+            ChartPanel(page, bodyTop + chartTop + (int)(pageHeight / 4) - 4, (int)(pageHeight / 4) - 6, chartStreamObject.B_chartStream, wall, "Calculate B");
+            ChartPanel(page, bodyTop + chartTop + (int)(pageHeight / 2) - 6, (int)(pageHeight / 4) - 6, chartStreamObject.C_chartStream, wall, "Calculate C");
+            ChartPanel(page, bodyTop + chartTop + (int)((pageHeight / 4) * 3) - 6, (int)(pageHeight / 4) - 6, chartStreamObject.HR_chartStream, wall, "Calculate HR");
         }
 
         private int PageHeader(PdfPage page, string header)
@@ -109,6 +111,60 @@ namespace Caveability.Services
             graphics.DrawString(date, dateFont, PdfBrushes.Black, new PointF(0, 50));
 
             return 70;
+        }
+
+        private static int StatsPanel(PdfPage page, int top, Wall wall)
+        {
+            PdfGrid pdfgrid = new PdfGrid();
+
+            DataTable dataTable = new DataTable();
+
+            dataTable.Columns.Add(" Current HR ");
+            dataTable.Columns.Add(" Max allowed HR ");
+            dataTable.Columns.Add(" Max allowed Length ");
+
+            var n = N_Model.Calculate(wall.Q.Calculate(), wall.A.Calculate(), wall.B.Calculate(), wall.C.Calculate());
+
+            dataTable.Rows.Add(new object[] { 
+                "  " + Math.Round(wall.HR.Calculate(), 2).ToString(),
+                "  " + Math.Round(wall.HR.CalculateXAxis(n), 2).ToString(),
+                "  " + wall.HR.GetMaxLenght((float)(n)).ToString()
+            });
+
+            pdfgrid.DataSource = dataTable;
+
+            PdfGridRowStyle pdfGridRowStyle = new PdfGridRowStyle();
+
+            pdfGridRowStyle.BackgroundBrush = new PdfSolidBrush(Color.FromArgb(240, 110, 62));
+
+            pdfGridRowStyle.TextBrush = PdfBrushes.White;
+
+            pdfGridRowStyle.Font = new PdfStandardFont(PdfFontFamily.Helvetica, 12);
+
+
+            PdfGridRow pdfGridRow = pdfgrid.Headers[0];
+
+            pdfGridRow.Style = pdfGridRowStyle;
+
+            pdfGridRow.Height = 16;
+
+            pdfGridRowStyle = new PdfGridRowStyle();
+
+            pdfGridRowStyle.BackgroundBrush = new PdfSolidBrush(Color.FromArgb(230, 221, 218));
+
+            pdfGridRowStyle.Font = new PdfStandardFont(PdfFontFamily.Helvetica, 10);
+
+            pdfGridRowStyle.TextBrush = PdfBrushes.Black;
+
+            pdfGridRow = pdfgrid.Rows[0];
+
+            pdfGridRow.Style = pdfGridRowStyle;
+
+            pdfGridRow.Height = 14;
+
+            pdfgrid.Draw(page, new RectangleF(0, top + 10, (float)(page.Graphics.ClientSize.Width), 80));
+
+            return 60;
         }
 
         private static void ChartPanel(PdfPage page, int top, int height, Stream chart, Wall wall, string header)
