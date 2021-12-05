@@ -9,10 +9,10 @@ namespace Caveability.Models
 {
     public class Q_Model : ICalculator
     {
-        public double _rqd { get; set; }
-        public double _jn { get; set; }
-        public double _jr { get; set; }
-        public double _ja { get; set; }
+        public float _rqd { get; set; }
+        public float _jn { get; set; }
+        public float _jr { get; set; }
+        public float _ja { get; set; }
 
         public Q_Model(float rQD, float jn, float jr, float ja)
         {
@@ -22,13 +22,13 @@ namespace Caveability.Models
             _ja = ja;
         }
 
-        public double Calculate()
+        public float Calculate()
         {
-            double N = (_rqd / _jn) * (_jr / _ja);
+            float N = (_rqd / _jn) * (_jr / _ja);
             return N;
         }
 
-        public double CalculateXAxis()
+        public float CalculateXAxis()
         {
             throw new NotImplementedException();
         }

@@ -11,24 +11,24 @@ namespace Caveability.Models
     public class HR_Model
     {
         [Category("HR"), DisplayName("length"), Description("")]
-        public double _length { get; set; }
+        public float _length { get; set; }
         [Category("HR"), DisplayName("width"), Description("")]
-        public double _width { get; set; }
+        public float _width { get; set; }
 
-        public HR_Model(double length, double width)
+        public HR_Model(float length, float width)
         {
             _length = length;
             _width = width;
         }
 
-        public double Calculate()
+        public float Calculate()
         {
             // Use N to Calculate
             return _length * _width / (2 * (_width + _length));
         }
 
         // calculate x axis of N
-        public double CalculateXAxis(double n)
+        public float CalculateXAxis(double n)
         {
             if (n < 0.1) return 0;
             else if (n < 18)
@@ -37,34 +37,34 @@ namespace Caveability.Models
                 double b = 2.1136;
                 double c = -3.2 + n;
 
-                double r1 = (Math.Pow(b, 2) - 4 * a * c);
+                double r1 = Math.Pow(b, 2) - 4 * a * c;
 
-                double x1 = (-b - Math.Sqrt(r1));
+                double x1 = -b - Math.Sqrt(r1);
 
                 x1 = x1 / (2 * a);
 
-                return x1;
+                return (float)(x1);
             }
             else
-                return Math.Pow(10, 0.338 * Math.Log10(n) + 0.573);
+                return (float)(Math.Pow(10, 0.338 * Math.Log10(n) + 0.573));
         }
 
         // Used to draw line graph
-        private double CalculateYAxis(double hr)
+        private float CalculateYAxis(double hr)
         {
             if (hr < 3) return 0;
             else if (hr < 10)
             {
-                return 0.3593 * Math.Pow(hr, 2) - 2.1136 * hr + 3.2;
+                return (float)(0.3593 * Math.Pow(hr, 2) - 2.1136 * hr + 3.2);
             }
             else
-                return Math.Pow(10, (Math.Log10(hr) - 0.573) / 0.338);
+                return (float)(Math.Pow(10, (Math.Log10(hr) - 0.573) / 0.338));
         }
 
         // Used to draw line graph
-        private double CalculateTopYAxis(double hr)
+        private float CalculateTopYAxis(double hr)
         {
-            return 0.0695*Math.Pow(hr,2.8198);
+            return (float)(0.0695*Math.Pow(hr,2.8198));
         }
 
         // Draw guide lines on graph
@@ -102,13 +102,13 @@ namespace Caveability.Models
             return graphPoints;
         }
 
-        public double GetMaxLenght(double n)
+        public float GetMaxLenght(float n)
         {
             double hr = CalculateXAxis(n);
             var t = 2 * _width * hr;
             var b = _width - 2 * hr;
             var final = Math.Round(t / b, 2);
-            return final;
+            return (float)(final);
         }
 
         public override string ToString()

@@ -10,7 +10,7 @@ namespace Caveability.Models
 {
     public class B_Model : ICalculator
     {
-        public double _b { get; set; }
+        public float _b { get; set; }
 
 
         public B_Model(float b)
@@ -18,13 +18,13 @@ namespace Caveability.Models
             _b = b;
         }
 
-        public double Calculate()
+        public float Calculate()
         {
-            double B = graphCalcutation(_b);
+            float B = graphCalcutation(_b);
             return B;
         }
 
-        public double CalculateXAxis()
+        public float CalculateXAxis()
         {
             return _b;
         }
@@ -33,9 +33,9 @@ namespace Caveability.Models
         public List<Coord> GetGraphCoords()
         {
             int range = 90;
-            double interval = 0.5;
+            float interval = 0.5f;
 
-            double numPoints = range / interval;
+            float numPoints = range / interval;
 
             List<Coord> graphPoints = new List<Coord>();
 
@@ -47,18 +47,18 @@ namespace Caveability.Models
             return graphPoints;
         }
 
-        private double graphCalcutation(double point)
+        private float graphCalcutation(float point)
         {
             if (point >= 0 && point < 20)
             {
-                return 0.4;
+                return 0.4f;
             }
             else if (point >= 20 && point < 40)
             {
                 float single = 0.005f;
                 float constant = 0.3f;
 
-                double result = single * point + constant;
+                float result = single * point + constant;
 
                 return result;
             }
@@ -67,13 +67,13 @@ namespace Caveability.Models
                 float single = 0.02f;
                 float constant = -0.3f;
 
-                double result = single * point + constant;
+                float result = single * point + constant;
 
                 return result;
             }
             else
             {
-                return 0.99;
+                return 0.99f;
             }
         }
 

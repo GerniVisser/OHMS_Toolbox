@@ -82,7 +82,7 @@ namespace Caveability
 
             txtCurrentHR.Text = Math.Round(_wall.HR.Calculate(), 2).ToString();
             txtMaxHR.Text = Math.Round(_wall.HR.CalculateXAxis(n), 2).ToString();
-            txtMaxLength.Text = _wall.HR.GetMaxLenght(n).ToString();
+            txtMaxLength.Text = _wall.HR.GetMaxLenght((float)(n)).ToString();
         }
 
 
@@ -127,11 +127,6 @@ namespace Caveability
             chart.Save(outStream, new BmpBitmapEncoder());
 
             return outStream;
-        }
-
-        static IntPtr ApplicationMessageFilter(IntPtr hwnd, int message, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
-            return IntPtr.Zero;
         }
 
     }

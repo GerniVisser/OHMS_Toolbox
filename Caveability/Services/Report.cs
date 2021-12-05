@@ -1,5 +1,6 @@
 ﻿using Caveability.Helper;
 using Caveability.Models;
+using Microsoft.Win32;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
 using Syncfusion.Pdf.Grid;
@@ -26,46 +27,48 @@ namespace Caveability.Services
 
         public bool GenerateReport(Wall Footwall, Wall Hangwall, Wall StopeBack, Wall StrikeEnd)
         {
-            //SaveFileDialog saveFileDialog = new SaveFileDialog();
-            //saveFileDialog.Filter = "PDF document (*.pdf)|*.pdf";
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF document (*.pdf)|*.pdf";
 
-            //if (saveFileDialog.ShowDialog() == true)
-
-            try
+            if (saveFileDialog.ShowDialog() == true)
             {
-                using (PdfDocument document = new PdfDocument())
+                try
                 {
-                    //Add a page to the document
-                    PdfPage Hangwallpage = document.Pages.Add();
+                    using (PdfDocument document = new PdfDocument())
+                    {
+                        //Add a page to the document
+                        PdfPage Hangwallpage = document.Pages.Add();
 
-                    WallReport(Hangwallpage, "Hangwall - Report", Hangwall, _chartStream.hangwallStreamObject);
+                        WallReport(Hangwallpage, "Hangwall - Report", Hangwall, _chartStream.hangwallStreamObject);
 
-                    PdfPage FootWallpage = document.Pages.Add();
+                        PdfPage FootWallpage = document.Pages.Add();
 
-                    WallReport(FootWallpage, "Footwall - Report", Footwall, _chartStream.footwallStreamObject);
+                        WallReport(FootWallpage, "Footwall - Report", Footwall, _chartStream.footwallStreamObject);
 
-                    PdfPage Stopebackpage = document.Pages.Add();
+                        PdfPage Stopebackpage = document.Pages.Add();
 
-                    WallReport(Stopebackpage, "Stope Back - Report", StopeBack, _chartStream.stopebackStreamObject);
+                        WallReport(Stopebackpage, "Stope Back - Report", StopeBack, _chartStream.stopebackStreamObject);
 
-                    PdfPage StrikeEndpage = document.Pages.Add();
+                        PdfPage StrikeEndpage = document.Pages.Add();
 
-                    WallReport(StrikeEndpage, "Strike End - Report", StrikeEnd, _chartStream.strikeendStreamObject);
+                        WallReport(StrikeEndpage, "Strike End - Report", StrikeEnd, _chartStream.strikeendStreamObject);
 
-                    //Save the document
+                        //Save the document
 
-                    document.Save(@"C:\Users\gerni\Downloads\TestPDF.pdf");
+                        document.Save(saveFileDialog.FileName);
 
-                    document.Close(true);
+                        document.Close(true);
 
+                    }
+
+                    return true;
                 }
-
-                return true;
+                catch (Exception ex)
+                {
+                    return false;
+                }
             }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            else return false;
 
         }
 

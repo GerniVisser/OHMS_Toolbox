@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Caveability"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
-                             
+                 
+        Icon="pack://application:,,,/Resources/OHMS logo.png"
         Title="Caveability Calculator" 
         Height="768" 
         Width="1366" 

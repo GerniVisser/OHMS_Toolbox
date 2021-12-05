@@ -10,20 +10,20 @@ namespace Caveability.Models
 {
     public class C_Model : ICalculator
     {
-        public double _c { get; set; }
+        public float _c { get; set; }
 
         public C_Model(float c)
         {
             _c = c;
         }
 
-        public double Calculate()
+        public float Calculate()
         {
-            double C = graphCalcutation(_c);
+            float C = graphCalcutation(_c);
             return C;
         }
 
-        public double CalculateXAxis()
+        public float CalculateXAxis()
         {
             return _c;
         }
@@ -32,9 +32,9 @@ namespace Caveability.Models
         public List<Coord> GetGraphCoords()
         {
             int range = 90;
-            double interval = 0.5;
+            float interval = 0.5f;
 
-            double numPoints = range / interval;
+            float numPoints = range / interval;
 
             List<Coord> graphPoints = new List<Coord>();
 
@@ -47,7 +47,7 @@ namespace Caveability.Models
         }
 
         // Takes X val and returns Y val
-        public virtual double graphCalcutation(double point)
+        public virtual float graphCalcutation(double point)
         {
             if (point >= 0 && point < 20)
             {
@@ -58,7 +58,7 @@ namespace Caveability.Models
                 float single = 0.0333f;
                 float constant = 3.3333f;
 
-                double result = single * point + constant;
+                float result = (float)(single * point + constant);
 
                 return result;
             }
@@ -67,7 +67,7 @@ namespace Caveability.Models
                 float single = 0.075f;
                 float constant = 1.25f;
 
-                double result = single * point + constant;
+                float result = (float)(single * point + constant);
 
                 return result;
             }

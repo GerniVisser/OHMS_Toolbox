@@ -9,7 +9,7 @@ namespace Caveability.Models
 {
     interface ICalculator
     {
-        double Calculate();
+        float Calculate();
         List<Coord> GetGraphCoords();
     }
 }

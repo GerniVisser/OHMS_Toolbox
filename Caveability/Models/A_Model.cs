@@ -11,8 +11,8 @@ namespace Caveability.Models
     public class A_Model : ICalculator
     {
 
-        public double _oc { get; set; }
-        public double _omax { get; set; }
+        public float _oc { get; set; }
+        public float _omax { get; set; }
 
 
         public A_Model(float oc, float omax)
@@ -21,13 +21,13 @@ namespace Caveability.Models
             _omax = omax;
         }
 
-        public double Calculate()
+        public float Calculate()
         {
-            double A = graphCalcutation(_oc / _omax);
+            float A = graphCalcutation(_oc / _omax);
             return A;
         }
 
-        public double CalculateXAxis()
+        public float CalculateXAxis()
         {
             return _oc / _omax;
         }
@@ -35,9 +35,9 @@ namespace Caveability.Models
         public List<Coord> GetGraphCoords()
         {
             int range = 10;
-            double interval = 0.07;
+            float interval = 0.07f;
 
-            double numPoints = range / interval;
+            float numPoints = range / interval;
 
             List<Coord> graphPoints = new List<Coord>();
 
@@ -49,11 +49,11 @@ namespace Caveability.Models
             return graphPoints;
         }
 
-        private double graphCalcutation(double point)
+        private float graphCalcutation(float point)
         {
             if (point >= 0 && point < 1.8)
             {
-                return 0.1;
+                return 0.1f;
             }
             else if (point >= 1.8 && point < 5.2)
             {
@@ -61,13 +61,13 @@ namespace Caveability.Models
                 float single = 0.7603f;
                 float constant = -1.0156f;
 
-                double result = quad * Math.Pow(point, 2) + single * point + constant;
+                float result = (float)(quad * Math.Pow(point, 2) + single * point + constant);
 
                 return result;
             }
             else
             {
-                return 0.99;
+                return 0.99f;
             }
         }
 

@@ -9,23 +9,23 @@ namespace Caveability.Models
 {
     public class Wall
     {
-        private double _RQD;
-        private double _Jn;
-        private double _Jr;
-        private double _Ja;
-        private double _oc;
-        private double _omax;
-        private double _b;
-        private double _c;
-        private double _length;
-        private double _width;
+        private float _RQD;
+        private float _Jn;
+        private float _Jr;
+        private float _Ja;
+        private float _oc;
+        private float _omax;
+        private float _b;
+        private float _c;
+        private float _length;
+        private float _width;
 
         [Browsable(false)]
-        public Q_Model Q { get; set; } = new Q_Model(66, 12, 1, 1);
+        public Q_Model Q { get; set; } = new Q_Model(78, 8, 1, 1);
         [Browsable(false)]
-        public A_Model A { get; set; } = new A_Model(50, 150);
+        public A_Model A { get; set; } = new A_Model(150, 54.33f);
         [Browsable(false)]
-        public B_Model B { get; set; } = new B_Model(0);
+        public B_Model B { get; set; } = new B_Model(20);
         [Browsable(false)]
         public C_Model C { get; set; } = new C_Model(0);
 
@@ -63,7 +63,7 @@ namespace Caveability.Models
         }
 
         [Category("Calculate Q"), DisplayName("RQD"), Description("")]
-        public double rqd
+        public float rqd
         {
             get { return _RQD; }
             set
@@ -74,7 +74,7 @@ namespace Caveability.Models
         }
 
         [Category("Calculate Q"), DisplayName("Jn"), Description("")]
-        public double jn
+        public float jn
         {
             get { return _Jn; }
             set
@@ -85,7 +85,7 @@ namespace Caveability.Models
         }
 
         [Category("Calculate Q"), DisplayName("Jr"), Description("")]
-        public double jr
+        public float jr
         {
             get { return _Jr; }
             set
@@ -96,7 +96,7 @@ namespace Caveability.Models
         }
 
         [Category("Calculate Q"), DisplayName("Ja"), Description("")]
-        public double ja
+        public float ja
         {
             get { return _Ja; }
             set
@@ -107,7 +107,7 @@ namespace Caveability.Models
         }
 
         [Category("Calculate A"), DisplayName("σc"), Description("")]
-        public double oc
+        public float oc
         {
             get { return _oc; }
             set
@@ -118,7 +118,7 @@ namespace Caveability.Models
         }
 
         [Category("Calculate A"), DisplayName("σmax"), Description("")]
-        public double omax
+        public float omax
         {
             get { return _omax; }
             set
@@ -129,7 +129,7 @@ namespace Caveability.Models
         }
 
         [Category("Calculate B"), DisplayName("b"), Description("")]
-        public double b
+        public float b
         {
             get { return _b; }
             set
@@ -140,7 +140,7 @@ namespace Caveability.Models
         }
 
         [Category("Calculate C"), DisplayName("c"), Description("")]
-        public double c
+        public float c
         {
             get { return _c; }
             set
@@ -151,7 +151,7 @@ namespace Caveability.Models
         }
 
         [Category("HR"), DisplayName("length"), Description("")]
-        public double lenght
+        public float lenght
         {
             get { return _length; }
             set
@@ -162,7 +162,7 @@ namespace Caveability.Models
         }
 
         [Category("HR"), DisplayName("width"), Description("")]
-        public double width
+        public float width
         {
             get { return _width; }
             set
