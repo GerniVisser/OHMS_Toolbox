@@ -18,6 +18,8 @@ namespace Toolbox
             base.OnStartup(e);
 
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NTMxMjI4QDMxMzkyZTMzMmUzMFdVTEs3a1U0bnZCd2dweUd6L0l2L3pVK0JRTERPRXhubGE3Um9pNitUdm89");
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de-DE");
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("de-DE");
         }
 
     }
