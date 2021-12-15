@@ -4,13 +4,13 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>Resources\ohms_logo_oBF_icon.ico</ApplicationIcon>
+    <ApplicationIcon>Icons\ohms_logo_oBF_icon.ico</ApplicationIcon>
     <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\OHMS logo.png" />
-    <None Remove="Resources\ohms_logo_oBF_icon.ico" />
+    <None Remove="Icons\OHMS logo.png" />
+    <None Remove="Icons\ohms_logo_oBF_icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,10 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\OHMS logo.png">
+    <Content Include="Icons\OHMS logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\ohms_logo_oBF_icon.ico">
+    <Content Include="Icons\ohms_logo_oBF_icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

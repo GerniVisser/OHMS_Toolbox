@@ -48,9 +48,6 @@ namespace Toolbox
 
         private void btnLaunch_Click(object sender, RoutedEventArgs e)
         {
-            string temp = System.IO.Path.Combine(AppDomain.
-                CurrentDomain.BaseDirectory
-                .SolutionFolder());
 
             Caveability.MainWindow mw = new Caveability.MainWindow();
             mw.Show();
