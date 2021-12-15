@@ -5,6 +5,7 @@
         <TargetFramework>net5.0-windows</TargetFramework>
         <UseWPF>true</UseWPF>
         <ApplicationIcon>Icons\ohms_logo_oBF_icon.ico</ApplicationIcon>
+        <Platforms>AnyCPU;x64;x86</Platforms>
       </PropertyGroup>
 
       <ItemGroup>
@@ -36,6 +37,10 @@
 	  <Content Include="Services\OHMS Toolbox 1.0.lw.xml">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Caveability\Caveability.csproj" />
 	</ItemGroup>
 
 </Project>

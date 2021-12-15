@@ -52,10 +52,13 @@ namespace Toolbox
                 CurrentDomain.BaseDirectory
                 .SolutionFolder());
 
-            var psi = new System.Diagnostics.ProcessStartInfo() { FileName = (temp + @"\Caveability\bin\Debug\net5.0-windows\Caveability.exe")
-                , UseShellExecute = true };
+            Caveability.MainWindow mw = new Caveability.MainWindow();
+            mw.Show();
 
-            System.Diagnostics.Process.Start(psi);
+            //var psi = new System.Diagnostics.ProcessStartInfo() { FileName = (temp + @"\Caveability\bin\Debug\net5.0-windows\Caveability.exe")
+            //    , UseShellExecute = true };
+
+            //System.Diagnostics.Process.Start(psi);
         }
     }
 }

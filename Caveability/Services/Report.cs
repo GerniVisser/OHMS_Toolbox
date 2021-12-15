@@ -63,7 +63,7 @@ namespace Caveability.Services
 
                     return true;
                 }
-                catch (Exception ex)
+                catch 
                 {
                     return false;
                 }

@@ -26,7 +26,6 @@ namespace Toolbox
 
         public MainWindow()
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de-DE");
 
             CavabilityTool = new ToolControl();
 
