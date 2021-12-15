@@ -4,11 +4,13 @@
         <OutputType>WinExe</OutputType>
         <TargetFramework>net5.0-windows</TargetFramework>
         <UseWPF>true</UseWPF>
+        <ApplicationIcon>Icons\ohms_logo_oBF_icon.ico</ApplicationIcon>
       </PropertyGroup>
 
       <ItemGroup>
         <None Remove="Icons\calculator.png" />
         <None Remove="Icons\Calculator_white.png" />
+        <None Remove="Icons\ohms_logo_oBF_icon.ico" />
         <None Remove="OHMS Toolbox 1.0.lw.xml" />
         <None Remove="Services\OHMS Toolbox 1.0.lw.xml" />
       </ItemGroup>
@@ -25,6 +27,9 @@
 	  <Resource Include="Icons\Calculator_white.png">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
+	  <Content Include="Icons\ohms_logo_oBF_icon.ico">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="OHMS Toolbox 1.0.lw.xml">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>

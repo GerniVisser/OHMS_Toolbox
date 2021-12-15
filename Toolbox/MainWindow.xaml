@@ -6,7 +6,11 @@
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         xmlns:local="clr-namespace:Toolbox"
         mc:Ignorable="d"
-        Title="OHMS Toolbox" Height="600" Width="1000" ResizeMode="CanMinimize">
+        Title="OHMS Toolbox" 
+        Icon="pack://application:,,,/Icons/ohms_logo_oBF_icon.ico"
+        Height="600" 
+        Width="1000" 
+        ResizeMode="CanMinimize">
 
     <Window.Resources>
         <SolidColorBrush x:Key="backgroundGray" Color="#e0e0e0"/>
