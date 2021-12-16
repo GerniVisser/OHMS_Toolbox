@@ -1,12 +1,4 @@
-﻿using Syncfusion.Drawing;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Toolbox.Helper
+﻿namespace Toolbox.Helper
 {
     public class ToolObject
     {

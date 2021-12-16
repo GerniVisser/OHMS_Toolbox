@@ -1,12 +1,9 @@
-using System;
-using System.Text;
-using System.IO;
-using System.Reflection;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
-using System.Net.Security;
-
 using QlmLicenseLib;
+using System;
+using System.IO;
+using System.Net.Security;
+using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 
 
 namespace QLM
@@ -54,22 +51,22 @@ namespace QLM
             // by the Protect Your App Wizard.
             // To load the settings from the XML file, call the license.LoadSettings function.
 
-            license.DefineProduct (3, "OHMS Toolbox", 1, 0, "", "{0fc68c7e-5a5c-4df6-a685-a93ebcbd0cc9}");
-			license.LicenseEngineLibrary = ELicenseEngineLibrary.DotNet;
-			license.PublicKey = "BhnQ+LoiN6NNfg==";
-			license.RsaPublicKey = "<RSAKeyValue><Modulus>rev7bsuAGTcCu4YW5Tlhxnl4dC87MmYOTCjZeVw+8Gcy5+BWXO7hjaIMnNfMu73X61Vjzv0eLB2ZgOB6tlr3BLStcVf81Kb7Vuk72wz5EEKBLNoQJl4smXsW1L7NPFYUVrRyHmYaNykWLt2T7n4sCFNB7ndppAE03nrO3pRR09k=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
-			license.CommunicationEncryptionKey = "{B6163D99-F46A-4580-BB42-BF276A507A14}";
-			license.DefaultWebServiceUrl = "https://qlm3.net/qlmdemov15/QlmLicenseServer/qlmservice.asmx";
-			license.StoreKeysLocation = EStoreKeysTo.EFileCommonData;
-			license.StoreKeysOptions = EStoreKeysOptions.EStoreKeysPerUser;
-			license.ValidateOnServer = false;
-			license.PublishAnalytics = true;
-			license.EvaluationPerUser = true;
-			license.EnableMultibyte = true;
-			license.ExpiryDateRoundHoursUp = true;
-			license.EnableSoapExtension = true;
-			license.EnableClientLanguageDetection = true;
-			license.LimitTerminalServerInstances = false;
+            license.DefineProduct(3, "OHMS Toolbox", 1, 0, "", "{0fc68c7e-5a5c-4df6-a685-a93ebcbd0cc9}");
+            license.LicenseEngineLibrary = ELicenseEngineLibrary.DotNet;
+            license.PublicKey = "BhnQ+LoiN6NNfg==";
+            license.RsaPublicKey = "<RSAKeyValue><Modulus>rev7bsuAGTcCu4YW5Tlhxnl4dC87MmYOTCjZeVw+8Gcy5+BWXO7hjaIMnNfMu73X61Vjzv0eLB2ZgOB6tlr3BLStcVf81Kb7Vuk72wz5EEKBLNoQJl4smXsW1L7NPFYUVrRyHmYaNykWLt2T7n4sCFNB7ndppAE03nrO3pRR09k=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
+            license.CommunicationEncryptionKey = "{B6163D99-F46A-4580-BB42-BF276A507A14}";
+            license.DefaultWebServiceUrl = "https://qlm3.net/qlmdemov15/QlmLicenseServer/qlmservice.asmx";
+            license.StoreKeysLocation = EStoreKeysTo.EFileCommonData;
+            license.StoreKeysOptions = EStoreKeysOptions.EStoreKeysPerUser;
+            license.ValidateOnServer = false;
+            license.PublishAnalytics = true;
+            license.EvaluationPerUser = true;
+            license.EnableMultibyte = true;
+            license.ExpiryDateRoundHoursUp = true;
+            license.EnableSoapExtension = true;
+            license.EnableClientLanguageDetection = true;
+            license.LimitTerminalServerInstances = false;
 
             // If you are using QLM Professional, you should also set the communicationEncryptionKey property
             // The CommunicationEncryptionKey must match the value specified in the web.config file of the QLM License Server
@@ -88,8 +85,8 @@ namespace QLM
         {
             license = new QlmLicense();
             license.LoadSettings(settingsFile);
-            
-			license.RsaPublicKey = "<RSAKeyValue><Modulus>rev7bsuAGTcCu4YW5Tlhxnl4dC87MmYOTCjZeVw+8Gcy5+BWXO7hjaIMnNfMu73X61Vjzv0eLB2ZgOB6tlr3BLStcVf81Kb7Vuk72wz5EEKBLNoQJl4smXsW1L7NPFYUVrRyHmYaNykWLt2T7n4sCFNB7ndppAE03nrO3pRR09k=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
+
+            license.RsaPublicKey = "<RSAKeyValue><Modulus>rev7bsuAGTcCu4YW5Tlhxnl4dC87MmYOTCjZeVw+8Gcy5+BWXO7hjaIMnNfMu73X61Vjzv0eLB2ZgOB6tlr3BLStcVf81Kb7Vuk72wz5EEKBLNoQJl4smXsW1L7NPFYUVrRyHmYaNykWLt2T7n4sCFNB7ndppAE03nrO3pRR09k=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
 
             string errorMessage;
             if (license.ValidateSettingsFile(settingsFile, out errorMessage) == false)
@@ -150,7 +147,7 @@ namespace QLM
             {
                 computerKey = storedComputerKey;
             }
-            
+
             if (String.IsNullOrEmpty(activationKey) && String.IsNullOrEmpty(computerKey))
             {
                 if (String.IsNullOrEmpty(license.EvaluationLicenseKey))
@@ -300,7 +297,7 @@ namespace QLM
                 {
                     needsActivation = true;
                     ret = false;
-                }                
+                }
             }
 
             return ret;
@@ -440,12 +437,12 @@ namespace QLM
 
             DateTime serverDate;
             string response = string.Empty;
-            if (license.PingEx (string.Empty, out response, out serverDate) == false)
+            if (license.PingEx(string.Empty, out response, out serverDate) == false)
             {
                 // we cannot connect to the server so we cannot do any validation with the server
                 return false;
             }
-            
+
 
             // try to reactivate the license and see if it still expired
             response = string.Empty;
@@ -484,7 +481,7 @@ namespace QLM
             license.DeleteKeys();
             this.computerKey = string.Empty;
         }
-        
+
         #endregion
 
         #region Properties
@@ -508,7 +505,7 @@ namespace QLM
             get
             {
                 return computerKey;
-            }            
+            }
         }
 
         public bool IsEvaluation
@@ -634,7 +631,7 @@ namespace QLM
                 // WriteProductPropertiesFile contacts the server, gets the product properties
                 // and writes them to a digitally signed xml file
                 license.WriteProductPropertiesFile(this.ActivationKey, licenseFile, out errorMessage);
-                
+
             }
             catch (Exception ex)
             {

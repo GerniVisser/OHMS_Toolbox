@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Caveability.Models
 {
@@ -64,7 +61,7 @@ namespace Caveability.Models
         // Used to draw line graph
         private float CalculateTopYAxis(double hr)
         {
-            return (float)(0.0695*Math.Pow(hr,2.8198));
+            return (float)(0.0695 * Math.Pow(hr, 2.8198));
         }
 
         // Draw guide lines on graph

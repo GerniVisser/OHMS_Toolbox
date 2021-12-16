@@ -4,15 +4,11 @@ using Microsoft.Win32;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
 using Syncfusion.Pdf.Grid;
-using Syncfusion.Pdf.Tables;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Caveability.Services
 {
@@ -63,7 +59,7 @@ namespace Caveability.Services
 
                     return true;
                 }
-                catch 
+                catch (Exception ex)
                 {
                     return false;
                 }
@@ -92,7 +88,7 @@ namespace Caveability.Services
 
             //LOGO
 
-            var logo = new PdfBitmap(AppDomain.CurrentDomain.BaseDirectory + @"\Resources\OHMS logo.png");
+            var logo = new PdfBitmap(AppDomain.CurrentDomain.BaseDirectory + @"\Icons\OHMS logo.png");
 
             graphics.DrawImage(logo, 0, 0, 100, 40);
 
@@ -100,7 +96,7 @@ namespace Caveability.Services
 
             PdfFont titleFont = new PdfStandardFont(PdfFontFamily.Helvetica, 26, PdfFontStyle.Bold);
 
-            graphics.DrawString(header, titleFont, PdfBrushes.OrangeRed, new PointF( 120, 00));
+            graphics.DrawString(header, titleFont, PdfBrushes.OrangeRed, new PointF(120, 00));
 
             //Date
 
@@ -125,7 +121,7 @@ namespace Caveability.Services
 
             var n = N_Model.Calculate(wall.Q.Calculate(), wall.A.Calculate(), wall.B.Calculate(), wall.C.Calculate());
 
-            dataTable.Rows.Add(new object[] { 
+            dataTable.Rows.Add(new object[] {
                 "  " + Math.Round(wall.HR.Calculate(), 2).ToString(),
                 "  " + Math.Round(wall.HR.CalculateXAxis(n), 2).ToString(),
                 "  " + wall.HR.GetMaxLenght((float)(n)).ToString()
@@ -173,7 +169,7 @@ namespace Caveability.Services
 
             float pageWidth = page.Graphics.ClientSize.Width;
 
-            RectangleF bounds = new RectangleF(0, top, pageWidth, height );
+            RectangleF bounds = new RectangleF(0, top, pageWidth, height);
 
             PdfSolidBrush brush = new PdfSolidBrush(Color.WhiteSmoke);
 
@@ -206,7 +202,7 @@ namespace Caveability.Services
 
             for (int i = 0; i < gridList.Count; i++)
             {
-                dataTable.Rows.Add(new object[] { gridList[i][0], gridList[i][1]});
+                dataTable.Rows.Add(new object[] { gridList[i][0], gridList[i][1] });
             }
 
             pdfGrid.DataSource = dataTable;
@@ -259,10 +255,10 @@ namespace Caveability.Services
         {
             List<List<String>> objectList = new List<List<String>>();
 
-            if(name == "Calculate A")
+            if (name == "Calculate A")
             {
-                objectList.Add(new List<string>{ " oc", " " + wall.A._oc.ToString() });
-                objectList.Add(new List<string>{ " omax", " " + wall.A._omax.ToString() });
+                objectList.Add(new List<string> { " oc", " " + wall.A._oc.ToString() });
+                objectList.Add(new List<string> { " omax", " " + wall.A._omax.ToString() });
             }
             else if (name == "Calculate B")
             {
