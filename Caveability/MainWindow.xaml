@@ -10,7 +10,7 @@
         Title="Caveability Calculator" 
         Height="768" 
         Width="1366" 
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         >
 
     <Window.Resources>

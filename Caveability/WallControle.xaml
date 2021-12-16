@@ -83,20 +83,23 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="*" MaxWidth="250" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="*" MaxHeight="170"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="3*" MinHeight="120"/>
             </Grid.RowDefinitions>
 
             <syncfusion:TabControlExt
                 x:Name="TabContr"
                 BorderThickness="0"
                 CloseButtonType="Hide"
-                HorizontalAlignment="Center"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                HorizontalContentAlignment="Stretch"
+                VerticalContentAlignment="Stretch"
                 ShowTabItemContextMenu="False"
-                ShowTabListContextMenu="False"
+                ShowTabListContextMenu="False" 
                 TabItemSelectedBackground="#f06e3e"
                 TabItemSelectedForeground="White"
                 TabPanelBackground="White"
@@ -105,56 +108,55 @@
                 <syncfusion:TabItemExt
                     Height="30"
                     Header="A Graph">
-                    
-                    <DockPanel>
-                        <chart:SfChart 
+
+                    <chart:SfChart 
                             Header="Stress Factor A"
                             Name="A_Chart"
                             FontSize="24"
                             Background="White"
                             BorderBrush="#d6d6d6"
                             BorderThickness="2">
-                            <chart:SfChart.PrimaryAxis>
-                                <chart:NumericalAxis
+                        <chart:SfChart.PrimaryAxis>
+                            <chart:NumericalAxis
                                     StartRangeFromZero="True"
                                     Header="A=σc/σmax"
                                     FontSize="14"/>
-                            </chart:SfChart.PrimaryAxis>
-                            <chart:SfChart.SecondaryAxis>
-                                <chart:NumericalAxis
+                        </chart:SfChart.PrimaryAxis>
+                        <chart:SfChart.SecondaryAxis>
+                            <chart:NumericalAxis
                                     StartRangeFromZero="True"
                                     Header="Rock Stress Factor A"
                                     FontSize="14"/>
-                            </chart:SfChart.SecondaryAxis>
+                        </chart:SfChart.SecondaryAxis>
 
-                            <chart:SfChart.Resources>
+                        <chart:SfChart.Resources>
 
-                                <Style TargetType="Line" x:Key="lineStyleVert">
+                            <Style TargetType="Line" x:Key="lineStyleVert">
 
-                                    <Setter Property="StrokeDashArray" Value="10,5"/>
+                                <Setter Property="StrokeDashArray" Value="10,5"/>
 
-                                    <Setter Property="Stroke" Value="Gray"/>
+                                <Setter Property="Stroke" Value="Gray"/>
 
-                                    <Setter Property="StrokeThickness" Value="0.8"/>
+                                <Setter Property="StrokeThickness" Value="0.8"/>
 
-                                </Style>
-                                <Style TargetType="syncfusion:ChartTrackBallControl" x:Key="trackballStyle">
+                            </Style>
+                            <Style TargetType="syncfusion:ChartTrackBallControl" x:Key="trackballStyle">
 
-                                    <Setter Property="Background" Value="red"></Setter>
+                                <Setter Property="Background" Value="red"></Setter>
 
-                                </Style>
+                            </Style>
 
-                            </chart:SfChart.Resources>
+                        </chart:SfChart.Resources>
 
-                            <chart:SfChart.Behaviors>
+                        <chart:SfChart.Behaviors>
 
-                                <chart:ChartTrackBallBehavior
+                            <chart:ChartTrackBallBehavior
                                     LineStyle="{StaticResource lineStyleVert}"
                                     ChartTrackBallStyle="{StaticResource trackballStyle}"         
                                     />
-                            </chart:SfChart.Behaviors>
+                        </chart:SfChart.Behaviors>
 
-                            <chart:LineSeries
+                        <chart:LineSeries
                                 Name="A_LineSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
@@ -162,7 +164,7 @@
                                 StrokeThickness="2"
                             
                                 />
-                            <chart:ScatterSeries
+                        <chart:ScatterSeries
                                 Name="A_PointSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
@@ -170,8 +172,7 @@
                                 ScatterWidth ="12"
                                 Interior="Red"
                                 />
-                        </chart:SfChart>
-                    </DockPanel>
+                    </chart:SfChart>
 
                 </syncfusion:TabItemExt>
                 <syncfusion:TabItemExt
@@ -179,55 +180,54 @@
                     Header="B Graph"
                     x:Name="B_Tab">
 
-                    <DockPanel>
-                        <chart:SfChart 
+                    <chart:SfChart 
                             Header="Stress Factor B"
                             Name="B_Chart"
                             FontSize="24"
                             Background="White"
                             BorderBrush="#d6d6d6"
                             BorderThickness="2">
-                            <chart:SfChart.PrimaryAxis>
-                                <chart:NumericalAxis
+                        <chart:SfChart.PrimaryAxis>
+                            <chart:NumericalAxis
                                     StartRangeFromZero="True"
                                     Header="True Angle between Stope Wall And Discontinuity"
                                     FontSize="14"/>
-                            </chart:SfChart.PrimaryAxis>
-                            <chart:SfChart.SecondaryAxis>
-                                <chart:NumericalAxis
+                        </chart:SfChart.PrimaryAxis>
+                        <chart:SfChart.SecondaryAxis>
+                            <chart:NumericalAxis
                                     StartRangeFromZero="True"
                                     Header="Joint Orientation Factor B"
                                     FontSize="14"/>
-                            </chart:SfChart.SecondaryAxis>
+                        </chart:SfChart.SecondaryAxis>
 
-                            <chart:SfChart.Resources>
+                        <chart:SfChart.Resources>
 
-                                <Style TargetType="Line" x:Key="lineStyleVert">
+                            <Style TargetType="Line" x:Key="lineStyleVert">
 
-                                    <Setter Property="StrokeDashArray" Value="10,5"/>
+                                <Setter Property="StrokeDashArray" Value="10,5"/>
 
-                                    <Setter Property="Stroke" Value="Gray"/>
+                                <Setter Property="Stroke" Value="Gray"/>
 
-                                    <Setter Property="StrokeThickness" Value="0.8"/>
+                                <Setter Property="StrokeThickness" Value="0.8"/>
 
-                                </Style>
-                                <Style TargetType="syncfusion:ChartTrackBallControl" x:Key="trackballStyle">
+                            </Style>
+                            <Style TargetType="syncfusion:ChartTrackBallControl" x:Key="trackballStyle">
 
-                                    <Setter Property="Background" Value="red"></Setter>
+                                <Setter Property="Background" Value="red"></Setter>
 
-                                </Style>
+                            </Style>
 
-                            </chart:SfChart.Resources>
+                        </chart:SfChart.Resources>
 
-                            <chart:SfChart.Behaviors>
+                        <chart:SfChart.Behaviors>
 
-                                <chart:ChartTrackBallBehavior
+                            <chart:ChartTrackBallBehavior
                                     LineStyle="{StaticResource lineStyleVert}"
                                     ChartTrackBallStyle="{StaticResource trackballStyle}"         
                                     />
-                            </chart:SfChart.Behaviors>
+                        </chart:SfChart.Behaviors>
 
-                            <chart:LineSeries
+                        <chart:LineSeries
                                 Name="B_LineSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
@@ -235,7 +235,7 @@
                                 StrokeThickness="2"
                             
                                 />
-                            <chart:ScatterSeries
+                        <chart:ScatterSeries
                                 Name="B_PointSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
@@ -243,63 +243,61 @@
                                 ScatterWidth ="12"
                                 Interior="Red"
                                 />
-                        </chart:SfChart>
-                    </DockPanel>
+                    </chart:SfChart>
 
                 </syncfusion:TabItemExt>
                 <syncfusion:TabItemExt
                     Height="30"
                     Header="C Graph">
 
-                    <DockPanel>
-                        <chart:SfChart 
+                    <chart:SfChart 
                             Header="Stress Factor C"
                             Name="C_Chart"
                             FontSize="24"
                             Background="White"
                             BorderBrush="#d6d6d6"
                             BorderThickness="2">
-                            <chart:SfChart.PrimaryAxis>
-                                <chart:NumericalAxis
+                        <chart:SfChart.PrimaryAxis>
+                            <chart:NumericalAxis
                                     StartRangeFromZero="True"
                                     Header="Dip Of Stopewall (Degrees)"
                                     FontSize="14"/>
-                            </chart:SfChart.PrimaryAxis>
-                            <chart:SfChart.SecondaryAxis>
-                                <chart:NumericalAxis
+                        </chart:SfChart.PrimaryAxis>
+                        <chart:SfChart.SecondaryAxis>
+                            <chart:NumericalAxis
                                     StartRangeFromZero="True"
                                     Header="Gravity Adjustment Factor C"
                                     FontSize="14"/>
-                            </chart:SfChart.SecondaryAxis>
+                        </chart:SfChart.SecondaryAxis>
 
-                            <chart:SfChart.Resources>
+                        <chart:SfChart.Resources>
 
-                                <Style TargetType="Line" x:Key="lineStyleVert">
+                            <Style TargetType="Line" x:Key="lineStyleVert">
 
-                                    <Setter Property="StrokeDashArray" Value="10,5"/>
+                                <Setter Property="StrokeDashArray" Value="10,5"/>
 
-                                    <Setter Property="Stroke" Value="Gray"/>
+                                <Setter Property="Stroke" Value="Gray"/>
 
-                                    <Setter Property="StrokeThickness" Value="0.8"/>
+                                <Setter Property="StrokeThickness" Value="0.8"/>
 
-                                </Style>
-                                <Style TargetType="syncfusion:ChartTrackBallControl" x:Key="trackballStyle">
+                            </Style>
+                            <Style TargetType="syncfusion:ChartTrackBallControl" x:Key="trackballStyle">
 
-                                    <Setter Property="Background" Value="red"></Setter>
+                                <Setter Property="Background" Value="red"></Setter>
 
-                                </Style>
+                            </Style>
 
-                            </chart:SfChart.Resources>
+                        </chart:SfChart.Resources>
 
-                            <chart:SfChart.Behaviors>
+                        <chart:SfChart.Behaviors>
 
-                                <chart:ChartTrackBallBehavior
+                            <chart:ChartTrackBallBehavior
                                     LineStyle="{StaticResource lineStyleVert}"
                                     ChartTrackBallStyle="{StaticResource trackballStyle}"         
                                     />
-                            </chart:SfChart.Behaviors>
+                        </chart:SfChart.Behaviors>
 
-                            <chart:LineSeries
+                        <chart:LineSeries
                                 Name="C_LineSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
@@ -307,7 +305,7 @@
                                 StrokeThickness="2" 
                             
                                 />
-                            <chart:ScatterSeries
+                        <chart:ScatterSeries
                                 Name="C_PointSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
@@ -315,37 +313,35 @@
                                 ScatterWidth ="12"
                                 Interior="Red"
                                 />
-                        </chart:SfChart>
-                    </DockPanel>
+                    </chart:SfChart>
                 </syncfusion:TabItemExt>
                 <syncfusion:TabItemExt
                     Height="30"
                     Header="HR Graph">
 
-                    <DockPanel>
-                        <chart:SfChart 
+                    <chart:SfChart 
                             Header="Stability for Gravity fall"
                             Name="HR_Chart"
                             FontSize="24"
                             Background="White"
                             BorderBrush="#d6d6d6"
                             BorderThickness="2">
-                            <chart:SfChart.PrimaryAxis>
-                                <chart:NumericalAxis
+                        <chart:SfChart.PrimaryAxis>
+                            <chart:NumericalAxis
                                     StartRangeFromZero="True"
                                     Header="Hydraulic Radius"
                                     FontSize="14"/>
-                            </chart:SfChart.PrimaryAxis>
-                            <chart:SfChart.SecondaryAxis>
-                                <chart:LogarithmicAxis
+                        </chart:SfChart.PrimaryAxis>
+                        <chart:SfChart.SecondaryAxis>
+                            <chart:LogarithmicAxis
                                     LogarithmicBase="10"
                                     Minimum="0.1"
                                     MaxHeight="1000"
                                     Header="Stability Number N'"
                                     FontSize="14"/>
-                            </chart:SfChart.SecondaryAxis>
+                        </chart:SfChart.SecondaryAxis>
 
-                            <chart:AreaSeries
+                        <chart:AreaSeries
                                 Name="HRTopAreSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
@@ -354,14 +350,14 @@
                                 IsClosed="False"
                                 />
 
-                            <chart:AreaSeries
+                        <chart:AreaSeries
                                 Name="HRBotAreSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
                                 Interior="White"
                                 StrokeThickness="2"
                                 />
-                            <chart:ScatterSeries
+                        <chart:ScatterSeries
                                 Name="HRmax_PointSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
@@ -369,7 +365,7 @@
                                 ScatterWidth ="12"
                                 Interior="#f0602b"
                                 />
-                            <chart:ScatterSeries
+                        <chart:ScatterSeries
                                 Name="HR_PointSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
@@ -377,8 +373,7 @@
                                 ScatterWidth ="12"
                                 Interior="Red"
                                 />
-                        </chart:SfChart>
-                    </DockPanel>
+                    </chart:SfChart>
                 </syncfusion:TabItemExt>
             </syncfusion:TabControlExt>
 

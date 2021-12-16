@@ -52,7 +52,7 @@
   <PropertyGroup>
     <ProjectGuid>dabfa6ab-b22e-4a9b-9367-1a272e88bc34</ProjectGuid>
     <TargetPlatformVersion>10.0.22000.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <PackageCertificateThumbprint>B3BF754825C26B032AE900B2928230CB43994049</PackageCertificateThumbprint>
@@ -60,7 +60,7 @@
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <EntryPointProjectUniqueName>..\Toolbox\Toolbox.csproj</EntryPointProjectUniqueName>
   </PropertyGroup>

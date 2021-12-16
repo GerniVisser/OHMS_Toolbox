@@ -6,6 +6,8 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Icons\ohms_logo_oBF_icon.ico</ApplicationIcon>
     <Platforms>AnyCPU;x64;x86</Platforms>
+	<RuntimeIdentifier Condition=" '$(OS)' == 'Windows_NT' ">win-x86</RuntimeIdentifier>
+	<SelfContained>true</SelfContained>
   </PropertyGroup>
 
   <ItemGroup>
