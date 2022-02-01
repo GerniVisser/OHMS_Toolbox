@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Syncfusion.Windows.Tools.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,31 @@ namespace PillarStability
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+
+        }
+
+        private void MenuItemAdv_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void ButtonAdv_Click(object sender, RoutedEventArgs e)
+        {
+            TabItemExt tabItem = new TabItemExt()
+            {
+                Header = "New Pillar",
+                Content = new PillarControl { },
+                CloseButtonState = Visibility.Visible
+               
+            };
+
+            TabControleMain.Items.Add(tabItem);
+            TabControleMain.SelectedItem = tabItem;
+            TabControleMain.EnableLabelEdit = true;
         }
     }
 }

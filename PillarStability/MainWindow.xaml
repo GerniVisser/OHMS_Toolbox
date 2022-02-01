@@ -4,9 +4,159 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PillarStability"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        
+        Title="Pillar Stability Analyser" 
+        Height="768" 
+        Width="1366" 
+        ResizeMode="CanResize">
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style TargetType="syncfusion:TabItemExt">
+                <Setter Property="FontSize" Value="25" />
+                <Setter Property="FontWeight" Value="Light" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Background" Value="#f0f0f0" />
+                <Setter Property="Width" Value="60" />
+                <Setter Property="CloseButtonState" Value="Visible" />
+                <Setter Property="Height" Value="250" />
+                <Setter Property="Margin" Value="0,0,0,0" />
+                <Setter Property="HeaderMargin" Value="10 0 0 50" />
+                <Setter Property="Control.HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="Control.VerticalContentAlignment" Value="Stretch" />
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <ContentPresenter Content="{TemplateBinding Content}">
+                                <ContentPresenter.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </ContentPresenter.LayoutTransform>
+                            </ContentPresenter>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type syncfusion:TabItemExt}">
+                            <DockPanel
+                                x:Name="PART_DockPanel"
+                                Margin="2"
+                                LastChildFill="True">
+                                <Border
+                                    Name="Bd"
+                                    Margin="{TemplateBinding Margin}"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="0"
+                                    SnapsToDevicePixels="True"
+                                    ToolTip="{Binding Path=ItemToolTip, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabItemExt}}, FallbackValue=''}">
+                                    <ContentPresenter
+                                        x:Name="Content"
+                                        Margin="{TemplateBinding HeaderMargin}"
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Content="{TemplateBinding HeaderedContentControl.Header}"
+                                        ContentSource="Header"
+                                        ContentTemplate="{TemplateBinding HeaderedContentControl.HeaderTemplate}"
+                                        RecognizesAccessKey="True"
+                                        SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
+                                        TextElement.Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabItemExt}}, FallbackValue=Transparent}" />
+                                </Border>
+                            </DockPanel>
+                            <ControlTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Self}}" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="{Binding Path=TabItemSelectedBackground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabControlExt}}, FallbackValue=Transparent}" />
+                                    <Setter TargetName="Bd" Property="BorderBrush" Value="{Binding Path=TabItemSelectedBorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabControlExt}}, FallbackValue=Transparent}" />
+                                    <Setter TargetName="Content" Property="TextElement.Foreground" Value="{Binding Path=TabItemSelectedForeground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabControlExt}}, FallbackValue=Transparent}" />
+                                    <Setter TargetName="Content" Property="TextElement.FontWeight" Value="{Binding Path=SelectedItemFontWeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabControlExt}}, FallbackValue=SemiBold}" />
+                                </DataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid Background="#f0f0f0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <syncfusion:MenuAdv
+                Grid.ColumnSpan="2"
+                Background="#f06e3e"
+                VerticalAlignment="Stretch"
+                FontWeight="Bold"
+                >
+                <syncfusion:MenuItemAdv
+                    Header="File"
+                    
+                    Margin="20 0 0 0"
+                    Foreground="White"
+                    VerticalAlignment="Center">
+
+                </syncfusion:MenuItemAdv>
+                <syncfusion:MenuItemAdv
+                    Header="Export"
+                    Click="MenuItemAdv_Click"
+                    Foreground="White"
+                    VerticalAlignment="Center"
+                    Command="{Binding ReportCommand}">
+
+                </syncfusion:MenuItemAdv>
+
+            </syncfusion:MenuAdv>
+
+
+            <syncfusion:TabControlExt
+                Grid.ColumnSpan="2"
+                Grid.Row="1"
+                HorizontalContentAlignment="Stretch"
+                VerticalContentAlignment="Stretch"
+                Background="#e8e8e8"
+                BorderThickness="0"
+                CloseButtonType="Extended"
+                CloseTabOnMiddleClick="True"
+                x:Name="TabControleMain"
+
+                SelectedIndex="0"
+                SelectedItemFontWeight="Medium"
+                ShowTabItemContextMenu="False"
+                ShowTabListContextMenu="False"
+                TabItemSelectedBackground="#f06e3e"
+                TabItemSelectedForeground="White"
+                TabPanelBackground="#f0f0f0"
+                TabScrollButtonVisibility="Hidden"
+                TabStripPlacement="Left">
+            </syncfusion:TabControlExt>
+            
+            <syncfusion:ButtonAdv 
+                Margin="5"
+                MaxHeight="44"
+                Grid.Column="0"
+                Grid.Row="1"
+                FontSize="22"
+                Background="#f06e3e"
+                Foreground="White"
+                Label="Add Pillar"
+                IconHeight="20"
+                IconWidth="30"
+                SmallIcon="icons/add.png"
+                VerticalAlignment="Bottom" 
+                HorizontalAlignment="Stretch" Click="ButtonAdv_Click"/>
+        </Grid>
     </Grid>
 </Window>

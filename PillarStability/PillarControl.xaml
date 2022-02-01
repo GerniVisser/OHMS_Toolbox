@@ -1,0 +1,373 @@
+﻿<UserControl x:Class="PillarStability.PillarControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PillarStability"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:chart="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="syncfusion:TabItemExt">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontWeight" Value="Light" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Background" Value="#d6d6d6" />
+                <Setter Property="Width" Value="120" />
+                <Setter Property="Height" Value="50" />
+                <Setter Property="Margin" Value="0,0,0,0" />
+                <Setter Property="HeaderMargin" Value="0 0 0 0" />
+                <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
+                <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <ContentPresenter Content="{TemplateBinding Content}">
+                            </ContentPresenter>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type syncfusion:TabItemExt}">
+                            <DockPanel
+                                x:Name="PART_DockPanel"
+                                Margin="1.5"
+                                LastChildFill="True">
+                                <Border
+                                    Name="Bd"
+                                    Margin="{TemplateBinding Margin}"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="0"
+                                    SnapsToDevicePixels="True"
+                                    ToolTip="{Binding Path=ItemToolTip, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabItemExt}}, FallbackValue=''}">
+                                    <ContentPresenter
+                                        x:Name="Content"
+                                        Margin="{TemplateBinding HeaderMargin}"
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Content="{TemplateBinding HeaderedContentControl.Header}"
+                                        ContentSource="Header"
+                                        ContentTemplate="{TemplateBinding HeaderedContentControl.HeaderTemplate}"
+                                        RecognizesAccessKey="True"
+                                        SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
+                                        TextElement.Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabItemExt}}, FallbackValue=Transparent}" />
+                                </Border>
+                            </DockPanel>
+                            <ControlTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Self}}" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="{Binding Path=TabItemSelectedBackground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabControlExt}}, FallbackValue=Transparent}" />
+                                    <Setter TargetName="Bd" Property="BorderBrush" Value="{Binding Path=TabItemSelectedBorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabControlExt}}, FallbackValue=Transparent}" />
+                                    <Setter TargetName="Content" Property="TextElement.Foreground" Value="{Binding Path=TabItemSelectedForeground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabControlExt}}, FallbackValue=Transparent}" />
+                                    <Setter TargetName="Content" Property="TextElement.FontWeight" Value="{Binding Path=SelectedItemFontWeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabControlExt}}, FallbackValue=SemiBold}" />
+                                </DataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+            </Style>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid 
+            Background="White">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="3*" MinHeight="120"/>
+            </Grid.RowDefinitions>
+
+            <syncfusion:TabControlExt
+                x:Name="TabContr"
+                BorderThickness="0"
+                CloseButtonType="Hide"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                HorizontalContentAlignment="Stretch"
+                VerticalContentAlignment="Stretch"
+                ShowTabItemContextMenu="False"
+                ShowTabListContextMenu="False" 
+                TabItemSelectedBackground="#f06e3e"
+                TabItemSelectedForeground="White"
+                TabPanelBackground="White"
+                TabScrollButtonVisibility="Hidden">
+
+                <syncfusion:TabItemExt
+                    Height="30"
+                    Header="Width:Height">
+
+                    <chart:SfChart 
+                            Header="Confinement Formula Stability Graph"
+                            Name="wh_Chart"
+                            FontSize="24"
+                            Background="White"
+                            BorderBrush="#d6d6d6"
+                            BorderThickness="2">
+                        <chart:SfChart.PrimaryAxis>
+                            <chart:NumericalAxis
+                                    StartRangeFromZero="True"
+                                    Header="Width/Height"
+                                    FontSize="14"/>
+                        </chart:SfChart.PrimaryAxis>
+                        <chart:SfChart.SecondaryAxis>
+                            <chart:NumericalAxis
+                                    StartRangeFromZero="True"
+                                    Header="APS/UCS"
+                                    FontSize="14"/>
+                        </chart:SfChart.SecondaryAxis>
+
+                        <chart:SfChart.Resources>
+
+                            <Style TargetType="Line" x:Key="lineStyleVert">
+
+                                <Setter Property="StrokeDashArray" Value="10,5"/>
+
+                                <Setter Property="Stroke" Value="Gray"/>
+
+                                <Setter Property="StrokeThickness" Value="0.8"/>
+
+                            </Style>
+                            <Style TargetType="syncfusion:ChartTrackBallControl" x:Key="trackballStyle">
+
+                                <Setter Property="Background" Value="red"></Setter>
+
+                            </Style>
+
+                        </chart:SfChart.Resources>
+
+                        <chart:SfChart.Behaviors>
+
+                            <chart:ChartTrackBallBehavior
+                                    LineStyle="{StaticResource lineStyleVert}"
+                                    ChartTrackBallStyle="{StaticResource trackballStyle}"         
+                                    />
+                        </chart:SfChart.Behaviors>
+
+                        <chart:LineSeries
+                                Name="wh_LineSerriesFail"
+                                XBindingPath="x"
+                                YBindingPath="y"
+                                Interior="Green"
+                                StrokeThickness="2"
+                            
+                                />
+
+                        <chart:LineSeries
+                                Name="wh_LineSerriesStable"
+                                XBindingPath="x"
+                                YBindingPath="y"
+                                Interior="red"
+                                StrokeThickness="2"
+                            
+                                />
+                        <chart:ScatterSeries
+                                Name="wh_PointSerries"
+                                XBindingPath="x"
+                                YBindingPath="y"
+                                ScatterHeight="12"
+                                ScatterWidth ="12"
+                                Interior="Gray"
+                                />
+                    </chart:SfChart>
+
+                </syncfusion:TabItemExt>
+                <syncfusion:TabItemExt
+                    Height="30"
+                    Header="Pillar Confinement"
+                    x:Name="ave_Tab">
+
+                    <chart:SfChart 
+                            Header="Confinement Formula Stability Graph"
+                            Name="ave_Chart"
+                            FontSize="24"
+                            Background="White"
+                            BorderBrush="#d6d6d6"
+                            BorderThickness="2">
+                        <chart:SfChart.PrimaryAxis>
+                            <chart:NumericalAxis
+                                    StartRangeFromZero="True"
+                                    Header="CPav"
+                                    FontSize="14"/>
+                        </chart:SfChart.PrimaryAxis>
+                        <chart:SfChart.SecondaryAxis>
+                            <chart:NumericalAxis
+                                    StartRangeFromZero="True"
+                                    Header="APS/UCS"
+                                    FontSize="14"/>
+                        </chart:SfChart.SecondaryAxis>
+
+                        <chart:SfChart.Resources>
+
+                            <Style TargetType="Line" x:Key="lineStyleVert">
+
+                                <Setter Property="StrokeDashArray" Value="10,5"/>
+
+                                <Setter Property="Stroke" Value="Gray"/>
+
+                                <Setter Property="StrokeThickness" Value="0.8"/>
+
+                            </Style>
+                            <Style TargetType="syncfusion:ChartTrackBallControl" x:Key="trackballStyle">
+
+                                <Setter Property="Background" Value="red"></Setter>
+
+                            </Style>
+
+                        </chart:SfChart.Resources>
+
+                        <chart:SfChart.Behaviors>
+
+                            <chart:ChartTrackBallBehavior
+                                    LineStyle="{StaticResource lineStyleVert}"
+                                    ChartTrackBallStyle="{StaticResource trackballStyle}"         
+                                    />
+                        </chart:SfChart.Behaviors>
+
+                        <chart:LineSeries
+                                Name="ave_LineSerriesFail"
+                                XBindingPath="x"
+                                YBindingPath="y"
+                                Interior="#f0602b"
+                                StrokeThickness="2"
+                            
+                                />
+
+                        <chart:LineSeries
+                                Name="ave_LineSerriesStable"
+                                XBindingPath="x"
+                                YBindingPath="y"
+                                Interior="#f0602b"
+                                StrokeThickness="2"
+                            
+                                />
+                        <chart:ScatterSeries
+                                Name="B_PointSerries"
+                                XBindingPath="x"
+                                YBindingPath="y"
+                                ScatterHeight="12"
+                                ScatterWidth ="12"
+                                Interior="gray"
+                                />
+                    </chart:SfChart>
+
+                </syncfusion:TabItemExt>
+                <syncfusion:TabItemExt
+                    Height="30"
+                    Header="Monte Carlo">
+
+                    <chart:SfChart 
+                            Header="Stress Factor C"
+                            Name="C_Chart"
+                            FontSize="24"
+                            Background="White"
+                            BorderBrush="#d6d6d6"
+                            BorderThickness="2">
+                        <chart:SfChart.PrimaryAxis>
+                            <chart:NumericalAxis
+                                    StartRangeFromZero="True"
+                                    Header="Dip Of Stopewall (Degrees)"
+                                    FontSize="14"/>
+                        </chart:SfChart.PrimaryAxis>
+                        <chart:SfChart.SecondaryAxis>
+                            <chart:NumericalAxis
+                                    StartRangeFromZero="True"
+                                    Header="Gravity Adjustment Factor C"
+                                    FontSize="14"/>
+                        </chart:SfChart.SecondaryAxis>
+
+                        <chart:SfChart.Resources>
+
+                            <Style TargetType="Line" x:Key="lineStyleVert">
+
+                                <Setter Property="StrokeDashArray" Value="10,5"/>
+
+                                <Setter Property="Stroke" Value="Gray"/>
+
+                                <Setter Property="StrokeThickness" Value="0.8"/>
+
+                            </Style>
+                            <Style TargetType="syncfusion:ChartTrackBallControl" x:Key="trackballStyle">
+
+                                <Setter Property="Background" Value="red"></Setter>
+
+                            </Style>
+
+                        </chart:SfChart.Resources>
+
+                        <chart:SfChart.Behaviors>
+
+                            <chart:ChartTrackBallBehavior
+                                    LineStyle="{StaticResource lineStyleVert}"
+                                    ChartTrackBallStyle="{StaticResource trackballStyle}"         
+                                    />
+                        </chart:SfChart.Behaviors>
+
+                        <chart:LineSeries
+                                Name="C_LineSerries"
+                                XBindingPath="x"
+                                YBindingPath="y"
+                                Interior="#f0602b"
+                                StrokeThickness="2" 
+                            
+                                />
+                        <chart:ScatterSeries
+                                Name="C_PointSerries"
+                                XBindingPath="x"
+                                YBindingPath="y"
+                                ScatterHeight="12"
+                                ScatterWidth ="12"
+                                Interior="Red"
+                                />
+                    </chart:SfChart>
+                </syncfusion:TabItemExt>
+            </syncfusion:TabControlExt>
+
+            <syncfusion:SfDataGrid  
+                x:Name="dataGrid"
+                Grid.Column="0"
+                Grid.Row="2"
+                HorizontalAlignment="Stretch">
+            </syncfusion:SfDataGrid>
+
+            <syncfusion:PropertyGrid 
+                Grid.Column="2" 
+                Grid.RowSpan="5" 
+                x:Name="PropertyGrid"
+                FontSize="18"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                BorderThickness="0"
+                ButtonPanelVisibility="Collapsed"
+                DisableAnimationOnObjectSelection="True"
+                DescriptionPanelVisibility="Collapsed"
+                UpdateSourceMode="ReturnOrLostFocus" 
+                PropertyExpandMode="FlatMode"  
+              />
+
+            <syncfusion:ButtonAdv 
+                Margin="5"
+                MaxHeight="44"
+                Grid.Column="2"
+                Grid.Row="1"
+                FontSize="22"
+                Background="#f06e3e"
+                Foreground="White"
+                Label="Calculate"
+                VerticalAlignment="Bottom" 
+                HorizontalAlignment="Stretch" Click="ButtonAdv_Click" />
+        </Grid>
+    </Grid>
+</UserControl>
