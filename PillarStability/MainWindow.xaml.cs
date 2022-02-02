@@ -28,7 +28,7 @@ namespace PillarStability
 
             _pillarControl = new PillarControl(_pillarModelList[0]);
 
-            addPillar(_pillarModelList[0]);
+            tabCombinedPillar.Content = _pillarControl;
         }
 
         private void MenuItemAdv_Click(object sender, RoutedEventArgs e)
@@ -37,7 +37,7 @@ namespace PillarStability
 
         private void ButtonAdv_Click(object sender, RoutedEventArgs e)
         {
-            var newPillarModel = new PillarModel("Pillar " + (_pillarModelList.Count));
+            var newPillarModel = new PillarModel("Pillar " + (TabControleMain.Items.Count));
             _pillarModelList.Add(newPillarModel);
 
             addPillar(_pillarModelList[_pillarModelList.Count - 1]);
@@ -50,9 +50,7 @@ namespace PillarStability
                 TabItemExt tabItem = new TabItemExt()
                 {
                     Content = _pillarControl,
-                    CloseButtonState = Visibility.Visible,
                     Header = _pillarControl.getPillarModel.Name,
-
                 };
 
                 TabControleMain.Items.Add(tabItem);
@@ -62,7 +60,40 @@ namespace PillarStability
 
         private void TabControleMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _pillarControl.setPillarModel(_pillarModelList[TabControleMain.SelectedIndex]);
+            if (TabControleMain.SelectedIndex != -1)
+            {
+                _pillarControl.setPillarModel(_pillarModelList[TabControleMain.SelectedIndex]);
+            }
+            else
+            {
+                TabControleMain.SelectedIndex = 0;
+                _pillarControl.setPillarModel(_pillarModelList[0]);
+            }
+        }
+
+        private void TabControlExt_OnCloseButtonClick(object sender, CloseTabEventArgs e)
+        {
+            int index = TabControleMain.SelectedIndex;
+
+            _pillarModelList.RemoveAt(index);
+
+            TabControleMain.SelectedIndex = index - 1;
+        }
+
+        private void TabControlExt_OnCloseAllTabs(object sender, CloseTabEventArgs e)
+        {
+            _pillarModelList.RemoveRange(1, _pillarModelList.Count - 1);
+
+            TabControleMain.SelectedIndex = 0;
+
+        }
+
+        private void TabControlExt_OnCloseOtherTabs(object sender, CloseTabEventArgs e)
+        {
+            _pillarModelList.RemoveRange(1, TabControleMain.SelectedIndex - 1);
+            _pillarModelList.RemoveRange(2, _pillarModelList.Count - 2);
+
+            TabControleMain.SelectedIndex = 0;
         }
     }
 }

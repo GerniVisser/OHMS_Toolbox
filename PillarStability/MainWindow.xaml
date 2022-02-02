@@ -128,13 +128,15 @@
                 VerticalContentAlignment="Stretch"
                 Background="#e8e8e8"
                 BorderThickness="0"
-                CloseButtonType="Extended"
                 CloseTabOnMiddleClick="True"
                 x:Name="TabControleMain"
+                OnCloseButtonClick="TabControlExt_OnCloseButtonClick"
+                OnCloseAllTabs="TabControlExt_OnCloseAllTabs"
+                OnCloseOtherTabs="TabControlExt_OnCloseOtherTabs"
+                CloseMode="Delete"
 
                 SelectedIndex="0"
                 SelectedItemFontWeight="Medium"
-                ShowTabItemContextMenu="False"
                 ShowTabListContextMenu="False"
                 TabItemSelectedBackground="#f06e3e"
                 TabItemSelectedForeground="White"
@@ -142,6 +144,14 @@
                 TabScrollButtonVisibility="Hidden"
                 TabStripPlacement="Left" 
                 SelectionChanged="TabControleMain_SelectionChanged">
+
+                <syncfusion:TabItemExt 
+                    Header="Overview"
+                    CanClose="False"
+                    x:Name="tabCombinedPillar">
+                    
+                </syncfusion:TabItemExt>
+                    
             </syncfusion:TabControlExt>
             
             <syncfusion:ButtonAdv 
@@ -157,7 +167,8 @@
                 IconWidth="30"
                 SmallIcon="icons/add.png"
                 VerticalAlignment="Bottom" 
-                HorizontalAlignment="Stretch" Click="ButtonAdv_Click"/>
+                HorizontalAlignment="Stretch" 
+                Click="ButtonAdv_Click"/>
         </Grid>
     </Grid>
 </Window>
