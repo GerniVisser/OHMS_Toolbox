@@ -11,7 +11,12 @@ namespace PillarStability.Models
     {
         public static OutputGridObject calculate(PillarModel pillar)
         {
-            var i = new OutputGridObject();
+            var i = new OutputGridObject() {
+                Width = pillar.Weff,
+                WidthtHeight = pillar.Wth,
+                Pillar = pillar.Name,
+                AveStress = pillar.APStUCS
+            };
 
             return i;
         }

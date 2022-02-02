@@ -1,20 +1,8 @@
 ﻿using PillarStability.Helper;
 using PillarStability.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PillarStability
 {
@@ -30,7 +18,7 @@ namespace PillarStability
         {
             InitializeComponent();
 
-            _pillar = new PillarModel();
+            _pillar = new PillarModel("New Pillar");
             _pillarOutputGrid = new ObservableCollection<OutputGridObject>();
             
             PropertyGrid.SelectedObject = _pillar;
@@ -46,6 +34,8 @@ namespace PillarStability
         public void update()
         {
             updateOutGrid();
+            UpdateMonteGrid();
+            UpdateOutChart();
         }
 
         private void updateOutGrid()
@@ -57,10 +47,31 @@ namespace PillarStability
             dataGrid.ItemsSource = PillarOut;
         }
 
+        private void UpdateMonteGrid()
+        {
+            PillarOut.Clear();
+            var t = Calculations.calculate(_pillar);
+            PillarOut.Add(t);
+
+            dataGridMonte.ItemsSource = PillarOut;
+        }
+
+        private void UpdateOutChart()
+        {
+            var x = SerriesBuilder.whGraph(_pillar.UCS)[0].coords;
+            wh_LineSerriesFail.ItemsSource = SerriesBuilder.whGraph(_pillar.UCS)[0].coords;
+            wh_LineSerriesStable.ItemsSource = SerriesBuilder.whGraph(_pillar.UCS)[1].coords;
+        }
+
         public ObservableCollection<OutputGridObject> PillarOut
         {
             get { return _pillarOutputGrid; }
             set { _pillarOutputGrid = value; }
+        }
+
+        public PillarModel getPillarModel
+        {
+            get { return _pillar; }
         }
 
     }

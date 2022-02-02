@@ -11,42 +11,45 @@ namespace PillarStability.Models
         private float _L;
         private float _APS;
         private float _UCS;
-        private float _Weff;
-        private float _Wth;
-        private float _APStUCS;
         private float _APC;
+        private string _name;
 
-        public PillarModel()
+
+        public PillarModel(string Name)
         {
+            _name = Name;
             _H = 0;
             _W = 0;
             _L = 0;
             _APS = 0;
             _UCS = 0;
-            _Weff = 4 * (_L * _W) / (2 * (_L + _W));
-            _Wth = _Weff / _H;
-            _APStUCS = _APS / _UCS;
-            _APC = 0;
         }
 
         private float calcAPC()
         {
-            if (_Wth > 3.99)
+            if (Wth > 3.99)
             {
-                _APC = 0.23f + 0.017f * _Wth;
+                _APC = 0.23f + 0.017f * Wth;
             }
             else
             {
-                _APC = (float)(0.34f * Math.Pow(Math.Log10(_Wth + 0.75f), (1.4f / _Wth)));
+                _APC = (float)(0.34f * Math.Pow(Math.Log10(Wth + 0.75f), (1.4f / Wth)));
             }
             return _APC;
         }
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+
 
         [DisplayName("Height"), Description("")]
         public float Height
         {
             get { return _H; }
-            set 
+            set
             {
                 _H = value;
             }
@@ -90,6 +93,30 @@ namespace PillarStability.Models
             {
                 _UCS = value;
             }
+        }
+
+        [Browsable(false)]
+        public float Weff
+        {
+            get { return 4 * (_L * _W) / (2 * (_L + _W)); }
+        }
+
+        [Browsable(false)]
+        public float Wth
+        {
+            get { return Weff / _H; }
+        }
+
+        [Browsable(false)]
+        public float APStUCS
+        {
+            get { return _APS / _UCS; }
+        }
+
+        [Browsable(false)]
+        public float APC
+        {
+            get { return calcAPC(); }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Syncfusion.Windows.Tools.Controls;
+﻿
+using Syncfusion.Windows.Tools.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,12 +39,14 @@ namespace PillarStability
 
         private void ButtonAdv_Click(object sender, RoutedEventArgs e)
         {
+            var newPillar = new PillarControl();
+
             TabItemExt tabItem = new TabItemExt()
             {
-                Header = "New Pillar",
-                Content = new PillarControl { },
-                CloseButtonState = Visibility.Visible
-               
+                Content = newPillar,
+                CloseButtonState = Visibility.Visible,
+                Header = newPillar.getPillarModel.Name,
+
             };
 
             TabControleMain.Items.Add(tabItem);
