@@ -140,7 +140,8 @@
                 TabItemSelectedForeground="White"
                 TabPanelBackground="#f0f0f0"
                 TabScrollButtonVisibility="Hidden"
-                TabStripPlacement="Left">
+                TabStripPlacement="Left" 
+                SelectionChanged="TabControleMain_SelectionChanged">
             </syncfusion:TabControlExt>
             
             <syncfusion:ButtonAdv 

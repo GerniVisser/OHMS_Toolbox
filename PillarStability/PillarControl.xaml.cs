@@ -14,16 +14,30 @@ namespace PillarStability
         private PillarModel _pillar;
         private ObservableCollection<OutputGridObject> _pillarOutputGrid;
 
-        public PillarControl()
+        public PillarControl(PillarModel pillarModel)
         {
             InitializeComponent();
 
-            _pillar = new PillarModel("New Pillar");
             _pillarOutputGrid = new ObservableCollection<OutputGridObject>();
-            
-            PropertyGrid.SelectedObject = _pillar;
+
+            setPillarModel(pillarModel);
 
             update();
+        }
+
+        public bool setPillarModel(PillarModel pillarModel)
+        {
+            try
+            {
+                _pillar = pillarModel;
+                PropertyGrid.SelectedObject = _pillar;
+                update();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
 
         private void ButtonAdv_Click(object sender, RoutedEventArgs e)

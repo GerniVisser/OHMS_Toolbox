@@ -38,6 +38,7 @@ namespace PillarStability.Models
             return _APC;
         }
 
+        [Browsable(false)]
         public string Name
         {
             get { return _name; }
