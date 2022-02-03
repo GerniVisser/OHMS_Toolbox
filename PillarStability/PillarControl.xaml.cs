@@ -11,16 +11,15 @@ namespace PillarStability
     /// </summary>
     public partial class PillarControl : UserControl
     {
-        private PillarModel _pillar;
+        private PillarModel _pillarModel;
         private ObservableCollection<OutputGridObject> _pillarOutputGrid;
 
-        public PillarControl(PillarModel pillarModel)
+        public PillarControl()
         {
             InitializeComponent();
 
             _pillarOutputGrid = new ObservableCollection<OutputGridObject>();
 
-            setPillarModel(pillarModel);
 
             update();
         }
@@ -29,8 +28,8 @@ namespace PillarStability
         {
             try
             {
-                _pillar = pillarModel;
-                PropertyGrid.SelectedObject = _pillar;
+                _pillarModel = pillarModel;
+                PropertyGrid.SelectedObject = _pillarModel;
                 update();
             }
             catch
@@ -47,15 +46,18 @@ namespace PillarStability
 
         public void update()
         {
-            updateOutGrid();
-            UpdateMonteGrid();
-            UpdateOutChart();
+            if(_pillarModel != null)
+            {
+                updateOutGrid();
+                UpdateMonteGrid();
+                UpdateOutChart();
+            }
         }
 
         private void updateOutGrid()
         {
             PillarOut.Clear();
-            var t = Calculations.calculate(_pillar);
+            var t = Calculations.calculate(_pillarModel);
             PillarOut.Add(t);
 
             dataGrid.ItemsSource = PillarOut;
@@ -64,7 +66,7 @@ namespace PillarStability
         private void UpdateMonteGrid()
         {
             PillarOut.Clear();
-            var t = Calculations.calculate(_pillar);
+            var t = Calculations.calculate(_pillarModel);
             PillarOut.Add(t);
 
             dataGridMonte.ItemsSource = PillarOut;
@@ -72,9 +74,9 @@ namespace PillarStability
 
         private void UpdateOutChart()
         {
-            var x = SerriesBuilder.whGraph(_pillar.UCS)[0].coords;
-            wh_LineSerriesFail.ItemsSource = SerriesBuilder.whGraph(_pillar.UCS)[0].coords;
-            wh_LineSerriesStable.ItemsSource = SerriesBuilder.whGraph(_pillar.UCS)[1].coords;
+            var x = SerriesBuilder.whGraph(_pillarModel.UCS)[0].coords;
+            wh_LineSerriesFail.ItemsSource = SerriesBuilder.whGraph(_pillarModel.UCS)[0].coords;
+            wh_LineSerriesStable.ItemsSource = SerriesBuilder.whGraph(_pillarModel.UCS)[1].coords;
         }
 
         public ObservableCollection<OutputGridObject> PillarOut
@@ -85,7 +87,7 @@ namespace PillarStability
 
         public PillarModel getPillarModel
         {
-            get { return _pillar; }
+            get { return _pillarModel; }
         }
 
     }
