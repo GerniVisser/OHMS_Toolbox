@@ -25,7 +25,7 @@ namespace PillarStability
             _pillarModelList = new List<PillarModel>();
             _pillarControl = new PillarControl();
 
-            _combinedPillarControl= new CombinedPillarControl();
+            _combinedPillarControl= new CombinedPillarControl(_pillarModelList);
 
             tabCombinedPillar.Content = _combinedPillarControl;
         }
@@ -54,6 +54,8 @@ namespace PillarStability
 
                 TabControleMain.Items.Add(tabItem);
                 TabControleMain.SelectedItem = tabItem;
+
+                _combinedPillarControl.update();
             }
         }
 
@@ -67,6 +69,8 @@ namespace PillarStability
             {
                 TabControleMain.SelectedIndex = 0;
             }
+
+            _combinedPillarControl.update();
         }
 
         private void TabControlExt_OnCloseButtonClick(object sender, CloseTabEventArgs e)

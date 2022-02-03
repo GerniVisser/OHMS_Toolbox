@@ -9,7 +9,7 @@ namespace PillarStability.Helper
 {
     public class OutputGridObject
     {
-        private string _pillarname = "Hi";
+        private string _pillarname;
 
         public string Pillar
         {
@@ -18,7 +18,7 @@ namespace PillarStability.Helper
         }
 
         
-        private float _effPillarWidth = 23;
+        private float _effPillarWidth;
 
         public float Width
         {

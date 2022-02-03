@@ -1,5 +1,6 @@
 ﻿using PillarStability.Helper;
 using PillarStability.Models;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,14 +13,13 @@ namespace PillarStability
     public partial class PillarControl : UserControl
     {
         private PillarModel _pillarModel;
-        private ObservableCollection<OutputGridObject> _pillarOutputGrid;
+        private ObservableCollection<OutputGridObject> _whGridObject;
 
         public PillarControl()
         {
             InitializeComponent();
 
-            _pillarOutputGrid = new ObservableCollection<OutputGridObject>();
-
+            _whGridObject = new ObservableCollection<OutputGridObject>();
 
             update();
         }
@@ -56,38 +56,41 @@ namespace PillarStability
 
         private void updateOutGrid()
         {
-            PillarOut.Clear();
+            whGridObject.Clear();
             var t = Calculations.calculate(_pillarModel);
-            PillarOut.Add(t);
+            whGridObject.Add(t);
 
-            dataGrid.ItemsSource = PillarOut;
+            dataGrid.ItemsSource = whGridObject;
         }
 
         private void UpdateMonteGrid()
         {
-            PillarOut.Clear();
+            whGridObject.Clear();
             var t = Calculations.calculate(_pillarModel);
-            PillarOut.Add(t);
+            whGridObject.Add(t);
 
-            dataGridMonte.ItemsSource = PillarOut;
+            dataGridMonte.ItemsSource = whGridObject;
         }
 
         private void UpdateOutChart()
         {
-            var x = SerriesBuilder.whGraph(_pillarModel.UCS)[0].coords;
-            wh_LineSerriesFail.ItemsSource = SerriesBuilder.whGraph(_pillarModel.UCS)[0].coords;
-            wh_LineSerriesStable.ItemsSource = SerriesBuilder.whGraph(_pillarModel.UCS)[1].coords;
-        }
+            wh_LineSerriesFail.ItemsSource = SerriesBuilder.whGraph(_pillarModel)[0].coords;
+            wh_LineSerriesStable.ItemsSource = SerriesBuilder.whGraph(_pillarModel)[1].coords;
 
-        public ObservableCollection<OutputGridObject> PillarOut
-        {
-            get { return _pillarOutputGrid; }
-            set { _pillarOutputGrid = value; }
+            var pointList = new List<PillarModel>();
+            pointList.Add(_pillarModel);
+            wh_PointSerries.ItemsSource = SerriesBuilder.whPoint(pointList).coords;
         }
 
         public PillarModel getPillarModel
         {
             get { return _pillarModel; }
+        }
+
+        public ObservableCollection<OutputGridObject> whGridObject
+        {
+            get { return _whGridObject; }
+            set { _whGridObject = value; }
         }
 
     }

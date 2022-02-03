@@ -9,7 +9,7 @@ namespace PillarStability.Models
 {
     public static class SerriesBuilder
     {
-        public static List<CoordSerries> whGraph(float UCS)
+        public static List<CoordSerries> whGraph(PillarModel pillarModel)
         {
             float wTh = 0.0f;
             float APC = 0.0f;
@@ -36,10 +36,10 @@ namespace PillarStability.Models
 
                 K = (float)(Math.Tan(Math.Acos((1 - APC) / (1 + APC))));
 
-                PS = (float)((0.44 * UCS) * (0.68 + 0.52 * K));
+                PS = (float)((0.44 * pillarModel.UCS) * (0.68 + 0.52 * K));
 
-                FOS1 = PS / UCS;
-                FOS14 = PS / (1.4f * UCS);
+                FOS1 = PS / pillarModel.UCS;
+                FOS14 = PS / (1.4f * pillarModel.UCS);
 
                 var coordfail = new Coord { x = wTh, y = FOS1 };
 
@@ -51,6 +51,23 @@ namespace PillarStability.Models
             }
 
             var res = new List<CoordSerries>() { coordsFail, coordsStable };
+            return res;
+        }
+
+        public static CoordSerries whPoint(List<PillarModel> pillarModels)
+        {
+            CoordSerries res = new CoordSerries();
+
+            for (int i = 0; i < pillarModels.Count; i++)
+            {
+                var WtH = pillarModels[i].Width / pillarModels[i].Height;
+                var APStUCS = pillarModels[i].APS / pillarModels[i].UCS;
+
+                Coord coordPoint = new Coord() { x = WtH, y = APStUCS };
+
+                res.coords.Add(coordPoint);
+            }
+
             return res;
         }
     }

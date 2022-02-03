@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PillarStability.Helper;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -13,7 +14,6 @@ namespace PillarStability.Models
         private float _UCS;
         private float _APC;
         private string _name;
-
 
         public PillarModel(string Name)
         {

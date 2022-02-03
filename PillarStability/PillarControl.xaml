@@ -78,7 +78,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid 
-            Background="White">
+            Background="WhiteSmoke">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*" />
@@ -359,7 +359,7 @@
             </Grid>
             <syncfusion:PropertyGrid 
                 Grid.Column="2" 
-                Grid.RowSpan="5" 
+                Background="#f0f0f0"
                 x:Name="PropertyGrid"
                 FontSize="18"
                 HorizontalAlignment="Stretch"
