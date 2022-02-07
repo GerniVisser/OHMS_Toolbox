@@ -359,6 +359,7 @@
             </Grid>
             <syncfusion:PropertyGrid 
                 Grid.Column="2" 
+                Grid.RowSpan="2"
                 Background="#f0f0f0"
                 x:Name="PropertyGrid"
                 FontSize="18"

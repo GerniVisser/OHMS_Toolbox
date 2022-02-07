@@ -23,14 +23,15 @@ namespace PillarStability
     /// </summary>
     public partial class CombinedPillarControl : UserControl
     {
-        private ObservableCollection<OutputGridObject> _pillarOutputGrid;
         private CombinedPillarModel _model;
+        private ObservableCollection<OutputGridObject> _pillarOutputGrid;
 
         public CombinedPillarControl(List<PillarModel> pillarModels)
         {
             InitializeComponent();
 
             _model = new CombinedPillarModel(pillarModels);
+            _pillarOutputGrid = new ObservableCollection<OutputGridObject>();
         }
 
         public ObservableCollection<OutputGridObject> PillarOut
@@ -44,7 +45,20 @@ namespace PillarStability
             if(_model.PillarModels.Count > 0)
             { 
                 UpdateOutChart();
+                updateOutGrid();
             }
+        }
+
+        private void updateOutGrid()
+        {
+            whGrid.Clear();
+            for (int i = 0; i < _model.PillarModels.Count; i++)
+            {
+                var t = Calculations.calculate(_model.PillarModels[i]);
+                whGrid.Add(t);
+            }
+
+            dataGrid.ItemsSource = whGrid;
         }
 
         private void UpdateOutChart()
@@ -53,6 +67,12 @@ namespace PillarStability
             wh_LineSerriesStable.ItemsSource = SerriesBuilder.whGraph(_model.PillarModels[0])[1].coords;
 
             wh_PointSerries.ItemsSource = SerriesBuilder.whPoint(_model.PillarModels).coords;
+        }
+
+        public ObservableCollection<OutputGridObject> whGrid
+        {
+            get { return _pillarOutputGrid; }
+            set { _pillarOutputGrid = value; }
         }
     }
 }
