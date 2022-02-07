@@ -77,9 +77,16 @@ namespace PillarStability
             wh_LineSerriesFail.ItemsSource = SerriesBuilder.whGraph(_pillarModel)[0].coords;
             wh_LineSerriesStable.ItemsSource = SerriesBuilder.whGraph(_pillarModel)[1].coords;
 
-            var pointList = new List<PillarModel>();
-            pointList.Add(_pillarModel);
-            wh_PointSerries.ItemsSource = SerriesBuilder.whPoint(pointList).coords;
+            var wh_pointList = new List<PillarModel>();
+            wh_pointList.Add(_pillarModel);
+            wh_PointSerries.ItemsSource = SerriesBuilder.whPoint(wh_pointList).coords;
+
+            ave_LineSerriesFail.ItemsSource = SerriesBuilder.apcGraph(_pillarModel)[0].coords;
+            ave_LineSerriesStable.ItemsSource = SerriesBuilder.apcGraph(_pillarModel)[1].coords;
+
+            var ave_pointList = new List<PillarModel>();
+            ave_pointList.Add(_pillarModel);
+            ave_PointSerries.ItemsSource = SerriesBuilder.apcPoint(ave_pointList).coords;
         }
 
         public PillarModel getPillarModel

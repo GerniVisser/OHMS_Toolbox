@@ -16,7 +16,7 @@
                 <Setter Property="FontWeight" Value="Light" />
                 <Setter Property="BorderThickness" Value="0" />
                 <Setter Property="Background" Value="#d6d6d6" />
-                <Setter Property="Width" Value="120" />
+                <Setter Property="Width" Value="200" />
                 <Setter Property="Height" Value="50" />
                 <Setter Property="Margin" Value="0,0,0,0" />
                 <Setter Property="HeaderMargin" Value="0 0 0 0" />
@@ -110,7 +110,7 @@
                     Header="Width:Height">
 
                     <chart:SfChart 
-                            Header="Confinement Formula Stability Graph"
+                            Header="Confinement Formula Stability Graph: 550"
                             Name="wh_Chart"
                             FontSize="24"
                             Background="White"
@@ -190,7 +190,7 @@
                     x:Name="ave_Tab">
 
                     <chart:SfChart 
-                            Header="Confinement Formula Stability Graph"
+                            Header="Confinement Formula Stability Graph: 550"
                             Name="ave_Chart"
                             FontSize="24"
                             Background="White"
@@ -240,7 +240,7 @@
                                 Name="ave_LineSerriesFail"
                                 XBindingPath="x"
                                 YBindingPath="y"
-                                Interior="#f0602b"
+                                Interior="Red"
                                 StrokeThickness="2"
                             
                                 />
@@ -249,12 +249,12 @@
                                 Name="ave_LineSerriesStable"
                                 XBindingPath="x"
                                 YBindingPath="y"
-                                Interior="#f0602b"
+                                Interior="Green"
                                 StrokeThickness="2"
                             
                                 />
                         <chart:ScatterSeries
-                                Name="B_PointSerries"
+                                Name="ave_PointSerries"
                                 XBindingPath="x"
                                 YBindingPath="y"
                                 ScatterHeight="12"
@@ -263,75 +263,6 @@
                                 />
                     </chart:SfChart>
 
-                </syncfusion:TabItemExt>
-                <syncfusion:TabItemExt
-                    Height="30"
-                    Header="Monte Carlo">
-
-                    <chart:SfChart 
-                            Header="Stress Factor C"
-                            Name="C_Chart"
-                            FontSize="24"
-                            Background="White"
-                            BorderBrush="#d6d6d6"
-                            BorderThickness="2">
-                        <chart:SfChart.PrimaryAxis>
-                            <chart:NumericalAxis
-                                    StartRangeFromZero="True"
-                                    Header="Dip Of Stopewall (Degrees)"
-                                    FontSize="14"/>
-                        </chart:SfChart.PrimaryAxis>
-                        <chart:SfChart.SecondaryAxis>
-                            <chart:NumericalAxis
-                                    StartRangeFromZero="True"
-                                    Header="Gravity Adjustment Factor C"
-                                    FontSize="14"/>
-                        </chart:SfChart.SecondaryAxis>
-
-                        <chart:SfChart.Resources>
-
-                            <Style TargetType="Line" x:Key="lineStyleVert">
-
-                                <Setter Property="StrokeDashArray" Value="10,5"/>
-
-                                <Setter Property="Stroke" Value="Gray"/>
-
-                                <Setter Property="StrokeThickness" Value="0.8"/>
-
-                            </Style>
-                            <Style TargetType="syncfusion:ChartTrackBallControl" x:Key="trackballStyle">
-
-                                <Setter Property="Background" Value="red"></Setter>
-
-                            </Style>
-
-                        </chart:SfChart.Resources>
-
-                        <chart:SfChart.Behaviors>
-
-                            <chart:ChartTrackBallBehavior
-                                    LineStyle="{StaticResource lineStyleVert}"
-                                    ChartTrackBallStyle="{StaticResource trackballStyle}"         
-                                    />
-                        </chart:SfChart.Behaviors>
-
-                        <chart:LineSeries
-                                Name="C_LineSerries"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                Interior="#f0602b"
-                                StrokeThickness="2" 
-                            
-                                />
-                        <chart:ScatterSeries
-                                Name="C_PointSerries"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                ScatterHeight="12"
-                                ScatterWidth ="12"
-                                Interior="Red"
-                                />
-                    </chart:SfChart>
                 </syncfusion:TabItemExt>
             </syncfusion:TabControlExt>
 

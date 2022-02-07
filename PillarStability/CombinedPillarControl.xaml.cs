@@ -67,6 +67,11 @@ namespace PillarStability
             wh_LineSerriesStable.ItemsSource = SerriesBuilder.whGraph(_model.PillarModels[0])[1].coords;
 
             wh_PointSerries.ItemsSource = SerriesBuilder.whPoint(_model.PillarModels).coords;
+
+            ave_LineSerriesFail.ItemsSource = SerriesBuilder.apcGraph(_model.PillarModels[0])[0].coords;
+            ave_LineSerriesStable.ItemsSource = SerriesBuilder.apcGraph(_model.PillarModels[0])[1].coords;
+            
+            ave_PointSerries.ItemsSource = SerriesBuilder.apcPoint(_model.PillarModels).coords;
         }
 
         public ObservableCollection<OutputGridObject> whGrid
