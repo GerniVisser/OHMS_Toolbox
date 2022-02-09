@@ -53,14 +53,18 @@ namespace PillarStability
             {
                 updateOutGrid();
                 UpdateOutChart();
+                UpdateMCGrid();
+                UpdateMCChart();
             }
         }
 
         public void updateMC()
         {
             var t = Calculations.calculateMC(_pillarModel, 10000);
-            UpdateMCGrid(t.Item1);
-            UpdateMCChart(t.Item2);
+            _pillarModel.MCGridObject = t.Item1;
+            _pillarModel.Bins = t.Item2;
+            UpdateMCGrid();
+            UpdateMCChart();
         }
 
         private void updateOutGrid()
@@ -72,31 +76,49 @@ namespace PillarStability
             dataGrid.ItemsSource = whGridObject;
         }
 
-        private void UpdateMCGrid(MCGridObject mCGridObject)
+        private void UpdateMCGrid()
         {
-            mcGridObjects.Clear();
-            mcGridObjects.Add(mCGridObject);
+            if(_pillarModel.MCGridObject != null)
+            {
+                mcGridObjects.Clear();
+                mcGridObjects.Add(_pillarModel.MCGridObject);
 
-            dataGridMonte.ItemsSource = mcGridObjects;
+                dataGridMonte.ItemsSource = mcGridObjects;
+            }
+            else
+            {
+                mcGridObjects.Clear();
+            }
         }
 
-        private void UpdateMCChart(Bins bins)
+        private void UpdateMCChart()
         {
-            mc_LineSerries.ItemsSource = SerriesBuilder.mcLineSerries(bins).coords;
-            mc_LineSerriesCumalitive.ItemsSource = SerriesBuilder.mcCumalitiveLineSerries(bins).coords;
+            if (_pillarModel.MCGridObject != null)
+            {
+                mc_LineSerries.ItemsSource = SerriesBuilder.mcLineSerries(_pillarModel.Bins).coords;
+                mc_LineSerriesCumalitive.ItemsSource = SerriesBuilder.mcCumalitiveLineSerries(_pillarModel.Bins).coords;
 
-            CoordSerries fos = new CoordSerries();
-            fos.coords.Add(new Coord() { x = 1, y = 0 });
-            fos.coords.Add(new Coord() { x = 1, y = 1 });
+                CoordSerries fos = new CoordSerries();
+                fos.coords.Add(new Coord() { x = 1, y = 0 });
+                fos.coords.Add(new Coord() { x = 1, y = 1 });
 
-            FOS1_LineSerries.ItemsSource = fos.coords;
+                FOS1_LineSerries.ItemsSource = fos.coords;
 
-            fos.coords.Clear();
+                fos.coords.Clear();
 
-            fos.coords.Add(new Coord() { x = 1.4, y = 0 });
-            fos.coords.Add(new Coord() { x = 1.4, y = 1 });
+                fos.coords.Add(new Coord() { x = 1.4, y = 0 });
+                fos.coords.Add(new Coord() { x = 1.4, y = 1 });
 
-            FOS14_LineSerries.ItemsSource = fos.coords;
+                FOS14_LineSerries.ItemsSource = fos.coords;
+            }
+            else
+            {
+                // Glears the graphs if no data is available otherwise the previous pillar's data is displayed.
+                mc_LineSerries.ItemsSource = null;
+                mc_LineSerriesCumalitive.ItemsSource = null;
+                FOS14_LineSerries.ItemsSource = null;
+                FOS1_LineSerries.ItemsSource = null;
+            }
         }
 
         private void UpdateOutChart()

@@ -31,6 +31,9 @@ namespace PillarStability.Models
         private float _stdAps = 0;
         private float _lsf = 1f;
 
+        private Bins _bins;
+        private MCGridObject _mcGridObject;
+
         public PillarModel(string Name)
         {
             _name = Name;
@@ -235,6 +238,23 @@ namespace PillarStability.Models
             get { return _lsf; }
             set { _lsf = value; }
         }
+
+        [Browsable(false)]
+        public MCGridObject MCGridObject
+        {
+            get { return _mcGridObject; }
+            set { _mcGridObject = value; }
+        }
+
+        [Browsable(false)]
+        public Bins Bins
+        {
+            get { return _bins; }
+            set { _bins = value; }
+        }
+
+
+
 
     }
 }

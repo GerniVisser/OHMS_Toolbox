@@ -86,12 +86,14 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
         <syncfusion:TabControlExt
                 x:Name="TabContr"
                 Grid.Column="1"
+                Grid.Row="0"
                 BorderThickness="0"
                 CloseButtonType="Hide"
                 HorizontalAlignment="Stretch"
@@ -109,14 +111,7 @@
                     Height="30"
                     Header="Width:Height">
 
-                <Grid Grid.Column="1" Grid.Row="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="3*"/>
-                        <RowDefinition Height=".5*"/>
-                        <RowDefinition Height="2*"/>
-                    </Grid.RowDefinitions>
-
-                    <chart:SfChart 
+                <chart:SfChart 
                             Grid.Row="0"
                             VerticalAlignment="Stretch"
                             Header="Confinement Formula Stability Graph"
@@ -131,41 +126,14 @@
                                     Header="Width/Height"
                                     FontSize="14"/>
                         </chart:SfChart.PrimaryAxis>
-                        <chart:SfChart.SecondaryAxis>
-                            <chart:NumericalAxis
+                    <chart:SfChart.SecondaryAxis>
+                        <chart:NumericalAxis
                                     StartRangeFromZero="True"
                                     Header="APS/UCS"
                                     FontSize="14"/>
-                        </chart:SfChart.SecondaryAxis>
+                    </chart:SfChart.SecondaryAxis>
 
-                        <chart:SfChart.Resources>
-
-                            <Style TargetType="Line" x:Key="lineStyleVert">
-
-                                <Setter Property="StrokeDashArray" Value="10,5"/>
-
-                                <Setter Property="Stroke" Value="Gray"/>
-
-                                <Setter Property="StrokeThickness" Value="0.8"/>
-
-                            </Style>
-                            <Style TargetType="syncfusion:ChartTrackBallControl" x:Key="trackballStyle">
-
-                                <Setter Property="Background" Value="red"></Setter>
-
-                            </Style>
-
-                        </chart:SfChart.Resources>
-
-                        <chart:SfChart.Behaviors>
-
-                            <chart:ChartTrackBallBehavior
-                                    LineStyle="{StaticResource lineStyleVert}"
-                                    ChartTrackBallStyle="{StaticResource trackballStyle}"         
-                                    />
-                        </chart:SfChart.Behaviors>
-
-                        <chart:LineSeries
+                    <chart:LineSeries
                                 Name="wh_LineSerriesFail"
                                 XBindingPath="x"
                                 YBindingPath="y"
@@ -192,28 +160,6 @@
                                 />
                     </chart:SfChart>
 
-                    <TextBox
-                        Margin="10"
-                        Grid.Column="0"
-                        Grid.Row="1"
-                        BorderThickness="0"
-                        FontWeight="Light"
-                        FontSize="20"
-                        HorizontalContentAlignment="Center">
-                            Pillar Parameters
-                    </TextBox>
-                    <syncfusion:SfDataGrid  
-                            Margin="0 10"
-                            x:Name="dataGrid"
-                            Grid.Column="0"
-                            Grid.Row="2"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Top">
-                    </syncfusion:SfDataGrid>
-
-
-                </Grid>
-
             </syncfusion:TabItemExt>
             <syncfusion:TabItemExt
                     Height="30"
@@ -239,33 +185,6 @@
                                     Header="APS/UCS"
                                     FontSize="14"/>
                     </chart:SfChart.SecondaryAxis>
-
-                    <chart:SfChart.Resources>
-
-                        <Style TargetType="Line" x:Key="lineStyleVert">
-
-                            <Setter Property="StrokeDashArray" Value="10,5"/>
-
-                            <Setter Property="Stroke" Value="Gray"/>
-
-                            <Setter Property="StrokeThickness" Value="0.8"/>
-
-                        </Style>
-                        <Style TargetType="syncfusion:ChartTrackBallControl" x:Key="trackballStyle">
-
-                            <Setter Property="Background" Value="red"></Setter>
-
-                        </Style>
-
-                    </chart:SfChart.Resources>
-
-                    <chart:SfChart.Behaviors>
-
-                        <chart:ChartTrackBallBehavior
-                                    LineStyle="{StaticResource lineStyleVert}"
-                                    ChartTrackBallStyle="{StaticResource trackballStyle}"         
-                                    />
-                    </chart:SfChart.Behaviors>
 
                     <chart:LineSeries
                                 Name="ave_LineSerriesFail"
@@ -295,75 +214,58 @@
                 </chart:SfChart>
 
             </syncfusion:TabItemExt>
-            <syncfusion:TabItemExt
-                    Height="30"
-                    Header="Monte Carlo">
-
-                <chart:SfChart 
-                            Header="Stress Factor C"
-                            Name="C_Chart"
-                            FontSize="24"
-                            Background="White"
-                            BorderBrush="#d6d6d6"
-                            BorderThickness="2">
-                    <chart:SfChart.PrimaryAxis>
-                        <chart:NumericalAxis
-                                    StartRangeFromZero="True"
-                                    Header="Dip Of Stopewall (Degrees)"
-                                    FontSize="14"/>
-                    </chart:SfChart.PrimaryAxis>
-                    <chart:SfChart.SecondaryAxis>
-                        <chart:NumericalAxis
-                                    StartRangeFromZero="True"
-                                    Header="Gravity Adjustment Factor C"
-                                    FontSize="14"/>
-                    </chart:SfChart.SecondaryAxis>
-
-                    <chart:SfChart.Resources>
-
-                        <Style TargetType="Line" x:Key="lineStyleVert">
-
-                            <Setter Property="StrokeDashArray" Value="10,5"/>
-
-                            <Setter Property="Stroke" Value="Gray"/>
-
-                            <Setter Property="StrokeThickness" Value="0.8"/>
-
-                        </Style>
-                        <Style TargetType="syncfusion:ChartTrackBallControl" x:Key="trackballStyle">
-
-                            <Setter Property="Background" Value="red"></Setter>
-
-                        </Style>
-
-                    </chart:SfChart.Resources>
-
-                    <chart:SfChart.Behaviors>
-
-                        <chart:ChartTrackBallBehavior
-                                    LineStyle="{StaticResource lineStyleVert}"
-                                    ChartTrackBallStyle="{StaticResource trackballStyle}"         
-                                    />
-                    </chart:SfChart.Behaviors>
-
-                    <chart:LineSeries
-                                Name="C_LineSerries"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                Interior="#f0602b"
-                                StrokeThickness="2" 
-                            
-                                />
-                    <chart:ScatterSeries
-                                Name="C_PointSerries"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                ScatterHeight="12"
-                                ScatterWidth ="12"
-                                Interior="Red"
-                                />
-                </chart:SfChart>
-            </syncfusion:TabItemExt>
         </syncfusion:TabControlExt>
+
+        <Grid Grid.Column="1" Grid.Row="1" Background="WhiteSmoke">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    BorderThickness="0"
+                    Background="Transparent"
+                    FontWeight="Light"
+                    FontSize="20"
+                    HorizontalContentAlignment="Center">
+                Pillar Parameters
+            </TextBox>
+
+            <syncfusion:SfDataGrid  
+                    x:Name="dataGrid"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    ColumnSizer="Star"
+                    Margin="20 0"
+                    VerticalAlignment="Top">
+            </syncfusion:SfDataGrid>
+
+            <TextBox
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    BorderThickness="0"
+                    Background="Transparent"
+                    FontWeight="Light"
+                    FontSize="20"
+                    HorizontalContentAlignment="Center">
+                Monte Carlo Results
+            </TextBox>
+
+            <syncfusion:SfDataGrid  
+                    x:Name="dataGridMonte"
+                    Grid.Column="0"
+                    Grid.Row="3"
+                    Margin="20 0"
+                    ColumnSizer="Star"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+            </syncfusion:SfDataGrid>
+
+        </Grid>   
     </Grid>
 </UserControl>
