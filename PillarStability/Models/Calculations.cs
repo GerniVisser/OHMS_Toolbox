@@ -15,13 +15,14 @@ namespace PillarStability.Models
                 Width = pillar.Weff,
                 WidthtHeight = pillar.Wth,
                 Pillar = pillar.Name,
-                AveStress = pillar.APStUCS
+                AveStress = pillar.APStUCS,
+                AveConfinement = pillar.APC
             };
 
             return i;
         }
 
-        public static MCGridObject calculateMC(PillarModel pillar, int iterations)
+        public static (MCGridObject, Bins) calculateMC(PillarModel pillar, int iterations)
         {
             List<float> fosList = new List<float>();
             Random random = new Random();
@@ -80,14 +81,15 @@ namespace PillarStability.Models
             float mfFOS = float.NaN;
             float plFOS = float.NaN;
 
-            if(fosList.Count > 0)
+            Bins bins = new Bins(fosList, 50);
+
+            if (fosList.Count > 0)
             {
                 float K = MathF.Tan(MathF.Acos((1 - pillar.APC) / (1 + pillar.APC)));
                 dsf = ((pillar.Psk * pillar.UCS) * (pillar.C1 + pillar.C2 * K)) / pillar.APS;
                 stdevsf = MCHelperCalc.calcStandardDev(fosList);
                 asf = fosList.Average();
 
-                Bins bins = new Bins(fosList, 1000);
                 mfFOS = MathF.Round(bins.getMostFrequentBin().Min, 2);
                 plFOS = bins.GetLimitFOS(pillar.Lsf);
             }
@@ -102,7 +104,7 @@ namespace PillarStability.Models
                 probSF = plFOS
             };
 
-            return gridObject;
+            return (gridObject , bins);
         }
 
     }

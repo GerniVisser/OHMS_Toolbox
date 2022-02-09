@@ -44,7 +44,7 @@ namespace PillarStability
         private void ButtonAdv_Click(object sender, RoutedEventArgs e)
         {
             update();
-            UpdateMonteGrid();
+            updateMC();
         }
 
         public void update()
@@ -56,6 +56,13 @@ namespace PillarStability
             }
         }
 
+        public void updateMC()
+        {
+            var t = Calculations.calculateMC(_pillarModel, 10000);
+            UpdateMCGrid(t.Item1);
+            UpdateMCChart(t.Item2);
+        }
+
         private void updateOutGrid()
         {
             whGridObject.Clear();
@@ -65,13 +72,31 @@ namespace PillarStability
             dataGrid.ItemsSource = whGridObject;
         }
 
-        private void UpdateMonteGrid()
+        private void UpdateMCGrid(MCGridObject mCGridObject)
         {
             mcGridObjects.Clear();
-            var t = Calculations.calculateMC(_pillarModel, 100);
-            mcGridObjects.Add(t);
+            mcGridObjects.Add(mCGridObject);
 
             dataGridMonte.ItemsSource = mcGridObjects;
+        }
+
+        private void UpdateMCChart(Bins bins)
+        {
+            mc_LineSerries.ItemsSource = SerriesBuilder.mcLineSerries(bins).coords;
+            mc_LineSerriesCumalitive.ItemsSource = SerriesBuilder.mcCumalitiveLineSerries(bins).coords;
+
+            CoordSerries fos = new CoordSerries();
+            fos.coords.Add(new Coord() { x = 1, y = 0 });
+            fos.coords.Add(new Coord() { x = 1, y = 1 });
+
+            FOS1_LineSerries.ItemsSource = fos.coords;
+
+            fos.coords.Clear();
+
+            fos.coords.Add(new Coord() { x = 1.4, y = 0 });
+            fos.coords.Add(new Coord() { x = 1.4, y = 1 });
+
+            FOS14_LineSerries.ItemsSource = fos.coords;
         }
 
         private void UpdateOutChart()

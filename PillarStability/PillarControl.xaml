@@ -110,7 +110,7 @@
                     Header="Width:Height">
 
                     <chart:SfChart 
-                            Header="Confinement Formula Stability Graph: 550"
+                            Header="Confinement Formula Stability Graph"
                             Name="wh_Chart"
                             FontSize="24"
                             Background="White"
@@ -129,39 +129,12 @@
                                     FontSize="14"/>
                         </chart:SfChart.SecondaryAxis>
 
-                        <chart:SfChart.Resources>
-
-                            <Style TargetType="Line" x:Key="lineStyleVert">
-
-                                <Setter Property="StrokeDashArray" Value="10,5"/>
-
-                                <Setter Property="Stroke" Value="Gray"/>
-
-                                <Setter Property="StrokeThickness" Value="0.8"/>
-
-                            </Style>
-                            <Style TargetType="syncfusion:ChartTrackBallControl" x:Key="trackballStyle">
-
-                                <Setter Property="Background" Value="red"></Setter>
-
-                            </Style>
-
-                        </chart:SfChart.Resources>
-
-                        <chart:SfChart.Behaviors>
-
-                            <chart:ChartTrackBallBehavior
-                                    LineStyle="{StaticResource lineStyleVert}"
-                                    ChartTrackBallStyle="{StaticResource trackballStyle}"         
-                                    />
-                        </chart:SfChart.Behaviors>
-
                         <chart:LineSeries
                                 Name="wh_LineSerriesFail"
                                 XBindingPath="x"
                                 YBindingPath="y"
-                                Interior="Green"
-                                StrokeThickness="2"
+                                Interior="red"
+                                StrokeThickness="1"
                             
                                 />
 
@@ -169,8 +142,8 @@
                                 Name="wh_LineSerriesStable"
                                 XBindingPath="x"
                                 YBindingPath="y"
-                                Interior="red"
-                                StrokeThickness="2"
+                                Interior="Green"
+                                StrokeThickness="1"
                             
                                 />
                         <chart:ScatterSeries
@@ -190,7 +163,7 @@
                     x:Name="ave_Tab">
 
                     <chart:SfChart 
-                            Header="Confinement Formula Stability Graph: 550"
+                            Header="Confinement Formula Stability Graph"
                             Name="ave_Chart"
                             FontSize="24"
                             Background="White"
@@ -209,39 +182,12 @@
                                     FontSize="14"/>
                         </chart:SfChart.SecondaryAxis>
 
-                        <chart:SfChart.Resources>
-
-                            <Style TargetType="Line" x:Key="lineStyleVert">
-
-                                <Setter Property="StrokeDashArray" Value="10,5"/>
-
-                                <Setter Property="Stroke" Value="Gray"/>
-
-                                <Setter Property="StrokeThickness" Value="0.8"/>
-
-                            </Style>
-                            <Style TargetType="syncfusion:ChartTrackBallControl" x:Key="trackballStyle">
-
-                                <Setter Property="Background" Value="red"></Setter>
-
-                            </Style>
-
-                        </chart:SfChart.Resources>
-
-                        <chart:SfChart.Behaviors>
-
-                            <chart:ChartTrackBallBehavior
-                                    LineStyle="{StaticResource lineStyleVert}"
-                                    ChartTrackBallStyle="{StaticResource trackballStyle}"         
-                                    />
-                        </chart:SfChart.Behaviors>
-
                         <chart:LineSeries
                                 Name="ave_LineSerriesFail"
                                 XBindingPath="x"
                                 YBindingPath="y"
-                                Interior="Red"
-                                StrokeThickness="2"
+                                Interior="Green"
+                                StrokeThickness="1"
                             
                                 />
 
@@ -249,8 +195,8 @@
                                 Name="ave_LineSerriesStable"
                                 XBindingPath="x"
                                 YBindingPath="y"
-                                Interior="Green"
-                                StrokeThickness="2"
+                                Interior="Red"
+                                StrokeThickness="1"
                             
                                 />
                         <chart:ScatterSeries
@@ -264,26 +210,139 @@
                     </chart:SfChart>
 
                 </syncfusion:TabItemExt>
+                <syncfusion:TabItemExt
+                    Height="30"
+                    Header="Monte Carlo">
+
+                    <chart:SfChart 
+                            Header="Frequency Distribution Graph"
+                            Name="mc_Chart"
+                            FontSize="24"
+                            Background="White"
+                            BorderBrush="#d6d6d6"
+                            BorderThickness="2">
+                        <chart:SfChart.PrimaryAxis>
+                            <chart:NumericalAxis
+                                    StartRangeFromZero="True"
+                                    Header="Safety Factor"
+                                    FontSize="14"/>
+                        </chart:SfChart.PrimaryAxis>
+                        <chart:SfChart.SecondaryAxis>
+                            <chart:NumericalAxis
+                                    StartRangeFromZero="True"
+                                    Header="Frequency"
+                                    FontSize="14"/>
+                        </chart:SfChart.SecondaryAxis>
+
+                        <chart:SfChart.Legend>
+                            <chart:ChartLegend
+                                IconHeight="10" IconWidth="10" 
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"                                    
+                                DockPosition="Top"
+                                IconVisibility="Visible"
+                                ItemMargin="3">
+                                
+                            </chart:ChartLegend>
+                        </chart:SfChart.Legend>
+
+                        <chart:LineSeries
+                                Name="mc_LineSerries"
+                                XBindingPath="x"
+                                YBindingPath="y"
+                                Interior="Black"
+                                StrokeThickness="1"
+                                LegendIcon="None"
+                                >
+                            <chart:LineSeries.YAxis>
+                                <chart:NumericalAxis 
+                                    OpposedPosition="True"
+                                    Header="Cumalative Frequency"
+                                    Foreground="Black"
+                                    FontSize="14"/>
+                            </chart:LineSeries.YAxis>
+                        </chart:LineSeries>
+
+                        <chart:LineSeries
+                                Name="mc_LineSerriesCumalitive"
+                                XBindingPath="x"
+                                YBindingPath="y"
+                                Interior="Gray"
+                                StrokeThickness="1"
+                                LegendIcon="None"
+                                />
+
+                        <chart:LineSeries
+                                Name="FOS1_LineSerries"
+                                XBindingPath="x"
+                                YBindingPath="y"
+                                Interior="Red"
+                                StrokeThickness="2"
+                                Label="FOS 1"
+                                LegendIcon="Circle"
+                                >
+                        </chart:LineSeries>
+
+                        <chart:LineSeries
+                                Name="FOS14_LineSerries"
+                                XBindingPath="x"
+                                YBindingPath="y"
+                                Interior="Green"
+                                StrokeThickness="2"
+                                Label="FOS 1.4"
+                                LegendIcon="Circle"
+                                />
+                    </chart:SfChart>
+
+                </syncfusion:TabItemExt>
             </syncfusion:TabControlExt>
 
             <Grid Grid.Column="0" Grid.Row="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
-            
+
+                <TextBox
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    BorderThickness="0"
+                    Background="Transparent"
+                    FontWeight="Light"
+                    FontSize="20"
+                    HorizontalContentAlignment="Center">
+                    Pillar Parameters
+                </TextBox>
+                
                 <syncfusion:SfDataGrid  
                     x:Name="dataGrid"
                     Grid.Column="0"
-                    Grid.Row="0"
+                    Grid.Row="1"
                     HorizontalAlignment="Center"
+                    ColumnSizer="Star"
+                    Margin="20 0"
                     VerticalAlignment="Top">
                 </syncfusion:SfDataGrid>
 
+                <TextBox
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    BorderThickness="0"
+                    Background="Transparent"
+                    FontWeight="Light"
+                    FontSize="20"
+                    HorizontalContentAlignment="Center">
+                    Monte Carlo Results
+                </TextBox>
+                
                 <syncfusion:SfDataGrid  
                     x:Name="dataGridMonte"
                     Grid.Column="0"
-                    Grid.Row="1"
+                    Grid.Row="3"
+                    Margin="20 0"
+                    ColumnSizer="Star"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top">
                 </syncfusion:SfDataGrid>

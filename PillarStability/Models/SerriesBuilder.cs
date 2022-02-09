@@ -132,5 +132,54 @@ namespace PillarStability.Models
 
             return res;
         }
+
+        public static CoordSerries mcLineSerries(Bins bins)
+        {
+            CoordSerries res = new CoordSerries();
+
+            int freqSum = bins.frequencySum();
+
+            for (int i = 0; i < bins.BinsList.Count; i++)
+            {
+                float x = bins.BinsList[i].Min;
+                float y = (float)(bins.BinsList[i].Frequency) / (float)(freqSum);
+
+                Coord coord = new Coord()
+                {
+                    x = x,
+                    y = y
+                };
+
+                res.coords.Add(coord);
+            }
+
+            return res;
+        }
+
+        public static CoordSerries mcCumalitiveLineSerries(Bins bins)
+        {
+            CoordSerries res = new CoordSerries();
+
+            int freqSum = bins.frequencySum();
+
+            float cumNormFreq = 0f;
+            for (int i = 0; i < bins.BinsList.Count; i++)
+            {
+                float x = bins.BinsList[i].Min;
+                float y = (float)(bins.BinsList[i].Frequency) / (float)(freqSum);
+
+                cumNormFreq = cumNormFreq + y;
+
+                Coord coord = new Coord()
+                {
+                    x = x,
+                    y = cumNormFreq
+                };
+
+                res.coords.Add(coord);
+            }
+
+            return res;
+        }
     }
 }

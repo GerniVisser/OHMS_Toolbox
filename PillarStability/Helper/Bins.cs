@@ -75,5 +75,15 @@ namespace PillarStability.Helper
             return res;
         }
 
+        public int frequencySum()
+        {
+            int res = 0;
+            for (int i = 0; i < BinsList.Count - 1; i++)
+            {
+                res = res + BinsList[i].Frequency;
+            }
+            return res;
+        }
+
     }
 }
