@@ -14,12 +14,14 @@ namespace PillarStability
     {
         private PillarModel _pillarModel;
         private ObservableCollection<OutputGridObject> _whGridObject;
+        private ObservableCollection<MCGridObject> _mcGridObjects;
 
         public PillarControl()
         {
             InitializeComponent();
 
             _whGridObject = new ObservableCollection<OutputGridObject>();
+            _mcGridObjects = new ObservableCollection<MCGridObject>();
 
             update();
         }
@@ -42,6 +44,7 @@ namespace PillarStability
         private void ButtonAdv_Click(object sender, RoutedEventArgs e)
         {
             update();
+            UpdateMonteGrid();
         }
 
         public void update()
@@ -49,7 +52,6 @@ namespace PillarStability
             if(_pillarModel != null)
             {
                 updateOutGrid();
-                UpdateMonteGrid();
                 UpdateOutChart();
             }
         }
@@ -65,11 +67,11 @@ namespace PillarStability
 
         private void UpdateMonteGrid()
         {
-            whGridObject.Clear();
-            var t = Calculations.calculate(_pillarModel);
-            whGridObject.Add(t);
+            mcGridObjects.Clear();
+            var t = Calculations.calculateMC(_pillarModel, 100);
+            mcGridObjects.Add(t);
 
-            dataGridMonte.ItemsSource = whGridObject;
+            dataGridMonte.ItemsSource = mcGridObjects;
         }
 
         private void UpdateOutChart()
@@ -100,5 +102,10 @@ namespace PillarStability
             set { _whGridObject = value; }
         }
 
+        public ObservableCollection<MCGridObject> mcGridObjects
+        {
+            get { return _mcGridObjects; }
+            set { _mcGridObjects = value; }
+        }
     }
 }

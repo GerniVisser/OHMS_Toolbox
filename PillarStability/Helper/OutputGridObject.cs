@@ -17,7 +17,6 @@ namespace PillarStability.Helper
             set { _pillarname = value; }
         }
 
-        
         private float _effPillarWidth;
 
         public float Width
@@ -49,7 +48,56 @@ namespace PillarStability.Helper
             get { return _aveConfinement; }
             set { _aveConfinement = value; }
         }
+    }
 
+    public class MCGridObject
+    {
+        private string _pillar;
 
+        public string Pillar
+        {
+            get { return _pillar; }
+            set { _pillar = value; }
+        }
+
+        private float _dsf;
+
+        public float DSF
+        {
+            get { return _dsf; }
+            set { _dsf = value; }
+        }
+
+        private float _aveSF;
+
+        public float AveSF
+        {
+            get { return _aveSF; }
+            set { _aveSF = value; }
+        }
+
+        private float _standardDev;
+
+        public float StandardDev
+        {
+            get { return _standardDev; }
+            set { _standardDev = value; }
+        }
+
+        private float _mfSF;
+
+        public float mfSF
+        {
+            get { return _mfSF; }
+            set { _mfSF = value; }
+        }
+
+        private float _probSF;
+
+        public float probSF
+        {
+            get { return _probSF; }
+            set { _probSF = value; }
+        }
     }
 }

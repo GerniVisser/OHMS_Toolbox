@@ -83,7 +83,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1.2*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="5*"/>
@@ -288,33 +288,43 @@
                     VerticalAlignment="Top">
                 </syncfusion:SfDataGrid>
             </Grid>
-            <syncfusion:PropertyGrid 
-                Grid.Column="2" 
-                Grid.RowSpan="2"
-                Background="#f0f0f0"
-                x:Name="PropertyGrid"
-                FontSize="18"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                BorderThickness="0"
-                ButtonPanelVisibility="Collapsed"
-                DisableAnimationOnObjectSelection="True"
-                DescriptionPanelVisibility="Collapsed"
-                UpdateSourceMode="ReturnOrLostFocus" 
-                PropertyExpandMode="FlatMode"  
-              />
 
-            <syncfusion:ButtonAdv 
-                Margin="5"
-                MaxHeight="44"
-                Grid.Column="2"
-                Grid.Row="1"
-                FontSize="22"
-                Background="#f06e3e"
-                Foreground="White"
-                Label="Calculate"
-                VerticalAlignment="Bottom" 
-                HorizontalAlignment="Stretch" Click="ButtonAdv_Click" />
+            <Grid
+                Grid.Column="2" 
+                Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="44"/>
+                </Grid.RowDefinitions>
+
+                <syncfusion:PropertyGrid 
+                    Grid.Row="0"
+                    EnableGrouping="True"
+                    Background="#f0f0f0"
+                    x:Name="PropertyGrid"
+                    FontSize="18"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    BorderThickness="0"
+                    ButtonPanelVisibility="Collapsed"
+                    DisableAnimationOnObjectSelection="True"
+                    DescriptionPanelVisibility="Collapsed"
+                    UpdateSourceMode="ReturnOrLostFocus" 
+                    PropertyExpandMode="FlatMode"  
+                  />
+
+                <syncfusion:ButtonAdv 
+                    Margin="5"
+                    MaxHeight="44"
+                    Grid.Column="2"
+                    Grid.Row="1"
+                    FontSize="22"
+                    Background="#f06e3e"
+                    Foreground="White"
+                    Label="Calculate"
+                    HorizontalAlignment="Stretch" Click="ButtonAdv_Click" />
+            </Grid>
+                
         </Grid>
     </Grid>
 </UserControl>

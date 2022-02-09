@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Meta.Numerics" Version="4.1.4" />
     <PackageReference Include="Syncfusion.Licensing" Version="19.4.0.48" />
     <PackageReference Include="Syncfusion.PropertyGrid.WPF" Version="19.4.0.48" />
     <PackageReference Include="Syncfusion.SfChart.WPF" Version="19.4.0.48" />
