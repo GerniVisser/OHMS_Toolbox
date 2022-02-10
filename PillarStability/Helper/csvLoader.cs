@@ -33,5 +33,26 @@ namespace PillarStability.Helper
 
             return res;
         }
+
+        public static bool SavePillarModel(string path, List<PillarModel> pillars)
+        {
+            string csv = "Pillar,Height [m],Width [m],Length [m],APS [MPa],UCS [MPa]\n";
+
+            for (int i = 0; i <= pillars.Count - 1; i++)
+            {
+                string nl = pillars[i].Name + ",";
+                nl += pillars[i].Height + ",";
+                nl += pillars[i].Width + ",";
+                nl += pillars[i].Length + ",";
+                nl += pillars[i].APS + ",";
+                nl += pillars[i].UCS + "\n";
+
+                csv += nl;
+            }
+
+            File.WriteAllText(path, csv);
+
+            return true;
+        }
     }
 }

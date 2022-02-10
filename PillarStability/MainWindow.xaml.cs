@@ -19,6 +19,7 @@ namespace PillarStability
         private PillarControl _pillarControl;
         private CombinedPillarControl _combinedPillarControl;
         private List<PillarModel> _pillarModelList;
+        private string _saveFileName = "";
 
         public MainWindow()
         {
@@ -49,6 +50,26 @@ namespace PillarStability
             addPillar(_pillarModelList[_pillarModelList.Count - 1]);
         }
 
+        private void OpenFromCSV_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog saveFileDialog = new OpenFileDialog();
+            saveFileDialog.Filter = "CSV file (*.csv)|*.csv";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    List<PillarModel> pillarModels = csvLoader.LoadCsvToPillarModels(saveFileDialog.FileName);
+                    LoadPillarModdels(pillarModels);
+                    _saveFileName = saveFileDialog.FileName;
+                }
+                catch(Exception ex)
+                {
+
+                }
+            }
+        }
+
         private void PopulateEmptyControle()
         {
             _combinedPillarControl = new CombinedPillarControl(_pillarModelList);
@@ -64,25 +85,6 @@ namespace PillarStability
             TabControleMain.Items.Add(tabItem);
         }
 
-        private void OpenFromCSV_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog saveFileDialog = new OpenFileDialog();
-            saveFileDialog.Filter = "CSV file (*.csv)|*.csv";
-
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                try
-                {
-                    List<PillarModel> pillarModels = csvLoader.LoadCsvToPillarModels(saveFileDialog.FileName);
-                    LoadPillarModdels(pillarModels);
-                }
-                catch(Exception ex)
-                {
-
-                }
-            }
-        }
-
         private void LoadPillarModdels(List<PillarModel> pillarModels)
         {
             _pillarModelList = pillarModels;
@@ -93,6 +95,30 @@ namespace PillarStability
             for (int i = 0; i <= _pillarModelList.Count - 1; i++)
             {
                 addPillar(_pillarModelList[i]);
+            }
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (_saveFileName != "")
+            {
+                csvLoader.SavePillarModel(_saveFileName, _pillarModelList);
+            }
+            else
+            {
+                SaveAs_Click(null, null);
+            }
+        }
+
+        private void SaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "CSV file (*.csv)|*.csv";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                _saveFileName = saveFileDialog.FileName;
+                csvLoader.SavePillarModel(_saveFileName, _pillarModelList);
             }
         }
 

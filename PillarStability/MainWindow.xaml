@@ -108,8 +108,8 @@
                     VerticalAlignment="Center">
                     <syncfusion:MenuItemAdv Header="New" FontWeight="Light" Click="NewProject_Click"/>
                     <syncfusion:MenuItemAdv Header="Open" FontWeight="Light" Click="OpenFromCSV_Click"/>
-                    <syncfusion:MenuItemAdv Header="Save as" FontWeight="Light"/>
-                    <syncfusion:MenuItemAdv Header="Save" FontWeight="Light"/>
+                    <syncfusion:MenuItemAdv Header="Save as" FontWeight="Light" Click="SaveAs_Click"/>
+                    <syncfusion:MenuItemAdv Header="Save" FontWeight="Light" Click="Save_Click"/>
 
                 </syncfusion:MenuItemAdv>
                 <syncfusion:MenuItemAdv
