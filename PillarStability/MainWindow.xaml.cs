@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.Win32;
+using PillarStability.Helper;
 using PillarStability.Models;
 using Syncfusion.Windows.Tools.Controls;
 using System;
@@ -25,21 +27,73 @@ namespace PillarStability
             _pillarModelList = new List<PillarModel>();
             _pillarControl = new PillarControl();
 
-            _combinedPillarControl= new CombinedPillarControl(_pillarModelList);
-
-            tabCombinedPillar.Content = _combinedPillarControl;
+            PopulateEmptyControle();
         }
 
         private void MenuItemAdv_Click(object sender, RoutedEventArgs e)
         {
         }
 
-        private void ButtonAdv_Click(object sender, RoutedEventArgs e)
+        private void NewProject_Click(object sender, RoutedEventArgs e)
+        {
+            _pillarModelList.Clear();
+
+            PopulateEmptyControle();
+        }
+
+        private void AddPillar_Click(object sender, RoutedEventArgs e)
         {
             var newPillarModel = new PillarModel("Pillar " + (TabControleMain.Items.Count));
             _pillarModelList.Add(newPillarModel);
 
             addPillar(_pillarModelList[_pillarModelList.Count - 1]);
+        }
+
+        private void PopulateEmptyControle()
+        {
+            _combinedPillarControl = new CombinedPillarControl(_pillarModelList);
+
+            TabItemExt tabItem = new TabItemExt()
+            {
+                Content = _combinedPillarControl,
+                Header = "Combined View",
+                CanClose = false
+            };
+
+            TabControleMain.Items.Clear();
+            TabControleMain.Items.Add(tabItem);
+        }
+
+        private void OpenFromCSV_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog saveFileDialog = new OpenFileDialog();
+            saveFileDialog.Filter = "CSV file (*.csv)|*.csv";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    List<PillarModel> pillarModels = csvLoader.LoadCsvToPillarModels(saveFileDialog.FileName);
+                    LoadPillarModdels(pillarModels);
+                }
+                catch(Exception ex)
+                {
+
+                }
+            }
+        }
+
+        private void LoadPillarModdels(List<PillarModel> pillarModels)
+        {
+            _pillarModelList = pillarModels;
+            _pillarControl = new PillarControl();
+
+            PopulateEmptyControle();
+
+            for (int i = 0; i <= _pillarModelList.Count - 1; i++)
+            {
+                addPillar(_pillarModelList[i]);
+            }
         }
 
         private void addPillar(PillarModel pillarModel)

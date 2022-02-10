@@ -39,6 +39,16 @@ namespace PillarStability.Models
             _name = Name;
         }
 
+        public PillarModel(string Name, float Height, float Width, float Length, float APS, float UCS)
+        {
+            _name = Name;
+            _H = Height;
+            _W = Width;
+            _L = Length;
+            _APS = APS;
+            _UCS = UCS;
+        }
+
         private float calcAPC()
         {
             if (Wth > 3.99)

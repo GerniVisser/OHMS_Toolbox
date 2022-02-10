@@ -103,10 +103,13 @@
                 >
                 <syncfusion:MenuItemAdv
                     Header="File"
-                    
                     Margin="20 0 0 0"
                     Foreground="White"
                     VerticalAlignment="Center">
+                    <syncfusion:MenuItemAdv Header="New" FontWeight="Light" Click="NewProject_Click"/>
+                    <syncfusion:MenuItemAdv Header="Open" FontWeight="Light" Click="OpenFromCSV_Click"/>
+                    <syncfusion:MenuItemAdv Header="Save as" FontWeight="Light"/>
+                    <syncfusion:MenuItemAdv Header="Save" FontWeight="Light"/>
 
                 </syncfusion:MenuItemAdv>
                 <syncfusion:MenuItemAdv
@@ -145,13 +148,6 @@
                 TabStripPlacement="Left" 
                 SelectionChanged="TabControleMain_SelectionChanged">
 
-                <syncfusion:TabItemExt 
-                    Header="Overview"
-                    CanClose="False"
-                    x:Name="tabCombinedPillar">
-                    
-                </syncfusion:TabItemExt>
-                    
             </syncfusion:TabControlExt>
             
             <syncfusion:ButtonAdv 
@@ -168,7 +164,7 @@
                 SmallIcon="icons/add.png"
                 VerticalAlignment="Bottom" 
                 HorizontalAlignment="Stretch" 
-                Click="ButtonAdv_Click"/>
+                Click="AddPillar_Click"/>
         </Grid>
     </Grid>
 </Window>
