@@ -54,21 +54,14 @@ namespace PillarStability.Models
             return res;
         }
 
-        public static CoordSerries whPoint(List<PillarModel> pillarModels)
+        public static Coord whPoint(PillarModel pillarModel)
         {
-            CoordSerries res = new CoordSerries();
+            var WtH = pillarModel.Width / pillarModel.Height;
+            var APStUCS = pillarModel.APS / pillarModel.UCS;
 
-            for (int i = 0; i < pillarModels.Count; i++)
-            {
-                var WtH = pillarModels[i].Width / pillarModels[i].Height;
-                var APStUCS = pillarModels[i].APS / pillarModels[i].UCS;
+            Coord coordPoint = new Coord() { x = WtH, y = APStUCS };
 
-                Coord coordPoint = new Coord() { x = WtH, y = APStUCS };
-
-                res.coords.Add(coordPoint);
-            }
-
-            return res;
+            return coordPoint;
         }
 
         public static List<CoordSerries> apcGraph(PillarModel pillarModel)
@@ -116,21 +109,14 @@ namespace PillarStability.Models
             return res;
         }
 
-        public static CoordSerries apcPoint(List<PillarModel> pillarModels)
+        public static Coord apcPoint(PillarModel pillarModel)
         {
-            CoordSerries res = new CoordSerries();
+            var apc = pillarModel.APC;
+            var APStUCS = pillarModel.APS / pillarModel.UCS;
 
-            for (int i = 0; i < pillarModels.Count; i++)
-            {
-                var apc = pillarModels[i].APC;
-                var APStUCS = pillarModels[i].APS / pillarModels[i].UCS;
+            Coord coordPoint = new Coord() { x = apc, y = APStUCS };
 
-                Coord coordPoint = new Coord() { x = apc, y = APStUCS };
-
-                res.coords.Add(coordPoint);
-            }
-
-            return res;
+            return coordPoint;
         }
 
         public static CoordSerries mcLineSerries(Bins bins)

@@ -133,32 +133,35 @@
                                     FontSize="14"/>
                     </chart:SfChart.SecondaryAxis>
 
+                    <chart:SfChart.Legend>
+                        <chart:ChartLegend
+                                IconHeight="10" IconWidth="10" 
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"                                    
+                                DockPosition="Bottom"
+                                IconVisibility="Visible"
+                                ItemMargin="3">
+                        </chart:ChartLegend>
+                    </chart:SfChart.Legend>
+
                     <chart:LineSeries
                                 Name="wh_LineSerriesFail"
                                 XBindingPath="x"
                                 YBindingPath="y"
                                 Interior="Green"
                                 StrokeThickness="2"
-                            
+                                LegendIcon="None"
                                 />
 
-                        <chart:LineSeries
+                    <chart:LineSeries
                                 Name="wh_LineSerriesStable"
                                 XBindingPath="x"
                                 YBindingPath="y"
                                 Interior="red"
                                 StrokeThickness="2"
-                            
+                                LegendIcon="None"
                                 />
-                        <chart:ScatterSeries
-                                Name="wh_PointSerries"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                ScatterHeight="12"
-                                ScatterWidth ="12"
-                                Interior="Gray"
-                                />
-                    </chart:SfChart>
+                </chart:SfChart>
 
             </syncfusion:TabItemExt>
             <syncfusion:TabItemExt
@@ -186,13 +189,24 @@
                                     FontSize="14"/>
                     </chart:SfChart.SecondaryAxis>
 
+                    <chart:SfChart.Legend>
+                        <chart:ChartLegend
+                                IconHeight="10" IconWidth="10" 
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"                                    
+                                DockPosition="Bottom"
+                                IconVisibility="Visible"
+                                ItemMargin="3">
+                        </chart:ChartLegend>
+                    </chart:SfChart.Legend>
+
                     <chart:LineSeries
                                 Name="ave_LineSerriesFail"
                                 XBindingPath="x"
                                 YBindingPath="y"
                                 Interior="Red"
                                 StrokeThickness="2"
-                            
+                                LegendIcon="None"
                                 />
 
                     <chart:LineSeries
@@ -201,15 +215,7 @@
                                 YBindingPath="y"
                                 Interior="Green"
                                 StrokeThickness="2"
-                            
-                                />
-                    <chart:ScatterSeries
-                                Name="ave_PointSerries"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                ScatterHeight="12"
-                                ScatterWidth ="12"
-                                Interior="gray"
+                                LegendIcon="None"
                                 />
                 </chart:SfChart>
 

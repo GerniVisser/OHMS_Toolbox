@@ -132,9 +132,8 @@ namespace PillarStability
 
                 TabControleMain.Items.Add(tabItem);
                 TabControleMain.SelectedItem = tabItem;
-
-                _combinedPillarControl.update();
             }
+
         }
 
         private void TabControleMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -148,7 +147,10 @@ namespace PillarStability
                 TabControleMain.SelectedIndex = 0;
             }
 
-            _combinedPillarControl.update();
+            if (TabControleMain.SelectedIndex == 0)
+            {
+                _combinedPillarControl.update();
+            }
         }
 
         private void TabControlExt_OnCloseButtonClick(object sender, CloseTabEventArgs e)
