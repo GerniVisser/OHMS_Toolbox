@@ -35,12 +35,6 @@ namespace PillarStability
             _pillarOutputGrid = new ObservableCollection<OutputGridObject>();
         }
 
-        public ObservableCollection<OutputGridObject> PillarOut
-        {
-            get { return _pillarOutputGrid; }
-            set { _pillarOutputGrid = value; }
-        }
-
         public void update()
         {
             if(_model.PillarModels.Count > 0)
@@ -113,6 +107,33 @@ namespace PillarStability
             };
 
             return series;
+        }
+
+        public ReportModel getChartStreams()
+        {
+            var wh = ReportHelper.ChartStream(wh_Chart);
+            var ave = ReportHelper.ChartStream(ave_Chart);
+
+            updateOutGrid();
+            List<OutputGridObject> outputGridObjects = new List<OutputGridObject>(whGrid);
+
+            List<PillarPrams> pillarPrams = new List<PillarPrams>();
+
+            for (int i = 0; i <= _model.PillarModels.Count - 1; i++)
+            {
+                pillarPrams.Add(new PillarPrams(_model.PillarModels[i]));
+
+            }
+
+            ReportModel model = new ReportModel()
+            {
+                whStream = wh,
+                aveStream = ave,
+                outGridObjects = outputGridObjects,
+                PillarPrams = pillarPrams
+            };
+
+            return model;
         }
 
         public ObservableCollection<OutputGridObject> whGrid

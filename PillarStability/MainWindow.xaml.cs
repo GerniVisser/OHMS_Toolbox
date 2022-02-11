@@ -32,6 +32,9 @@ namespace PillarStability
 
         private void Report_Click(object sender, RoutedEventArgs e)
         {
+            var reportModel = _combinedPillarControl.getChartStreams();
+
+
         }
 
         private void NewProject_Click(object sender, RoutedEventArgs e)

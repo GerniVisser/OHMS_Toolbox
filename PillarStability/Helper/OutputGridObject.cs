@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PillarStability.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -99,5 +100,25 @@ namespace PillarStability.Helper
             get { return _probSF; }
             set { _probSF = value; }
         }
+    }
+
+    public class PillarPrams
+    {
+        public PillarPrams(PillarModel model)
+        {
+            Name = model.Name;
+            Width = model.Width;
+            Height = model.Height;
+            Length = model.Length;
+            APS = model.APS;
+            UCS = model.UCS;
+        }
+
+        public string Name { get; set; }
+        public float Width { get; set; }
+        public float Height { get; set; }
+        public float Length { get; set; }
+        public float APS { get; set; }
+        public float UCS { get; set; }
     }
 }
