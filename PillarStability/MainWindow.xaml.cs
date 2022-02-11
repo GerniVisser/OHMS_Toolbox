@@ -5,7 +5,6 @@ using PillarStability.Models;
 using Syncfusion.Windows.Tools.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -31,7 +30,7 @@ namespace PillarStability
             PopulateEmptyControle();
         }
 
-        private void MenuItemAdv_Click(object sender, RoutedEventArgs e)
+        private void Report_Click(object sender, RoutedEventArgs e)
         {
         }
 
@@ -69,6 +68,29 @@ namespace PillarStability
                 }
             }
         }
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (_saveFileName != "")
+            {
+                csvLoader.SavePillarModel(_saveFileName, _pillarModelList);
+            }
+            else
+            {
+                SaveAs_Click(null, null);
+            }
+        }
+
+        private void SaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "CSV file (*.csv)|*.csv";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                _saveFileName = saveFileDialog.FileName;
+                csvLoader.SavePillarModel(_saveFileName, _pillarModelList);
+            }
+        }
 
         private void PopulateEmptyControle()
         {
@@ -95,30 +117,6 @@ namespace PillarStability
             for (int i = 0; i <= _pillarModelList.Count - 1; i++)
             {
                 addPillar(_pillarModelList[i]);
-            }
-        }
-
-        private void Save_Click(object sender, RoutedEventArgs e)
-        {
-            if (_saveFileName != "")
-            {
-                csvLoader.SavePillarModel(_saveFileName, _pillarModelList);
-            }
-            else
-            {
-                SaveAs_Click(null, null);
-            }
-        }
-
-        private void SaveAs_Click(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "CSV file (*.csv)|*.csv";
-
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                _saveFileName = saveFileDialog.FileName;
-                csvLoader.SavePillarModel(_saveFileName, _pillarModelList);
             }
         }
 

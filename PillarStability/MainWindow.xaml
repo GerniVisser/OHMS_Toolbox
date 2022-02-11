@@ -114,10 +114,9 @@
                 </syncfusion:MenuItemAdv>
                 <syncfusion:MenuItemAdv
                     Header="Export"
-                    Click="MenuItemAdv_Click"
                     Foreground="White"
                     VerticalAlignment="Center"
-                    Command="{Binding ReportCommand}">
+                    Click="Report_Click">
 
                 </syncfusion:MenuItemAdv>
 
