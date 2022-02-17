@@ -1,5 +1,6 @@
 ﻿using PillarStability.Helper;
 using PillarStability.Models;
+using SharedWpfLibrary.Tools;
 using Syncfusion.UI.Xaml.Charts;
 using System;
 using System.Collections.Generic;

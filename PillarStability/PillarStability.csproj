@@ -8,22 +8,33 @@
 
   <ItemGroup>
     <None Remove="Icons\add.png" />
+    <None Remove="Icons\OHMS logo.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Icons\add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Icons\OHMS logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Meta.Numerics" Version="4.1.4" />
-    <PackageReference Include="Syncfusion.Licensing" Version="19.4.0.48" />
+    <PackageReference Include="Syncfusion.Licensing" Version="19.4.0.50" />
+    <PackageReference Include="Syncfusion.Pdf.Wpf" Version="19.4.0.50" />
+    <PackageReference Include="Syncfusion.PdfViewer.WPF" Version="19.4.0.50" />
     <PackageReference Include="Syncfusion.PropertyGrid.WPF" Version="19.4.0.48" />
     <PackageReference Include="Syncfusion.SfChart.WPF" Version="19.4.0.48" />
     <PackageReference Include="Syncfusion.SfGrid.WPF" Version="19.4.0.48" />
-    <PackageReference Include="Syncfusion.Shared.WPF" Version="19.4.0.48" />
+    <PackageReference Include="Syncfusion.Shared.WPF" Version="19.4.0.50" />
     <PackageReference Include="Syncfusion.Tools.WPF" Version="19.4.0.48" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharedWpfLibrary\_SharedWpfLibrary.csproj" />
   </ItemGroup>
 
 </Project>
