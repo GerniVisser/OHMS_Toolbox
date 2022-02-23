@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using PillarStability.Helper;
 using PillarStability.Models;
+using PillarStability.Services;
 using Syncfusion.Windows.Tools.Controls;
 using System;
 using System.Collections.Generic;
@@ -30,11 +31,20 @@ namespace PillarStability
             PopulateEmptyControle();
         }
 
-        private void Report_Click(object sender, RoutedEventArgs e)
+        private void ExportAsPDF_Click(object sender, RoutedEventArgs e)
         {
             var reportModel = _combinedPillarControl.getChartStreams();
 
+            Report rep = new Report(reportModel);
+            rep.SaveReportPDf();
+        }
 
+        private void ExportAsImage_Click(object sender, RoutedEventArgs e)
+        {
+            var reportModel = _combinedPillarControl.getChartStreams();
+
+            Report rep = new Report(reportModel);
+            rep.SaveReportImage();
         }
 
         private void NewProject_Click(object sender, RoutedEventArgs e)
@@ -102,7 +112,7 @@ namespace PillarStability
             TabItemExt tabItem = new TabItemExt()
             {
                 Content = _combinedPillarControl,
-                Header = "Combined View",
+                Header = "Combined",
                 CanClose = false
             };
 

@@ -115,9 +115,9 @@
                 <syncfusion:MenuItemAdv
                     Header="Export"
                     Foreground="White"
-                    VerticalAlignment="Center"
-                    Click="Report_Click">
-
+                    VerticalAlignment="Center">
+                    <syncfusion:MenuItemAdv Header="Export as PDF" FontWeight="Light" Click="ExportAsPDF_Click"/>
+                    <syncfusion:MenuItemAdv Header="Export as Image" FontWeight="Light" Click="ExportAsImage_Click"/>
                 </syncfusion:MenuItemAdv>
 
             </syncfusion:MenuAdv>
@@ -148,7 +148,7 @@
                 SelectionChanged="TabControleMain_SelectionChanged">
 
             </syncfusion:TabControlExt>
-            
+
             <syncfusion:ButtonAdv 
                 Margin="5"
                 MaxHeight="44"

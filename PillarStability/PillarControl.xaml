@@ -372,7 +372,7 @@
                     PropertyExpandMode="FlatMode"  
                   />
 
-                <syncfusion:ButtonAdv 
+                <Button
                     Margin="5"
                     MaxHeight="44"
                     Grid.Column="2"
@@ -380,7 +380,7 @@
                     FontSize="22"
                     Background="#f06e3e"
                     Foreground="White"
-                    Label="Calculate"
+                    Content="Calculate"
                     HorizontalAlignment="Stretch" Click="ButtonAdv_Click" />
             </Grid>
                 

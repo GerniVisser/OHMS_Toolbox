@@ -251,27 +251,6 @@
                     VerticalAlignment="Top">
             </syncfusion:SfDataGrid>
 
-            <TextBox
-                    Grid.Column="0"
-                    Grid.Row="2"
-                    BorderThickness="0"
-                    Background="Transparent"
-                    FontWeight="Light"
-                    FontSize="20"
-                    HorizontalContentAlignment="Center">
-                Monte Carlo Results
-            </TextBox>
-
-            <syncfusion:SfDataGrid  
-                    x:Name="dataGridMonte"
-                    Grid.Column="0"
-                    Grid.Row="3"
-                    Margin="20 0"
-                    ColumnSizer="Star"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top">
-            </syncfusion:SfDataGrid>
-
         </Grid>   
     </Grid>
 </UserControl>
