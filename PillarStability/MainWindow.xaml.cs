@@ -112,7 +112,7 @@ namespace PillarStability
             TabItemExt tabItem = new TabItemExt()
             {
                 Content = _combinedPillarControl,
-                Header = "Combined",
+                Header = "Summary",
                 CanClose = false
             };
 
@@ -123,7 +123,6 @@ namespace PillarStability
         private void LoadPillarModdels(List<PillarModel> pillarModels)
         {
             _pillarModelList = pillarModels;
-            _pillarControl = new PillarControl();
 
             PopulateEmptyControle();
 
@@ -145,6 +144,10 @@ namespace PillarStability
 
                 TabControleMain.Items.Add(tabItem);
                 TabControleMain.SelectedItem = tabItem;
+            }
+            else
+            {
+                throw new Exception("Pillar model could not be set correctly");
             }
 
         }

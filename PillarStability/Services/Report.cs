@@ -1,5 +1,4 @@
 ﻿using PillarStability.Models;
-using _SharedWpfLibrary.Interfaces;
 using System;
 using Syncfusion.Pdf;
 using System.Collections.Generic;
@@ -19,7 +18,7 @@ using PillarStability.Helper;
 
 namespace PillarStability.Services
 {
-    public class Report: IReport
+    public class Report
     {
         private ReportModel _model;
 

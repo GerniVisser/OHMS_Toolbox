@@ -225,9 +225,7 @@
         <Grid Grid.Column="1" Grid.Row="1" Background="WhiteSmoke">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
 
             <TextBox
