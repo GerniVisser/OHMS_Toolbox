@@ -34,7 +34,8 @@
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         <syncfusion:NavigationItem
-                Header="Rock">
+                Header="Pillar Stabillity Tool"
+                Name="PillarStability">
             <syncfusion:NavigationItem.Icon>
                 <Image Source="/Icons/calculator.png" />
             </syncfusion:NavigationItem.Icon>

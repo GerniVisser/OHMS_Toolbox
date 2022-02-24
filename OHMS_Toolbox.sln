@@ -8,13 +8,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toolbox", "Toolbox\Toolbox.csproj", "{36E99518-888C-40B9-8360-54DA5B6F4773}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E15B4334-1625-4A72-A5CD-1E309D51C451} = {E15B4334-1625-4A72-A5CD-1E309D51C451}
+		{3E70169D-601E-4021-B84E-29EBD15443D9} = {3E70169D-601E-4021-B84E-29EBD15443D9}
 	EndProjectSection
 EndProject
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "_Installer", "_Installer\_Installer.wapproj", "{DABFA6AB-B22E-4A9B-9367-1A272E88BC34}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PillarStability", "PillarStability\PillarStability.csproj", "{3E70169D-601E-4021-B84E-29EBD15443D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_SharedWpfLibrary", "SharedWpfLibrary\_SharedWpfLibrary.csproj", "{39462BEA-104E-4E71-90E8-F3AD141CBFAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_SharedWpfLibrary", "SharedWpfLibrary\_SharedWpfLibrary.csproj", "{39462BEA-104E-4E71-90E8-F3AD141CBFAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

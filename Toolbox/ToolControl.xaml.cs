@@ -13,6 +13,7 @@ namespace Toolbox
     public partial class ToolControl : UserControl
     {
         private ToolObject _toolObject;
+        private string _location;
 
         public ToolObject ToolObject
         {
@@ -24,8 +25,9 @@ namespace Toolbox
         }
 
 
-        public ToolControl()
+        public ToolControl(string RelativeFileLocation)
         {
+            _location = RelativeFileLocation;
             ToolObject = new ToolObject();
 
             InitializeComponent();
@@ -35,10 +37,12 @@ namespace Toolbox
 
         private void btnLaunch_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(Path.Combine(AppDomain.
-                CurrentDomain.BaseDirectory
-                .SolutionFolder(),
-                @"Caveability\bin\Debug\net5.0-windows\Caveability.exe"));
+            var a = AppDomain.
+                  CurrentDomain.BaseDirectory
+                  .SolutionFolder();
+            var b = Path.Combine(a,
+                _location);
+            Process.Start(b);
         }
     }
 }
