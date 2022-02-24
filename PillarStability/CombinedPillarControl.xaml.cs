@@ -5,18 +5,8 @@ using Syncfusion.UI.Xaml.Charts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PillarStability
 {
@@ -38,8 +28,8 @@ namespace PillarStability
 
         public void update()
         {
-            if(_model.PillarModels.Count > 0)
-            { 
+            if (_model.PillarModels.Count > 0)
+            {
                 UpdateOutChart();
                 updateOutGrid();
             }
@@ -65,7 +55,7 @@ namespace PillarStability
             ave_LineSerriesFail.ItemsSource = SerriesBuilder.apcGraph(_model.PillarModels[0])[0].coords;
             ave_LineSerriesStable.ItemsSource = SerriesBuilder.apcGraph(_model.PillarModels[0])[1].coords;
 
-            while(wh_Chart.Series.Count > 2)
+            while (wh_Chart.Series.Count > 2)
             {
                 wh_Chart.Series.RemoveAt(2);
                 ave_Chart.Series.RemoveAt(2);

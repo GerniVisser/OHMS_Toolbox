@@ -1,7 +1,6 @@
 ﻿using PillarStability.Helper;
 using PillarStability.Models;
 using SharedWpfLibrary.Tools;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -92,7 +91,7 @@ namespace PillarStability
         // Updated will run all calcs and should be used sparingly as it uses alot of resources
         public void update()
         {
-            if(_pillarModel != null)
+            if (_pillarModel != null)
             {
                 UpdateOutGrid();
                 UpdateOutChart();

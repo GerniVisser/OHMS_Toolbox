@@ -20,8 +20,6 @@
 
       <ItemGroup>
         <PackageReference Include="QLM.QlmLicenseLibNetCore" Version="15.0.21315.2" />
-        <PackageReference Include="Syncfusion.Shared.WPF" Version="19.3.0.48" />
-        <PackageReference Include="Syncfusion.Tools.WPF" Version="19.3.0.48" />
         <PackageReference Include="Syncfusion.UI.WPF.NET" Version="19.3.0.48" />
       </ItemGroup>
 

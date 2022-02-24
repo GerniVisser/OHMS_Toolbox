@@ -1,9 +1,5 @@
-﻿using Meta.Numerics.Statistics;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PillarStability.Helper
 {
@@ -55,7 +51,7 @@ namespace PillarStability.Helper
             Bin bin = BinsList[0];
             for (int i = 1; i < BinsList.Count - 1; i++)
             {
-                if(BinsList[i].Frequency > bin.Frequency)
+                if (BinsList[i].Frequency > bin.Frequency)
                 {
                     bin = BinsList[i];
                 }

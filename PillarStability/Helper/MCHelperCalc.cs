@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Meta.Numerics.Statistics.Distributions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Meta.Numerics.Statistics.Distributions;
 
 namespace PillarStability.Helper
 {
@@ -13,7 +11,7 @@ namespace PillarStability.Helper
         {
             float normInv = 0.0f;
 
-            if(stdev == 0.0f)
+            if (stdev == 0.0f)
             {
                 return mean;
             }

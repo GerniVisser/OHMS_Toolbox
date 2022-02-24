@@ -1,20 +1,16 @@
-﻿using PillarStability.Models;
-using System;
-using Syncfusion.Pdf;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Syncfusion.Pdf.Graphics;
-using System.Drawing;
-using Syncfusion.Windows.PdfViewer;
-using Syncfusion.Pdf.Parsing;
-using System.Windows.Media.Imaging;
-using System.IO;
-using Microsoft.Win32;
-using Syncfusion.Pdf.Grid;
-using System.Data;
+﻿using Microsoft.Win32;
 using PillarStability.Helper;
+using PillarStability.Models;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
+using Syncfusion.Pdf.Grid;
+using Syncfusion.Pdf.Parsing;
+using Syncfusion.Windows.PdfViewer;
+using System;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace PillarStability.Services
 {
@@ -63,7 +59,7 @@ namespace PillarStability.Services
                             //Create the bitmap frame using the bitmap source and add it to the encoder.
                             encoder.Frames.Add(BitmapFrame.Create(image));
                             //Create the file stream for the output in the desired image format.
-                            FileStream stream = new FileStream(saveFileDialog.FileName.Insert(saveFileDialog.FileName.IndexOf(".")," ("+i+")"), FileMode.Create);
+                            FileStream stream = new FileStream(saveFileDialog.FileName.Insert(saveFileDialog.FileName.IndexOf("."), " (" + i + ")"), FileMode.Create);
                             //Save the stream so that the image will be generated in the output location.
                             encoder.Save(stream);
                         }
@@ -103,7 +99,7 @@ namespace PillarStability.Services
             }
 
         }
-        
+
         public void SaveReportPDf()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -225,9 +221,9 @@ namespace PillarStability.Services
             dataTable.Columns.Add(" APS");
             dataTable.Columns.Add(" UCS");
 
-            dataTable.Rows.Add(new object[] 
-            { 
-                pillarPrams.Name, 
+            dataTable.Rows.Add(new object[]
+            {
+                pillarPrams.Name,
                 pillarPrams.Width,
                 pillarPrams.Height,
                 pillarPrams.Length,
@@ -296,10 +292,10 @@ namespace PillarStability.Services
             dataTable.Columns.Add(" Average Stress");
             dataTable.Columns.Add(" Average Confinement");
 
-            dataTable.Rows.Add(new object[] 
-            { 
-                outputGridObject.Width, 
-                outputGridObject.WidthtHeight, 
+            dataTable.Rows.Add(new object[]
+            {
+                outputGridObject.Width,
+                outputGridObject.WidthtHeight,
                 MathF.Round(outputGridObject.AveStress,3),
                 MathF.Round(outputGridObject.AveConfinement,3)
             });

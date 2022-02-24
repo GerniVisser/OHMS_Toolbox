@@ -41,7 +41,7 @@ namespace Toolbox.Helper
         }
         public static string SolutionFolder(this string pSender)
         {
-            return pSender.UpperFolder(5);
+            return pSender.UpperFolder(6);
         }
     }
 }

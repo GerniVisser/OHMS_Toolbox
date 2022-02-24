@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using Toolbox.Helper;
 
@@ -32,14 +35,10 @@ namespace Toolbox
 
         private void btnLaunch_Click(object sender, RoutedEventArgs e)
         {
-
-            Caveability.MainWindow mw = new Caveability.MainWindow();
-            mw.Show();
-
-            //var psi = new System.Diagnostics.ProcessStartInfo() { FileName = (temp + @"\Caveability\bin\Debug\net5.0-windows\Caveability.exe")
-            //    , UseShellExecute = true };
-
-            //System.Diagnostics.Process.Start(psi);
+            Process.Start(Path.Combine(AppDomain.
+                CurrentDomain.BaseDirectory
+                .SolutionFolder(),
+                @"Caveability\bin\Debug\net5.0-windows\Caveability.exe"));
         }
     }
 }

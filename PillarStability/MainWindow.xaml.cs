@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.Win32;
-using PillarStability.Helper;
 using PillarStability.Models;
 using PillarStability.Services;
 using Syncfusion.Windows.Tools.Controls;
@@ -75,7 +74,7 @@ namespace PillarStability
                     LoadPillarModdels(pillarModels);
                     _saveFileName = saveFileDialog.FileName;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
 
                 }
@@ -156,7 +155,7 @@ namespace PillarStability
         {
             if (TabControleMain.SelectedIndex > 0)
             {
-                _pillarControl.setPillarModel(_pillarModelList[TabControleMain.SelectedIndex -1]);
+                _pillarControl.setPillarModel(_pillarModelList[TabControleMain.SelectedIndex - 1]);
             }
             else
             {
