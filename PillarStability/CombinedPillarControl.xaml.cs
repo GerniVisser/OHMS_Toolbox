@@ -1,10 +1,13 @@
 ﻿using PillarStability.Helper;
 using PillarStability.Models;
+using PillarStability.Services;
+using SharedWpfLibrary.Service;
 using SharedWpfLibrary.Tools;
 using Syncfusion.UI.Xaml.Charts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -121,10 +124,38 @@ namespace PillarStability
                 whStream = wh,
                 aveStream = ave,
                 outGridObjects = outputGridObjects,
-                PillarPrams = pillarPrams
+                pillarPrams = pillarPrams
             };
 
             return model;
+        }
+
+        private void ExportWhImage_Click(object sender, RoutedEventArgs e)
+        {
+            var data = getChartStreams();
+            data.aveStream = null;
+
+            Report rep = new Report(data);
+            rep.SaveReportImage();
+        }
+
+        private void ExportAveImage_Click(object sender, RoutedEventArgs e)
+        {
+            var data = getChartStreams();
+            data.whStream = null;
+
+            Report rep = new Report(data);
+            rep.SaveReportImage();
+        }
+
+        private void AddWHToClipBoard_Click(object sender, RoutedEventArgs e)
+        {
+            ClipboardService.CopyToClipboard(wh_Chart, (int)(wh_Chart.ActualWidth), (int)(wh_Chart.ActualHeight));
+        }
+
+        private void AddAveToClipBoard_Click(object sender, RoutedEventArgs e)
+        {
+            ClipboardService.CopyToClipboard(ave_Chart, (int)(ave_Chart.ActualWidth), (int)(ave_Chart.ActualHeight));
         }
 
         public ObservableCollection<OutputGridObject> whGrid

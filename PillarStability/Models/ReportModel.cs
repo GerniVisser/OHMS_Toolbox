@@ -8,7 +8,9 @@ namespace PillarStability.Models
     {
         public Stream whStream { get; set; }
         public Stream aveStream { get; set; }
-        public List<PillarPrams> PillarPrams { get; set; }
+        public Stream mcStream { get; set; }
+        public List<PillarPrams> pillarPrams { get; set; }
         public List<OutputGridObject> outGridObjects { get; set; }
+        public MCGridObject mcGridObject { get; set; }
     }
 }

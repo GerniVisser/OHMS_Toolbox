@@ -76,314 +76,334 @@
         </ResourceDictionary>
 
     </UserControl.Resources>
-    <Grid>
-        <Grid 
-            Background="WhiteSmoke">
+    <Grid 
+        Background="WhiteSmoke">
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="1.2*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="3*" MinHeight="120"/>
-            </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="1.2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="3*" MinHeight="120"/>
+        </Grid.RowDefinitions>
 
-            <syncfusion:TabControlExt
-                x:Name="TabContr"
-                BorderThickness="0"
-                CloseButtonType="Hide"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                HorizontalContentAlignment="Stretch"
-                VerticalContentAlignment="Stretch"
-                ShowTabItemContextMenu="False"
-                ShowTabListContextMenu="False" 
-                TabItemSelectedBackground="#f06e3e"
-                TabItemSelectedForeground="White"
-                TabPanelBackground="White"
-                TabScrollButtonVisibility="Hidden">
+        <syncfusion:TabControlExt
+            x:Name="TabContr"
+            BorderThickness="0"
+            CloseButtonType="Hide"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            ShowTabItemContextMenu="False"
+            ShowTabListContextMenu="False" 
+            TabItemSelectedBackground="#f06e3e"
+            TabItemSelectedForeground="White"
+            TabPanelBackground="White"
+            TabScrollButtonVisibility="Hidden">
 
-                <syncfusion:TabItemExt
-                    Height="30"
-                    Header="Width:Height">
+            <syncfusion:TabItemExt
+                Height="30"
+                Header="Width:Height">
 
+                <chart:SfChart 
+                        Header="Confinement Formula Stability Graph"
+                        Name="wh_Chart"
+                        FontSize="24"
+                        Background="White"
+                        BorderBrush="#d6d6d6"
+                        BorderThickness="2">
+                    <chart:SfChart.PrimaryAxis>
+                        <chart:NumericalAxis
+                                StartRangeFromZero="True"
+                                Header="Width/Height"
+                                FontSize="14"/>
+                    </chart:SfChart.PrimaryAxis>
+                    <chart:SfChart.SecondaryAxis>
+                        <chart:NumericalAxis
+                                StartRangeFromZero="True"
+                                Header="APS/UCS"
+                                FontSize="14"/>
+                    </chart:SfChart.SecondaryAxis>
+
+                    <chart:LineSeries
+                            Name="wh_LineSerriesFail"
+                            XBindingPath="x"
+                            YBindingPath="y"
+                            Interior="red"
+                            StrokeThickness="1"
+                            
+                            />
+
+                    <chart:LineSeries
+                            Name="wh_LineSerriesStable"
+                            XBindingPath="x"
+                            YBindingPath="y"
+                            Interior="Green"
+                            StrokeThickness="1"
+                            
+                            />
+                    <chart:ScatterSeries
+                            Name="wh_PointSerries"
+                            XBindingPath="x"
+                            YBindingPath="y"
+                            ScatterHeight="12"
+                            ScatterWidth ="12"
+                            Interior="Gray"
+                            />
+                    <chart:SfChart.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Save as Image" Click="ExportWhImage_Click"/>
+                            <MenuItem Header="Copy" Click="AddWHToClipBoard_Click" />
+                        </ContextMenu>
+                    </chart:SfChart.ContextMenu>
+                </chart:SfChart>
+
+            </syncfusion:TabItemExt>
+            <syncfusion:TabItemExt
+                Height="30"
+                Header="Pillar Confinement"
+                x:Name="ave_Tab">
+
+                <chart:SfChart 
+                        Header="Confinement Formula Stability Graph"
+                        Name="ave_Chart"
+                        FontSize="24"
+                        Background="White"
+                        BorderBrush="#d6d6d6"
+                        BorderThickness="2">
+                    <chart:SfChart.PrimaryAxis>
+                        <chart:NumericalAxis
+                                StartRangeFromZero="True"
+                                Header="CPav"
+                                FontSize="14"/>
+                    </chart:SfChart.PrimaryAxis>
+                    <chart:SfChart.SecondaryAxis>
+                        <chart:NumericalAxis
+                                StartRangeFromZero="True"
+                                Header="APS/UCS"
+                                FontSize="14"/>
+                    </chart:SfChart.SecondaryAxis>
+
+                    <chart:LineSeries
+                            Name="ave_LineSerriesFail"
+                            XBindingPath="x"
+                            YBindingPath="y"
+                            Interior="Green"
+                            StrokeThickness="1"
+                            
+                            />
+
+                    <chart:LineSeries
+                            Name="ave_LineSerriesStable"
+                            XBindingPath="x"
+                            YBindingPath="y"
+                            Interior="Red"
+                            StrokeThickness="1"
+                            
+                            />
+                    <chart:ScatterSeries
+                            Name="ave_PointSerries"
+                            XBindingPath="x"
+                            YBindingPath="y"
+                            ScatterHeight="12"
+                            ScatterWidth ="12"
+                            Interior="gray"
+                            />
+                    <chart:SfChart.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Save as Image" Click="ExportAveImage_Click"/>
+                            <MenuItem Header="Copy" Click="AddAveToClipBoard_Click" />
+                        </ContextMenu>
+                    </chart:SfChart.ContextMenu>
+                </chart:SfChart>
+
+            </syncfusion:TabItemExt>
+            <syncfusion:TabItemExt
+                Height="30"
+                Header="Monte Carlo">
+
+                <Grid>
                     <chart:SfChart 
-                            Header="Confinement Formula Stability Graph"
-                            Name="wh_Chart"
-                            FontSize="24"
-                            Background="White"
-                            BorderBrush="#d6d6d6"
-                            BorderThickness="2">
+                        Header="Frequency Distribution Graph"
+                        Name="mc_Chart"
+                        FontSize="24"
+                        Background="White"
+                        BorderBrush="#d6d6d6"
+                        BorderThickness="2">
                         <chart:SfChart.PrimaryAxis>
                             <chart:NumericalAxis
-                                    StartRangeFromZero="True"
-                                    Header="Width/Height"
-                                    FontSize="14"/>
+                                StartRangeFromZero="True"
+                                Header="Safety Factor"
+                                FontSize="14"/>
                         </chart:SfChart.PrimaryAxis>
                         <chart:SfChart.SecondaryAxis>
                             <chart:NumericalAxis
-                                    StartRangeFromZero="True"
-                                    Header="APS/UCS"
-                                    FontSize="14"/>
-                        </chart:SfChart.SecondaryAxis>
-
-                        <chart:LineSeries
-                                Name="wh_LineSerriesFail"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                Interior="red"
-                                StrokeThickness="1"
-                            
-                                />
-
-                        <chart:LineSeries
-                                Name="wh_LineSerriesStable"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                Interior="Green"
-                                StrokeThickness="1"
-                            
-                                />
-                        <chart:ScatterSeries
-                                Name="wh_PointSerries"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                ScatterHeight="12"
-                                ScatterWidth ="12"
-                                Interior="Gray"
-                                />
-                    </chart:SfChart>
-
-                </syncfusion:TabItemExt>
-                <syncfusion:TabItemExt
-                    Height="30"
-                    Header="Pillar Confinement"
-                    x:Name="ave_Tab">
-
-                    <chart:SfChart 
-                            Header="Confinement Formula Stability Graph"
-                            Name="ave_Chart"
-                            FontSize="24"
-                            Background="White"
-                            BorderBrush="#d6d6d6"
-                            BorderThickness="2">
-                        <chart:SfChart.PrimaryAxis>
-                            <chart:NumericalAxis
-                                    StartRangeFromZero="True"
-                                    Header="CPav"
-                                    FontSize="14"/>
-                        </chart:SfChart.PrimaryAxis>
-                        <chart:SfChart.SecondaryAxis>
-                            <chart:NumericalAxis
-                                    StartRangeFromZero="True"
-                                    Header="APS/UCS"
-                                    FontSize="14"/>
-                        </chart:SfChart.SecondaryAxis>
-
-                        <chart:LineSeries
-                                Name="ave_LineSerriesFail"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                Interior="Green"
-                                StrokeThickness="1"
-                            
-                                />
-
-                        <chart:LineSeries
-                                Name="ave_LineSerriesStable"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                Interior="Red"
-                                StrokeThickness="1"
-                            
-                                />
-                        <chart:ScatterSeries
-                                Name="ave_PointSerries"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                ScatterHeight="12"
-                                ScatterWidth ="12"
-                                Interior="gray"
-                                />
-                    </chart:SfChart>
-
-                </syncfusion:TabItemExt>
-                <syncfusion:TabItemExt
-                    Height="30"
-                    Header="Monte Carlo">
-
-                    <chart:SfChart 
-                            Header="Frequency Distribution Graph"
-                            Name="mc_Chart"
-                            FontSize="24"
-                            Background="White"
-                            BorderBrush="#d6d6d6"
-                            BorderThickness="2">
-                        <chart:SfChart.PrimaryAxis>
-                            <chart:NumericalAxis
-                                    StartRangeFromZero="True"
-                                    Header="Safety Factor"
-                                    FontSize="14"/>
-                        </chart:SfChart.PrimaryAxis>
-                        <chart:SfChart.SecondaryAxis>
-                            <chart:NumericalAxis
-                                    StartRangeFromZero="True"
-                                    Header="Frequency"
-                                    FontSize="14"/>
+                                StartRangeFromZero="True"
+                                Header="Frequency"
+                                FontSize="14"/>
                         </chart:SfChart.SecondaryAxis>
 
                         <chart:SfChart.Legend>
                             <chart:ChartLegend
-                                IconHeight="10" IconWidth="10" 
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"                                    
-                                DockPosition="Top"
-                                IconVisibility="Visible"
-                                ItemMargin="3">
-                                
+                            IconHeight="10" IconWidth="10" 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"                                    
+                            DockPosition="Top"
+                            IconVisibility="Visible"
+                            ItemMargin="3">
+
                             </chart:ChartLegend>
                         </chart:SfChart.Legend>
 
                         <chart:LineSeries
-                                Name="mc_LineSerries"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                Interior="Black"
-                                StrokeThickness="1"
-                                LegendIcon="None"
-                                >
+                            Name="mc_LineSerries"
+                            XBindingPath="x"
+                            YBindingPath="y"
+                            Interior="Black"
+                            StrokeThickness="1"
+                            LegendIcon="None"
+                            >
                             <chart:LineSeries.YAxis>
                                 <chart:NumericalAxis 
-                                    OpposedPosition="True"
-                                    Header="Cumalative Frequency"
-                                    Foreground="Black"
-                                    FontSize="14"/>
+                                OpposedPosition="True"
+                                Header="Cumalative Frequency"
+                                Foreground="Black"
+                                FontSize="14"/>
                             </chart:LineSeries.YAxis>
                         </chart:LineSeries>
 
                         <chart:LineSeries
-                                Name="mc_LineSerriesCumalitive"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                Interior="Gray"
-                                StrokeThickness="1"
-                                LegendIcon="None"
-                                />
+                            Name="mc_LineSerriesCumalitive"
+                            XBindingPath="x"
+                            YBindingPath="y"
+                            Interior="Gray"
+                            StrokeThickness="1"
+                            LegendIcon="None"
+                            />
 
                         <chart:LineSeries
-                                Name="FOS1_LineSerries"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                Interior="Red"
-                                StrokeThickness="2"
-                                Label="FOS 1"
-                                LegendIcon="Circle"
-                                >
+                            Name="FOS1_LineSerries"
+                            XBindingPath="x"
+                            YBindingPath="y"
+                            Interior="Red"
+                            StrokeThickness="2"
+                            Label="FOS 1"
+                            LegendIcon="Circle"
+                            >
                         </chart:LineSeries>
 
                         <chart:LineSeries
-                                Name="FOS14_LineSerries"
-                                XBindingPath="x"
-                                YBindingPath="y"
-                                Interior="Green"
-                                StrokeThickness="2"
-                                Label="FOS 1.4"
-                                LegendIcon="Circle"
-                                />
+                            Name="FOS14_LineSerries"
+                            XBindingPath="x"
+                            YBindingPath="y"
+                            Interior="Green"
+                            StrokeThickness="2"
+                            Label="FOS 1.4"
+                            LegendIcon="Circle"
+                            />
+                        <chart:SfChart.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Save as Image" Click="ExportMcImage_Click"/>
+                                <MenuItem Header="Copy" Click="AddMCToClipBoard_Click" />
+                            </ContextMenu>
+                        </chart:SfChart.ContextMenu>
                     </chart:SfChart>
+                </Grid>
 
-                </syncfusion:TabItemExt>
-            </syncfusion:TabControlExt>
+            </syncfusion:TabItemExt>
+        </syncfusion:TabControlExt>
 
-            <Grid Grid.Column="0" Grid.Row="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="3*"/>
-                </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
 
-                <TextBox
-                    Grid.Column="0"
-                    Grid.Row="0"
-                    BorderThickness="0"
-                    Background="Transparent"
-                    FontWeight="Light"
-                    FontSize="20"
-                    HorizontalContentAlignment="Center">
-                    Pillar Parameters
-                </TextBox>
-                
-                <syncfusion:SfDataGrid  
-                    x:Name="dataGrid"
-                    Grid.Column="0"
-                    Grid.Row="1"
-                    HorizontalAlignment="Center"
-                    ColumnSizer="Star"
-                    Margin="20 0"
-                    VerticalAlignment="Top">
-                </syncfusion:SfDataGrid>
+            <TextBox
+                Grid.Column="0"
+                Grid.Row="0"
+                BorderThickness="0"
+                Background="Transparent"
+                FontWeight="Light"
+                FontSize="20"
+                Focusable="False"
+                HorizontalContentAlignment="Center">
+                Pillar Parameters
+            </TextBox>
 
-                <TextBox
-                    Grid.Column="0"
-                    Grid.Row="2"
-                    BorderThickness="0"
-                    Background="Transparent"
-                    FontWeight="Light"
-                    FontSize="20"
-                    HorizontalContentAlignment="Center">
-                    Monte Carlo Results
-                </TextBox>
-                
-                <syncfusion:SfDataGrid  
-                    x:Name="dataGridMonte"
-                    Grid.Column="0"
-                    Grid.Row="3"
-                    Margin="20 0"
-                    ColumnSizer="Star"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top">
-                </syncfusion:SfDataGrid>
-            </Grid>
+            <syncfusion:SfDataGrid  
+                x:Name="dataGrid"
+                Grid.Column="0"
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                ColumnSizer="Star"
+                Margin="20 0"
+                VerticalAlignment="Top">
+            </syncfusion:SfDataGrid>
 
-            <Grid
-                Grid.Column="2" 
-                Grid.RowSpan="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="44"/>
-                </Grid.RowDefinitions>
+            <TextBox
+                Grid.Column="0"
+                Grid.Row="2"
+                BorderThickness="0"
+                Background="Transparent"
+                FontWeight="Light"
+                Focusable="False"
+                FontSize="20"
+                HorizontalContentAlignment="Center">
+                Monte Carlo Results
+            </TextBox>
 
-                <syncfusion:PropertyGrid 
-                    Grid.Row="0"
-                    EnableGrouping="True"
-                    Background="#f0f0f0"
-                    x:Name="PropertyGrid"
-                    FontSize="18"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    BorderThickness="0"
-                    ButtonPanelVisibility="Collapsed"
-                    DisableAnimationOnObjectSelection="True"
-                    DescriptionPanelVisibility="Collapsed"
-                    UpdateSourceMode="ReturnOrLostFocus" 
-                    PropertyExpandMode="FlatMode"  
-                  />
-
-                <Button
-                    Margin="5"
-                    MaxHeight="44"
-                    Grid.Column="2"
-                    Grid.Row="1"
-                    FontSize="22"
-                    Background="#f06e3e"
-                    Foreground="White"
-                    Content="Calculate"
-                    HorizontalAlignment="Stretch" Click="ButtonAdv_Click" />
-            </Grid>
-                
+            <syncfusion:SfDataGrid  
+                x:Name="dataGridMonte"
+                Grid.Column="0"
+                Grid.Row="3"
+                Margin="20 0"
+                ColumnSizer="Star"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top">
+            </syncfusion:SfDataGrid>
         </Grid>
-    </Grid>
+
+        <Grid
+            Grid.Column="2" 
+            Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="44"/>
+            </Grid.RowDefinitions>
+
+            <syncfusion:PropertyGrid 
+                Grid.Row="0"
+                EnableGrouping="True"
+                Background="#f0f0f0"
+                x:Name="PropertyGrid"
+                FontSize="18"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                BorderThickness="0"
+                ButtonPanelVisibility="Collapsed"
+                DisableAnimationOnObjectSelection="True"
+                DescriptionPanelVisibility="Collapsed"
+                UpdateSourceMode="ReturnOrLostFocus" 
+                PropertyExpandMode="FlatMode"  
+                />
+
+            <Button
+                Margin="5"
+                MaxHeight="44"
+                Grid.Column="2"
+                Grid.Row="1"
+                FontSize="22"
+                Background="#f06e3e"
+                Foreground="White"
+                Content="Calculate"
+                HorizontalAlignment="Stretch" Click="ButtonAdv_Click" />
+        </Grid>
+
+     </Grid>
 </UserControl>

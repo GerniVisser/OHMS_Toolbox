@@ -161,6 +161,12 @@
                                 StrokeThickness="2"
                                 LegendIcon="None"
                                 />
+                    <chart:SfChart.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Save as Image" Click="ExportWhImage_Click"/>
+                            <MenuItem Header="Copy" Click="AddWHToClipBoard_Click" />
+                        </ContextMenu>
+                    </chart:SfChart.ContextMenu>
                 </chart:SfChart>
 
             </syncfusion:TabItemExt>
@@ -217,6 +223,12 @@
                                 StrokeThickness="2"
                                 LegendIcon="None"
                                 />
+                    <chart:SfChart.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Save as Image" Click="ExportAveImage_Click"/>
+                            <MenuItem Header="Copy" Click="AddWHToClipBoard_Click" />
+                        </ContextMenu>
+                    </chart:SfChart.ContextMenu>
                 </chart:SfChart>
 
             </syncfusion:TabItemExt>
@@ -229,24 +241,26 @@
             </Grid.RowDefinitions>
 
             <TextBox
-                    Grid.Column="0"
-                    Grid.Row="0"
-                    BorderThickness="0"
-                    Background="Transparent"
-                    FontWeight="Light"
-                    FontSize="20"
-                    HorizontalContentAlignment="Center">
+                Grid.Column="0"
+                Grid.Row="0"
+                Focusable="False"
+                BorderThickness="0"
+                Background="Transparent"
+                FontWeight="Light"
+                FontSize="20"
+                HorizontalContentAlignment="Center">
                 Pillar Parameters
             </TextBox>
 
             <syncfusion:SfDataGrid  
-                    x:Name="dataGrid"
-                    Grid.Column="0"
-                    Grid.Row="1"
-                    HorizontalAlignment="Center"
-                    ColumnSizer="Star"
-                    Margin="20 0"
-                    VerticalAlignment="Top">
+                x:Name="dataGrid"
+                Grid.Column="0"
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                ColumnSizer="Star"
+                Margin="20 0"
+                Focusable="False"
+                VerticalAlignment="Top">
             </syncfusion:SfDataGrid>
 
         </Grid>   

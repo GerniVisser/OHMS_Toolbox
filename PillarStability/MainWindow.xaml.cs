@@ -142,7 +142,6 @@ namespace PillarStability
                 };
 
                 TabControleMain.Items.Add(tabItem);
-                TabControleMain.SelectedItem = tabItem;
             }
             else
             {

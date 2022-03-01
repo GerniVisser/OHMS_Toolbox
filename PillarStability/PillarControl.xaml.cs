@@ -1,6 +1,9 @@
 ﻿using PillarStability.Helper;
 using PillarStability.Models;
+using PillarStability.Services;
 using SharedWpfLibrary.Tools;
+using SharedWpfLibrary.Service;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -168,6 +171,84 @@ namespace PillarStability
         {
             get { return _mcGridObjects; }
             set { _mcGridObjects = value; }
+        }
+
+        private void ExportWhImage_Click(object sender, RoutedEventArgs e)
+        {
+            List<PillarPrams> pillarPrams = new List<PillarPrams>();
+
+            pillarPrams.Add(new PillarPrams(_pillarModel));
+
+            ReportModel reportModel = new ReportModel
+            {
+                whStream = ReportHelper.ChartStream(wh_Chart),
+                aveStream = null,
+                mcStream = null,
+                outGridObjects = new List<OutputGridObject>(whGridObject),
+                mcGridObject = null,
+                pillarPrams = pillarPrams
+            };
+
+            Report rep = new Report(reportModel);
+            rep.SaveReportImage();
+        }
+
+        private void ExportAveImage_Click(object sender, RoutedEventArgs e)
+        {
+            List<PillarPrams> pillarPrams = new List<PillarPrams>();
+
+            pillarPrams.Add(new PillarPrams(_pillarModel));
+
+            ReportModel reportModel = new ReportModel
+            {
+                whStream = null,
+                aveStream = ReportHelper.ChartStream(ave_Chart),
+                mcStream = null,
+                outGridObjects = new List<OutputGridObject>(whGridObject),
+                mcGridObject = null,
+                pillarPrams = pillarPrams
+            };
+
+            Report rep = new Report(reportModel);
+            rep.SaveReportImage();
+        }
+
+        private void ExportMcImage_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateMC();
+            update();
+
+            List<PillarPrams> pillarPrams = new List<PillarPrams>();
+
+            pillarPrams.Add(new PillarPrams(_pillarModel));
+
+            ReportModel reportModel = new ReportModel
+            {
+                whStream = null,
+                aveStream = null,
+                mcStream = ReportHelper.ChartStream(mc_Chart),
+                outGridObjects = null,
+                mcGridObject = _pillarModel.MCGridObject,
+                pillarPrams = pillarPrams
+            };
+
+            Report rep = new Report(reportModel);
+            rep.SaveReportImage();
+        }
+
+        private void AddMCToClipBoard_Click(object sender, RoutedEventArgs e)
+        {
+            ClipboardService.CopyToClipboard(mc_Chart, (int)(mc_Chart.ActualWidth), (int)(mc_Chart.ActualHeight));
+        }
+
+        private void AddWHToClipBoard_Click(object sender, RoutedEventArgs e)
+        {
+            ClipboardService.CopyToClipboard(wh_Chart, (int)(wh_Chart.ActualWidth), (int)(wh_Chart.ActualHeight));
+        }
+
+        private void AddAveToClipBoard_Click(object sender, RoutedEventArgs e)
+        {
+            ClipboardService.CopyToClipboard(ave_Chart, (int)(ave_Chart.ActualWidth), (int)(ave_Chart.ActualHeight));
         }
     }
 }
