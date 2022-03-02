@@ -64,18 +64,15 @@ namespace PillarStability
                 ave_Chart.Series.RemoveAt(2);
             }
 
-            var random = new Random();
-
             for (int i = 0; i <= _model.PillarModels.Count - 1; i++)
             {
-                string randColor = String.Format("#{0:X6}", random.Next(0x1000000));
-
+                
                 Coord coord = SerriesBuilder.whPoint(_model.PillarModels[i]);
-                var t = addScarrterSerries(coord, _model.PillarModels[i].Name, randColor);
+                var t = addScarrterSerries(coord, _model.PillarModels[i].Name, _model.PillarModels[i].Color);
                 wh_Chart.Series.Add(t);
 
                 coord = SerriesBuilder.apcPoint(_model.PillarModels[i]);
-                t = addScarrterSerries(coord, _model.PillarModels[i].Name, randColor);
+                t = addScarrterSerries(coord, _model.PillarModels[i].Name, _model.PillarModels[i].Color);
                 ave_Chart.Series.Add(t);
             }
         }
