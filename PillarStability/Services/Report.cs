@@ -264,10 +264,9 @@ namespace PillarStability.Services
             }
 
             pdfGrid.DataSource = dataTable;
-
             // Grid Styling
 
-            PdfGridRowStyle pdfGridRowStyle = new PdfGridRowStyle();
+            PdfGridCellStyle pdfGridRowStyle = new PdfGridCellStyle();
 
             pdfGridRowStyle.BackgroundBrush = new PdfSolidBrush(Color.FromArgb(240, 110, 62));
 
@@ -275,6 +274,10 @@ namespace PillarStability.Services
 
             pdfGridRowStyle.Font = new PdfStandardFont(PdfFontFamily.Helvetica, 12);
 
+            PdfStringFormat format = new PdfStringFormat();
+            format.Alignment = PdfTextAlignment.Center;
+
+            pdfGridRowStyle.StringFormat = format;
 
             PdfGridRow pdfGridRow = pdfGrid.Headers[0];
 
@@ -284,7 +287,7 @@ namespace PillarStability.Services
 
             for (int i = 0; i < pillarPrams.Count; i++)
             {
-                pdfGridRowStyle = new PdfGridRowStyle();
+                pdfGridRowStyle = new PdfGridCellStyle();
 
                 if (i % 2 == 0)
                 {
@@ -294,6 +297,7 @@ namespace PillarStability.Services
                 {
                     pdfGridRowStyle.BackgroundBrush = new PdfSolidBrush(Color.FromArgb(227, 182, 166));
                 }
+                pdfGridRowStyle.StringFormat = format;
 
                 pdfGridRowStyle.Font = new PdfStandardFont(PdfFontFamily.Helvetica, 10);
 
@@ -305,6 +309,12 @@ namespace PillarStability.Services
 
                 pdfGridRow.Height = 14;
             }
+
+            PdfGridCellStyle headerstyle = new PdfGridCellStyle();
+            headerstyle.Font = new PdfStandardFont(PdfFontFamily.Helvetica, 10);
+            headerstyle.StringFormat = format;
+
+            pdfGrid.Rows.ApplyStyle(headerstyle);
 
             pdfGrid.Draw(page, new RectangleF((float)(left), top + 30, 590, 100));
         }
@@ -366,7 +376,7 @@ namespace PillarStability.Services
 
             // Grid Styling
 
-            PdfGridRowStyle pdfGridRowStyle = new PdfGridRowStyle();
+            PdfGridCellStyle pdfGridRowStyle = new PdfGridCellStyle();
 
             pdfGridRowStyle.BackgroundBrush = new PdfSolidBrush(Color.FromArgb(240, 110, 62));
 
@@ -374,6 +384,10 @@ namespace PillarStability.Services
 
             pdfGridRowStyle.Font = new PdfStandardFont(PdfFontFamily.Helvetica, 12);
 
+            PdfStringFormat format = new PdfStringFormat();
+            format.Alignment = PdfTextAlignment.Center;
+
+            pdfGridRowStyle.StringFormat = format;
 
             PdfGridRow pdfGridRow = pdfGrid.Headers[0];
 
@@ -383,7 +397,7 @@ namespace PillarStability.Services
 
             for (int i = 0; i < counter; i++)
             {
-                pdfGridRowStyle = new PdfGridRowStyle();
+                pdfGridRowStyle = new PdfGridCellStyle();
 
                 if (i % 2 == 0)
                 {
@@ -393,6 +407,8 @@ namespace PillarStability.Services
                 {
                     pdfGridRowStyle.BackgroundBrush = new PdfSolidBrush(Color.FromArgb(227, 182, 166));
                 }
+
+                pdfGridRowStyle.StringFormat = format;
 
                 pdfGridRowStyle.Font = new PdfStandardFont(PdfFontFamily.Helvetica, 10);
 
@@ -404,6 +420,12 @@ namespace PillarStability.Services
 
                 pdfGridRow.Height = 14;
             }
+
+            PdfGridCellStyle headerstyle = new PdfGridCellStyle();
+            headerstyle.Font = new PdfStandardFont(PdfFontFamily.Helvetica, 10);
+            headerstyle.StringFormat = format;
+
+            pdfGrid.Rows.ApplyStyle(headerstyle);
 
             pdfGrid.Draw(page, new RectangleF((float)(left), top + 30, 590, 100));
         }
