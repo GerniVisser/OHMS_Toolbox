@@ -19,6 +19,7 @@ namespace PillarStability
         private CombinedPillarControl _combinedPillarControl;
         private List<PillarModel> _pillarModelList;
         private string _saveFileName = "";
+        private int PillarNumber = 0;
 
         public MainWindow()
         {
@@ -55,7 +56,8 @@ namespace PillarStability
 
         private void AddPillar_Click(object sender, RoutedEventArgs e)
         {
-            var newPillarModel = new PillarModel("Pillar " + (TabControleMain.Items.Count));
+            PillarNumber++;
+            var newPillarModel = new PillarModel("Pillar " + PillarNumber);
             _pillarModelList.Add(newPillarModel);
 
             addPillar(_pillarModelList[_pillarModelList.Count - 1]);
@@ -181,6 +183,7 @@ namespace PillarStability
             _pillarModelList.Clear();
 
             TabControleMain.SelectedIndex = 0;
+            PillarNumber = 0;
         }
 
         private void TabControlExt_OnCloseOtherTabs(object sender, CloseTabEventArgs e)
