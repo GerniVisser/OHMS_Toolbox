@@ -9,6 +9,7 @@ using Syncfusion.Windows.PdfViewer;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Media.Imaging;
@@ -33,6 +34,7 @@ namespace PillarStability.Services
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "JPEG Image(.jpeg) | *.jpeg | Png Image(.png) | *.png";
+            string filepath = "";
 
             if (saveFileDialog.ShowDialog() == true)
             {
@@ -40,7 +42,7 @@ namespace PillarStability.Services
                 {
                     PdfViewerControl pdfViewer = new PdfViewerControl();
 
-                    MemoryStream tempStream = GenerateReportPdf();
+                    MemoryStream tempStream = GenerateReport();
 
                     //Load the input PDF file
                     PdfLoadedDocument loadedDocument = new PdfLoadedDocument(tempStream);
@@ -60,9 +62,11 @@ namespace PillarStability.Services
                             //Create the bitmap frame using the bitmap source and add it to the encoder.
                             encoder.Frames.Add(BitmapFrame.Create(image));
                             //Create the file stream for the output in the desired image format.
-                            FileStream stream = new FileStream(saveFileDialog.FileName.Insert(saveFileDialog.FileName.IndexOf("."), " (" + i + ")"), FileMode.Create);
+                            filepath = saveFileDialog.FileName.Insert(saveFileDialog.FileName.IndexOf("."), " (" + i + ")");
+                            FileStream stream = new FileStream(filepath, FileMode.Create);
                             //Save the stream so that the image will be generated in the output location.
                             encoder.Save(stream);
+                            stream.Close();
                         }
                     }
 
@@ -70,6 +74,16 @@ namespace PillarStability.Services
                     tempStream.Dispose();
                     loadedDocument.Dispose();
                     loadedDocument = null;
+
+                    string Location_ToOpen = filepath;
+                    if (!File.Exists(Location_ToOpen))
+                    {
+                        return;
+                    }
+
+                    string argument = "/open, \"" + Location_ToOpen + "\"";
+
+                    Process.Start("explorer.exe", argument);
                 }
                 catch (Exception ex)
                 {
@@ -78,31 +92,59 @@ namespace PillarStability.Services
             }
         }
 
-        public MemoryStream GenerateReportPdf()
+        public MemoryStream GenerateReport()
         {
             using (PdfDocument document = new PdfDocument())
             {
-                document.PageSettings.Orientation = PdfPageOrientation.Landscape;
+                
                 //Add a page to the document
                 if(_model.whStream != null)
                 {
-                    PdfPage whPage = document.Pages.Add();
+                    int width = 0;
+                    // More than 1 pram means it is a combined report 
+                    if (_model.pillarPrams.Count > 1)
+                    {
+                        document.PageSettings.Orientation = PdfPageOrientation.Portrait;
+                        PdfPage whPage = document.Pages.Add();
+                        width = (int)(whPage.Graphics.ClientSize.Width - 60);
+                        whReport(whPage, width, "Height / Width - Report");
+                    }
+                    else
+                    {
+                        document.PageSettings.Orientation = PdfPageOrientation.Landscape;
+                        PdfPage whPage = document.Pages.Add();
+                        width = (int)(whPage.Graphics.ClientSize.Width - 250);
+                        whReport(whPage, width, "Height / Width - Report");
+                    }
 
-                    whReport(whPage, "Height / Width - Report");
                 }
                 
                 if(_model.aveStream != null)
                 {
-                    PdfPage avePage = document.Pages.Add();
+                    int width = 0;
 
-                    aveReport(avePage, "Pillar Confinement - Report");
+                    if (_model.pillarPrams.Count > 1)
+                    {
+                        document.PageSettings.Orientation = PdfPageOrientation.Portrait;
+                        PdfPage avePage = document.Pages.Add();
+                        width = (int)(avePage.Graphics.ClientSize.Width - 60);
+                        aveReport(avePage, width, "Pillar Confinement - Report");
+                    }
+                    else
+                    {
+                        document.PageSettings.Orientation = PdfPageOrientation.Landscape;
+                        PdfPage avePage = document.Pages.Add();
+                        width = (int)(avePage.Graphics.ClientSize.Width - 250);
+                        aveReport(avePage, width, "Pillar Confinement - Report");
+                    }
                 }
 
                 if(_model.mcStream != null)
                 {
+                    document.PageSettings.Orientation = PdfPageOrientation.Landscape;
                     PdfPage mcPage = document.Pages.Add();
-
-                    mcReport(mcPage, "Monte Carlo Simulation - Report");
+                    int width = (int)(mcPage.Graphics.ClientSize.Width - 250);
+                    mcReport(mcPage, width, "Monte Carlo Simulation - Report");
                 }
 
                 MemoryStream stream = new MemoryStream();
@@ -123,60 +165,60 @@ namespace PillarStability.Services
             {
                 try
                 {
-                    var tempStream = GenerateReportPdf();
+                    var tempStream = GenerateReport();
+                    string filepath = saveFileDialog.FileName;
                     PdfLoadedDocument document = new PdfLoadedDocument(tempStream);
-                    document.Save(saveFileDialog.FileName);
+                    document.Save(filepath);
                     document.Close(true);
                     tempStream.Dispose();
+
+                    string Location_ToOpen = filepath;
+                    if (!File.Exists(Location_ToOpen))
+                    {
+                        return;
+                    }
+
+                    string argument = "/open, \"" + Location_ToOpen + "\"";
+
+                    Process.Start("explorer.exe", argument);
                 }
                 catch { }
             }
         }
 
-        private void whReport(PdfPage page, string header)
+        private void whReport(PdfPage page, int width, string header)
         {
             int bodyTop = PageHeader(page, header);
 
-            int chartTop = 0;
+            int pramTop = ChartPanel(page, bodyTop, width, _model.whStream, "Width / Height");
 
-            float pageHeight = page.Graphics.ClientSize.Height - bodyTop - chartTop;
+            int resultTop = PramsPanel(page, pramTop, 30, width, _model.pillarPrams);
 
-            ChartPanel(page, bodyTop - chartTop, (int)(pageHeight) - 8, _model.whStream, "Width / Height");
-
-            PramsPanel(page, 380, 30, _model.pillarPrams);
-
-            ResultPanel(page, 430, 30, _model.outGridObjects, null);
+            ResultPanel(page, resultTop, 30, width, _model.outGridObjects, null);
         }
 
-        private void aveReport(PdfPage page, string header)
+        private void aveReport(PdfPage page, int width, string header)
         {
             int bodyTop = PageHeader(page, header);
 
-            int chartTop = 0;
+            int pramTop = ChartPanel(page, bodyTop, width, _model.aveStream, "Pillar Confinement");
 
-            float pageHeight = page.Graphics.ClientSize.Height - bodyTop - chartTop;
+            int resultTop = PramsPanel(page, pramTop, 30, width, _model.pillarPrams);
 
-            ChartPanel(page, bodyTop - chartTop, (int)(pageHeight) - 8, _model.aveStream, "Pillar Confinement");
-
-            PramsPanel(page, 380, 30, _model.pillarPrams);
-
-            ResultPanel(page, 430, 30, _model.outGridObjects, null);
+            ResultPanel(page, resultTop, 30, width, _model.outGridObjects, null);
         }
 
-        private void mcReport(PdfPage page, string header)
+        private void mcReport(PdfPage page, int width, string header)
         {
             int bodyTop = PageHeader(page, header);
 
-            int chartTop = 0;
+            int pramTop = ChartPanel(page, bodyTop, width, _model.mcStream, "Monte Carlo Simulation");
 
-            float pageHeight = page.Graphics.ClientSize.Height - bodyTop - chartTop;
+            int resultTop = PramsPanel(page, pramTop, 30, width, _model.pillarPrams);
 
-            ChartPanel(page, bodyTop - chartTop, (int)(pageHeight) - 8, _model.mcStream, "Monte Carlo Simulation");
-
-            PramsPanel(page, 380, 30, _model.pillarPrams);
-
-            ResultPanel(page, 430, 30, null, _model.mcGridObject);
+            ResultPanel(page, resultTop, 30, width, null, _model.mcGridObject);
         }
+
         private int PageHeader(PdfPage page, string header)
         {
             PdfGraphics graphics = page.Graphics;
@@ -204,13 +246,15 @@ namespace PillarStability.Services
             return 70;
         }
 
-        private void ChartPanel(PdfPage page, int top, int height, Stream chart, string header)
+        private int ChartPanel(PdfPage page, int top, int width, Stream chart, string header)
         {
             PdfGraphics graphics = page.Graphics;
 
             float pageWidth = page.Graphics.ClientSize.Width;
 
-            RectangleF bounds = new RectangleF(0, top, pageWidth, height);
+            float pageHeight = page.Graphics.ClientSize.Height;
+
+            RectangleF bounds = new RectangleF(0, top, pageWidth, pageHeight);
 
             PdfSolidBrush brush = new PdfSolidBrush(Color.WhiteSmoke);
 
@@ -226,17 +270,25 @@ namespace PillarStability.Services
             // Chart
             var image = new PdfBitmap(chart);
 
-            float ratio = image.Width / page.Graphics.ClientSize.Width;
+            float ratio = image.Width / width;
 
-            graphics.DrawImage(image, 30, top + 30, (int)(590), (int)(height / 1.5));
+            graphics.DrawImage(image, 30, top + 30, width, (int)((width) / ratio));
+
+            return top + 30 + (int)((width) / ratio);
 
         }
 
-        private void PramsPanel(PdfPage page, int top, int left, List<PillarPrams> pillarPrams)
+        private int PramsPanel(PdfPage page, int top, int left, int width, List<PillarPrams> pillarPrams)
         {
             PdfGraphics graphics = page.Graphics;
 
             float pageWidth = page.Graphics.ClientSize.Width;
+
+            PdfFont headerFont = new PdfStandardFont(PdfFontFamily.Helvetica, 12, PdfFontStyle.Bold);
+
+            graphics.DrawString("Pillar parameters", headerFont, PdfBrushes.Black, new PointF(30, top + 5));
+
+            top += 10;
             // Grid 
 
             PdfGrid pdfGrid = new PdfGrid();
@@ -316,15 +368,26 @@ namespace PillarStability.Services
 
             pdfGrid.Rows.ApplyStyle(headerstyle);
 
-            pdfGrid.Draw(page, new RectangleF((float)(left), top + 30, 590, 100));
+            int heigth = 14 * (_model.pillarPrams.Count + 1) + 14;
+
+            pdfGrid.Draw(page, new RectangleF((float)(left), top + 15, width, heigth));
+
+            return top + heigth;
         }
 
-        private void ResultPanel(PdfPage page, int top, int left, List<OutputGridObject>? outputGridObject, MCGridObject? mCGridObject)
+        private void ResultPanel(PdfPage page, int top, int left, int width, List<OutputGridObject>? outputGridObject, MCGridObject? mCGridObject)
         {
             PdfGraphics graphics = page.Graphics;
             int counter = 0;
 
             float pageWidth = page.Graphics.ClientSize.Width;
+
+            PdfFont headerFont = new PdfStandardFont(PdfFontFamily.Helvetica, 12, PdfFontStyle.Bold);
+
+            graphics.DrawString("Pillar results", headerFont, PdfBrushes.Black, new PointF(30, top + 10));
+
+            top += 15;
+
             // Grid 
 
             PdfGrid pdfGrid = new PdfGrid();
@@ -334,6 +397,7 @@ namespace PillarStability.Services
             {
                 counter = outputGridObject.Count;
 
+                dataTable.Columns.Add(" Name");
                 dataTable.Columns.Add(" Effective Width");
                 dataTable.Columns.Add(" Width / Height");
                 dataTable.Columns.Add(" Average Stress");
@@ -343,6 +407,7 @@ namespace PillarStability.Services
                 {
                     dataTable.Rows.Add(new object[]
                     {
+                        outputGridObject[i].Pillar,
                         MathF.Round(outputGridObject[i].Width,3),
                         MathF.Round(outputGridObject[i].WidthtHeight, 3),
                         MathF.Round(outputGridObject[i].AveStress,3),
@@ -355,6 +420,7 @@ namespace PillarStability.Services
             {
                 counter = 1;
 
+                dataTable.Columns.Add(" Name");
                 dataTable.Columns.Add(" DSF");
                 dataTable.Columns.Add(" AveSF");
                 dataTable.Columns.Add(" StandardDev");
@@ -363,11 +429,12 @@ namespace PillarStability.Services
 
                 dataTable.Rows.Add(new object[]
                 {
-                MathF.Round(mCGridObject.DSF,3),
-                MathF.Round(mCGridObject.AveSF,3),
-                MathF.Round(mCGridObject.StandardDev,3),
-                MathF.Round(mCGridObject.mfSF,3),
-                MathF.Round(mCGridObject.probSF,3),
+                    mCGridObject.Pillar,
+                    MathF.Round(mCGridObject.DSF,3),
+                    MathF.Round(mCGridObject.AveSF,3),
+                    MathF.Round(mCGridObject.StandardDev,3),
+                    MathF.Round(mCGridObject.mfSF,3),
+                    MathF.Round(mCGridObject.probSF,3),
                 });
             }
             
@@ -427,7 +494,7 @@ namespace PillarStability.Services
 
             pdfGrid.Rows.ApplyStyle(headerstyle);
 
-            pdfGrid.Draw(page, new RectangleF((float)(left), top + 30, 590, 100));
+            pdfGrid.Draw(page, new RectangleF((float)(left), top + 15, width, 100));
         }
     }
 }

@@ -12,13 +12,16 @@ namespace PillarStability.Helper
         {
             Stream outStream = new MemoryStream();
 
-            chart.Width = 824;
-            chart.Height = 474;
-            chart.Background = new SolidColorBrush(Colors.White);
-            chart.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-            chart.Arrange(new Rect(0, 0, chart.Width, chart.Height));
+            var temp = chart.Clone() as SfChart;
 
-            chart.Save(outStream, new BmpBitmapEncoder());
+            temp.Width = 1024;
+            temp.Height = 768;
+            temp.Background = new SolidColorBrush(Colors.White);
+            temp.Measure(new Size(temp.Width, temp.Height));
+            temp.Arrange(new Rect(0, 0, temp.Width, temp.Height));
+
+            temp.Save(outStream, new BmpBitmapEncoder());
+            temp.Dispose();
 
             return outStream;
         }
