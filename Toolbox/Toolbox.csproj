@@ -31,7 +31,7 @@
 	  <Content Include="Icons\ohms_logo_oBF_icon.ico">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="OHMS Toolbox 1.0.lw.xml">
+	  <Content Include="Icons\OHMS Toolbox 1.0.lw.xml">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Services\OHMS Toolbox 1.0.lw.xml">
