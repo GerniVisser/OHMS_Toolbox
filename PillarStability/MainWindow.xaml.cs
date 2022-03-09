@@ -114,7 +114,8 @@ namespace PillarStability
             {
                 Content = _combinedPillarControl,
                 Header = "Summary",
-                CanClose = false
+                CanClose = false,
+                CloseButtonState = Visibility.Hidden,
             };
 
             TabControleMain.Items.Clear();
@@ -213,7 +214,7 @@ namespace PillarStability
             {
                 for (int i = 0; i < TabControleMain.Items.Count; i++)
                 {
-                    if (e.TabItem == TabControleMain.Items[i])
+                    if (e.TabItem == TabControleMain.Items[i] && i != 0)
                     {
                         _pillarModelList[i - 1].Name = e.HeaderAfterEdit.ToString();
                         _pillarControl.update();
