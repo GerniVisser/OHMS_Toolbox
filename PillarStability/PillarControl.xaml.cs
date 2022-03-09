@@ -41,9 +41,12 @@ namespace PillarStability
         {
             try
             {
-                _pillarModel = pillarModel;
-                PropertyGrid.SelectedObject = _pillarModel;
-                update();
+                if(pillarModel != _pillarModel)
+                {
+                    _pillarModel = pillarModel;
+                    PropertyGrid.SelectedObject = _pillarModel;
+                    update();
+                }
             }
             catch
             {

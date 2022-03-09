@@ -14,6 +14,9 @@
 
     <Window.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Syncfusion.Tools.WPF;component/Controls/TabControlExt/Themes/aero.normalcolor.xaml" />
+            </ResourceDictionary.MergedDictionaries>
             <Style TargetType="syncfusion:TabItemExt">
                 <Setter Property="FontSize" Value="25" />
                 <Setter Property="FontWeight" Value="Light" />
@@ -40,38 +43,68 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type syncfusion:TabItemExt}">
-                            <DockPanel
-                                x:Name="PART_DockPanel"
-                                Margin="2"
-                                LastChildFill="True">
-                                <Border
-                                    Name="Bd"
-                                    Margin="{TemplateBinding Margin}"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="0"
-                                    SnapsToDevicePixels="True"
-                                    ToolTip="{Binding Path=ItemToolTip, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabItemExt}}, FallbackValue=''}">
-                                    <ContentPresenter
-                                        x:Name="Content"
-                                        Margin="{TemplateBinding HeaderMargin}"
-                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        Content="{TemplateBinding HeaderedContentControl.Header}"
-                                        ContentSource="Header"
-                                        ContentTemplate="{TemplateBinding HeaderedContentControl.HeaderTemplate}"
-                                        RecognizesAccessKey="True"
-                                        SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
-                                        TextElement.Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabItemExt}}, FallbackValue=Transparent}" />
-                                </Border>
-                            </DockPanel>
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" x:Name="Bd" ToolTip="{Binding Path=ItemToolTip, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabItemExt}},FallbackValue=''}" >
+                                <DockPanel x:Name="PART_DockPanel" LastChildFill="True" Margin="2" >
+                                    <Button 
+                                        Name="PART_CloseButton" 
+                                        Width="15" Height="14" 
+                                        VerticalAlignment="Top"                                
+                                        DockPanel.Dock="Top" 
+                                        Focusable="False" 
+                                        Visibility="Collapsed"
+							            Tag="TabItemCancelButton" 
+                                        Style="{StaticResource TabScrollingButton}"
+                                        Command="syncfusion:TabControlCommands.CloseTabItem" />
+                                    <ToggleButton 
+                                        Name="PART_PinButton" 
+                                        Visibility="{Binding ShowPin, RelativeSource={RelativeSource AncestorType={x:Type syncfusion:TabItemExt}}, Converter={StaticResource CloseButtonTypeToVisibilityConverter}}" 
+                                        DockPanel.Dock="Right" 
+                                        Width="15" 
+                                        Height="14"
+                                        Command="syncfusion:TabControlCommands.PinTabItem" 
+                                        CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}" 
+                                        Foreground="{StaticResource Aero.ButtonInactivePathBrush}"  
+                                        VerticalAlignment="Top" 
+                                        Margin="1,0,3,0"                 
+                                        Template="{StaticResource PinButtonTemplate}"  />
+                                    <Image x:Name="PART_Image"
+					                    Source="{TemplateBinding syncfusion:TabControlExt.Image}"
+					                    Height="{TemplateBinding syncfusion:TabControlExt.ImageHeight}"
+					                    Width="{TemplateBinding syncfusion:TabControlExt.ImageWidth}"
+					                    Stretch="Fill" Margin="{TemplateBinding IconMargin}"
+					                    SnapsToDevicePixels="True" VerticalAlignment="Center"
+                                        DockPanel.Dock="{Binding Path=(syncfusion:TabControlExt.ImageAlignment), Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ImageAlignmentToDockConverter}}"/>
+                                    <ContentPresenter    ContentSource="Header" x:Name="Content" Margin="{TemplateBinding HeaderMargin}" TextElement.Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabItemExt}},FallbackValue=Transparent}" 
+                                          RecognizesAccessKey="False" Content="{TemplateBinding HeaderedContentControl.Header}" 
+                                          ContentTemplate="{TemplateBinding HeaderedContentControl.HeaderTemplate}"                                           
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                          SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+
+                                    <ContentPresenter    ContentSource="Header" x:Name="PART_EditHeader" Visibility="Collapsed"
+                                          Margin="{TemplateBinding HeaderMargin}" TextElement.Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabItemExt}},FallbackValue=Transparent}" 
+                                          RecognizesAccessKey="True" Content="{TemplateBinding HeaderedContentControl.Header}" 
+                                          ContentTemplate="{Binding EditHeaderTemplate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type syncfusion:TabControlExt}}}"                                           
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                          SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                                </DockPanel>
+                            </Border>
                             <ControlTemplate.Triggers>
                                 <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Self}}" Value="True">
                                     <Setter TargetName="Bd" Property="Background" Value="{Binding Path=TabItemSelectedBackground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabControlExt}}, FallbackValue=Transparent}" />
                                     <Setter TargetName="Bd" Property="BorderBrush" Value="{Binding Path=TabItemSelectedBorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabControlExt}}, FallbackValue=Transparent}" />
                                     <Setter TargetName="Content" Property="TextElement.Foreground" Value="{Binding Path=TabItemSelectedForeground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabControlExt}}, FallbackValue=Transparent}" />
                                     <Setter TargetName="Content" Property="TextElement.FontWeight" Value="{Binding Path=SelectedItemFontWeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type syncfusion:TabControlExt}}, FallbackValue=SemiBold}" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=(syncfusion:TabControlExt.IsEditing), RelativeSource={RelativeSource Self}}" Value="True">
+                                    <Setter Property="Visibility" TargetName="PART_EditHeader" Value="Visible"/>
+                                    <Setter Property="Visibility" TargetName="Content" Value="Collapsed"/>
+                                    <Setter Property="LayoutTransform" TargetName="PART_EditHeader">
+                                        <Setter.Value>
+                                            <RotateTransform Angle="-90"/>
+                                        </Setter.Value>
+                                    </Setter>
                                 </DataTrigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -130,12 +163,14 @@
                 VerticalContentAlignment="Stretch"
                 Background="#e8e8e8"
                 BorderThickness="0"
-                CloseTabOnMiddleClick="True"
                 x:Name="TabControleMain"
                 OnCloseButtonClick="TabControlExt_OnCloseButtonClick"
                 OnCloseAllTabs="TabControlExt_OnCloseAllTabs"
                 OnCloseOtherTabs="TabControlExt_OnCloseOtherTabs"
                 CloseMode="Delete"
+                EnableLabelEdit="True"
+                AfterLabelEdit="TabControleMain_AfterLabelEdit"
+                CloseButtonType="Individual"
 
                 SelectedIndex="0"
                 SelectedItemFontWeight="Medium"

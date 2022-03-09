@@ -174,8 +174,6 @@ namespace PillarStability
             int index = TabControleMain.SelectedIndex - 1;
 
             _pillarModelList.RemoveAt(index);
-
-            TabControleMain.SelectedIndex = index - 1;
         }
 
         private void TabControlExt_OnCloseAllTabs(object sender, CloseTabEventArgs e)
@@ -189,9 +187,21 @@ namespace PillarStability
         private void TabControlExt_OnCloseOtherTabs(object sender, CloseTabEventArgs e)
         {
             _pillarModelList.RemoveRange(0, TabControleMain.SelectedIndex);
-            _pillarModelList.RemoveRange(1, _pillarModelList.Count - 1);
 
+            if(_pillarModelList.Count > 0)
+            {
+                _pillarModelList.RemoveRange(1, _pillarModelList.Count - 1);
+            }
+            
             TabControleMain.SelectedIndex = 0;
+        }
+
+        private void TabControleMain_AfterLabelEdit(object sender, AfterLabelEditEventArgs e)
+        {
+            if (TabControleMain.SelectedIndex >= 0)
+            {
+                _pillarModelList[TabControleMain.SelectedIndex - 1].Name = e.HeaderAfterEdit.ToString();
+            }
         }
     }
 }
