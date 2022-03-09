@@ -171,9 +171,20 @@ namespace PillarStability
 
         private void TabControlExt_OnCloseButtonClick(object sender, CloseTabEventArgs e)
         {
-            int index = TabControleMain.SelectedIndex - 1;
+            for (int i = 0; i < TabControleMain.Items.Count; i++)
+            {
+                if(e.TargetTabItem == TabControleMain.Items[i])
+                {
+                    _pillarModelList.RemoveAt(i - 1);
+                    TabControleMain.SelectedIndex = 0;
 
-            _pillarModelList.RemoveAt(index);
+                    if (TabControleMain.SelectedIndex == 0)
+                    {
+                        _combinedPillarControl.update();
+                    }
+                    return;
+                }
+            }
         }
 
         private void TabControlExt_OnCloseAllTabs(object sender, CloseTabEventArgs e)
@@ -200,7 +211,15 @@ namespace PillarStability
         {
             if (TabControleMain.SelectedIndex >= 0)
             {
-                _pillarModelList[TabControleMain.SelectedIndex - 1].Name = e.HeaderAfterEdit.ToString();
+                for (int i = 0; i < TabControleMain.Items.Count; i++)
+                {
+                    if (e.TabItem == TabControleMain.Items[i])
+                    {
+                        _pillarModelList[i - 1].Name = e.HeaderAfterEdit.ToString();
+                        _pillarControl.update();
+                        return;
+                    }
+                }
             }
         }
     }
