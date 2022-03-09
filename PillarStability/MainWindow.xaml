@@ -47,7 +47,9 @@
                                 <DockPanel x:Name="PART_DockPanel" LastChildFill="True" Margin="2" >
                                     <Button 
                                         Name="PART_CloseButton" 
-                                        Width="15" Height="14" 
+                                        Width="20" 
+                                        Height="20" 
+                                        Margin="20"
                                         VerticalAlignment="Top"                                
                                         DockPanel.Dock="Top" 
                                         Focusable="False" 
@@ -184,7 +186,7 @@
 
             </syncfusion:TabControlExt>
 
-            <syncfusion:ButtonAdv 
+            <Button
                 Margin="5"
                 MaxHeight="44"
                 Grid.Column="0"
@@ -192,13 +194,11 @@
                 FontSize="22"
                 Background="#f06e3e"
                 Foreground="White"
-                Label="Add Pillar"
-                IconHeight="20"
-                IconWidth="30"
-                SmallIcon="icons/add.png"
                 VerticalAlignment="Bottom" 
                 HorizontalAlignment="Stretch" 
-                Click="AddPillar_Click"/>
+                Click="AddPillar_Click">
+                Add Pillar
+            </Button>
         </Grid>
     </Grid>
 </Window>
