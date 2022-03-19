@@ -191,7 +191,7 @@
                             Name="ave_LineSerriesFail"
                             XBindingPath="x"
                             YBindingPath="y"
-                            Interior="Green"
+                            Interior="Red"
                             StrokeThickness="1"
                             
                             />
@@ -200,7 +200,7 @@
                             Name="ave_LineSerriesStable"
                             XBindingPath="x"
                             YBindingPath="y"
-                            Interior="Red"
+                            Interior="Green"
                             StrokeThickness="1"
                             
                             />

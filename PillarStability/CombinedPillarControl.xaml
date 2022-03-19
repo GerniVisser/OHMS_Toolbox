@@ -148,7 +148,7 @@
                                 Name="wh_LineSerriesFail"
                                 XBindingPath="x"
                                 YBindingPath="y"
-                                Interior="Green"
+                                Interior="Red"
                                 StrokeThickness="2"
                                 LegendIcon="None"
                                 />
@@ -157,7 +157,7 @@
                                 Name="wh_LineSerriesStable"
                                 XBindingPath="x"
                                 YBindingPath="y"
-                                Interior="red"
+                                Interior="Green"
                                 StrokeThickness="2"
                                 LegendIcon="None"
                                 />
