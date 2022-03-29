@@ -16,18 +16,19 @@ namespace Toolbox
 
             setupTools();
             loadTools(CavabilityTool);
+            loadTools(PillarStressTool);
             //LicensingService.ValidateLicense();
         }
 
         private void setupTools()
         {
-            CavabilityTool = new ToolControl(@"Caveability\bin\x64\Release\net5.0-windows\Caveability.exe");
+            CavabilityTool = new ToolControl(@"Caveability\bin\Debug\net5.0-windows\win-x86\Caveability.exe");
 
             CavabilityTool.ToolObject.Name = "Caveability Calculator";
             CavabilityTool.ToolObject.Icon = "/Icons/calculator_white.png";
             CavabilityTool.ToolObject.Description = "Calculator tool to measure and assess Stress in a Stope";
 
-            PillarStressTool = new ToolControl(@"PillarStability\bin\Release\net5.0-windows\PillarStability.exe");
+            PillarStressTool = new ToolControl(@"PillarStability\bin\Debug\net5.0-windows\PillarStability.exe");
 
             PillarStressTool.ToolObject.Name = "Pillar Stress Calculator";
             PillarStressTool.ToolObject.Icon = "/Icons/calculator_white.png";
@@ -58,5 +59,4 @@ namespace Toolbox
 
         }
     }
-
 }
