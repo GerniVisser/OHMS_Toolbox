@@ -1,6 +1,8 @@
-﻿using PillarStability.Helper;
+﻿using _SharedWpfLibrary.Service;
+using PillarStability.Helper;
 using System;
 using System.ComponentModel;
+using System.Windows.Media;
 
 namespace PillarStability.Models
 {
@@ -30,22 +32,20 @@ namespace PillarStability.Models
         private float _stdAps = 0;
         private float _lsf = 1f;
 
-        private string _color;
+        private Brush _color;
         private Bins _bins;
         private MCGridObject _mcGridObject;
 
         public PillarModel(string Name)
         {
-            var random = new Random();
             _name = Name;
-            _color = String.Format("#{0:X6}", random.Next(0x1000000));
+            _color = BrushService.getRandomBrush();
         }
 
         public PillarModel(string Name, float Height, float Width, float Length, float APS, float UCS)
         {
-            var random = new Random();
+            _color = BrushService.getRandomBrush();
             _name = Name;
-            _color = String.Format("#{0:X6}", random.Next(0x1000000));
             _H = Height;
             _W = Width;
             _L = Length;
@@ -53,13 +53,12 @@ namespace PillarStability.Models
             _UCS = UCS;
         }
 
-        [Browsable(false)]
-        public string Color
+        [DisplayName("Color"), Description("Pillar Color"), Category("General")]
+        public Brush Color
         {
             get { return _color; }
             set { _color = value; }
         }
-
 
         private float calcAPC()
         {

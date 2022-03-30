@@ -89,13 +89,12 @@ namespace PillarStability
             
         }
 
-        private ScatterSeries addScarrterSerries(Coord coord, string label, string hexColor)
+        private ScatterSeries addScarrterSerries(Coord coord, string label, Brush brushColor)
         {
             List<Coord> coords = new List<Coord>();
             coords.Add(coord);
 
             var converter = new System.Windows.Media.BrushConverter();
-            var brush = (Brush)converter.ConvertFromString(hexColor);
 
             ScatterSeries series = new ScatterSeries()
             {
@@ -104,7 +103,7 @@ namespace PillarStability
                 YBindingPath = "y",
                 ScatterHeight = 12,
                 ScatterWidth = 12,
-                Interior = brush,
+                Interior = brushColor,
                 Label = label,
                 LegendIcon = ChartLegendIcon.Circle
             };

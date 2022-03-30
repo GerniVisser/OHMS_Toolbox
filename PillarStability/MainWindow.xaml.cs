@@ -141,7 +141,7 @@ namespace PillarStability
                 TabItemExt tabItem = new TabItemExt()
                 {
                     Content = _pillarControl,
-                    Header = _pillarControl.getPillarModel.Name,
+                    Header = pillarModel.Name,
                 };
 
                 TabControleMain.Items.Add(tabItem);
@@ -157,6 +157,7 @@ namespace PillarStability
         {
             if (TabControleMain.SelectedIndex > 0)
             {
+
                 _pillarControl.setPillarModel(_pillarModelList[TabControleMain.SelectedIndex - 1]);
             }
             else
