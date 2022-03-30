@@ -57,7 +57,7 @@ namespace Caveability.Models
             lenght = HR._length;
         }
 
-        [Category("Calculate Q"), DisplayName("RQD"), Description("")]
+        [Category("Calculate Q"), DisplayName("RQD"), Description("Rock Quality Designation")]
         public float rqd
         {
             get { return _RQD; }
@@ -68,7 +68,7 @@ namespace Caveability.Models
             }
         }
 
-        [Category("Calculate Q"), DisplayName("Jn"), Description("")]
+        [Category("Calculate Q"), DisplayName("Jn"), Description("Joint set number")]
         public float jn
         {
             get { return _Jn; }
@@ -79,7 +79,7 @@ namespace Caveability.Models
             }
         }
 
-        [Category("Calculate Q"), DisplayName("Jr"), Description("")]
+        [Category("Calculate Q"), DisplayName("Jr"), Description("Joint roughness number")]
         public float jr
         {
             get { return _Jr; }
@@ -90,7 +90,7 @@ namespace Caveability.Models
             }
         }
 
-        [Category("Calculate Q"), DisplayName("Ja"), Description("")]
+        [Category("Calculate Q"), DisplayName("Ja"), Description("Joint alteration number")]
         public float ja
         {
             get { return _Ja; }
@@ -101,7 +101,7 @@ namespace Caveability.Models
             }
         }
 
-        [Category("Calculate A"), DisplayName("σc"), Description("")]
+        [Category("Calculate A"), DisplayName("σc"), Description("This is the intact rock strength (UCS) of the orebody")]
         public float oc
         {
             get { return _oc; }
@@ -123,7 +123,7 @@ namespace Caveability.Models
             }
         }
 
-        [Category("Calculate B"), DisplayName("b"), Description("")]
+        [Category("Calculate B"), DisplayName("b"), Description("Smallest intersection angle between plane under investigation and identified sets")]
         public float b
         {
             get { return _b; }
@@ -134,7 +134,7 @@ namespace Caveability.Models
             }
         }
 
-        [Category("Calculate C"), DisplayName("c"), Description("")]
+        [Category("Calculate C"), DisplayName("c"), Description("Dip of slabbing")]
         public float c
         {
             get { return _c; }
@@ -145,7 +145,7 @@ namespace Caveability.Models
             }
         }
 
-        [Category("HR"), DisplayName("length"), Description("")]
+        [Category("HR"), DisplayName("Length"), Description("")]
         public float lenght
         {
             get { return _length; }
@@ -156,7 +156,7 @@ namespace Caveability.Models
             }
         }
 
-        [Category("HR"), DisplayName("width"), Description("")]
+        [Category("HR"), DisplayName("Width"), Description("")]
         public float width
         {
             get { return _width; }

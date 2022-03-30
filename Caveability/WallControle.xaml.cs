@@ -19,13 +19,14 @@ namespace Caveability
 
         public Wall _wall;
 
-        public WallControle(bool isFootwall = false)
+        public WallControle(Brush backgroundColor, bool isFootwall = false)
         {
             if (isFootwall) _wall = new Wall(isFootwall);
             else _wall = new Wall();
 
             InitializeComponent();
 
+            Viewport.Background = backgroundColor;
             PropertyGrid.SelectedObject = _wall;
 
             A_LineSerries.ItemsSource = _wall.A.GetGraphCoords();

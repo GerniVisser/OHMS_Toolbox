@@ -78,6 +78,7 @@
     
     <Grid>
         <Grid 
+            x:Name="Viewport"
             Background="White">
 
             <Grid.ColumnDefinitions>
@@ -91,6 +92,7 @@
             </Grid.RowDefinitions>
 
             <syncfusion:TabControlExt
+                Margin="10 0"
                 x:Name="TabContr"
                 BorderThickness="0"
                 CloseButtonType="Hide"
@@ -113,7 +115,6 @@
                             Header="Stress Factor A"
                             Name="A_Chart"
                             FontSize="24"
-                            Background="White"
                             BorderBrush="#d6d6d6"
                             BorderThickness="2">
                         <chart:SfChart.PrimaryAxis>
@@ -184,7 +185,6 @@
                             Header="Stress Factor B"
                             Name="B_Chart"
                             FontSize="24"
-                            Background="White"
                             BorderBrush="#d6d6d6"
                             BorderThickness="2">
                         <chart:SfChart.PrimaryAxis>
@@ -254,7 +254,6 @@
                             Header="Stress Factor C"
                             Name="C_Chart"
                             FontSize="24"
-                            Background="White"
                             BorderBrush="#d6d6d6"
                             BorderThickness="2">
                         <chart:SfChart.PrimaryAxis>
@@ -323,7 +322,6 @@
                             Header="Stability for Gravity fall"
                             Name="HR_Chart"
                             FontSize="24"
-                            Background="White"
                             BorderBrush="#d6d6d6"
                             BorderThickness="2">
                         <chart:SfChart.PrimaryAxis>
@@ -379,9 +377,7 @@
 
             <Grid 
                 Grid.Column="0" 
-                Grid.Row="2"
-                Background="#e8e8e8">
-
+                Grid.Row="2">
                 <Grid.Resources>
                     <ResourceDictionary>
                         <Style TargetType="TextBlock">
@@ -424,23 +420,23 @@
                                    Grid.Column="3" 
                                    Grid.Row="4"/>
              </Grid>
-
-            <syncfusion:PropertyGrid 
+            <DockPanel
                 Grid.Column="2" 
-                Grid.RowSpan="5" 
-                x:Name="PropertyGrid"
-                FontSize="18"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                BorderThickness="0"
-                ButtonPanelVisibility="Collapsed"
-                DisableAnimationOnObjectSelection="True"
-                DescriptionPanelVisibility="Collapsed"
-                EnableGrouping="True"
-                UpdateSourceMode="ReturnOrLostFocus" 
-                ValueChanged="PropertyGrid_ValueChanged"
-                PropertyExpandMode="FlatMode"  
+                Grid.RowSpan="2" 
+                Background="White">
+                    <syncfusion:PropertyGrid 
+                    x:Name="PropertyGrid"
+                    FontSize="18"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    BorderThickness="0"
+                    DisableAnimationOnObjectSelection="True"
+                    EnableGrouping="True"
+                    UpdateSourceMode="ReturnOrLostFocus" 
+                    ValueChanged="PropertyGrid_ValueChanged"
+                    PropertyExpandMode="FlatMode" 
                 />
+            </DockPanel>
         </Grid>
     </Grid>
 

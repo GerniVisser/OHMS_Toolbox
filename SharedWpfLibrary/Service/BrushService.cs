@@ -20,5 +20,13 @@ namespace _SharedWpfLibrary.Service
 
             return color;
         }
+
+        public static Brush getBrushFromHex(string hex)
+        {
+            SolidColorBrush mySolidColorBrush = new SolidColorBrush();
+            mySolidColorBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom(hex));
+
+            return mySolidColorBrush;
+        }
     }
 }

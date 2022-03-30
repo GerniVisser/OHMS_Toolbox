@@ -1,6 +1,8 @@
-﻿using Caveability.Helper;
+﻿using _SharedWpfLibrary.Service;
+using Caveability.Helper;
 using Caveability.Services;
 using System;
+using System.Drawing;
 using System.Windows;
 
 namespace Caveability
@@ -20,10 +22,10 @@ namespace Caveability
         {
             InitializeComponent();
 
-            Footwall = new WallControle(true);
-            Hangwall = new WallControle();
-            StopeBack = new WallControle();
-            StrikeEnd = new WallControle();
+            Footwall = new WallControle(BrushService.getBrushFromHex("#e3e3e3"), true);
+            Hangwall = new WallControle(BrushService.getBrushFromHex("#d4d4d4"));
+            StopeBack = new WallControle(BrushService.getBrushFromHex("#e3e3e3"));
+            StrikeEnd = new WallControle(BrushService.getBrushFromHex("#d4d4d4"));
         }
 
         protected override void OnActivated(EventArgs e)
