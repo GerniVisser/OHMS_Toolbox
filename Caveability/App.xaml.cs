@@ -11,7 +11,7 @@ namespace Caveability
         {
             base.OnStartup(e);
 
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NTMxMjI4QDMxMzkyZTMzMmUzMFdVTEs3a1U0bnZCd2dweUd6L0l2L3pVK0JRTERPRXhubGE3Um9pNitUdm89");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjAzNTcyQDMxMzkyZTM0MmUzMGV5VWFwVnN4eiszU1VtcFBRdUtrZE91ME1kMVJuVm51RFJmcTNnVFl6VDA9");
         }
     }
 }

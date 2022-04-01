@@ -1,5 +1,6 @@
 ﻿using _SharedWpfLibrary.Service;
 using Caveability.Helper;
+using Caveability.Models;
 using Caveability.Services;
 using System;
 using System.Drawing;
@@ -38,19 +39,44 @@ namespace Caveability
             tabStrikeEnds.Content = StrikeEnd;
         }
 
-        private void MenuItemAdv_Click(object sender, RoutedEventArgs e)
+        private void ExportAsPDF_Click(object sender, RoutedEventArgs e)
         {
-            StopeStreamObject stopeStream = new StopeStreamObject();
+            ReportModel reportModel = new ReportModel();
 
-            stopeStream.footwallStreamObject = Footwall.ChartStreams();
-            stopeStream.hangwallStreamObject = Hangwall.ChartStreams();
-            stopeStream.stopebackStreamObject = StopeBack.ChartStreams();
-            stopeStream.strikeendStreamObject = StrikeEnd.ChartStreams();
+            reportModel.footwall = Footwall._wall;
+            reportModel.hangwall = Hangwall._wall;
+            reportModel.stopeback = StopeBack._wall;
+            reportModel.strikeend = StrikeEnd._wall;
+
+            reportModel.footwallStream= Footwall.ChartStreams();
+            reportModel.hangwallStream= Hangwall.ChartStreams();
+            reportModel.stopebackStream = StopeBack.ChartStreams();
+            reportModel.strikeendStream = StrikeEnd.ChartStreams();
 
             //Report.GenerateReport(stopeStream, saveFileDialog.FileName);
-            Report report = new Report(stopeStream);
+            Report report = new Report(reportModel);
 
-            report.GenerateReport(Footwall._wall, Hangwall._wall, StopeBack._wall, StrikeEnd._wall);
+            report.SaveReportPDF();
+        }
+
+        private void ExportAsImage_Click(object sender, RoutedEventArgs e)
+        {
+            ReportModel reportModel = new ReportModel();
+
+            reportModel.footwall = Footwall._wall;
+            reportModel.hangwall = Hangwall._wall;
+            reportModel.stopeback = StopeBack._wall;
+            reportModel.strikeend = StrikeEnd._wall;
+
+            reportModel.footwallStream = Footwall.ChartStreams();
+            reportModel.hangwallStream = Hangwall.ChartStreams();
+            reportModel.stopebackStream = StopeBack.ChartStreams();
+            reportModel.strikeendStream = StrikeEnd.ChartStreams();
+
+            //Report.GenerateReport(stopeStream, saveFileDialog.FileName);
+            Report report = new Report(reportModel);
+
+            report.SaveReportImage();
         }
     }
 }

@@ -1,5 +1,8 @@
-﻿using Caveability.Helper;
+﻿using _SharedWpfLibrary.Service;
+using Caveability.Helper;
 using Caveability.Models;
+using Caveability.Services;
+using SharedWpfLibrary.Service;
 using Syncfusion.UI.Xaml.Charts;
 using System;
 using System.Collections.ObjectModel;
@@ -77,22 +80,22 @@ namespace Caveability
 
 
         // This method may perhaps have to be made async
-        public ChartStreamObject ChartStreams()
+        public ChartStreamModel ChartStreams()
         {
-            ChartStreamObject chartStream = new ChartStreamObject();
+            ChartStreamModel chartStream = new ChartStreamModel();
 
             int currentIndex = TabContr.SelectedIndex;
 
             try
             {
                 TabContr.SelectedIndex = 0;
-                chartStream.A_chartStream = ChartStream(A_Chart);
+                chartStream.A_chartStream = ReportStreamService.ChartStream(A_Chart);
                 TabContr.SelectedIndex = 1;
-                chartStream.B_chartStream = ChartStream(B_Chart);
+                chartStream.B_chartStream = ReportStreamService.ChartStream(B_Chart);
                 TabContr.SelectedIndex = 2;
-                chartStream.C_chartStream = ChartStream(C_Chart);
+                chartStream.C_chartStream = ReportStreamService.ChartStream(C_Chart);
                 TabContr.SelectedIndex = 3;
-                chartStream.HR_chartStream = ChartStream(HR_Chart);
+                chartStream.HR_chartStream = ReportStreamService.ChartStream(HR_Chart);
                 TabContr.SelectedIndex = currentIndex;
             }
             catch (Exception ex)
@@ -103,20 +106,36 @@ namespace Caveability
             return chartStream;
         }
 
-        private Stream ChartStream(SfChart chart)
+        private void ExportImage_Click(object sender, RoutedEventArgs e)
         {
+            ReportModel reportModel = new ReportModel();
 
-            Stream outStream = new MemoryStream();
+            reportModel.footwall = _wall;
 
-            chart.Width = 824;
-            chart.Height = 474;
-            chart.Background = new SolidColorBrush(Colors.White);
-            chart.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-            chart.Arrange(new Rect(0, 0, chart.Width, chart.Height));
+            reportModel.footwallStream = ChartStreams();
 
-            chart.Save(outStream, new BmpBitmapEncoder());
+            //Report.GenerateReport(stopeStream, saveFileDialog.FileName);
+            Report report = new Report(reportModel);
 
-            return outStream;
+            report.SaveReportImage();
+        }
+
+        private void AddAToClipBoard_Click(object sender, RoutedEventArgs e)
+        {
+            ClipboardService.CopyToClipboard(A_Chart, (int)(A_Chart.ActualWidth), (int)(A_Chart.ActualHeight));
+        }
+
+        private void AddBToClipBoard_Click(object sender, RoutedEventArgs e)
+        {
+            ClipboardService.CopyToClipboard(B_Chart, (int)(B_Chart.ActualWidth), (int)(B_Chart.ActualHeight));
+        }
+        private void AddCToClipBoard_Click(object sender, RoutedEventArgs e)
+        {
+            ClipboardService.CopyToClipboard(C_Chart, (int)(C_Chart.ActualWidth), (int)(C_Chart.ActualHeight));
+        }
+        private void AddHRToClipBoard_Click(object sender, RoutedEventArgs e)
+        {
+            ClipboardService.CopyToClipboard(HR_Chart, (int)(HR_Chart.ActualWidth), (int)(HR_Chart.ActualHeight));
         }
 
     }

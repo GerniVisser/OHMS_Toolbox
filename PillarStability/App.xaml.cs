@@ -11,7 +11,7 @@ namespace PillarStability
         {
             base.OnStartup(e);
 
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NTgwNDQ5QDMxMzkyZTM0MmUzMFRrR0RFajVDZEh2MG5FSGlqaE81T1A3YWVPUFAvTFpkNGROSDVIQmo0RVU9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjAzNTcyQDMxMzkyZTM0MmUzMGV5VWFwVnN4eiszU1VtcFBRdUtrZE91ME1kMVJuVm51RFJmcTNnVFl6VDA9");
         }
     }
 }

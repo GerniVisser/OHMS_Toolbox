@@ -115,6 +115,7 @@
                             Header="Stress Factor A"
                             Name="A_Chart"
                             FontSize="24"
+                            Background="White"
                             BorderBrush="#d6d6d6"
                             BorderThickness="2">
                         <chart:SfChart.PrimaryAxis>
@@ -173,6 +174,14 @@
                                 ScatterWidth ="12"
                                 Interior="Red"
                                 />
+
+                        <chart:SfChart.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Save as Image" Click="ExportImage_Click"/>
+                                <MenuItem Header="Copy" Click="AddAToClipBoard_Click" />
+                            </ContextMenu>
+                        </chart:SfChart.ContextMenu>
+
                     </chart:SfChart>
 
                 </syncfusion:TabItemExt>
@@ -185,6 +194,7 @@
                             Header="Stress Factor B"
                             Name="B_Chart"
                             FontSize="24"
+                            Background="White"
                             BorderBrush="#d6d6d6"
                             BorderThickness="2">
                         <chart:SfChart.PrimaryAxis>
@@ -243,6 +253,13 @@
                                 ScatterWidth ="12"
                                 Interior="Red"
                                 />
+
+                        <chart:SfChart.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Save as Image" Click="ExportImage_Click"/>
+                                <MenuItem Header="Copy" Click="AddBToClipBoard_Click" />
+                            </ContextMenu>
+                        </chart:SfChart.ContextMenu>
                     </chart:SfChart>
 
                 </syncfusion:TabItemExt>
@@ -254,6 +271,7 @@
                             Header="Stress Factor C"
                             Name="C_Chart"
                             FontSize="24"
+                            Background="White"
                             BorderBrush="#d6d6d6"
                             BorderThickness="2">
                         <chart:SfChart.PrimaryAxis>
@@ -312,6 +330,12 @@
                                 ScatterWidth ="12"
                                 Interior="Red"
                                 />
+                        <chart:SfChart.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Save as Image" Click="ExportImage_Click"/>
+                                <MenuItem Header="Copy" Click="AddCToClipBoard_Click" />
+                            </ContextMenu>
+                        </chart:SfChart.ContextMenu>
                     </chart:SfChart>
                 </syncfusion:TabItemExt>
                 <syncfusion:TabItemExt
@@ -322,6 +346,7 @@
                             Header="Stability for Gravity fall"
                             Name="HR_Chart"
                             FontSize="24"
+                            Background="White"
                             BorderBrush="#d6d6d6"
                             BorderThickness="2">
                         <chart:SfChart.PrimaryAxis>
@@ -371,6 +396,12 @@
                                 ScatterWidth ="12"
                                 Interior="Red"
                                 />
+                        <chart:SfChart.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Save as Image" Click="ExportImage_Click"/>
+                                <MenuItem Header="Copy" Click="AddHRToClipBoard_Click" />
+                            </ContextMenu>
+                        </chart:SfChart.ContextMenu>
                     </chart:SfChart>
                 </syncfusion:TabItemExt>
             </syncfusion:TabControlExt>

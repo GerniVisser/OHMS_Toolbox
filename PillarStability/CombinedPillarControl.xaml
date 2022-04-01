@@ -114,7 +114,7 @@
                 <chart:SfChart 
                             Grid.Row="0"
                             VerticalAlignment="Stretch"
-                            Header="Confinement Formula Stability Graph"
+                            Header="Width / Height Stability Graph"
                             Name="wh_Chart"
                             FontSize="24"
                             Background="White"
@@ -226,7 +226,7 @@
                     <chart:SfChart.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Save as Image" Click="ExportAveImage_Click"/>
-                            <MenuItem Header="Copy" Click="AddWHToClipBoard_Click" />
+                            <MenuItem Header="Copy" Click="AddAveToClipBoard_Click" />
                         </ContextMenu>
                     </chart:SfChart.ContextMenu>
                 </chart:SfChart>

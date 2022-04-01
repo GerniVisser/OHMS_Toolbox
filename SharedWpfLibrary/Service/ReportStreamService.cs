@@ -1,12 +1,17 @@
 ﻿using Syncfusion.UI.Xaml.Charts;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace PillarStability.Helper
+namespace _SharedWpfLibrary.Service
 {
-    public class ReportHelper
+    public class ReportStreamService
     {
         public static Stream ChartStream(SfChart chart)
         {
@@ -25,6 +30,5 @@ namespace PillarStability.Helper
 
             return outStream;
         }
-
     }
 }

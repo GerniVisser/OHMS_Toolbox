@@ -1,4 +1,5 @@
-﻿using PillarStability.Helper;
+﻿using _SharedWpfLibrary.Service;
+using PillarStability.Helper;
 using PillarStability.Models;
 using PillarStability.Services;
 using SharedWpfLibrary.Service;
@@ -113,8 +114,8 @@ namespace PillarStability
 
         public ReportModel getChartStreams()
         {
-            var wh = ReportHelper.ChartStream(wh_Chart);
-            var ave = ReportHelper.ChartStream(ave_Chart);
+            var wh = ReportStreamService.ChartStream(wh_Chart);
+            var ave = ReportStreamService.ChartStream(ave_Chart);
 
             updateOutGrid();
             List<OutputGridObject> outputGridObjects = new List<OutputGridObject>(whGrid);

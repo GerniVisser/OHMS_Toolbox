@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using _SharedWpfLibrary.Service;
 
 namespace PillarStability
 {
@@ -184,7 +185,7 @@ namespace PillarStability
 
             ReportModel reportModel = new ReportModel
             {
-                whStream = ReportHelper.ChartStream(wh_Chart),
+                whStream = ReportStreamService.ChartStream(wh_Chart),
                 aveStream = null,
                 mcStream = null,
                 outGridObjects = new List<OutputGridObject>(whGridObject),
@@ -205,7 +206,7 @@ namespace PillarStability
             ReportModel reportModel = new ReportModel
             {
                 whStream = null,
-                aveStream = ReportHelper.ChartStream(ave_Chart),
+                aveStream = ReportStreamService.ChartStream(ave_Chart),
                 mcStream = null,
                 outGridObjects = new List<OutputGridObject>(whGridObject),
                 mcGridObject = null,
@@ -229,7 +230,7 @@ namespace PillarStability
             {
                 whStream = null,
                 aveStream = null,
-                mcStream = ReportHelper.ChartStream(mc_Chart),
+                mcStream = ReportStreamService.ChartStream(mc_Chart),
                 outGridObjects = null,
                 mcGridObject = _pillarModel.MCGridObject,
                 pillarPrams = pillarPrams

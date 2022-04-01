@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using _SharedWpfLibrary.Interface;
+using Microsoft.Win32;
 using PillarStability.Helper;
 using PillarStability.Models;
 using Syncfusion.Pdf;
@@ -16,18 +17,77 @@ using System.Windows.Media.Imaging;
 
 namespace PillarStability.Services
 {
-    public class Report
+    public class Report : IReport
     {
         private ReportModel _model;
 
         public Report(ReportModel reportModel)
         {
-            ReportModel = reportModel;
+            _model = reportModel;
         }
-        public ReportModel ReportModel
+
+        public MemoryStream GenerateReport()
         {
-            get { return _model; }
-            set { _model = value; }
+            using (PdfDocument document = new PdfDocument())
+            {
+
+                //Add a page to the document
+                if (_model.whStream != null)
+                {
+                    int width = 0;
+                    // More than 1 pram means it is a combined report 
+                    if (_model.pillarPrams.Count > 1)
+                    {
+                        document.PageSettings.Orientation = PdfPageOrientation.Portrait;
+                        PdfPage whPage = document.Pages.Add();
+                        width = (int)(whPage.Graphics.ClientSize.Width - 60);
+                        whReport(whPage, width, "Height / Width - Report");
+                    }
+                    else
+                    {
+                        document.PageSettings.Orientation = PdfPageOrientation.Landscape;
+                        PdfPage whPage = document.Pages.Add();
+                        width = (int)(whPage.Graphics.ClientSize.Width - 250);
+                        whReport(whPage, width, "Height / Width - Report");
+                    }
+
+                }
+
+                if (_model.aveStream != null)
+                {
+                    int width = 0;
+
+                    if (_model.pillarPrams.Count > 1)
+                    {
+                        document.PageSettings.Orientation = PdfPageOrientation.Portrait;
+                        PdfPage avePage = document.Pages.Add();
+                        width = (int)(avePage.Graphics.ClientSize.Width - 60);
+                        aveReport(avePage, width, "Pillar Confinement - Report");
+                    }
+                    else
+                    {
+                        document.PageSettings.Orientation = PdfPageOrientation.Landscape;
+                        PdfPage avePage = document.Pages.Add();
+                        width = (int)(avePage.Graphics.ClientSize.Width - 250);
+                        aveReport(avePage, width, "Pillar Confinement - Report");
+                    }
+                }
+
+                if (_model.mcStream != null)
+                {
+                    document.PageSettings.Orientation = PdfPageOrientation.Landscape;
+                    PdfPage mcPage = document.Pages.Add();
+                    int width = (int)(mcPage.Graphics.ClientSize.Width - 250);
+                    mcReport(mcPage, width, "Monte Carlo Simulation - Report");
+                }
+
+                MemoryStream stream = new MemoryStream();
+
+                document.Save(stream);
+
+                return stream;
+            }
+
         }
 
         public void SaveReportImage()
@@ -92,71 +152,7 @@ namespace PillarStability.Services
             }
         }
 
-        public MemoryStream GenerateReport()
-        {
-            using (PdfDocument document = new PdfDocument())
-            {
-                
-                //Add a page to the document
-                if(_model.whStream != null)
-                {
-                    int width = 0;
-                    // More than 1 pram means it is a combined report 
-                    if (_model.pillarPrams.Count > 1)
-                    {
-                        document.PageSettings.Orientation = PdfPageOrientation.Portrait;
-                        PdfPage whPage = document.Pages.Add();
-                        width = (int)(whPage.Graphics.ClientSize.Width - 60);
-                        whReport(whPage, width, "Height / Width - Report");
-                    }
-                    else
-                    {
-                        document.PageSettings.Orientation = PdfPageOrientation.Landscape;
-                        PdfPage whPage = document.Pages.Add();
-                        width = (int)(whPage.Graphics.ClientSize.Width - 250);
-                        whReport(whPage, width, "Height / Width - Report");
-                    }
-
-                }
-                
-                if(_model.aveStream != null)
-                {
-                    int width = 0;
-
-                    if (_model.pillarPrams.Count > 1)
-                    {
-                        document.PageSettings.Orientation = PdfPageOrientation.Portrait;
-                        PdfPage avePage = document.Pages.Add();
-                        width = (int)(avePage.Graphics.ClientSize.Width - 60);
-                        aveReport(avePage, width, "Pillar Confinement - Report");
-                    }
-                    else
-                    {
-                        document.PageSettings.Orientation = PdfPageOrientation.Landscape;
-                        PdfPage avePage = document.Pages.Add();
-                        width = (int)(avePage.Graphics.ClientSize.Width - 250);
-                        aveReport(avePage, width, "Pillar Confinement - Report");
-                    }
-                }
-
-                if(_model.mcStream != null)
-                {
-                    document.PageSettings.Orientation = PdfPageOrientation.Landscape;
-                    PdfPage mcPage = document.Pages.Add();
-                    int width = (int)(mcPage.Graphics.ClientSize.Width - 250);
-                    mcReport(mcPage, width, "Monte Carlo Simulation - Report");
-                }
-
-                MemoryStream stream = new MemoryStream();
-
-                document.Save(stream);
-
-                return stream;
-            }
-
-        }
-
-        public void SaveReportPDf()
+        public void SaveReportPDF()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PDF document(*.pdf)| *.pdf";
@@ -496,5 +492,6 @@ namespace PillarStability.Services
 
             pdfGrid.Draw(page, new RectangleF((float)(left), top + 15, width, 100));
         }
+
     }
 }

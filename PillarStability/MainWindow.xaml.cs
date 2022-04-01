@@ -36,7 +36,7 @@ namespace PillarStability
             var reportModel = _combinedPillarControl.getChartStreams();
 
             Report rep = new Report(reportModel);
-            rep.SaveReportPDf();
+            rep.SaveReportPDF();
         }
 
         private void ExportAsImage_Click(object sender, RoutedEventArgs e)

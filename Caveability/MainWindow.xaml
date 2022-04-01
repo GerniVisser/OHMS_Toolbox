@@ -109,13 +109,13 @@
                     VerticalAlignment="Center">
 
                 </syncfusion:MenuItemAdv>
+                
                 <syncfusion:MenuItemAdv
                     Header="Export"
-                    Click="MenuItemAdv_Click"
                     Foreground="White"
-                    VerticalAlignment="Center"
-                    Command="{Binding ReportCommand}">
-
+                    VerticalAlignment="Center">
+                    <syncfusion:MenuItemAdv Header="Export as PDF" FontWeight="Light" Click="ExportAsPDF_Click"/>
+                    <syncfusion:MenuItemAdv Header="Export as Image" FontWeight="Light" Click="ExportAsImage_Click"/>
                 </syncfusion:MenuItemAdv>
 
             </syncfusion:MenuAdv>

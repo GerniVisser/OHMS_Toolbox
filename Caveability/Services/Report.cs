@@ -1,4 +1,4 @@
-﻿using Caveability.Helper;
+﻿using _SharedWpfLibrary.Interface;
 using Caveability.Models;
 using Microsoft.Win32;
 using Syncfusion.Pdf;
@@ -6,69 +6,165 @@ using Syncfusion.Pdf.Graphics;
 using Syncfusion.Pdf.Grid;
 using System;
 using System.Collections.Generic;
+using Syncfusion.Windows.PdfViewer;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using Syncfusion.Pdf.Parsing;
+using System.Windows.Media.Imaging;
+using System.Diagnostics;
 
 namespace Caveability.Services
 {
-    public class Report
+    public class Report : IReport
     {
-        private StopeStreamObject _chartStream;
+        private ReportModel _model;
 
-        public Report(StopeStreamObject chartStream)
+        public Report(ReportModel model)
         {
-            _chartStream = chartStream;
+            _model = model;
         }
 
-        public bool GenerateReport(Wall Footwall, Wall Hangwall, Wall StopeBack, Wall StrikeEnd)
+        public MemoryStream GenerateReport()
+        {
+            using (PdfDocument document = new PdfDocument())
+            {
+                //Add a page to the document
+                if(_model.hangwall != null)
+                {
+                    PdfPage Hangwallpage = document.Pages.Add();
+
+                    WallReport(Hangwallpage, "Hangwall - Report", _model.hangwall, _model.hangwallStream);
+
+                }
+
+                if (_model.footwall != null)
+                {
+                    PdfPage Footwallpage = document.Pages.Add();
+
+                    WallReport(Footwallpage, "Footwall - Report", _model.footwall, _model.footwallStream);
+
+                }
+
+                if (_model.stopeback != null)
+                {
+                    PdfPage Stopebackpage = document.Pages.Add();
+
+                    WallReport(Stopebackpage, "Stope Back - Report", _model.stopeback, _model.stopebackStream );
+
+                }
+
+                if (_model.strikeend != null)
+                {
+                    PdfPage Strikeendpage = document.Pages.Add();
+
+                    WallReport(Strikeendpage, "Strike End - Report", _model.strikeend, _model.strikeendStream);
+
+                }
+                //Save the document
+
+                MemoryStream stream = new MemoryStream();
+
+                document.Save(stream);
+
+                return stream;
+
+            }
+        }
+
+        public void SaveReportImage()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "PDF document (*.pdf)|*.pdf";
+            saveFileDialog.Filter = "JPEG Image(.jpeg) | *.jpeg | Png Image(.png) | *.png";
+            string filepath = "";
 
             if (saveFileDialog.ShowDialog() == true)
             {
                 try
                 {
-                    using (PdfDocument document = new PdfDocument())
+                    PdfViewerControl pdfViewer = new PdfViewerControl();
+
+                    MemoryStream tempStream = GenerateReport();
+
+                    //Load the input PDF file
+                    PdfLoadedDocument loadedDocument = new PdfLoadedDocument(tempStream);
+
+                    pdfViewer.Load(loadedDocument);
+
+                    //Export the particular PDF page as image at the page index of 0
+                    for (int i = 0; i < pdfViewer.PageCount; i++)
                     {
-                        //Add a page to the document
-                        PdfPage Hangwallpage = document.Pages.Add();
+                        BitmapSource image = pdfViewer.ExportAsImage(i);
 
-                        WallReport(Hangwallpage, "Hangwall - Report", Hangwall, _chartStream.hangwallStreamObject);
-
-                        PdfPage FootWallpage = document.Pages.Add();
-
-                        WallReport(FootWallpage, "Footwall - Report", Footwall, _chartStream.footwallStreamObject);
-
-                        PdfPage Stopebackpage = document.Pages.Add();
-
-                        WallReport(Stopebackpage, "Stope Back - Report", StopeBack, _chartStream.stopebackStreamObject);
-
-                        PdfPage StrikeEndpage = document.Pages.Add();
-
-                        WallReport(StrikeEndpage, "Strike End - Report", StrikeEnd, _chartStream.strikeendStreamObject);
-
-                        //Save the document
-
-                        document.Save(saveFileDialog.FileName);
-
-                        document.Close(true);
-
+                        //Set up the output path.
+                        if (image != null)
+                        {
+                            //Initialize the new Jpeg bitmap encoder.
+                            BitmapEncoder encoder = new JpegBitmapEncoder();
+                            //Create the bitmap frame using the bitmap source and add it to the encoder.
+                            encoder.Frames.Add(BitmapFrame.Create(image));
+                            //Create the file stream for the output in the desired image format.
+                            filepath = saveFileDialog.FileName.Insert(saveFileDialog.FileName.IndexOf("."), " (" + i + ")");
+                            FileStream stream = new FileStream(filepath, FileMode.Create);
+                            //Save the stream so that the image will be generated in the output location.
+                            encoder.Save(stream);
+                            stream.Close();
+                        }
                     }
 
-                    return true;
+                    //Dispose the document.
+                    tempStream.Dispose();
+                    loadedDocument.Dispose();
+                    loadedDocument = null;
+
+                    string Location_ToOpen = filepath;
+                    if (!File.Exists(Location_ToOpen))
+                    {
+                        return;
+                    }
+
+                    string argument = "/open, \"" + Location_ToOpen + "\"";
+
+                    Process.Start("explorer.exe", argument);
                 }
-                catch
+                catch (Exception ex)
                 {
-                    return false;
+
                 }
             }
-            else return false;
-
         }
 
-        private void WallReport(PdfPage page, string header, Wall wall, ChartStreamObject chartStreamObject)
+        public void SaveReportPDF()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF document(*.pdf)| *.pdf";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    var tempStream = GenerateReport();
+                    string filepath = saveFileDialog.FileName;
+                    PdfLoadedDocument document = new PdfLoadedDocument(tempStream);
+                    document.Save(filepath);
+                    document.Close(true);
+                    tempStream.Dispose();
+
+                    string Location_ToOpen = filepath;
+                    if (!File.Exists(Location_ToOpen))
+                    {
+                        return;
+                    }
+
+                    string argument = "/open, \"" + Location_ToOpen + "\"";
+
+                    Process.Start("explorer.exe", argument);
+                }
+                catch { }
+            }
+        }
+
+        private void WallReport(PdfPage page, string header, Wall wall, ChartStreamModel chartStreamObject)
         {
             int bodyTop = PageHeader(page, header);
 
