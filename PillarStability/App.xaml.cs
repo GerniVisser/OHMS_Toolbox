@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using _SharedWpfLibrary.Models;
+using _SharedWpfLibrary.Service;
+using System.Windows;
 
 namespace PillarStability
 {
@@ -11,7 +13,8 @@ namespace PillarStability
         {
             base.OnStartup(e);
 
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjAzNTcyQDMxMzkyZTM0MmUzMGV5VWFwVnN4eiszU1VtcFBRdUtrZE91ME1kMVJuVm51RFJmcTNnVFl6VDA9");
+            SyncfusionLicanceModel licance = JsonService.SyncfusionLicance();
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(licance.SyncfusionLicance);
         }
     }
 }
