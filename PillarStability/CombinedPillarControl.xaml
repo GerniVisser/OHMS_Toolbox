@@ -261,6 +261,28 @@
                 Margin="20 0"
                 Focusable="False"
                 VerticalAlignment="Top">
+                <syncfusion:SfDataGrid.Columns>
+                    <syncfusion:GridTextColumn MappingName="Pillar" 
+                                   HeaderText="Pillar"
+                                   TextAlignment="Left"  
+                                   VerticalAlignment="Center"/>
+                    <syncfusion:GridTextColumn MappingName="Width" 
+                                   HeaderText="Width"
+                                   TextAlignment="Center"  
+                                   VerticalAlignment="Center"/>
+                    <syncfusion:GridTextColumn MappingName="WidthtHeight" 
+                                   HeaderText="Width/Height"
+                                   TextAlignment="Center"  
+                                   VerticalAlignment="Center"/>
+                    <syncfusion:GridTextColumn MappingName="AveStress" 
+                                   HeaderText="Ave Stress"
+                                   TextAlignment="Center"  
+                                   VerticalAlignment="Center"/>
+                    <syncfusion:GridTextColumn MappingName="AveConfinement" 
+                                   HeaderText="Ave Confinement"
+                                   TextAlignment="Center"  
+                                   VerticalAlignment="Center"/>
+                </syncfusion:SfDataGrid.Columns>
             </syncfusion:SfDataGrid>
 
         </Grid>   

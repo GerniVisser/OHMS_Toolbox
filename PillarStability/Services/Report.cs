@@ -363,6 +363,7 @@ namespace PillarStability.Services
             headerstyle.StringFormat = format;
 
             pdfGrid.Rows.ApplyStyle(headerstyle);
+            pdfGrid.Headers.ApplyStyle(headerstyle);
 
             int heigth = 14 * (_model.pillarPrams.Count + 1) + 14;
 
@@ -393,11 +394,11 @@ namespace PillarStability.Services
             {
                 counter = outputGridObject.Count;
 
-                dataTable.Columns.Add(" Name");
-                dataTable.Columns.Add(" Effective Width");
-                dataTable.Columns.Add(" Width / Height");
-                dataTable.Columns.Add(" Average Stress");
-                dataTable.Columns.Add(" Average Confinement");
+                dataTable.Columns.Add("Name");
+                dataTable.Columns.Add("Effective Width");
+                dataTable.Columns.Add("Width / Height");
+                dataTable.Columns.Add("Average Stress");
+                dataTable.Columns.Add("Average Confinement");
 
                 for (int i = 0; i < counter; i++)
                 {
@@ -416,12 +417,12 @@ namespace PillarStability.Services
             {
                 counter = 1;
 
-                dataTable.Columns.Add(" Name");
-                dataTable.Columns.Add(" DSF");
-                dataTable.Columns.Add(" AveSF");
-                dataTable.Columns.Add(" StandardDev");
-                dataTable.Columns.Add(" mfSF");
-                dataTable.Columns.Add(" probSF");
+                dataTable.Columns.Add("Name");
+                dataTable.Columns.Add("DSF");
+                dataTable.Columns.Add("AveSF");
+                dataTable.Columns.Add("StandardDev");
+                dataTable.Columns.Add("mfSF");
+                dataTable.Columns.Add("probSF");
 
                 dataTable.Rows.Add(new object[]
                 {
@@ -489,6 +490,8 @@ namespace PillarStability.Services
             headerstyle.StringFormat = format;
 
             pdfGrid.Rows.ApplyStyle(headerstyle);
+
+            pdfGrid.Headers.ApplyStyle(headerstyle);
 
             pdfGrid.Draw(page, new RectangleF((float)(left), top + 15, width, 100));
         }

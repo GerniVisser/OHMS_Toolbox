@@ -344,6 +344,28 @@
                 ColumnSizer="Star"
                 Margin="20 0"
                 VerticalAlignment="Top">
+                <syncfusion:SfDataGrid.Columns>
+                    <syncfusion:GridTextColumn MappingName="Pillar" 
+                                   HeaderText="Pillar"
+                                   TextAlignment="Left"  
+                                   VerticalAlignment="Center"/>
+                    <syncfusion:GridTextColumn MappingName="Width" 
+                                   HeaderText="Width"
+                                   TextAlignment="Center"  
+                                   VerticalAlignment="Center"/>
+                    <syncfusion:GridTextColumn MappingName="WidthtHeight" 
+                                   HeaderText="Width/Height"
+                                   TextAlignment="Center"  
+                                   VerticalAlignment="Center"/>
+                    <syncfusion:GridTextColumn MappingName="AveStress" 
+                                   HeaderText="Ave Stress"
+                                   TextAlignment="Center"  
+                                   VerticalAlignment="Center"/>
+                    <syncfusion:GridTextColumn MappingName="AveConfinement" 
+                                   HeaderText="Ave Confinement"
+                                   TextAlignment="Center"  
+                                   VerticalAlignment="Center"/>
+                </syncfusion:SfDataGrid.Columns>
             </syncfusion:SfDataGrid>
 
             <TextBox
@@ -366,6 +388,32 @@
                 ColumnSizer="Star"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top">
+                <syncfusion:SfDataGrid.Columns>
+                    <syncfusion:GridTextColumn MappingName="Pillar" 
+                                   HeaderText="Pillar"
+                                   TextAlignment="Left"  
+                                   VerticalAlignment="Center"/>
+                    <syncfusion:GridTextColumn MappingName="DSF" 
+                                   HeaderText="DSF"
+                                   TextAlignment="Center"  
+                                   VerticalAlignment="Center"/>
+                    <syncfusion:GridTextColumn MappingName="AveSF" 
+                                   HeaderText="AveSF"
+                                   TextAlignment="Center"  
+                                   VerticalAlignment="Center"/>
+                    <syncfusion:GridTextColumn MappingName="StandardDev" 
+                                   HeaderText="Std Dev"
+                                   TextAlignment="Center"  
+                                   VerticalAlignment="Center"/>
+                    <syncfusion:GridTextColumn MappingName="mfSF" 
+                                   HeaderText="mfSF"
+                                   TextAlignment="Center"  
+                                   VerticalAlignment="Center"/>
+                    <syncfusion:GridTextColumn MappingName="probSF" 
+                                   HeaderText="probSF"
+                                   TextAlignment="Center"  
+                                   VerticalAlignment="Center"/>
+                </syncfusion:SfDataGrid.Columns>
             </syncfusion:SfDataGrid>
         </Grid>
 
