@@ -13,7 +13,7 @@ namespace _SharedWpfLibrary.Service
     {
         public static SyncfusionLicanceModel SyncfusionLicance()
         {
-            StreamReader r = new StreamReader("../../../../SharedWpfLibrary/Keys.json");
+            StreamReader r = new StreamReader("Keys.json");
             string jsonString = r.ReadToEnd();
             SyncfusionLicanceModel m = JsonConvert.DeserializeObject<SyncfusionLicanceModel>(jsonString);
             return m;
