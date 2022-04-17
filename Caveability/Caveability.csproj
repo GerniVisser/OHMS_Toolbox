@@ -4,17 +4,14 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>Icons\ohms_logo_oBF_icon.ico</ApplicationIcon>
-    <Platforms>AnyCPU;x64;x86</Platforms>
-	<RuntimeIdentifier Condition=" '$(OS)' == 'Windows_NT' ">win-x86</RuntimeIdentifier>
-	<SelfContained>true</SelfContained>
+	  <ApplicationIcon>Icons\ohms_logo_oBF_icon.ico</ApplicationIcon>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Icons\OHMS logo.png" />
-    <None Remove="Icons\ohms_logo_oBF_icon.ico" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<None Remove="Icons\OHMS logo.png" />
+		<None Remove="Icons\ohms_logo_oBF_icon.ico" />
+	</ItemGroup>
+	
   <ItemGroup>
     <PackageReference Include="Syncfusion.Licensing" Version="19.4.0.56" />
     <PackageReference Include="Syncfusion.Pdf.Wpf" Version="19.4.0.56" />
@@ -27,16 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Icons\OHMS logo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\ohms_logo_oBF_icon.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <ProjectReference Include="..\SharedWpfLibrary\_SharedWpfLibrary.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SharedWpfLibrary\_SharedWpfLibrary.csproj" />
+    <Folder Include="Icons\" />
   </ItemGroup>
 
 </Project>

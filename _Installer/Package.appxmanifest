@@ -9,7 +9,7 @@
   <Identity
     Name="849d5d9a-ff78-4b17-a9ce-150845b16f8f"
     Publisher="CN=Gerni Visser"
-    Version="1.0.25.0" />
+    Version="1.1.5.0" />
 
   <Properties>
     <DisplayName>OHMS Toolbox</DisplayName>

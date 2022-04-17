@@ -5,9 +5,6 @@
         <TargetFramework>net5.0-windows</TargetFramework>
         <UseWPF>true</UseWPF>
         <ApplicationIcon>Icons\ohms_logo_oBF_icon.ico</ApplicationIcon>
-        <Platforms>AnyCPU;x64;x86</Platforms>
-		  <RuntimeIdentifier Condition=" '$(OS)' == 'Windows_NT' ">win-x86</RuntimeIdentifier>
-		  <SelfContained>true</SelfContained>
       </PropertyGroup>
 
       <ItemGroup>
@@ -15,11 +12,9 @@
         <None Remove="Icons\Calculator_white.png" />
         <None Remove="Icons\ohms_logo_oBF_icon.ico" />
         <None Remove="OHMS Toolbox 1.0.lw.xml" />
-        <None Remove="Services\OHMS Toolbox 1.0.lw.xml" />
       </ItemGroup>
 
       <ItemGroup>
-        <PackageReference Include="QLM.QlmLicenseLibNetCore" Version="15.0.21315.2" />
         <PackageReference Include="Syncfusion.UI.WPF.NET" Version="19.3.0.48" />
       </ItemGroup>
 
@@ -31,16 +26,14 @@
 	  <Content Include="Icons\ohms_logo_oBF_icon.ico">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="Icons\OHMS Toolbox 1.0.lw.xml">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <Content Include="Services\OHMS Toolbox 1.0.lw.xml">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Caveability\Caveability.csproj" />
+	  <Folder Include="Services\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\SharedWpfLibrary\_SharedWpfLibrary.csproj" />
 	</ItemGroup>
 
 </Project>

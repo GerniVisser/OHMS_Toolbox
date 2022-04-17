@@ -60,7 +60,7 @@
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <EntryPointProjectUniqueName>..\Toolbox\Toolbox.csproj</EntryPointProjectUniqueName>
   </PropertyGroup>
@@ -158,6 +158,8 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.19041.8" PrivateAssets="all" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Caveability\Caveability.csproj" />
+    <ProjectReference Include="..\PillarStability\PillarStability.csproj" />
     <ProjectReference Include="..\Toolbox\Toolbox.csproj" />
   </ItemGroup>
 </Project>
