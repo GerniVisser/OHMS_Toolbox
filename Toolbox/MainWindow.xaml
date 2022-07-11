@@ -28,21 +28,23 @@
 
         <syncfusion:NavigationItem
                 Header="Caveability Calculator"
-                Name="Caveability">
+                Name="CaveabilityItem">
             <syncfusion:NavigationItem.Icon>
                 <Image Source="/Icons/calculator.png" />
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
         <syncfusion:NavigationItem
                 Header="Pillar Stabillity Tool"
-                Name="PillarStability">
+                Name="PillarStabilityItem">
             <syncfusion:NavigationItem.Icon>
                 <Image Source="/Icons/calculator.png" />
             </syncfusion:NavigationItem.Icon>
         </syncfusion:NavigationItem>
 
         <syncfusion:SfNavigationDrawer.ContentView>
-            <DockPanel x:Name="ContentView"/>
+            <Grid x:Name="ContentView">
+                
+            </Grid>
         </syncfusion:SfNavigationDrawer.ContentView>
     </syncfusion:SfNavigationDrawer>
 </Window>

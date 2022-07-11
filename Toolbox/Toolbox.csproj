@@ -15,7 +15,7 @@
       </ItemGroup>
 
       <ItemGroup>
-        <PackageReference Include="Syncfusion.UI.WPF.NET" Version="19.3.0.48" />
+        <PackageReference Include="Syncfusion.UI.WPF.NET" Version="20.1.0.55" />
       </ItemGroup>
 
 	<ItemGroup>
@@ -33,6 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Caveability\Caveability.csproj" />
 	  <ProjectReference Include="..\SharedWpfLibrary\_SharedWpfLibrary.csproj" />
 	</ItemGroup>
 

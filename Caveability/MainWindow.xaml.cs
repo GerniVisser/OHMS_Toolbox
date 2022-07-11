@@ -13,70 +13,10 @@ namespace Caveability
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        private WallControle Footwall;
-        private WallControle Hangwall;
-        private WallControle StopeBack;
-        private WallControle StrikeEnd;
-
         public MainWindow()
         {
             InitializeComponent();
-
-            Footwall = new WallControle(BrushService.getBrushFromHex("#e3e3e3"), true);
-            Hangwall = new WallControle(BrushService.getBrushFromHex("#d4d4d4"));
-            StopeBack = new WallControle(BrushService.getBrushFromHex("#e3e3e3"));
-            StrikeEnd = new WallControle(BrushService.getBrushFromHex("#d4d4d4"));
         }
 
-        protected override void OnActivated(EventArgs e)
-        {
-            base.OnActivated(e);
-
-            tabFootwall.Content = Footwall;
-            tabHangwall.Content = Hangwall;
-            tabStopeBack.Content = StopeBack;
-            tabStrikeEnds.Content = StrikeEnd;
-        }
-
-        private void ExportAsPDF_Click(object sender, RoutedEventArgs e)
-        {
-            ReportModel reportModel = new ReportModel();
-
-            reportModel.footwall = Footwall._wall;
-            reportModel.hangwall = Hangwall._wall;
-            reportModel.stopeback = StopeBack._wall;
-            reportModel.strikeend = StrikeEnd._wall;
-
-            reportModel.footwallStream= Footwall.ChartStreams();
-            reportModel.hangwallStream= Hangwall.ChartStreams();
-            reportModel.stopebackStream = StopeBack.ChartStreams();
-            reportModel.strikeendStream = StrikeEnd.ChartStreams();
-
-            //Report.GenerateReport(stopeStream, saveFileDialog.FileName);
-            Report report = new Report(reportModel);
-
-            report.SaveReportPDF();
-        }
-
-        private void ExportAsImage_Click(object sender, RoutedEventArgs e)
-        {
-            ReportModel reportModel = new ReportModel();
-
-            reportModel.footwall = Footwall._wall;
-            reportModel.hangwall = Hangwall._wall;
-            reportModel.stopeback = StopeBack._wall;
-            reportModel.strikeend = StrikeEnd._wall;
-
-            reportModel.footwallStream = Footwall.ChartStreams();
-            reportModel.hangwallStream = Hangwall.ChartStreams();
-            reportModel.stopebackStream = StopeBack.ChartStreams();
-            reportModel.strikeendStream = StrikeEnd.ChartStreams();
-
-            //Report.GenerateReport(stopeStream, saveFileDialog.FileName);
-            Report report = new Report(reportModel);
-
-            report.SaveReportImage();
-        }
     }
 }
