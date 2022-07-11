@@ -10,7 +10,7 @@
         Icon="pack://application:,,,/Icons/ohms_logo_oBF_icon.ico"
         Height="600" 
         Width="1000" 
-        ResizeMode="CanMinimize">
+        ResizeMode="CanResize">
 
     <Window.Resources>
         <SolidColorBrush x:Key="backgroundGray" Color="#e0e0e0"/>

@@ -12,7 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace PillarStability
+namespace PillarStability.Views
 {
     /// <summary>
     /// Interaction logic for CombinedPillarControl.xaml

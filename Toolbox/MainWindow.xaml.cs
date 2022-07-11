@@ -29,6 +29,7 @@ namespace Toolbox
         private void loadTools()
         {
             _toolView.AddTool("CaveabilityItem", new Caveability.Views.Caveability());
+            _toolView.AddTool("PillarStabilityItem", new PillarStability.Views.PillarStabiltyControl());
         }
 
         private void navigationDrawer_ItemClicked(object sender, Syncfusion.UI.Xaml.NavigationDrawer.NavigationItemClickedEventArgs e)

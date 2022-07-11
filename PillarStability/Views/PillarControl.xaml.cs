@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using _SharedWpfLibrary.Service;
 
-namespace PillarStability
+namespace PillarStability.Views
 {
     /// <summary>
     /// Interaction logic for PillarControl.xaml
