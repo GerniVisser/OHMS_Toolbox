@@ -145,7 +145,7 @@ namespace PillarStability.Services
 
                     Process.Start("explorer.exe", argument);
                 }
-                catch (Exception ex)
+                catch
                 {
 
                 }
@@ -372,7 +372,7 @@ namespace PillarStability.Services
             return top + heigth;
         }
 
-        private void ResultPanel(PdfPage page, int top, int left, int width, List<OutputGridObject>? outputGridObject, MCGridObject? mCGridObject)
+        private void ResultPanel(PdfPage page, int top, int left, int width, List<OutputGridObject> outputGridObject, MCGridObject mCGridObject)
         {
             PdfGraphics graphics = page.Graphics;
             int counter = 0;

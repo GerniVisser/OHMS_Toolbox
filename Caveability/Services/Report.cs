@@ -127,7 +127,7 @@ namespace Caveability.Services
 
                     Process.Start("explorer.exe", argument);
                 }
-                catch (Exception ex)
+                catch
                 {
 
                 }
