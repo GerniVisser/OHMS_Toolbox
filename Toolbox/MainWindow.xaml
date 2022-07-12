@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         xmlns:local="clr-namespace:Toolbox"
+        xmlns:views="clr-namespace:Toolbox.Views"
         mc:Ignorable="d"
         Title="OHMS Toolbox" 
         Icon="pack://application:,,,/Icons/ohms_logo_oBF_icon.ico"
@@ -12,39 +12,7 @@
         Width="1000" 
         ResizeMode="CanResize">
 
-    <Window.Resources>
-        <SolidColorBrush x:Key="backgroundGray" Color="#e0e0e0"/>
-    </Window.Resources>
-
-    <syncfusion:SfNavigationDrawer 
-        x:Name="navigationDrawer" 
-        DrawerBackground="{StaticResource backgroundGray}"
-        DisplayMode="Expanded"
-        ItemClicked="navigationDrawer_ItemClicked"
-        Position="Left"
-        FontFamily="Calibri"
-        FontSize="16"
-        ExpandedModeWidth="200">
-
-        <syncfusion:NavigationItem
-                Header="Caveability Calculator"
-                Name="CaveabilityItem">
-            <syncfusion:NavigationItem.Icon>
-                <Image Source="/Icons/calculator.png" />
-            </syncfusion:NavigationItem.Icon>
-        </syncfusion:NavigationItem>
-        <syncfusion:NavigationItem
-                Header="Pillar Stabillity Tool"
-                Name="PillarStabilityItem">
-            <syncfusion:NavigationItem.Icon>
-                <Image Source="/Icons/calculator.png" />
-            </syncfusion:NavigationItem.Icon>
-        </syncfusion:NavigationItem>
-
-        <syncfusion:SfNavigationDrawer.ContentView>
-            <Grid x:Name="ContentView">
-                
-            </Grid>
-        </syncfusion:SfNavigationDrawer.ContentView>
-    </syncfusion:SfNavigationDrawer>
+    <Grid>
+        <views:ToolboxView></views:ToolboxView>
+    </Grid>
 </Window>
