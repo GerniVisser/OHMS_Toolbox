@@ -5,6 +5,7 @@
         <TargetFramework>net5.0-windows</TargetFramework>
         <UseWPF>true</UseWPF>
         <ApplicationIcon>Icons\ohms_logo_oBF_icon.ico</ApplicationIcon>
+        <StartupObject>Toolbox.App</StartupObject>
       </PropertyGroup>
 
       <ItemGroup>
@@ -12,10 +13,6 @@
         <None Remove="Icons\Calculator_white.png" />
         <None Remove="Icons\ohms_logo_oBF_icon.ico" />
         <None Remove="OHMS Toolbox 1.0.lw.xml" />
-      </ItemGroup>
-
-      <ItemGroup>
-        <PackageReference Include="Syncfusion.UI.WPF.NET" Version="20.1.0.55" />
       </ItemGroup>
 
 	<ItemGroup>
@@ -30,6 +27,10 @@
 
 	<ItemGroup>
 	  <Folder Include="Services\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Syncfusion.SfNavigationDrawer.WPF" Version="20.2.0.36" />
 	</ItemGroup>
 
 	<ItemGroup>
