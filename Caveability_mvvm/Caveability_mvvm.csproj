@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Syncfusion.PropertyGrid.WPF" Version="20.2.0.39" />
+    <PackageReference Include="Syncfusion.SfChart.WPF" Version="20.2.0.39" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharedWpfLibrary\_SharedWpfLibrary.csproj" />
+  </ItemGroup>
+
+</Project>

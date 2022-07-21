@@ -38,7 +38,7 @@ namespace Toolbox.Views
 
         private void loadTools()
         {
-            _toolView.AddTool("CaveabilityItem", new Caveability.Views.Caveability());
+            //_toolView.AddTool("CaveabilityItem", new Caveability.Views.Caveability());
             _toolView.AddTool("PillarStabilityItem", new PillarStability.Views.PillarStabiltyControl());
         }
 
