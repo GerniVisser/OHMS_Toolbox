@@ -20,7 +20,7 @@ namespace Toolbox.Views
     /// </summary>
     public partial class ToolboxView : UserControl
     {
-        private Views.ToolView _toolView;
+        private ToolView _toolView;
         public ToolboxView()
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace Toolbox.Views
 
         private void setupTools()
         {
-            _toolView = new Views.ToolView();
+            _toolView = new ToolView();
             ContentView.Children.Add(_toolView);
 
             loadTools();
