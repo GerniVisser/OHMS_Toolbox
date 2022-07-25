@@ -111,6 +111,15 @@ namespace Caveability.Services
             return graphPoints;
         }
 
+        public float GetMaxLenght()
+        {
+            double hr = CalculateXAxis();
+            var t = 2 * HR_Model.Width * hr;
+            var b = HR_Model.Width - 2 * hr;
+            var final = Math.Round(t / b, 2);
+            return (float)(final);
+        }
+
         public float Calc_N()
         {
             var q = Q_Service.CalcCoordFromX().y;

@@ -20,7 +20,12 @@ namespace Caveability.ViewModels.Graphs
 
         public override string GraphName => "Stability for Gravity fall";
 
+        public override string xAxisHeader => "Hydraulic Radius";
+
+        public override string yAxisHeader => "Stability Number N'";
+
         public override float getX => hr_Service.getX();
+        public float getMaxLength => hr_Service.GetMaxLenght();
 
         public override List<Coord> HRGraphLineTop => hr_Service.CoordSerriesCalc().coords;
 

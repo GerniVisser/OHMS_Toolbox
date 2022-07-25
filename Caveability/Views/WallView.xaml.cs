@@ -1,4 +1,5 @@
-﻿using Syncfusion.UI.Xaml.Charts;
+﻿using Caveability.ViewModels;
+using Syncfusion.UI.Xaml.Charts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,7 +23,6 @@ namespace Caveability.Views
     /// </summary>
     public partial class WallView : UserControl
     {
-
         public WallView()
         {
             InitializeComponent();
@@ -30,6 +30,8 @@ namespace Caveability.Views
 
         private void GraphTabList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var vm = (WallViewModel)this.DataContext;
+
             if (GraphTabList.SelectedIndex == 3)
             {
                 chart.SecondaryAxis = new LogarithmicAxis()
@@ -37,13 +39,15 @@ namespace Caveability.Views
                     LogarithmicBase = 10,
                     Minimum = 0.1,
                     MaxHeight = 1000,
+                    Header = vm.GraphViewModel.yAxisHeader,
                 };
             }
             else
             {
                 chart.SecondaryAxis = new NumericalAxis()
                 {
-                    StartRangeFromZero = true
+                    StartRangeFromZero = true,
+                    Header = vm.GraphViewModel.yAxisHeader,
                 };
             }
         }

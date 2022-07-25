@@ -13,6 +13,7 @@ namespace Caveability.ViewModels
     public class WallViewModel : ViewModelBase
     {
         private WallModel _wallModel;
+        private HR_GraphViewModel _hrViewModel;
 
         public string WallName
         {
@@ -58,16 +59,32 @@ namespace Caveability.ViewModels
             get { return _propGridViewModel; }
         }
 
+        public float CurrentHR 
+        { 
+            get { return MathF.Round(_hrViewModel.getX,2); } 
+        }
+
+        public float MaxHR
+        {
+            get { return MathF.Round((float)_hrViewModel.GraphPoint[0].x, 2); }
+        }
+
+        public float MaxLength
+        {
+            get { return MathF.Round(_hrViewModel.getMaxLength, 2); }
+        }
+
         public WallViewModel(WallModel wallModel)
         {
             _wallModel = wallModel;
+            _hrViewModel = new HR_GraphViewModel(_wallModel);
 
             _graphViewModelList = new List<GraphViewModelBase>
             {
                 new A_GraphViewModel(_wallModel.A_Model),
                 new B_GraphViewModel(_wallModel.B_Model),
                 new C_GraphViewModel(_wallModel.C_Model),
-                new HR_GraphViewModel(_wallModel)
+                _hrViewModel
             };
             TabGraphIndex = 0;
 

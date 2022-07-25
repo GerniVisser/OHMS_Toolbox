@@ -24,10 +24,10 @@
                     <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
-            <ListBoxItem Content="A Graph"></ListBoxItem>
-            <ListBoxItem Content="B Graph"></ListBoxItem>
-            <ListBoxItem Content="C Graph"></ListBoxItem>
-            <ListBoxItem Content="HR Graph"></ListBoxItem>
+            <ListBoxItem Content="A Graph" Background="#bfbfbf"></ListBoxItem>
+            <ListBoxItem Content="B Graph" Background="#bfbfbf"></ListBoxItem>
+            <ListBoxItem Content="C Graph" Background="#bfbfbf"></ListBoxItem>
+            <ListBoxItem Content="HR Graph" Background="#bfbfbf"></ListBoxItem>
         </ListBox>
 
         <chart:SfChart 
@@ -41,8 +41,9 @@
             <chart:SfChart.PrimaryAxis>
                 <chart:NumericalAxis
                     StartRangeFromZero="True"
-                    Header="{Binding xHeader}"
-                    FontSize="14"/>
+                    Header="{Binding GraphViewModel.xAxisHeader}"
+                    FontSize="14">
+                </chart:NumericalAxis>
             </chart:SfChart.PrimaryAxis>
 
             <chart:LineSeries
@@ -119,23 +120,26 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="Current Hydraulic Radius"
-                                   Grid.Column="1"
-                                   Grid.Row="1"/>
+                            Grid.Column="1"
+                            Grid.Row="1"/>
                 <TextBlock x:Name="txtCurrentHR"
-                                   Grid.Column="3" 
-                                   Grid.Row="1"/>
+                            Text="{Binding CurrentHR}"
+                            Grid.Column="3" 
+                            Grid.Row="1"/>
                 <TextBlock Text="Maximum allowed Hydraulic Radius"
-                                   Grid.Column="1" 
-                                   Grid.Row="2"/>
+                            Grid.Column="1" 
+                            Grid.Row="2"/>
                 <TextBlock x:Name="txtMaxHR"
-                                   Grid.Column="3" 
-                                   Grid.Row="2"/>
+                           Text="{Binding MaxHR}"
+                            Grid.Column="3" 
+                            Grid.Row="2"/>
                 <TextBlock Text="Maximum allowed Length"
-                                   Grid.Column="1" 
-                                   Grid.Row="3"/>
+                            Grid.Column="1" 
+                            Grid.Row="3"/>
                 <TextBlock x:Name="txtMaxLength"
-                                   Grid.Column="3" 
-                                   Grid.Row="4"/>
+                           Text="{Binding MaxLength}"
+                            Grid.Column="3" 
+                            Grid.Row="4"/>
             </Grid>
         </DockPanel>
 

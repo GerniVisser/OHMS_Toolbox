@@ -9,10 +9,19 @@ namespace Caveability.ViewModels.Graphs
 {
     public abstract class GraphViewModelBase : ViewModelBase
     {
-        public abstract string GraphName
+        public abstract string GraphName 
         {
             get;
         }
+        public abstract string xAxisHeader
+        {
+            get;
+        }
+        public abstract string yAxisHeader
+        {
+            get;
+        }
+
         public abstract float getX
         {
             get;

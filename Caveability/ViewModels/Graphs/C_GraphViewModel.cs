@@ -20,6 +20,10 @@ namespace Caveability.ViewModels.Graphs
 
         public override string GraphName => "Stress Factor C";
 
+        public override string xAxisHeader => "Dip Of Stopewall (Degrees)";
+
+        public override string yAxisHeader => "Gravity Adjustment Factor C";
+
         public override float getX => c_Service.getX();
 
         public override List<Coord> GraphLine => c_Service.CoordSerriesCalc().coords;

@@ -20,6 +20,10 @@ namespace Caveability.ViewModels.Graphs
 
         public override string GraphName => "Stress Factor B";
 
+        public override string xAxisHeader => "True Angle between Stope Wall And Discontinuity";
+
+        public override string yAxisHeader => "Joint Orientation Factor B";
+
         public override float getX => b_Service.getX();
 
         public override List<Coord> GraphLine => b_Service.CoordSerriesCalc().coords;

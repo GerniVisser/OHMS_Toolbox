@@ -20,6 +20,8 @@ namespace Caveability.ViewModels.Graphs
 
         //Public Methods accessable by WallViewModel
         public override string GraphName => "Stress Factor A";
+        public override string xAxisHeader => "A=σc/σmax";
+        public override string yAxisHeader => "Rock Stress Factor A";
         public override float getX => a_Service.getX();
         public override List<Coord> GraphLine => a_Service.CoordSerriesCalc().coords;
         public override List<Coord> GraphPoint => new List<Coord>{ a_Service.CalcCoordFromX(getX)};
