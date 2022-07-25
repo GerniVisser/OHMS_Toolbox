@@ -1,43 +1,24 @@
-﻿using Caveability.Helper;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Caveability.Models
 {
-    public class Q_Model : ICalculator
+    public class Q_Model
     {
-        public float _rqd { get; set; }
-        public float _jn { get; set; }
-        public float _jr { get; set; }
-        public float _ja { get; set; }
-
-        public Q_Model(float rQD, float jn, float jr, float ja)
+        public Q_Model(float rqd, float jn, float jr, float ja)
         {
-            _rqd = rQD;
-            _jn = jn;
-            _jr = jr;
-            _ja = ja;
+            this.rqd = rqd;
+            this.jn = jn;
+            this.jr = jr;
+            this.ja = ja;
         }
-
-        public float Calculate()
-        {
-            float N = (_rqd / _jn) * (_jr / _ja);
-            return N;
-        }
-
-        public float CalculateXAxis()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Coord> GetGraphCoords()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string ToString()
-        {
-            return "";
-        }
+        // Use models a primary strore and just dervive all values in Viewmodels from here
+        public float rqd { get; set; }
+        public float jn { get; set; }
+        public float jr { get; set; }
+        public float ja { get; set; }
     }
 }

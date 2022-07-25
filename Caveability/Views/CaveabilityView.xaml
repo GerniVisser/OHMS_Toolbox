@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="Caveability.Views.CaveabilityView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Caveability.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="FontWeight" Value="Light" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <DockPanel
+                            Margin="1.5 1.5 1.5 0">
+                            <Border 
+                                Name="Bd"
+                                Margin="{TemplateBinding Margin}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="0"
+                                CornerRadius="0 10 0 0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                SnapsToDevicePixels="true">
+                                <ContentPresenter 
+                                    x:Name="Content"
+                                    Margin="20 0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
+                            </Border>
+                        </DockPanel>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Bd" Property="Background" Value="#f06e3e"/>
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="gray"/>
+                                <Setter TargetName="Content" Property="TextElement.Foreground" Value="White"/>
+                                <Setter TargetName="Content" Property="TextElement.FontWeight" Value="Medium"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter> 
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ListBox Background="#e8e8e8" SelectedIndex="{Binding TabWallIndex}">
+            <ListBoxItem Content="Hangwall" Height="60" FontSize="23"></ListBoxItem>
+            <ListBoxItem Content="Footwall" Height="60" FontSize="23"></ListBoxItem>
+            <ListBoxItem Content="Stope Back" Height="60" FontSize="23"></ListBoxItem>
+            <ListBoxItem Content="Strike End" Height="60" FontSize="23"></ListBoxItem>
+        </ListBox>
+        <local:WallView Grid.Column="1" DataContext="{Binding CurrentWallViewModel}"/>
+    </Grid>
+</UserControl>

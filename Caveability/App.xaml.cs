@@ -1,5 +1,10 @@
-﻿using _SharedWpfLibrary.Models;
-using _SharedWpfLibrary.Service;
+﻿using Caveability.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Caveability
@@ -11,10 +16,12 @@ namespace Caveability
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
+            MainWindow = new MainWindow()
+            {
+            };
+            MainWindow.Show();
 
-            SyncfusionLicanceModel licance = JsonService.SyncfusionLicance();
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(licance.SyncfusionLicance);
+            base.OnStartup(e);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Caveability.Models;
+using Caveability.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Caveability_mvvm.Views
+namespace Caveability.Views
 {
     /// <summary>
     /// Interaction logic for CaveabilityView.xaml
@@ -22,6 +24,15 @@ namespace Caveability_mvvm.Views
     {
         public CaveabilityView()
         {
+            List<WallModel> wallModels = new List<WallModel>()
+            {
+                new WallModel("Hangwall"),
+                new WallModel("Footwall", true),
+                new WallModel("Stope Back"),
+                new WallModel("Strike End")
+            };
+            this.DataContext = new CaveabilityViewModel(wallModels);
+
             InitializeComponent();
         }
     }
