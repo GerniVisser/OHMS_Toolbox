@@ -1,4 +1,6 @@
-﻿using Caveability.ViewModels;
+﻿using _SharedWpfLibrary.Models;
+using _SharedWpfLibrary.Service;
+using Caveability.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -20,6 +22,9 @@ namespace Caveability
             {
             };
             MainWindow.Show();
+
+            SyncfusionLicanceModel licance = JsonService.SyncfusionLicance();
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(licance.SyncfusionLicance);
 
             base.OnStartup(e);
         }
