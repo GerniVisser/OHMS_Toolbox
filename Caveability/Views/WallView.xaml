@@ -8,29 +8,37 @@
              xmlns:local="clr-namespace:Caveability.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Grid.Column="1" Background="#d6d6d6">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="3*" MinHeight="120"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <ListBox Name="GraphTabList" Background="#d9d9d9" SelectedIndex="{Binding TabGraphIndex}" SelectionChanged="GraphTabList_SelectionChanged" >
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBoxItem Content="A Graph" Background="#bfbfbf"></ListBoxItem>
-            <ListBoxItem Content="B Graph" Background="#bfbfbf"></ListBoxItem>
-            <ListBoxItem Content="C Graph" Background="#bfbfbf"></ListBoxItem>
-            <ListBoxItem Content="HR Graph" Background="#bfbfbf"></ListBoxItem>
-        </ListBox>
+    <UserControl.Resources>
+        <Storyboard x:Key="BackgroundFade">
+            <DoubleAnimation Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Opacity"
+                            From="0.0" To="1.0" Duration="0:0:0.5"/>
+        </Storyboard>
+    </UserControl.Resources>
 
-        <chart:SfChart 
+    <Grid Background="White">
+        <Grid Grid.Column="1" Background="#d6d6d6" x:Name="MainGrid" DataContextChanged="MainGrid_DataContextChanged">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="3*" MinHeight="120"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox Name="GraphTabList" Background="#d9d9d9" SelectedIndex="{Binding TabGraphIndex}" SelectionChanged="GraphTabList_SelectionChanged" >
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBoxItem Content="A Graph" Background="#bfbfbf"></ListBoxItem>
+                <ListBoxItem Content="B Graph" Background="#bfbfbf"></ListBoxItem>
+                <ListBoxItem Content="C Graph" Background="#bfbfbf"></ListBoxItem>
+                <ListBoxItem Content="HR Graph" Background="#bfbfbf"></ListBoxItem>
+            </ListBox>
+
+            <chart:SfChart 
             Name="chart"
             Grid.Row="1"
             Header="{Binding GraphViewModel.GraphName}"
@@ -38,15 +46,15 @@
             Background="White"
             BorderBrush="#d6d6d6"
             BorderThickness="2">
-            <chart:SfChart.PrimaryAxis>
-                <chart:NumericalAxis
+                <chart:SfChart.PrimaryAxis>
+                    <chart:NumericalAxis
                     StartRangeFromZero="True"
                     Header="{Binding GraphViewModel.xAxisHeader}"
                     FontSize="14">
-                </chart:NumericalAxis>
-            </chart:SfChart.PrimaryAxis>
+                    </chart:NumericalAxis>
+                </chart:SfChart.PrimaryAxis>
 
-            <chart:LineSeries
+                <chart:LineSeries
                 XBindingPath="x"
                 YBindingPath="y"
                 Interior="#f0602b"
@@ -54,7 +62,7 @@
                 ItemsSource="{Binding GraphViewModel.GraphLine}"           
                 />
 
-            <chart:AreaSeries
+                <chart:AreaSeries
                 XBindingPath="x"
                 YBindingPath="y"
                 Interior="#e0e0e0"
@@ -63,15 +71,15 @@
                 ItemsSource="{Binding GraphViewModel.HRGraphLineTop}" 
                 />
 
-            <chart:AreaSeries
+                <chart:AreaSeries
                 XBindingPath="x"
                 YBindingPath="y"
                 Interior="White"
                 StrokeThickness="2"
                 ItemsSource="{Binding GraphViewModel.HRGraphLineBot}"
                 />
-            
-            <chart:ScatterSeries
+
+                <chart:ScatterSeries
                 XBindingPath="x"
                 YBindingPath="y"
                 ScatterHeight="12"
@@ -80,7 +88,7 @@
                 ItemsSource="{Binding GraphViewModel.GraphPoint}"
                 />
 
-            <chart:ScatterSeries
+                <chart:ScatterSeries
                 XBindingPath="x"
                 YBindingPath="y"
                 ScatterHeight="12"
@@ -88,65 +96,65 @@
                 Interior="#f0602b"
                 ItemsSource="{Binding GraphViewModel.HRGraphPointMax}"
                 />
-        </chart:SfChart>
+            </chart:SfChart>
 
-        <DockPanel
+            <DockPanel
             Grid.Column="0"
             Grid.Row="2">
-            <Grid 
+                <Grid 
                 Grid.Column="0" 
                 Grid.Row="2">
-                <Grid.Resources>
-                    <ResourceDictionary>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="FontSize" Value="18"/>
-                            <Setter Property="FontWeight" Value="Thin"/>
-                        </Style>
-                    </ResourceDictionary>
-                </Grid.Resources>
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="FontWeight" Value="Thin"/>
+                            </Style>
+                        </ResourceDictionary>
+                    </Grid.Resources>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <TextBlock Text="Current Hydraulic Radius"
+                    <TextBlock Text="Current Hydraulic Radius"
                             Grid.Column="1"
                             Grid.Row="1"/>
-                <TextBlock x:Name="txtCurrentHR"
+                    <TextBlock x:Name="txtCurrentHR"
                             Text="{Binding CurrentHR}"
                             Grid.Column="3" 
                             Grid.Row="1"/>
-                <TextBlock Text="Maximum allowed Hydraulic Radius"
+                    <TextBlock Text="Maximum allowed Hydraulic Radius"
                             Grid.Column="1" 
                             Grid.Row="2"/>
-                <TextBlock x:Name="txtMaxHR"
+                    <TextBlock x:Name="txtMaxHR"
                            Text="{Binding MaxHR}"
                             Grid.Column="3" 
                             Grid.Row="2"/>
-                <TextBlock Text="Maximum allowed Length"
+                    <TextBlock Text="Maximum allowed Length"
                             Grid.Column="1" 
                             Grid.Row="3"/>
-                <TextBlock x:Name="txtMaxLength"
+                    <TextBlock x:Name="txtMaxLength"
                            Text="{Binding MaxLength}"
                             Grid.Column="3" 
                             Grid.Row="4"/>
-            </Grid>
-        </DockPanel>
+                </Grid>
+            </DockPanel>
 
-        <DockPanel
+            <DockPanel
             Grid.Column="1"
             Grid.RowSpan="3">
-            <syncfusion:PropertyGrid 
+                <syncfusion:PropertyGrid 
                 Background="#f5f5f5"
                 Margin="5 0 0 0"
                 SelectedObject="{Binding PropGridViewModel}"
@@ -158,7 +166,8 @@
                 EnableGrouping="True"
                 UpdateSourceMode="ReturnOrLostFocus" 
                 PropertyExpandMode="FlatMode"/>
-        </DockPanel>
-        
+            </DockPanel>
+        </Grid>
     </Grid>
+    
 </UserControl>
