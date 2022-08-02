@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Caveability.ViewModels
+namespace _SharedWpfLibrary.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

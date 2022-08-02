@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Caveability.Models;
 
 namespace Caveability
 {
@@ -16,10 +17,18 @@ namespace Caveability
     /// </summary>
     public partial class App : Application
     {
+        private CaveabilityModel _caveabilityModel;
+
+        public App()
+        {
+            _caveabilityModel = new CaveabilityModel();
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             MainWindow = new MainWindow()
             {
+                DataContext = new MainViewModel(_caveabilityModel)
             };
             MainWindow.Show();
 

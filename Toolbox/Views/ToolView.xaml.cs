@@ -20,23 +20,9 @@ namespace Toolbox.Views
     /// </summary>
     public partial class ToolView : UserControl
     {
-        private Dictionary<string, UserControl> _tools;
         public ToolView()
         {
-            _tools = new Dictionary<string, UserControl>();
             InitializeComponent();
-        }
-
-        public void AddTool(string toolName, UserControl tool)
-        {
-            _tools.Add(toolName,tool);
-        }
-
-        public void ShowTool(string toolName)
-        {
-            ContentView.Children.Clear();
-
-            ContentView.Children.Add(_tools[toolName]);
         }
 
     }

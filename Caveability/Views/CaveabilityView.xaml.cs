@@ -24,15 +24,6 @@ namespace Caveability.Views
     {
         public CaveabilityView()
         {
-            List<WallModel> wallModels = new List<WallModel>()
-            {
-                new WallModel("Hangwall"),
-                new WallModel("Footwall", true),
-                new WallModel("Stope Back"),
-                new WallModel("Strike End")
-            };
-            this.DataContext = new CaveabilityViewModel(wallModels);
-
             InitializeComponent();
         }
     }

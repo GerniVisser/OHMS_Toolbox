@@ -1,4 +1,5 @@
-﻿using Caveability.Commands;
+﻿using _SharedWpfLibrary.ViewModels;
+using Caveability.Commands;
 using Caveability.Models;
 using System;
 using System.Collections.Generic;
@@ -42,14 +43,14 @@ namespace Caveability.ViewModels
             }
         }
 
-        public CaveabilityViewModel(List<WallModel> wallModels)
+        public CaveabilityViewModel(CaveabilityModel caveabilityModel)
         {
             _wallViewModelList = new List<WallViewModel>
             {
-                new WallViewModel(wallModels[0]),
-                new WallViewModel(wallModels[1]),
-                new WallViewModel(wallModels[2]),
-                new WallViewModel(wallModels[3])
+                new WallViewModel(caveabilityModel.Hangwall),
+                new WallViewModel(caveabilityModel.Footwall),
+                new WallViewModel(caveabilityModel.StopeBack),
+                new WallViewModel(caveabilityModel.StrikeEnd)
             };
             TabWallIndex = 0;
         }

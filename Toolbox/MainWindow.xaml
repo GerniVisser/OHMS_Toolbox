@@ -13,6 +13,6 @@
         ResizeMode="CanResize">
 
     <Grid>
-        <views:ToolboxView></views:ToolboxView>
+        <views:ToolboxView DataContext="{Binding ToolboxViewModel}"/>
     </Grid>
 </Window>

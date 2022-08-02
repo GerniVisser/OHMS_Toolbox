@@ -3,46 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              xmlns:local="clr-namespace:Toolbox.Views"
+             xmlns:cavevm="clr-namespace:Caveability.ViewModels;assembly=Caveability"
+             xmlns:cavev="clr-namespace:Caveability.Views;assembly=Caveability"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <UserControl.Resources>
-        <SolidColorBrush x:Key="backgroundGray" Color="#e0e0e0"/>
-    </UserControl.Resources>
-
     <Grid>
-        <syncfusion:SfNavigationDrawer 
-        x:Name="navigationDrawer" 
-        DrawerBackground="{StaticResource backgroundGray}"
-        DisplayMode="Compact"
-        ItemClicked="navigationDrawer_ItemClicked"
-        Position="Left"
-        FontFamily="Calibri"
-        FontSize="16"
-        ExpandedModeWidth="200">
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type cavevm:CaveabilityViewModel}">
+                <cavev:CaveabilityView/>
+            </DataTemplate>
+        </Grid.Resources>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-            <syncfusion:NavigationItem
-                Header="Caveability Calculator"
-                Name="CaveabilityItem">
-                <syncfusion:NavigationItem.Icon>
-                    <Image Source="/Icons/calculator.png" />
-                </syncfusion:NavigationItem.Icon>
-            </syncfusion:NavigationItem>
-            <syncfusion:NavigationItem
-                Header="Pillar Stabillity Tool"
-                Name="PillarStabilityItem">
-                <syncfusion:NavigationItem.Icon>
-                    <Image Source="/Icons/calculator.png" />
-                </syncfusion:NavigationItem.Icon>
-            </syncfusion:NavigationItem>
+        <StackPanel Grid.Column="0">
+            <Button Height="50"></Button>
+            <Button Height="50"></Button>
+        </StackPanel>
 
-            <syncfusion:SfNavigationDrawer.ContentView>
-                <Grid x:Name="ContentView">
-
-                </Grid>
-            </syncfusion:SfNavigationDrawer.ContentView>
-        </syncfusion:SfNavigationDrawer>
+        <ContentControl Content="{Binding CurrentViewModel}" Grid.Column="1"/>
     </Grid>
 </UserControl>

@@ -20,32 +20,9 @@ namespace Toolbox.Views
     /// </summary>
     public partial class ToolboxView : UserControl
     {
-        private ToolView _toolView;
         public ToolboxView()
         {
             InitializeComponent();
-
-            setupTools();
-        }
-
-        private void setupTools()
-        {
-            _toolView = new ToolView();
-            ContentView.Children.Add(_toolView);
-
-            loadTools();
-        }
-
-        private void loadTools()
-        {
-            //_toolView.AddTool("CaveabilityItem", new Caveability.Views.Caveability());
-            _toolView.AddTool("PillarStabilityItem", new PillarStability.Views.PillarStabiltyControl());
-        }
-
-        private void navigationDrawer_ItemClicked(object sender, Syncfusion.UI.Xaml.NavigationDrawer.NavigationItemClickedEventArgs e)
-        {
-            _toolView.ShowTool(e.Item.Name);
-
         }
     }
 }

@@ -7,6 +7,6 @@
              xmlns:local="clr-namespace:Toolbox.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid x:Name="ContentView">
+    <Grid>
     </Grid>
 </UserControl>
