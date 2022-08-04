@@ -1,5 +1,7 @@
 ﻿using _SharedWpfLibrary.Models;
 using _SharedWpfLibrary.Service;
+using _SharedWpfLibrary.ViewModels;
+using System.Collections.Generic;
 using System.Windows;
 using Toolbox.Store;
 using Toolbox.ViewModels;
@@ -15,8 +17,14 @@ namespace Toolbox
 
         public App()
         {
-            _navigationStore = new NavigationStore();
-            _navigationStore.CurrentViewModel = new Caveability.ViewModels.CaveabilityViewModel(new Caveability.Models.CaveabilityModel());
+            List<ViewModelBase> viewModelBases = new List<ViewModelBase>()
+            {
+                new HomeViewModel(),
+                new Caveability.ViewModels.CaveabilityViewModel(new Caveability.Models.CaveabilityModel()),
+                new WIPViewModel("Pillar Stability calculator")
+            };
+
+            _navigationStore = new NavigationStore(viewModelBases);
 
             SyncfusionLicanceModel licance = JsonService.SyncfusionLicance();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(licance.SyncfusionLicance);

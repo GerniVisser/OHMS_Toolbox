@@ -3,28 +3,123 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:localvm="clr-namespace:Toolbox.ViewModels"
              xmlns:local="clr-namespace:Toolbox.Views"
              xmlns:cavevm="clr-namespace:Caveability.ViewModels;assembly=Caveability"
              xmlns:cavev="clr-namespace:Caveability.Views;assembly=Caveability"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="PrimaryDarkBrush" Color="#919191"/>
+        <SolidColorBrush x:Key="PrimaryLightBrush" Color="#f0602b"/>
+
+        <Style x:Key="NavigationListBoxStyle" TargetType="{x:Type ListBox}">
+            <Setter Property="Background" Value="{StaticResource PrimaryDarkBrush}"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="SelectedIndex" Value="0"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderThickness="0"
+                        Padding="0"
+                        SnapsToDevicePixels="true">
+                            <ScrollViewer Padding="{TemplateBinding Padding}"
+                                    Focusable="false">
+                                <ItemsPresenter SnapsToDevicePixels=
+                                    "{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NavigationListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        Background="{TemplateBinding Background}"
+                        Padding="8"
+                        Width="50"
+                        CornerRadius="0 0 10 0"
+                        SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment=
+                                    "{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment=
+                                    "{TemplateBinding VerticalContentAlignment}"
+                                    SnapsToDevicePixels=
+                                    "{TemplateBinding SnapsToDevicePixels}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Bd" Property="Background" 
+                                    Value="{StaticResource PrimaryLightBrush}"/>
+                                <Setter TargetName="Bd" Property="Width" Value="60"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </UserControl.Resources>
+
     <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type cavevm:CaveabilityViewModel}">
                 <cavev:CaveabilityView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type localvm:HomeViewModel}">
+                <local:HomeView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type localvm:WIPViewModel}">
+                <local:WIPView/>
+            </DataTemplate>
         </Grid.Resources>
         
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0">
-            <Button Height="50"></Button>
-            <Button Height="50"></Button>
-        </StackPanel>
+        <ListBox 
+            SelectedIndex="{Binding SelctedToolIndex}"
+            Style="{StaticResource NavigationListBoxStyle}"
+            ItemContainerStyle="{DynamicResource NavigationListBoxItemStyle}">
+            <ListBoxItem>
+                <ListBoxItem.ToolTip>
+                    <ToolTip>
+                        Home
+                    </ToolTip>
+                </ListBoxItem.ToolTip>
+                <Image Source="\Icons\Home_white.png"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <ListBoxItem.ToolTip>
+                    <ToolTip>
+                        Caveability Calculator
+                    </ToolTip>
+                </ListBoxItem.ToolTip>
+                <Image Source="\Icons\Caveability_white.png"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <ListBoxItem.ToolTip>
+                    <ToolTip>
+                        Pillar Stability Calculator
+                    </ToolTip>
+                </ListBoxItem.ToolTip>
+                <Image Source="\Icons\Pillar_white.png"/>
+            </ListBoxItem>
+        </ListBox>
 
         <ContentControl Content="{Binding CurrentViewModel}" Grid.Column="1"/>
     </Grid>

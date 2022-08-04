@@ -11,14 +11,28 @@
       <ItemGroup>
         <None Remove="Icons\calculator.png" />
         <None Remove="Icons\Calculator_white.png" />
+        <None Remove="Icons\Caveability_white.png" />
+        <None Remove="Icons\Home_white.png" />
         <None Remove="Icons\ohms_logo_oBF_icon.ico" />
+        <None Remove="Icons\Pillar_white.png" />
         <None Remove="OHMS Toolbox 1.0.lw.xml" />
       </ItemGroup>
 
 	<ItemGroup>
-	  <Resource Include="Icons\calculator.png" />
+	  <Resource Include="Icons\calculator.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Resource>
 	  <Resource Include="Icons\Calculator_white.png">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\Caveability_white.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\Home_white.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\Pillar_white.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Resource>
 	  <Content Include="Icons\ohms_logo_oBF_icon.ico">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

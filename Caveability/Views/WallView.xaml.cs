@@ -33,6 +33,8 @@ namespace Caveability.Views
         {
             var vm = (WallViewModel)this.DataContext;
 
+            if (vm == null) return;
+
             if (GraphTabList.SelectedIndex == 3)
             {
                 chart.SecondaryAxis = new LogarithmicAxis()
