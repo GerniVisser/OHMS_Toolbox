@@ -6,11 +6,88 @@
              xmlns:local="clr-namespace:Toolbox.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Gray">
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                   FontSize="20">
-            Welcome Home
-        </TextBlock>
-            
+    <Grid Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MaxWidth="300"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Border Padding="20" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <Image Source="\Icons\ohms_transeparent_logo.png" Stretch="Fill"/>
+
+                <StackPanel Grid.Row="2">
+                    <TextBlock Text="Deverloped by: Gerni Visser" FontSize="12" FontWeight="Medium"/>
+                    <TextBlock Text="Vesrion 1.0" FontSize="12" FontWeight="Medium"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1" Background="Gray" BorderThickness="2 0 0 0" BorderBrush="DarkGray">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock FontWeight="ExtraBold" FontSize="32" Margin="20 10" Foreground="LightGray" >Rock Engineers Toolbox</TextBlock>
+
+                <TextBox 
+                    
+                    Margin="20 0 20 20"
+                    Grid.Row="2"
+                    AcceptsReturn="True" 
+                    BorderThickness="1"
+                    BorderBrush="Black"
+                    IsReadOnly="True"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    TextWrapping="Wrap" 
+                    Background="#4a4a4a"
+                    Foreground="LightGray"
+                    FontSize="20">
+                    Hallo 
+                </TextBox>
+            </Grid>
+        </Border>
+
+        <Border Background="#3a393a" Grid.Row="1" Grid.Column="1" BorderThickness="2 0 0 0" BorderBrush="DarkGray">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30 0">
+                    <Hyperlink NavigateUri="https://trello.com/b/UVvT2N52/ohms-toobox" TargetName="">
+                        What is being worked on?
+                    </Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30 0">
+                    <Hyperlink NavigateUri="https://trello.com/b/UVvT2N52/ohms-toobox">
+                        Authers
+                    </Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30 0">
+                    <Hyperlink NavigateUri="https://trello.com/b/UVvT2N52/ohms-toobox">
+                        License
+                    </Hyperlink>
+                </TextBlock>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

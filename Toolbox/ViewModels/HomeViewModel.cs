@@ -9,5 +9,13 @@ namespace Toolbox.ViewModels
 {
     public class HomeViewModel: ViewModelBase
     {
+        public string Version
+        {
+            get 
+            {
+                var version = System.Reflection.Assembly.GetEntryAssembly().GetName().Version;
+                return $"Version : {version.Major}.{version.Minor}"; 
+            }
+        }
     }
 }
