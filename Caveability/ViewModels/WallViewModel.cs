@@ -98,6 +98,9 @@ namespace Caveability.ViewModels
         public void HandlePropGridChange(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(nameof(GraphViewModel));
+            OnPropertyChanged(nameof(CurrentHR));
+            OnPropertyChanged(nameof(MaxHR));
+            OnPropertyChanged(nameof(MaxLength));
         }
 
     }

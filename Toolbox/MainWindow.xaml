@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         Title="OHMS Toolbox" 
         Icon="pack://application:,,,/Icons/ohms_logo_oBF_icon.ico"
-        Height="600" 
-        Width="1000" 
+        Height="768" 
+        Width="1280" 
         ResizeMode="CanResize">
 
     <Grid>
