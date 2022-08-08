@@ -14,6 +14,7 @@
         <None Remove="Icons\Caveability_white.png" />
         <None Remove="Icons\Home_white.png" />
         <None Remove="Icons\ohms_logo_oBF_icon.ico" />
+        <None Remove="Icons\ohms_transeparent_logo.png" />
         <None Remove="Icons\Pillar_white.png" />
         <None Remove="OHMS Toolbox 1.0.lw.xml" />
       </ItemGroup>
@@ -29,6 +30,9 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Resource>
 	  <Resource Include="Icons\Home_white.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Icons\ohms_transeparent_logo.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Resource>
 	  <Resource Include="Icons\Pillar_white.png">

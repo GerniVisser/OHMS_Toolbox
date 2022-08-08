@@ -6,6 +6,25 @@
              xmlns:local="clr-namespace:Toolbox.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style TargetType="RichTextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border x:Name="Bd"
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        SnapsToDevicePixels="True"
+                        Background="{TemplateBinding Background}">
+                            <ScrollViewer Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid Background="LightGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" MaxWidth="300"/>
@@ -43,8 +62,7 @@
 
                 <TextBlock FontWeight="ExtraBold" FontSize="32" Margin="20 10" Foreground="LightGray" >Rock Engineers Toolbox</TextBlock>
 
-                <TextBox 
-                    
+                <RichTextBox
                     Margin="20 0 20 20"
                     Grid.Row="2"
                     AcceptsReturn="True" 
@@ -53,12 +71,47 @@
                     IsReadOnly="True"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
-                    TextWrapping="Wrap" 
                     Background="#4a4a4a"
                     Foreground="LightGray"
+                    SpellCheck.IsEnabled="True"
+                    Block.LineHeight="8"
                     FontSize="20">
-                    Hallo 
-                </TextBox>
+                    <RichTextBox.Document>
+                        <FlowDocument>
+                            <Paragraph Margin="0" FontSize="24" FontWeight="Bold">
+                                <Bold>
+                                    Version - 1.0
+                                </Bold>
+                                <LineBreak/>
+                                <Run FontSize="12" FontWeight="Light">
+                                    2022/08/08
+                                </Run>
+                            </Paragraph>
+                            <Paragraph>
+                                <Run FontSize="14" FontWeight="Regular">
+                                    Firts implementation of tools running within the Toolbox itself. Moved projects over to the MVVM design pattern. 
+                                </Run>
+                            </Paragraph>
+                            <List FontSize="14">
+                                <ListItem>
+                                    <Paragraph>
+                                        Created Toolbox App
+                                    </Paragraph>
+                                </ListItem>
+                                <ListItem>
+                                    <Paragraph>
+                                        Added Caveability tool
+                                    </Paragraph>
+                                </ListItem>
+                                <ListItem>
+                                    <Paragraph>
+                                        Added Caveability tool
+                                    </Paragraph>
+                                </ListItem>
+                            </List>
+                        </FlowDocument>
+                    </RichTextBox.Document>
+                </RichTextBox>
             </Grid>
         </Border>
 
@@ -71,7 +124,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30 0">
-                    <Hyperlink NavigateUri="https://trello.com/b/UVvT2N52/ohms-toobox" TargetName="">
+                    <Hyperlink NavigateUri="https://stackedit.io/app#" TargetName="">
                         What is being worked on?
                     </Hyperlink>
                 </TextBlock>
