@@ -26,8 +26,7 @@ namespace Toolbox
 
             _navigationStore = new NavigationStore(viewModelBases);
 
-            SyncfusionLicanceModel licance = JsonService.SyncfusionLicance();
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(licance.SyncfusionLicance);
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(SyncfusionLicanseModel.getSyncfusionLicanse());
         }
 
         protected override void OnStartup(StartupEventArgs e)

@@ -6,18 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Keys.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Syncfusion.SfChart.WPF" Version="20.1.0.61" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Keys.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
 </Project>

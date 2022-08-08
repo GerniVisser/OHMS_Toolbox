@@ -32,8 +32,7 @@ namespace Caveability
             };
             MainWindow.Show();
 
-            SyncfusionLicanceModel licance = JsonService.SyncfusionLicance();
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(licance.SyncfusionLicance);
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(SyncfusionLicanseModel.getSyncfusionLicanse());
 
             base.OnStartup(e);
         }

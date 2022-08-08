@@ -13,8 +13,7 @@ namespace PillarStability
         {
             base.OnStartup(e);
 
-            SyncfusionLicanceModel licance = JsonService.SyncfusionLicance();
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(licance.SyncfusionLicance);
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(SyncfusionLicanseModel.getSyncfusionLicanse());
         }
     }
 }

@@ -50,7 +50,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Caveability\Caveability.csproj" />
-	  <ProjectReference Include="..\PillarStability\PillarStability.csproj" />
 	  <ProjectReference Include="..\SharedWpfLibrary\_SharedWpfLibrary.csproj" />
 	</ItemGroup>
 
