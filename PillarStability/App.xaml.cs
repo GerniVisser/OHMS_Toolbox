@@ -1,5 +1,6 @@
 ﻿using _SharedWpfLibrary.Models;
 using _SharedWpfLibrary.Service;
+using PillarStability.ViewModels;
 using System.Windows;
 
 namespace PillarStability
@@ -11,9 +12,15 @@ namespace PillarStability
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
+            MainWindow = new MainWindow()
+            {
+                DataContext = new MainViewModel(null)
+            };
+            MainWindow.Show();
 
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(SyncfusionLicanseModel.getSyncfusionLicanse());
+
+            base.OnStartup(e);
         }
     }
 }

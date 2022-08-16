@@ -33,60 +33,45 @@ namespace PillarStability.Views
         public void update()
         {
             UpdateOutChart();
-            updateOutGrid();
-        }
-
-        private void updateOutGrid()
-        {
-            whGrid.Clear();
-            if (_model.PillarModels.Count > 0)
-            {
-                for (int i = 0; i < _model.PillarModels.Count; i++)
-                {
-                    var t = Calculations.calculate(_model.PillarModels[i]);
-                    whGrid.Add(t);
-                }
-
-                dataGrid.ItemsSource = whGrid;
-            }
+            //updateOutGrid();
         }
 
         private void UpdateOutChart()
         {
-            if (_model.PillarModels.Count > 0)
-            {
-                wh_LineSerriesFail.ItemsSource = SerriesBuilder.whGraph(_model.PillarModels[0])[0].coords;
-                wh_LineSerriesStable.ItemsSource = SerriesBuilder.whGraph(_model.PillarModels[0])[1].coords;
+            //if (_model.PillarModels.Count > 0)
+            //{
+            //    wh_LineSerriesFail.ItemsSource = SerriesBuilder.whGraph(_model.PillarModels[0])[0].coords;
+            //    wh_LineSerriesStable.ItemsSource = SerriesBuilder.whGraph(_model.PillarModels[0])[1].coords;
 
-                ave_LineSerriesFail.ItemsSource = SerriesBuilder.apcGraph(_model.PillarModels[0])[0].coords;
-                ave_LineSerriesStable.ItemsSource = SerriesBuilder.apcGraph(_model.PillarModels[0])[1].coords;
+            //    ave_LineSerriesFail.ItemsSource = SerriesBuilder.apcGraph(_model.PillarModels[0])[0].coords;
+            //    ave_LineSerriesStable.ItemsSource = SerriesBuilder.apcGraph(_model.PillarModels[0])[1].coords;
 
-                while (wh_Chart.Series.Count > 2)
-                {
-                    wh_Chart.Series.RemoveAt(2);
-                    ave_Chart.Series.RemoveAt(2);
-                }
+            //    while (wh_Chart.Series.Count > 2)
+            //    {
+            //        wh_Chart.Series.RemoveAt(2);
+            //        ave_Chart.Series.RemoveAt(2);
+            //    }
 
-                for (int i = 0; i <= _model.PillarModels.Count - 1; i++)
-                {
+            //    for (int i = 0; i <= _model.PillarModels.Count - 1; i++)
+            //    {
                 
-                    Coord coord = SerriesBuilder.whPoint(_model.PillarModels[i]);
-                    var t = addScarrterSerries(coord, _model.PillarModels[i].Name, _model.PillarModels[i].Color);
-                    wh_Chart.Series.Add(t);
+            //        Coord coord = SerriesBuilder.whPoint(_model.PillarModels[i]);
+            //        var t = addScarrterSerries(coord, _model.PillarModels[i].Name, _model.PillarModels[i].Color);
+            //        wh_Chart.Series.Add(t);
 
-                    coord = SerriesBuilder.apcPoint(_model.PillarModels[i]);
-                    t = addScarrterSerries(coord, _model.PillarModels[i].Name, _model.PillarModels[i].Color);
-                    ave_Chart.Series.Add(t);
-                }
-            }
-            else
-            {
-                while (wh_Chart.Series.Count > 2)
-                {
-                    wh_Chart.Series.RemoveAt(2);
-                    ave_Chart.Series.RemoveAt(2);
-                }
-            }
+            //        coord = SerriesBuilder.apcPoint(_model.PillarModels[i]);
+            //        t = addScarrterSerries(coord, _model.PillarModels[i].Name, _model.PillarModels[i].Color);
+            //        ave_Chart.Series.Add(t);
+            //    }
+            //}
+            //else
+            //{
+            //    while (wh_Chart.Series.Count > 2)
+            //    {
+            //        wh_Chart.Series.RemoveAt(2);
+            //        ave_Chart.Series.RemoveAt(2);
+            //    }
+            //}
             
         }
 
@@ -117,7 +102,7 @@ namespace PillarStability.Views
             var wh = ReportStreamService.ChartStream(wh_Chart);
             var ave = ReportStreamService.ChartStream(ave_Chart);
 
-            updateOutGrid();
+            //updateOutGrid();
             List<OutputGridObject> outputGridObjects = new List<OutputGridObject>(whGrid);
 
             List<PillarPrams> pillarPrams = new List<PillarPrams>();
