@@ -20,6 +20,7 @@ namespace PillarStability.ViewModels
             _addPillarCommand = new DelegateCommand(AddPillar);
 
             _pillarListModel = pillarListModel;
+            SelectedPillar = pillarListModel.PillarModels[0];
         }
 
         private ICommand _addPillarCommand;

@@ -1,5 +1,6 @@
 ﻿using _SharedWpfLibrary.ViewModels;
 using PillarStability.Models;
+using PillarStability.Services;
 using SharedWpfLibrary.Tools;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace PillarStability.ViewModels.Graphs
     public class Confinement_GraphVM: ViewModelBase
     {
         private PillarModel _pillarModel;
+        private Confinement_Service _confinement_Service;
 
         public Confinement_GraphVM(PillarModel pillarModel)
         {
             _pillarModel = pillarModel;
+            _confinement_Service = new Confinement_Service(pillarModel);
         }
 
         public string GraphHeader
@@ -34,14 +37,19 @@ namespace PillarStability.ViewModels.Graphs
             get { return "APS/UCS"; }
         }
 
-        public List<Coord> GraphLine
+        public List<Coord> GraphLineFail
         {
-            get { return new List<Coord>() { new Coord() { x = 0, y = 0 }, new Coord() { x = 1, y = 1 } }; }
+            get { return _confinement_Service.graphFail(); }
+        }
+
+        public List<Coord> GraphLineStable
+        {
+            get { return _confinement_Service.graphStable(); }
         }
 
         public List<Coord> GraphPoint
         {
-            get { return new List<Coord>() { new Coord() { x = 0, y = 0 }, new Coord() { x = 1, y = 1 } }; }
+            get { return _confinement_Service.graphPoint(); }
         }
 
         public Brush GraphPointColor

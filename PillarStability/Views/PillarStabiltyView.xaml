@@ -20,6 +20,7 @@
                             <Border 
                                 Name="Bd"
                                 Height="60"
+                                Width="230"
                                 Margin="{TemplateBinding Margin}"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"

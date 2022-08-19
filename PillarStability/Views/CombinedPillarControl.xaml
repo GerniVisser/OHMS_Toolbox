@@ -163,8 +163,8 @@
                                 />
                     <chart:SfChart.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Save as Image" Click="ExportWhImage_Click"/>
-                            <MenuItem Header="Copy" Click="AddWHToClipBoard_Click" />
+                            <MenuItem Header="Save as Image"/>
+                            <MenuItem Header="Copy"/>
                         </ContextMenu>
                     </chart:SfChart.ContextMenu>
                 </chart:SfChart>
@@ -225,8 +225,8 @@
                                 />
                     <chart:SfChart.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Save as Image" Click="ExportAveImage_Click"/>
-                            <MenuItem Header="Copy" Click="AddAveToClipBoard_Click" />
+                            <MenuItem Header="Save as Image" />
+                            <MenuItem Header="Copy"  />
                         </ContextMenu>
                     </chart:SfChart.ContextMenu>
                 </chart:SfChart>

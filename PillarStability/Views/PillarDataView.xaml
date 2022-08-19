@@ -36,12 +36,20 @@
                 </chart:NumericalAxis>
             </chart:SfChart.SecondaryAxis>
 
-            <chart:LineSeries
+            <chart:AreaSeries
                 XBindingPath="x"
                 YBindingPath="y"
-                Interior="#f0602b"
+                Interior="#ffeded"
                 StrokeThickness="2"
-                ItemsSource="{Binding GraphViewModel.GraphLine}"           
+                ItemsSource="{Binding GraphViewModel.GraphLineFail}"           
+                />
+
+            <chart:AreaSeries
+                XBindingPath="x"
+                YBindingPath="y"
+                Interior="#eef7e9"
+                StrokeThickness="2"
+                ItemsSource="{Binding GraphViewModel.GraphLineStable}"           
                 />
 
             <chart:ScatterSeries
@@ -53,5 +61,13 @@
                 ItemsSource="{Binding GraphViewModel.GraphPoint}"
                 />
         </chart:SfChart>
+
+        <DataGrid Grid.Row="1" ItemsSource="{Binding PillarDataGrid}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Width="200" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="isbn" Width="200" Binding="{Binding Width}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
     </Grid>
 </UserControl>

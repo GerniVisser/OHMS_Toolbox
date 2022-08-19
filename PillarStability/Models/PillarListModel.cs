@@ -12,7 +12,7 @@ namespace PillarStability.Models
 
         public PillarListModel()
         {
-            _pillarModels = new List<PillarModel>();
+            _pillarModels = new List<PillarModel>() { new PillarModel("base")};
         }
 
         public List<PillarModel> PillarModels

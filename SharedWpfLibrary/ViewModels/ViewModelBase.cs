@@ -15,5 +15,10 @@ namespace _SharedWpfLibrary.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public void Notify(string property)
+        {
+            OnPropertyChanged(property);
+        }
     }
 }

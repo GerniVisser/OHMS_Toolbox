@@ -1,4 +1,5 @@
 ﻿using PillarStability.Models;
+using SharedWpfLibrary.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PillarStability.Services
 {
-    public class PillarDataService
+    public abstract class PillarDataService
     {
         private PillarModel _pillarModel;
 
@@ -48,5 +49,15 @@ namespace PillarStability.Services
         {
             get { return calcAPC(); }
         }
+
+        public float GraphStepSize
+        {
+            get { return 0.1f; }
+        }
+
+        public abstract List<Coord> graphStable();
+        public abstract List<Coord> graphFail();
+
+        public abstract List<Coord> graphPoint();
     }
 }

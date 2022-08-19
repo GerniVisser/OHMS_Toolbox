@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using PillarStability.Models;
 using PillarStability.Services;
 using PillarStability.Views;

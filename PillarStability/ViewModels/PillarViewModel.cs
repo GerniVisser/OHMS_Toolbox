@@ -17,7 +17,8 @@ namespace PillarStability.ViewModels
         public PillarViewModel(PillarModel pillarModel)
         {
             _pillarModel = pillarModel;
-            _selectedViewIndex = 0;
+            SelectedViewIndex = 0;
+
         }
 
         public string Name
@@ -36,26 +37,18 @@ namespace PillarStability.ViewModels
             get { return _selectedViewIndex; }
             set 
             {
+                //if (_selectedViewIndex == value) return;
                 _selectedViewIndex = value;
 
-                if(_selectedViewIndex == 2)
-                {
-                    _propGridViewModel = new PropGrid.MonteCarloPropGridVM(_pillarModel);
-                }
-                else _propGridViewModel = new PropGrid.PillarPropGridVM(_pillarModel);
-
-                // Subscribe to PropGridModel Property Changed 
-                _propGridViewModel.PropertyChanged += HandlePropGridChange;
-
-                OnPropertyChanged(nameof(CurrentViewModel));
-                OnPropertyChanged(nameof(PropGridViewModel));
+                SetViewModel();
             }
         }
 
         private void HandlePropGridChange(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged(nameof(CurrentViewModel));
+            _currentViewModel.Notify("GraphViewModel");
         }
+
 
         public ViewModelBase PropGridViewModel
         {
@@ -65,19 +58,47 @@ namespace PillarStability.ViewModels
             }
         }
 
-
+        private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
         {
             get
             {
-                switch (_selectedViewIndex)
-                {
-                    case 0: return new PillarDataViewModel(_pillarModel, new Graphs.WH_GraphVM(_pillarModel));
-                    case 1: return new PillarDataViewModel(_pillarModel, new Graphs.Confinement_GraphVM(_pillarModel));
-                    case 2: return new MonteCarloViewModel(_pillarModel);
-                    default: return new PillarDataViewModel(_pillarModel, new Graphs.WH_GraphVM(_pillarModel));
-                }
+                return _currentViewModel;
             }
+        }
+
+        private void SetViewModel()
+        {
+            // WH View
+            if (_selectedViewIndex == 0)
+            {
+                _currentViewModel = new PillarDataViewModel(_pillarModel, new Graphs.WH_GraphVM(_pillarModel));
+                _propGridViewModel = new PropGrid.PillarPropGridVM(_pillarModel);
+            }
+            // Confinement View
+            else if (_selectedViewIndex == 1)
+            {
+                _currentViewModel = new PillarDataViewModel(_pillarModel, new Graphs.Confinement_GraphVM(_pillarModel));
+                _propGridViewModel = new PropGrid.PillarPropGridVM(_pillarModel);
+            }
+            // MonteCarlo View
+            else if (_selectedViewIndex == 2)
+            {
+                _currentViewModel = new MonteCarloViewModel(_pillarModel);
+                _propGridViewModel = new PropGrid.MonteCarloPropGridVM(_pillarModel);
+            }
+            // Default data View - WH View
+            else
+            {
+                _currentViewModel = new PillarDataViewModel(_pillarModel, new Graphs.WH_GraphVM(_pillarModel));
+                _propGridViewModel = new PropGrid.PillarPropGridVM(_pillarModel);
+            }
+
+            OnPropertyChanged(nameof(CurrentViewModel));
+            OnPropertyChanged(nameof(PropGridViewModel));
+
+            // Subscribe to PropGridModel Property Changed 
+            PropGridViewModel.PropertyChanged += HandlePropGridChange;
         }
     }
 }
