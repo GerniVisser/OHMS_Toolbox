@@ -3,11 +3,106 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:chart="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
              xmlns:local="clr-namespace:PillarStability.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Monte Carlo Simulation</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <chart:SfChart 
+            Grid.Row="0"
+            Header=""
+            FontSize="24"
+            Background="White"
+            BorderBrush="#d6d6d6"
+            BorderThickness="2">
+            <chart:SfChart.PrimaryAxis>
+                <chart:NumericalAxis
+                    Minimum="0"
+                    Header="Safety Factor"
+                    FontSize="14"/>
+            </chart:SfChart.PrimaryAxis>
+            <chart:SfChart.SecondaryAxis>
+                <chart:NumericalAxis
+                    StartRangeFromZero="True"
+                    OpposedPosition="True"
+                    Maximum="1"
+                    Header="Cumalative Frequency"
+                    FontSize="14"/>
+            </chart:SfChart.SecondaryAxis>
+
+            <chart:SfChart.Legend>
+                <chart:ChartLegend
+                    IconHeight="10" IconWidth="10" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"                                    
+                    DockPosition="Top"
+                    IconVisibility="Visible"
+                    ItemMargin="3">
+                </chart:ChartLegend>
+            </chart:SfChart.Legend>
+
+            <chart:LineSeries
+                ItemsSource="{Binding MCChartLine}"
+                XBindingPath="x"
+                YBindingPath="y"
+                Interior="Black"
+                StrokeThickness="1"
+                LegendIcon="None"
+                >
+                <chart:LineSeries.YAxis>
+                    <chart:NumericalAxis 
+                        x:Name="Hi"
+                        Header="Frequency"
+                        Foreground="Black"
+                        FontSize="14"/>
+                </chart:LineSeries.YAxis>
+            </chart:LineSeries>
+
+            <chart:LineSeries
+                XBindingPath="x"
+                YBindingPath="y"
+                Interior="Black"
+                StrokeThickness="1"
+                LegendIcon="None"
+                ItemsSource="{Binding MCChartLineCumulative}"           
+                />
+
+            <chart:LineSeries
+                XBindingPath="x"
+                YBindingPath="y"
+                Interior="Red"
+                StrokeThickness="2"
+                LegendIcon="Circle"
+                Label="FOS 1"
+                ItemsSource="{Binding MCChartLineFos1}"           
+                />
+
+            <chart:LineSeries
+                XBindingPath="x"
+                YBindingPath="y"
+                Interior="Green"
+                StrokeThickness="2"
+                LegendIcon="Circle"
+                Label="FOS 1.4"
+                ItemsSource="{Binding MCChartLineFos14}"           
+                />
+        </chart:SfChart>
+
+
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <TextBlock HorizontalAlignment="Center"  FontSize="20" Text="{Binding MCDataGrid.Pillar}"></TextBlock>
+            <TextBlock HorizontalAlignment="Center"  FontSize="20" Text="{Binding MCDataGrid.DSF}"></TextBlock>
+            <TextBlock HorizontalAlignment="Center"  FontSize="20" Text="{Binding MCDataGrid.AveSF}"></TextBlock>
+            <TextBlock HorizontalAlignment="Center"  FontSize="20" Text="{Binding MCDataGrid.StandardDev}"></TextBlock>
+            <TextBlock HorizontalAlignment="Center"  FontSize="20" Text="{Binding MCDataGrid.mfSF}"></TextBlock>
+            <TextBlock HorizontalAlignment="Center"  FontSize="20" Text="{Binding MCDataGrid.probSF}"></TextBlock>
+            <Button Content="Calculate" Command="{Binding CalculateMonteCarlo}"/>
+        </StackPanel>
             
     </Grid>
 </UserControl>

@@ -18,6 +18,28 @@ namespace PillarStability.ViewModels.PropGrid
             _monteCarloModel = pillarModel.MonteCarloModel;
         }
 
+        [DisplayName("Iterations"), Description("Number of sumulation run"), Category("Monte Carlo")]
+        public int Iterations
+        {
+            get { return _monteCarloModel.Iterations; }
+            set
+            {
+                _monteCarloModel.Iterations = value;
+                OnPropertyChanged(nameof(MonteCarloPropGridVM));
+            }
+        }
+
+        [DisplayName("Bins"), Description("Number of bins"), Category("Monte Carlo")]
+        public int Bins
+        {
+            get { return _monteCarloModel.Bins; }
+            set
+            {
+                _monteCarloModel.Bins = value;
+                OnPropertyChanged(nameof(MonteCarloPropGridVM));
+            }
+        }
+
         [DisplayName("Std Dev Height"), Description("Std Dev of Pillar Height (m)"), Category("Monte Carlo")]
         public float stdLength
         {

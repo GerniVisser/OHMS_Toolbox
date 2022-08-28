@@ -9,6 +9,8 @@ namespace PillarStability.Models
 {
     public class MonteCarloModel
     {
+        public int Iterations;
+        public int Bins;
         public float StdLength;
         public float StdWidth;
         public float StdHeight;
@@ -27,6 +29,8 @@ namespace PillarStability.Models
 
         public MonteCarloModel()
         {
+            Iterations = 5000;
+            Bins = 50;
             StdLength = 0.5f;
             StdWidth = 0.5f;
             StdHeight = 0.5f;
