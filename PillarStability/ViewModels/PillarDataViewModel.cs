@@ -17,8 +17,8 @@ namespace PillarStability.ViewModels
         public PillarDataViewModel(PillarModel pillarModel, ViewModelBase graphViewModel)
         {
             _pillarModel = pillarModel;
+            _pillarDataGridViewModel = new PillarDataGridViewModel(_pillarModel) ;
             GraphViewModel = graphViewModel;
-            PillarDataGrid = new ObservableCollection<PillarDataGridViewModel>() { new PillarDataGridViewModel(pillarModel) };
         }
 
         public ViewModelBase GraphViewModel
@@ -30,14 +30,16 @@ namespace PillarStability.ViewModels
             }
         }
 
-        private ObservableCollection<PillarDataGridViewModel> _pillarDataGridViewModel;
+        private PillarDataGridViewModel _pillarDataGridViewModel;
 
-        public ObservableCollection<PillarDataGridViewModel> PillarDataGrid
+        public Collection<PillarDataGridViewModel> PillarDataGrid
         {
-            get { return _pillarDataGridViewModel; }
-            set { _pillarDataGridViewModel = value; }
+            get
+            {
+                // Could not find a better way for ObservableCollection to update the DataGrid without createing a new instance of the Collection
+                return new Collection<PillarDataGridViewModel>() { _pillarDataGridViewModel };
+            }
         }
-
 
     }
 }

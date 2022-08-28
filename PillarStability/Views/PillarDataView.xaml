@@ -62,12 +62,29 @@
                 />
         </chart:SfChart>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding PillarDataGrid}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Width="200" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="isbn" Width="200" Binding="{Binding Width}"/>
-            </DataGrid.Columns>
 
-        </DataGrid>
+        <DockPanel Grid.Row="1" Background="#ebebeb">
+            <Border Padding="20" Background="Transparent" >
+                <DataGrid Focusable="False"  RowBackground="White" ColumnWidth="*" FontWeight="Medium" BorderThickness="0" VerticalAlignment="Top"  ItemsSource="{Binding PillarDataGrid}" HorizontalGridLinesBrush="Transparent" VerticalGridLinesBrush="LightGray">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#f06e3e"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontSize" Value="18"/>
+                            <Setter Property="FontWeight" Value="Medium"/>
+                            <Setter Property="Padding" Value="5"/>
+                        </Style>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="FontSize" Value="15"/>
+                            <Setter Property="FontWeight" Value="Medium"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+            </Border>
+        </DockPanel>
+        
     </Grid>
 </UserControl>

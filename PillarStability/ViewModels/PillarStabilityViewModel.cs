@@ -4,6 +4,7 @@ using PillarStability.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,7 +61,18 @@ namespace PillarStability.ViewModels
             get
             {
                 if (_selectedPillar == null) return null;
-                return new PillarViewModel(_selectedPillar);
+                PillarViewModel newPVM = new PillarViewModel(_selectedPillar);
+                newPVM.PropertyChanged += HandleNameChange;
+                return newPVM;
+            }
+        }
+
+        private void HandleNameChange(object sender, PropertyChangedEventArgs e)
+        {
+            // If Name of pillar is changed from Propgrid this will trigger 
+            if( e.PropertyName == "Name")
+            {
+                OnPropertyChanged(nameof(PillarList));
             }
         }
 

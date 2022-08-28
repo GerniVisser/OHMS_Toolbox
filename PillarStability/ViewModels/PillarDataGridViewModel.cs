@@ -44,7 +44,7 @@ namespace PillarStability.ViewModels
         {
             get
             {
-                return _pillarModel.Width;
+                return _pillarDataService.Wth;
             }
         }
 

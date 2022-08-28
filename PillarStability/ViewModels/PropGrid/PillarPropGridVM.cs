@@ -19,6 +19,17 @@ namespace PillarStability.ViewModels.PropGrid
             _pillarModel = pillarModel;
         }
 
+        [DisplayName("Name"), Description("Pillar Nickname"), Category("General")]
+        public string Name
+        {
+            get { return _pillarModel.Name; }
+            set 
+            { 
+                _pillarModel.Name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+
         [DisplayName("Color"), Description("Pillar Color"), Category("General")]
         public Brush Color
         {
@@ -26,7 +37,7 @@ namespace PillarStability.ViewModels.PropGrid
             set 
             { 
                 _pillarModel.Color = value;
-                OnPropertyChanged(nameof(PillarPropGridVM));
+                OnPropertyChanged(nameof(Color));
             }
         }
 
@@ -37,7 +48,7 @@ namespace PillarStability.ViewModels.PropGrid
             set
             {
                 _pillarModel.Height = value;
-                OnPropertyChanged(nameof(PillarPropGridVM));
+                OnPropertyChanged(nameof(Height));
             }
         }
 
@@ -48,7 +59,7 @@ namespace PillarStability.ViewModels.PropGrid
             set
             {
                 _pillarModel.Width = value;
-                OnPropertyChanged(nameof(PillarPropGridVM));
+                OnPropertyChanged(nameof(Width));
             }
         }
 
@@ -59,7 +70,7 @@ namespace PillarStability.ViewModels.PropGrid
             set
             {
                 _pillarModel.Length = value;
-                OnPropertyChanged(nameof(PillarPropGridVM));
+                OnPropertyChanged(nameof(Length));
             }
         }
 
@@ -70,7 +81,7 @@ namespace PillarStability.ViewModels.PropGrid
             set
             {
                 _pillarModel.APS = value;
-                OnPropertyChanged(nameof(PillarPropGridVM));
+                OnPropertyChanged(nameof(APS));
             }
         }
 
@@ -81,7 +92,7 @@ namespace PillarStability.ViewModels.PropGrid
             set
             {
                 _pillarModel.UCS = value;
-                OnPropertyChanged(nameof(PillarPropGridVM));
+                OnPropertyChanged(nameof(UCS));
             }
         }
     }

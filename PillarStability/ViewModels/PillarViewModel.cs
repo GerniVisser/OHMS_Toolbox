@@ -47,6 +47,9 @@ namespace PillarStability.ViewModels
         private void HandlePropGridChange(object sender, PropertyChangedEventArgs e)
         {
             _currentViewModel.Notify("GraphViewModel");
+            _currentViewModel.Notify("PillarDataGrid");
+
+            OnPropertyChanged(nameof(Name));
         }
 
 
