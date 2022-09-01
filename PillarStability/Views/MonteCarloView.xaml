@@ -15,8 +15,8 @@
 
         <chart:SfChart 
             Grid.Row="0"
-            Header=""
             FontSize="24"
+            Header="Frequency Distribution Graph"
             Background="White"
             BorderBrush="#d6d6d6"
             BorderThickness="2">
@@ -95,11 +95,12 @@
 
 
         <DockPanel Grid.Row="1" Background="#ebebeb">
-            <Border Padding="20" Background="Transparent" >
+            <Border Margin="20" Padding="10" Background="White" BorderBrush="DarkGray" BorderThickness="2" >
                 <Grid VerticalAlignment="Stretch">
                     <DataGrid Focusable="False"  
                           RowBackground="White" 
                           ColumnWidth="*" 
+                          IsReadOnly="True"
                           FontWeight="Medium" 
                           BorderThickness="0" 
                           VerticalAlignment="Top"  
@@ -122,15 +123,15 @@
                     </DataGrid>
                     <Button
                         Command="{Binding CalculateMonteCarlo}"
-                        Margin="5"
                         MaxHeight="44"
+                        Padding="5 2"
                         Grid.Column="0"
                         Grid.Row="1"
                         FontSize="15"
                         Background="#f06e3e"
                         Foreground="White"
                         VerticalAlignment="Bottom" 
-                        HorizontalAlignment="Stretch">
+                        HorizontalAlignment="Left">
                         Calculate
                     </Button>
                 </Grid>

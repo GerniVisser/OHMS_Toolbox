@@ -7,19 +7,62 @@
              xmlns:local="clr-namespace:PillarStability.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style x:Key="NavMenuStyle" TargetType="ListBoxItem">
+            <Setter Property="FontWeight" Value="Light" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <DockPanel
+                            Margin=" 0 0 5 0">
+                            <Border 
+                                Name="Bd"
+                                Margin="{TemplateBinding Margin}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="DarkGray"
+                                BorderThickness="1 0 1 1"
+                                CornerRadius="0 0 10 0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                SnapsToDevicePixels="true">
+                                <ContentPresenter 
+                                    x:Name="Content"
+                                    Margin="10 0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
+                            </Border>
+                        </DockPanel>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Bd" Property="Background" Value="#f06e3e"/>
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="gray"/>
+                                <Setter TargetName="Content" Property="TextElement.Foreground" Value="White"/>
+                                <Setter TargetName="Content" Property="TextElement.FontWeight" Value="Medium"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <chart:SfChart 
+            BorderThickness="0"
             Grid.Row="0"
             Header="{Binding GraphViewModel.GraphHeader}"
             FontSize="24"
             Background="White"
-            BorderBrush="#d6d6d6"
-            BorderThickness="2">
+            BorderBrush="#d6d6d6">
             <chart:SfChart.PrimaryAxis>
                 <chart:NumericalAxis
                     StartRangeFromZero="True"
@@ -62,9 +105,23 @@
                 />
         </chart:SfChart>
 
+        <ListBox BorderThickness="0" Grid.Row="1" ItemContainerStyle="{StaticResource NavMenuStyle}" Name="GraphTabList" Background="#ebebeb" SelectedIndex="{Binding SelectedGraphIndex}" DisplayMemberPath="Name" >
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBoxItem Content="Width/Height" Background="White"></ListBoxItem>
+            <ListBoxItem Content="Confinement" Background="White"></ListBoxItem>
+        </ListBox>
 
-        <DockPanel Grid.Row="1" Background="#ebebeb">
-            <Border Padding="20" Background="Transparent" >
+
+        <DockPanel Grid.Row="2" Background="#ebebeb">
+            <Border Padding="10"
+                    Margin="20"
+                    BorderThickness="2"
+                    BorderBrush="DarkGray"
+                    Background="White" >
                 <DataGrid Focusable="False"  
                           RowBackground="White" 
                           ColumnWidth="*" 

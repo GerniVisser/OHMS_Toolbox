@@ -15,12 +15,16 @@ namespace PillarStability.ViewModels
     public class PillarStabilityViewModel : ViewModelBase
     {
         private readonly PillarListModel _pillarListModel;
+        private int _pillarCounter;
 
         public PillarStabilityViewModel(PillarListModel pillarListModel)
         {
+            _pillarCounter = 1;
             _addPillarCommand = new DelegateCommand(AddPillar);
+            _removePillarCommand = new DelegateCommand(RemovePillar);
 
             _pillarListModel = pillarListModel;
+            AddPillar(null);
             SelectedPillar = pillarListModel.PillarModels[0];
         }
 
@@ -29,6 +33,13 @@ namespace PillarStability.ViewModels
         public ICommand AddPillarCommand
         {
             get { return _addPillarCommand; }
+        }
+
+        private ICommand _removePillarCommand;
+
+        public ICommand RemovePillarCommand
+        {
+            get { return _removePillarCommand; }
         }
 
 
@@ -78,9 +89,14 @@ namespace PillarStability.ViewModels
 
         private void AddPillar(object obj)
         {
-            _pillarListModel.PillarModels.Add(new PillarModel(DateTime.Now.ToString()));
+            _pillarListModel.PillarModels.Add(new PillarModel("Pillar " + _pillarCounter));
             OnPropertyChanged(nameof(PillarList));
+            _pillarCounter++;
         }
 
+        private void RemovePillar(object obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -77,8 +77,7 @@
                     <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
-            <ListBoxItem Content="Width/Height" Background="#bfbfbf"></ListBoxItem>
-            <ListBoxItem Content="Confinement" Background="#bfbfbf"></ListBoxItem>
+            <ListBoxItem Content="Pillar Data" Background="#bfbfbf"></ListBoxItem>
             <ListBoxItem Content="Simulation" Background="#bfbfbf"></ListBoxItem>
         </ListBox>
 
@@ -95,7 +94,8 @@
             DisableAnimationOnObjectSelection="True"
             DescriptionPanelVisibility="Collapsed"
             UpdateSourceMode="ReturnOrLostFocus" 
-            PropertyExpandMode="FlatMode"  
+            PropertyExpandMode="FlatMode" 
+            SortDirection="{x:Null}"
             />
 
         <ContentControl Content="{Binding CurrentViewModel}" Grid.Column="0" Grid.Row="1"/>

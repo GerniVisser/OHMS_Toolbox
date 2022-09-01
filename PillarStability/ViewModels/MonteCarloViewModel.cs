@@ -84,7 +84,22 @@ namespace PillarStability.ViewModels
 
         public MonteCarloDataObject MCDataGridData
         {
-            get { return _mcDataGridData; }
+            get 
+            { 
+                if (_mcDataGridData == null)
+                {
+                    return new MonteCarloDataObject()
+                    {
+                        Pillar = _pillarModel.Name,
+                        AveSF = float.NaN,
+                        DSF = float.NaN,
+                        mfSF = float.NaN,
+                        probSF = float.NaN,
+                        StandardDev = float.NaN
+                    };
+                }
+                return _mcDataGridData; 
+            }
             set
             {
                 _mcDataGridData = value;
@@ -93,12 +108,12 @@ namespace PillarStability.ViewModels
         }
 
         //Collection of MCDataGridData to display in DataGrid 
-        public Collection<MonteCarloDataObject> MCDataGrid
+        public List<MonteCarloDataObject> MCDataGrid
         {
             get 
             {
-                if (MCDataGridData == null) return null;
-                return new Collection<MonteCarloDataObject>() { MCDataGridData }; 
+                var res = new List<MonteCarloDataObject>() { MCDataGridData };
+                return res;
             }
         }
 

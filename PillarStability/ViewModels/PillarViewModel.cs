@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PillarStability.ViewModels
 {
@@ -76,17 +77,11 @@ namespace PillarStability.ViewModels
             // WH View
             if (_selectedViewIndex == 0)
             {
-                _currentViewModel = new PillarDataViewModel(_pillarModel, new Graphs.WH_GraphVM(_pillarModel));
-                _propGridViewModel = new PropGrid.PillarPropGridVM(_pillarModel);
-            }
-            // Confinement View
-            else if (_selectedViewIndex == 1)
-            {
-                _currentViewModel = new PillarDataViewModel(_pillarModel, new Graphs.Confinement_GraphVM(_pillarModel));
+                _currentViewModel = new PillarDataViewModel(_pillarModel);
                 _propGridViewModel = new PropGrid.PillarPropGridVM(_pillarModel);
             }
             // MonteCarlo View
-            else if (_selectedViewIndex == 2)
+            else if (_selectedViewIndex == 1)
             {
                 if ( _monteCarloViewModel == null) 
                     _monteCarloViewModel = new MonteCarloViewModel(_pillarModel);
@@ -96,7 +91,7 @@ namespace PillarStability.ViewModels
             // Default data View - WH View
             else
             {
-                _currentViewModel = new PillarDataViewModel(_pillarModel, new Graphs.WH_GraphVM(_pillarModel));
+                _currentViewModel = new PillarDataViewModel(_pillarModel);
                 _propGridViewModel = new PropGrid.PillarPropGridVM(_pillarModel);
             }
 
