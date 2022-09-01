@@ -94,15 +94,49 @@
         </chart:SfChart>
 
 
-        <StackPanel Grid.Row="1" Orientation="Vertical">
-            <TextBlock HorizontalAlignment="Center"  FontSize="20" Text="{Binding MCDataGrid.Pillar}"></TextBlock>
-            <TextBlock HorizontalAlignment="Center"  FontSize="20" Text="{Binding MCDataGrid.DSF}"></TextBlock>
-            <TextBlock HorizontalAlignment="Center"  FontSize="20" Text="{Binding MCDataGrid.AveSF}"></TextBlock>
-            <TextBlock HorizontalAlignment="Center"  FontSize="20" Text="{Binding MCDataGrid.StandardDev}"></TextBlock>
-            <TextBlock HorizontalAlignment="Center"  FontSize="20" Text="{Binding MCDataGrid.mfSF}"></TextBlock>
-            <TextBlock HorizontalAlignment="Center"  FontSize="20" Text="{Binding MCDataGrid.probSF}"></TextBlock>
-            <Button Content="Calculate" Command="{Binding CalculateMonteCarlo}"/>
-        </StackPanel>
-            
+        <DockPanel Grid.Row="1" Background="#ebebeb">
+            <Border Padding="20" Background="Transparent" >
+                <Grid VerticalAlignment="Stretch">
+                    <DataGrid Focusable="False"  
+                          RowBackground="White" 
+                          ColumnWidth="*" 
+                          FontWeight="Medium" 
+                          BorderThickness="0" 
+                          VerticalAlignment="Top"  
+                          ItemsSource="{Binding MCDataGrid}" 
+                          HorizontalGridLinesBrush="Transparent" 
+                          VerticalGridLinesBrush="LightGray">
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#f06e3e"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="FontWeight" Value="Medium"/>
+                                <Setter Property="Padding" Value="5"/>
+                            </Style>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontWeight" Value="Medium"/>
+                            </Style>
+                        </DataGrid.Resources>
+                    </DataGrid>
+                    <Button
+                        Command="{Binding CalculateMonteCarlo}"
+                        Margin="5"
+                        MaxHeight="44"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        FontSize="15"
+                        Background="#f06e3e"
+                        Foreground="White"
+                        VerticalAlignment="Bottom" 
+                        HorizontalAlignment="Stretch">
+                        Calculate
+                    </Button>
+                </Grid>
+                
+            </Border>
+        </DockPanel>
+
     </Grid>
 </UserControl>

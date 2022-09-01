@@ -21,7 +21,8 @@ namespace Toolbox
             {
                 new HomeViewModel(),
                 new Caveability.ViewModels.CaveabilityViewModel(new Caveability.Models.CaveabilityModel()),
-                new WIPViewModel("Pillar Stability calculator")
+                new PillarStability.ViewModels.PillarStabilityViewModel(new PillarStability.Models.PillarListModel()),
+                new WIPViewModel("Borehole Analizer")
             };
 
             _navigationStore = new NavigationStore(viewModelBases);

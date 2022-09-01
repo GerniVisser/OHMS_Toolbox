@@ -13,6 +13,7 @@ namespace PillarStability.ViewModels
     {
         private PillarModel _pillarModel;
         private ViewModelBase _propGridViewModel;
+        private MonteCarloViewModel _monteCarloViewModel;
 
         public PillarViewModel(PillarModel pillarModel)
         {
@@ -87,7 +88,9 @@ namespace PillarStability.ViewModels
             // MonteCarlo View
             else if (_selectedViewIndex == 2)
             {
-                _currentViewModel = new MonteCarloViewModel(_pillarModel);
+                if ( _monteCarloViewModel == null) 
+                    _monteCarloViewModel = new MonteCarloViewModel(_pillarModel);
+                _currentViewModel = _monteCarloViewModel;
                 _propGridViewModel = new PropGrid.MonteCarloPropGridVM(_pillarModel);
             }
             // Default data View - WH View

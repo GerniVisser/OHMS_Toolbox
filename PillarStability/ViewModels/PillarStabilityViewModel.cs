@@ -12,11 +12,11 @@ using System.Windows.Input;
 
 namespace PillarStability.ViewModels
 {
-    public class PillarStabilityViewmodel : ViewModelBase
+    public class PillarStabilityViewModel : ViewModelBase
     {
         private readonly PillarListModel _pillarListModel;
 
-        public PillarStabilityViewmodel(PillarListModel pillarListModel)
+        public PillarStabilityViewModel(PillarListModel pillarListModel)
         {
             _addPillarCommand = new DelegateCommand(AddPillar);
 

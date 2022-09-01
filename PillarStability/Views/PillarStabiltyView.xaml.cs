@@ -22,9 +22,9 @@ namespace PillarStability.Views
     /// <summary>
     /// Interaction logic for PillarStabiltyControl.xaml
     /// </summary>
-    public partial class PillarStabiltyControl : UserControl
+    public partial class PillarStabiltyView : UserControl
     {
-        public PillarStabiltyControl()
+        public PillarStabiltyView()
         {
             InitializeComponent();
         }

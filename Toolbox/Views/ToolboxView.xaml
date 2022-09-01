@@ -7,6 +7,8 @@
              xmlns:local="clr-namespace:Toolbox.Views"
              xmlns:cavevm="clr-namespace:Caveability.ViewModels;assembly=Caveability"
              xmlns:cavev="clr-namespace:Caveability.Views;assembly=Caveability"
+             xmlns:pillarvm="clr-namespace:PillarStability.ViewModels;assembly=PillarStability"
+             xmlns:pillarv="clr-namespace:PillarStability.Views;assembly=PillarStability"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -78,6 +80,9 @@
             <DataTemplate DataType="{x:Type cavevm:CaveabilityViewModel}">
                 <cavev:CaveabilityView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type pillarvm:PillarStabilityViewModel}">
+                <pillarv:PillarStabiltyView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type localvm:HomeViewModel}">
                 <local:HomeView/>
             </DataTemplate>
@@ -115,6 +120,14 @@
                 <ListBoxItem.ToolTip>
                     <ToolTip>
                         Pillar Stability Calculator
+                    </ToolTip>
+                </ListBoxItem.ToolTip>
+                <Image Source="\Icons\Pillar_white.png"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <ListBoxItem.ToolTip>
+                    <ToolTip>
+                        Borehole Analizer
                     </ToolTip>
                 </ListBoxItem.ToolTip>
                 <Image Source="\Icons\Pillar_white.png"/>

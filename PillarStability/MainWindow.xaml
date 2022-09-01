@@ -10,6 +10,6 @@
         Title="Pillar Stability Analyser" >
 
     <Grid>
-        <views:PillarStabiltyControl DataContext="{Binding PillarStabilityViewModel}"></views:PillarStabiltyControl>
+        <views:PillarStabiltyView DataContext="{Binding PillarStabilityViewModel}"></views:PillarStabiltyView>
     </Grid>
 </Window>

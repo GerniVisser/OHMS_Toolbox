@@ -65,7 +65,15 @@
 
         <DockPanel Grid.Row="1" Background="#ebebeb">
             <Border Padding="20" Background="Transparent" >
-                <DataGrid Focusable="False"  RowBackground="White" ColumnWidth="*" FontWeight="Medium" BorderThickness="0" VerticalAlignment="Top"  ItemsSource="{Binding PillarDataGrid}" HorizontalGridLinesBrush="Transparent" VerticalGridLinesBrush="LightGray">
+                <DataGrid Focusable="False"  
+                          RowBackground="White" 
+                          ColumnWidth="*" 
+                          FontWeight="Medium" 
+                          BorderThickness="0" 
+                          VerticalAlignment="Top"  
+                          ItemsSource="{Binding PillarDataGrid}" 
+                          HorizontalGridLinesBrush="Transparent" 
+                          VerticalGridLinesBrush="LightGray">
                     <DataGrid.Resources>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="Background" Value="#f06e3e"/>
@@ -79,9 +87,6 @@
                             <Setter Property="FontWeight" Value="Medium"/>
                         </Style>
                     </DataGrid.Resources>
-                    <DataGrid.Columns>
-                    </DataGrid.Columns>
-
                 </DataGrid>
             </Border>
         </DockPanel>

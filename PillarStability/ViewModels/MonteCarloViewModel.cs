@@ -6,6 +6,7 @@ using PillarStability.Services;
 using SharedWpfLibrary.Tools;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace PillarStability.ViewModels
         {
             _monteCarloService.CalculateMonteCarlo();
 
-            MCDataGrid = _monteCarloService.generateMonteCarloDataObject();
+            MCDataGridData = _monteCarloService.generateMonteCarloDataObject();
             MCChartLine = _monteCarloService.generateMonteCarloChartLine();
             MCChartLineCumulative = _monteCarloService.generateMonteCarloCumulativeChartLine();
         }
@@ -79,15 +80,25 @@ namespace PillarStability.ViewModels
         }
 
 
-        private MonteCarloDataObject _mcDataGrid;
+        private MonteCarloDataObject _mcDataGridData;
 
-        public MonteCarloDataObject MCDataGrid
+        public MonteCarloDataObject MCDataGridData
         {
-            get { return _mcDataGrid; }
-            set 
-            { 
-                _mcDataGrid = value;
+            get { return _mcDataGridData; }
+            set
+            {
+                _mcDataGridData = value;
                 OnPropertyChanged(nameof(MCDataGrid));
+            }
+        }
+
+        //Collection of MCDataGridData to display in DataGrid 
+        public Collection<MonteCarloDataObject> MCDataGrid
+        {
+            get 
+            {
+                if (MCDataGridData == null) return null;
+                return new Collection<MonteCarloDataObject>() { MCDataGridData }; 
             }
         }
 

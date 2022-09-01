@@ -9,17 +9,17 @@ namespace PillarStability.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private PillarStabilityViewmodel _pillarStabilityViewModel;
+        private PillarStabilityViewModel _pillarStabilityViewModel;
 
-        public PillarStabilityViewmodel PillarStabilityViewModel
+        public PillarStabilityViewModel PillarStabilityViewModel
         {
             get { return _pillarStabilityViewModel; }
             set { _pillarStabilityViewModel = value; }
         }
 
-        public MainViewModel(PillarStabilityViewmodel pillarStabilityModel)
+        public MainViewModel(PillarStabilityViewModel pillarStabilityModel)
         {
-            _pillarStabilityViewModel = new PillarStabilityViewmodel(new Models.PillarListModel());
+            _pillarStabilityViewModel = new PillarStabilityViewModel(new Models.PillarListModel());
         }
     }
 }
