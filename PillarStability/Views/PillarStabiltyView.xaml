@@ -38,7 +38,7 @@
                                     <Button 
                                         x:Name="CloseButton" 
                                         Command="{Binding Path=DataContext.RemovePillarCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                        CommandParameter="{Binding Path=DataContext}"
+                                        CommandParameter="{Binding}"
                                         FontSize="12" 
                                         FontWeight="Medium" 
                                         BorderThickness="0" 

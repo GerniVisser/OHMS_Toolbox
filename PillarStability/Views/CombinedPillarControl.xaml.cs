@@ -1,5 +1,4 @@
 ﻿using _SharedWpfLibrary.Service;
-using PillarStability.Helper;
 using PillarStability.Models;
 using PillarStability.Services;
 using SharedWpfLibrary.Service;

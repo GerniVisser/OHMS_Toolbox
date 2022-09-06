@@ -58,9 +58,16 @@ namespace PillarStability.ViewModels
 
         public PillarModel SelectedPillar
         {
-            get { return _selectedPillar; }
+            get 
+            {
+                if (!PillarList.Contains(_selectedPillar))
+                {
+                    _selectedPillar = null;
+                }
+                return _selectedPillar; 
+            }
             set 
-            { 
+            {
                 _selectedPillar = value;
                 OnPropertyChanged(nameof(SelectedPillar));
                 OnPropertyChanged(nameof(PillarViewModel));
@@ -96,7 +103,16 @@ namespace PillarStability.ViewModels
 
         private void RemovePillar(object obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var t = _pillarListModel.PillarModels.Remove((PillarModel)obj);
+                OnPropertyChanged(nameof(PillarList));
+                OnPropertyChanged(nameof(SelectedPillar));
+            }
+            catch
+            {
+
+            }
         }
     }
 }
