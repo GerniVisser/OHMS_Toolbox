@@ -130,7 +130,7 @@
                         Borehole Analizer
                     </ToolTip>
                 </ListBoxItem.ToolTip>
-                <Image Source="\Icons\Pillar_white.png"/>
+                <Image Source="\Icons\Borehole_white.png"/>
             </ListBoxItem>
         </ListBox>
 

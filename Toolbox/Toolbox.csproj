@@ -9,6 +9,7 @@
       </PropertyGroup>
 
       <ItemGroup>
+        <None Remove="Icons\Borehole_white.png" />
         <None Remove="Icons\calculator.png" />
         <None Remove="Icons\Calculator_white.png" />
         <None Remove="Icons\Caveability_white.png" />
@@ -20,6 +21,9 @@
       </ItemGroup>
 
 	<ItemGroup>
+	  <Resource Include="Icons\Borehole_white.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Resource>
 	  <Resource Include="Icons\calculator.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Resource>
