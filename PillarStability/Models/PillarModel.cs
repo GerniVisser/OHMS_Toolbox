@@ -1,5 +1,4 @@
 ﻿using _SharedWpfLibrary.Service;
-using PillarStability.Helper;
 using System;
 using System.ComponentModel;
 using System.Windows.Media;
@@ -26,7 +25,7 @@ namespace PillarStability.Models
             APS = 80.34f;
             UCS = 111.42f;
             Color = BrushService.getRandomBrush();
-            MonteCarloModel = new MonteCarloModel();
+            MonteCarloModel = new LunderPakalnisModel();
         }
 
         public PillarModel(string name, float height, float width, float length, float aps, float ucs)
@@ -38,7 +37,7 @@ namespace PillarStability.Models
             APS = aps;
             UCS = ucs;
             Color = BrushService.getRandomBrush();
-            MonteCarloModel = new MonteCarloModel();
+            MonteCarloModel = new LunderPakalnisModel();
         }
 
     }

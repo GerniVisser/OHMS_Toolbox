@@ -1,4 +1,5 @@
-﻿using PillarStability.Models;
+﻿using PillarStability.DataObjects;
+using PillarStability.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace PillarStability.Services
 {
     public interface FoSAlgoritm
     {
-        public float Calculate(Func<float, float, float> getExcelNormInv, PillarModel pillarModel, MonteCarloModel monteCarloModel);
+        public float Calculate(Func<float, float, float> getExcelNormInv, PillarModel pillarModel);
+        public MonteCarloDataObject GenerateSummaryObject(PillarModel pillarModel, List<float> fosList);
     }
 }

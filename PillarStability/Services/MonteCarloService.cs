@@ -12,18 +12,15 @@ namespace PillarStability.Services
 {
     public class MonteCarloService
     {
-        private FoSAlgoritm _fosAlgoritm;
+        private PillarModel _pillarModel;
+        private Random _random;
 
-        //Algorithm thaty is used to Calcutale Factor of safety
-        public  FoSAlgoritm FoSAlgoritm
+        public MonteCarloModel MonteCarloModel
         {
-            get { return _fosAlgoritm; }
-            set { _fosAlgoritm = value; }
+            get { return _pillarModel.MonteCarloModel; }
+            set { _pillarModel.MonteCarloModel = value; }
         }
 
-        private PillarModel _pillarModel;
-        private MonteCarloModel _monteCarloModel;
-        private Random _random;
 
         private List<float> _fosList;
 
@@ -39,15 +36,28 @@ namespace PillarStability.Services
             }
         }
 
-        public MonteCarloService(FoSAlgoritm foSAlgoritm, PillarModel pillarModel, MonteCarloModel monteCarloModel)
+        public FoSAlgoritm FoSAlgoritm
         {
-            _fosAlgoritm = foSAlgoritm;
+            get 
+            {
+                if (MonteCarloModel is LunderPakalnisModel)
+                {
+                    return new LunderPakalnisService();
+                }
+                else if (MonteCarloModel is PowerFormulaModel)
+                {
+                    return new PowerFormulaService();
+                }
+                else return null;
+            }
+        }
+
+        public MonteCarloService(PillarModel pillarModel)
+        {
             _pillarModel = pillarModel;
-            _monteCarloModel = monteCarloModel;
             // Gernerate random seed
             _random = new Random(Guid.NewGuid().GetHashCode());
         }
-
 
         public void CalculateMonteCarlo()
         {
@@ -58,9 +68,9 @@ namespace PillarStability.Services
         {
             List<float> fosList = new List<float>();
 
-            for (int i = 0; i < _monteCarloModel.Iterations; i++)
+            for (int i = 0; i < MonteCarloModel.Iterations; i++)
             {
-                float FOS = FoSAlgoritm.Calculate(getExcelNormInv, _pillarModel, _monteCarloModel);
+                float FOS = FoSAlgoritm.Calculate(getExcelNormInv, _pillarModel);
 
                 if (!float.IsNaN(FOS))
                 {
@@ -72,7 +82,7 @@ namespace PillarStability.Services
         public List<Coord> generateMonteCarloChartLine()
         {
             List<Coord> res = new List<Coord>();
-            BinsService binsService = new BinsService(Foslist, _monteCarloModel.Bins);
+            BinsService binsService = new BinsService(Foslist, MonteCarloModel.Bins);
 
             int freqSum = binsService.getSumOffrequencies();
 
@@ -96,7 +106,7 @@ namespace PillarStability.Services
         public List<Coord> generateMonteCarloCumulativeChartLine()
         {
             List<Coord> res = new List<Coord>();
-            BinsService binsService = new BinsService(Foslist, _monteCarloModel.Bins);
+            BinsService binsService = new BinsService(Foslist, MonteCarloModel.Bins);
 
             int freqSum = binsService.getSumOffrequencies();
 
@@ -145,20 +155,7 @@ namespace PillarStability.Services
 
         public MonteCarloDataObject generateMonteCarloDataObject()
         {
-            PillarDataService pillarDataService = new Wh_Service(_pillarModel);
-            BinsService binsService = new BinsService(Foslist, _monteCarloModel.Bins);
-            float K = MathF.Tan(MathF.Acos((1 - pillarDataService.APC) / (1 + pillarDataService.APC)));
-            float dsf = _monteCarloModel.Psk * _pillarModel.UCS * (_monteCarloModel.C1 + _monteCarloModel.C2 * K) / _pillarModel.APS;
-
-            return new MonteCarloDataObject()
-            {
-                Pillar = _pillarModel.Name,
-                DSF = dsf,
-                AveSF = Foslist.Average(),
-                StandardDev = getStandardDev(),
-                mfSF = MathF.Round(binsService.getMostFrequentBin().Min, 2),
-                probSF = binsService.getPercentageOfBinsBelowLimit(_monteCarloModel.Lsf)
-            };
+            return FoSAlgoritm.GenerateSummaryObject(_pillarModel, Foslist);
         }
 
         private float getExcelNormInv(float mean, float stdev)
@@ -183,15 +180,6 @@ namespace PillarStability.Services
 
                 return normInv;
             }
-        }
-
-        public float getStandardDev()
-        {
-            float ave = Foslist.Average();
-            float sumOfSquaresOfDiff = Foslist.Select(val => (val - ave) * (val - ave)).Sum();
-            float sd = MathF.Sqrt(sumOfSquaresOfDiff / Foslist.Count);
-
-            return sd;
         }
     }
 }

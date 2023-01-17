@@ -13,8 +13,12 @@ namespace PillarStability.DataObjects
             {
                 return new List<string>()
                 {
-                    "Lunder",
-                    "Plankis",
+                    "Lunder and Pakalnis",
+                    "Salamon and Munro",
+                    "Hedley and Grant",
+                    "Stacey and Page",
+                    "PlatMine Merensky",
+                    "PlatMine UG2"
                 };
             }
             set { } }

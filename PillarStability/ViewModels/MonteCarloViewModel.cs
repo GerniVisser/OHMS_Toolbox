@@ -24,7 +24,7 @@ namespace PillarStability.ViewModels
         {
             _pillarModel = pillarModel;
             _monteCarloModel = _pillarModel.MonteCarloModel;
-            _monteCarloService = new MonteCarloService(new LunderPakalnisService(), pillarModel, _monteCarloModel);
+            _monteCarloService = new MonteCarloService(pillarModel);
             _calculateMonteCarlo = new DelegateCommand(Calculate);
         }
 

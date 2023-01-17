@@ -82,6 +82,8 @@
         </ListBox>
 
         <syncfusion:PropertyGrid 
+            x:Name="Propgrid"
+            
             SelectedObject="{Binding PropGridViewModel}"
             Grid.Column="1"
             Grid.RowSpan="2"
@@ -97,6 +99,8 @@
             PropertyExpandMode="FlatMode" 
             SortDirection="{x:Null}"
             />
+
+        <Button Click="Button_Click" Content="Refresh" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="2"></Button>
 
         <ContentControl Content="{Binding CurrentViewModel}" Grid.Column="0" Grid.Row="1"/>
     </Grid>
