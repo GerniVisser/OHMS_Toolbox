@@ -25,6 +25,7 @@ namespace PillarStability.Models
             APS = 80.34f;
             UCS = 111.42f;
             Color = BrushService.getRandomBrush();
+            // LunderPakalnis Extendes MonteCarloModel
             MonteCarloModel = new LunderPakalnisModel();
         }
 

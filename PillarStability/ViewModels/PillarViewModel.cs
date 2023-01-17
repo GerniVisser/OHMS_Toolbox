@@ -1,7 +1,9 @@
 ﻿using _SharedWpfLibrary.ViewModels;
+using PillarStability.DataObjects;
 using PillarStability.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -14,12 +16,23 @@ namespace PillarStability.ViewModels
     {
         private PillarModel _pillarModel;
         private ViewModelBase _propGridViewModel;
-        private MonteCarloViewModel _monteCarloViewModel;
+        private ViewModelBase _graphViewModel;
+        private PillarDataGridViewModel _pillarDataGridViewModel;
+        private int _selectedGraphIndex;
+        private int _selectedFormulaIndex;
+        private PillarStrengthOptions _strengthOptions;
 
         public PillarViewModel(PillarModel pillarModel)
         {
             _pillarModel = pillarModel;
-            SelectedViewIndex = 0;
+
+            _propGridViewModel = new PropGrid.PillarPropGridVM(_pillarModel);
+            _pillarDataGridViewModel = new PillarDataGridViewModel(_pillarModel);
+
+            SelectedGraphIndex = 0;
+            SelectedFormulaIndex = 0;
+
+            SetFormulaViewModel();
 
         }
 
@@ -32,25 +45,10 @@ namespace PillarStability.ViewModels
             }
         }
 
-        private int _selectedViewIndex;
-
-        public int SelectedViewIndex
-        {
-            get { return _selectedViewIndex; }
-            set 
-            {
-                //if (_selectedViewIndex == value) return;
-                _selectedViewIndex = value;
-
-                SetViewModel();
-            }
-        }
-
         private void HandlePropGridChange(object sender, PropertyChangedEventArgs e)
         {
-            _currentViewModel.Notify("GraphViewModel");
-            _currentViewModel.Notify("PillarDataGrid");
-
+            OnPropertyChanged(nameof(GraphViewModel));
+            OnPropertyChanged(nameof(PillarDataGrid));
             OnPropertyChanged(nameof(Name));
         }
 
@@ -63,43 +61,103 @@ namespace PillarStability.ViewModels
             }
         }
 
-        private ViewModelBase _currentViewModel;
-        public ViewModelBase CurrentViewModel
+        public int SelectedGraphIndex
         {
-            get
+            get { return _selectedGraphIndex; }
+            set
             {
-                return _currentViewModel;
+                //if (_selectedViewIndex == value) return;
+                _selectedGraphIndex = value;
+
+                SetGraphViewModel();
             }
         }
 
-        private void SetViewModel()
+        public int SelectedFormulaIndex
+        {
+            get { return _selectedFormulaIndex; }
+            set
+            {
+                //if (_selectedViewIndex == value) return;
+                _selectedFormulaIndex = value;
+
+                SetFormulaViewModel();
+            }
+        }
+
+        public ViewModelBase GraphViewModel
+        {
+            get { return _graphViewModel; }
+            set
+            {
+                _graphViewModel = value;
+                OnPropertyChanged(nameof(GraphViewModel));
+            }
+        }
+
+        public List<string> FormulaDataSource
+        {
+            get
+            {
+                if(_strengthOptions == null)
+                {
+                    _strengthOptions = new PillarStrengthOptions();
+                }
+                return _strengthOptions.Options;
+            }
+        }
+
+        public Collection<PillarDataGridViewModel> PillarDataGrid
+        {
+            get
+            {
+                // Could not find a better way for ObservableCollection to update the DataGrid without createing a new instance of the Collection
+                return new Collection<PillarDataGridViewModel>() { _pillarDataGridViewModel };
+            }
+        }
+
+        private void SetFormulaViewModel()
         {
             // WH View
-            if (_selectedViewIndex == 0)
+            if (SelectedFormulaIndex == 0)
             {
-                _currentViewModel = new PillarDataViewModel(_pillarModel);
                 _propGridViewModel = new PropGrid.PillarPropGridVM(_pillarModel);
             }
             // MonteCarlo View
-            else if (_selectedViewIndex == 1)
+            else if (SelectedFormulaIndex == 1)
             {
-                if ( _monteCarloViewModel == null) 
-                    _monteCarloViewModel = new MonteCarloViewModel(_pillarModel);
-                _currentViewModel = _monteCarloViewModel;
                 _propGridViewModel = new PropGrid.MonteCarloPropGridVM(_pillarModel);
             }
             // Default data View - WH View
             else
             {
-                _currentViewModel = new PillarDataViewModel(_pillarModel);
                 _propGridViewModel = new PropGrid.PillarPropGridVM(_pillarModel);
             }
 
-            OnPropertyChanged(nameof(CurrentViewModel));
             OnPropertyChanged(nameof(PropGridViewModel));
 
             // Subscribe to PropGridModel Property Changed 
             PropGridViewModel.PropertyChanged += HandlePropGridChange;
+        }
+
+
+        private void SetGraphViewModel()
+        {
+            // WH View
+            if (_selectedGraphIndex == 0)
+            {
+                GraphViewModel = new Graphs.WH_GraphVM(_pillarModel);
+            }
+            // MonteCarlo View
+            else if (_selectedGraphIndex == 1)
+            {
+                GraphViewModel = new Graphs.Confinement_GraphVM(_pillarModel);
+            }
+            // Default data View - WH View
+            else
+            {
+                GraphViewModel = new Graphs.WH_GraphVM(_pillarModel);
+            }
         }
     }
 }

@@ -50,17 +50,8 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    
-    <Grid Background="White">
 
-        <Grid.Resources>
-            <DataTemplate DataType="{x:Type vm:PillarDataViewModel}">
-                <local:PillarDataView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:MonteCarloViewModel}">
-                <local:MonteCarloView/>
-            </DataTemplate>
-        </Grid.Resources>
+    <Grid Background="White">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
@@ -71,15 +62,15 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ListBox ItemContainerStyle="{StaticResource NavMenuStyle}" Name="GraphTabList" Background="#d9d9d9" SelectedIndex="{Binding SelectedViewIndex}" DisplayMemberPath="Name" >
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBoxItem Content="Pillar Data" Background="#bfbfbf"></ListBoxItem>
-            <ListBoxItem Content="Simulation" Background="#bfbfbf"></ListBoxItem>
-        </ListBox>
+        <ComboBox 
+            x:Name="comboBox" 
+            Width="100" 
+            HorizontalAlignment="Left"
+            SelectedIndex="{Binding SelectedFormulaIndex, Mode=TwoWay}"
+            ItemsSource="{Binding FormulaDataSource}"
+            >
+
+        </ComboBox>
 
         <syncfusion:PropertyGrid 
             x:Name="Propgrid"
@@ -102,6 +93,105 @@
 
         <Button Click="Button_Click" Content="Refresh" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="2"></Button>
 
-        <ContentControl Content="{Binding CurrentViewModel}" Grid.Column="0" Grid.Row="1"/>
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <chart:SfChart 
+            BorderThickness="0"
+            Grid.Row="0"
+            Header="{Binding GraphViewModel.GraphHeader}"
+            FontSize="24"
+            Background="White"
+            BorderBrush="#d6d6d6">
+                <chart:SfChart.PrimaryAxis>
+                    <chart:NumericalAxis
+                    StartRangeFromZero="True"
+                    Header="{Binding GraphViewModel.xAxisHeader}"
+                    FontSize="14">
+                    </chart:NumericalAxis>
+                </chart:SfChart.PrimaryAxis>
+
+                <chart:SfChart.SecondaryAxis>
+                    <chart:NumericalAxis
+                    StartRangeFromZero="True"
+                    Header="{Binding GraphViewModel.yAxisHeader}"
+                    FontSize="14">
+                    </chart:NumericalAxis>
+                </chart:SfChart.SecondaryAxis>
+
+                <chart:AreaSeries
+                XBindingPath="x"
+                YBindingPath="y"
+                Interior="#ffeded"
+                StrokeThickness="2"
+                ItemsSource="{Binding GraphViewModel.GraphLineFail}"           
+                />
+
+                <chart:AreaSeries
+                XBindingPath="x"
+                YBindingPath="y"
+                Interior="#eef7e9"
+                StrokeThickness="2"
+                ItemsSource="{Binding GraphViewModel.GraphLineStable}"           
+                />
+
+                <chart:ScatterSeries
+                XBindingPath="x"
+                YBindingPath="y"
+                ScatterHeight="12"
+                ScatterWidth ="12"
+                Interior="{Binding GraphViewModel.GraphPointColor}"
+                ItemsSource="{Binding GraphViewModel.GraphPoint}"
+                />
+            </chart:SfChart>
+
+            <ListBox BorderThickness="0" Grid.Row="1" ItemContainerStyle="{StaticResource NavMenuStyle}" Background="#ebebeb" SelectedIndex="{Binding SelectedGraphIndex}" DisplayMemberPath="Name" >
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBoxItem Content="Width/Height" Background="White"></ListBoxItem>
+                <ListBoxItem Content="Confinement" Background="White"></ListBoxItem>
+            </ListBox>
+
+
+            <DockPanel Grid.Row="2" Background="#ebebeb">
+                <Border Padding="10"
+                    Margin="20"
+                    BorderThickness="2"
+                    BorderBrush="DarkGray"
+                    Background="White" >
+                    <DataGrid Focusable="False"  
+                          RowBackground="White" 
+                          ColumnWidth="*" 
+                          FontWeight="Medium" 
+                          BorderThickness="0" 
+                          VerticalAlignment="Top"  
+                          ItemsSource="{Binding PillarDataGrid}" 
+                          HorizontalGridLinesBrush="Transparent" 
+                          VerticalGridLinesBrush="LightGray">
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#f06e3e"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="FontWeight" Value="Medium"/>
+                                <Setter Property="Padding" Value="5"/>
+                            </Style>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontWeight" Value="Medium"/>
+                            </Style>
+                        </DataGrid.Resources>
+                    </DataGrid>
+                </Border>
+            </DockPanel>
+
+        </Grid>
     </Grid>
 </UserControl>

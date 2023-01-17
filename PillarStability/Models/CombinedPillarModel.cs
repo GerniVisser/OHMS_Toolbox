@@ -2,6 +2,7 @@
 
 namespace PillarStability.Models
 {
+    // Not Inuse but keeping as feature might be reintroduced in future
     public class CombinedPillarModel
     {
         private List<PillarModel> _pillarModels;

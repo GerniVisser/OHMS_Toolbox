@@ -10,6 +10,7 @@ using System.Windows.Data;
 
 namespace PillarStability.Utils
 {
+    // Used to implement a custom Dropdown menu in Syncfusion PropGrid
     class PropGridCustomEditors
     {
     }
