@@ -9,6 +9,7 @@ namespace PillarStability.Models
 {
     public class LunderPakalnisModel : MonteCarloModel
     {
+        public float UCS;
         public float StdLength;
         public float StdWidth;
         public float StdHeight;
@@ -27,6 +28,7 @@ namespace PillarStability.Models
 
         public LunderPakalnisModel()
         {
+            UCS = 111.42f;
             StdLength = 0f;
             StdWidth = 0f;
             StdHeight = 0f;

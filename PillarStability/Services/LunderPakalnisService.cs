@@ -23,7 +23,7 @@ namespace PillarStability.Services
             float C1 = getExcelNormInv(lunderPakalnisModel.C1, lunderPakalnisModel.StdC1);
             float C2 = getExcelNormInv(lunderPakalnisModel.C2, lunderPakalnisModel.StdC2);
 
-            float UCS = getExcelNormInv(pillarModel.UCS, lunderPakalnisModel.StdUcs);
+            float UCS = getExcelNormInv(lunderPakalnisModel.UCS, lunderPakalnisModel.StdUcs);
             float APS = getExcelNormInv(pillarModel.APS, lunderPakalnisModel.StdAps);
 
             float PSK = getExcelNormInv(lunderPakalnisModel.Psk, lunderPakalnisModel.StdPsk);
@@ -62,7 +62,7 @@ namespace PillarStability.Services
             BinsService binsService = new BinsService(fosList, lunderPakalnisModel.Bins);
 
             float K = MathF.Tan(MathF.Acos((1 - pillarDataService.APC) / (1 + pillarDataService.APC)));
-            float dsf = lunderPakalnisModel.Psk * pillarModel.UCS * (lunderPakalnisModel.C1 + lunderPakalnisModel.C2 * K) / pillarModel.APS;
+            float dsf = lunderPakalnisModel.Psk * lunderPakalnisModel.UCS * (lunderPakalnisModel.C1 + lunderPakalnisModel.C2 * K) / pillarModel.APS;
 
             return new MonteCarloDataObject()
             {

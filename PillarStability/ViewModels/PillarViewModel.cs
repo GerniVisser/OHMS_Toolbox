@@ -26,7 +26,6 @@ namespace PillarStability.ViewModels
         {
             _pillarModel = pillarModel;
 
-            _propGridViewModel = new PropGrid.PillarPropGridVM(_pillarModel);
             _pillarDataGridViewModel = new PillarDataGridViewModel(_pillarModel);
 
             SelectedGraphIndex = 0;
@@ -118,20 +117,52 @@ namespace PillarStability.ViewModels
 
         private void SetFormulaViewModel()
         {
-            // WH View
-            if (SelectedFormulaIndex == 0)
+
+            switch (SelectedFormulaIndex)
             {
-                _propGridViewModel = new PropGrid.PillarPropGridVM(_pillarModel);
-            }
-            // MonteCarlo View
-            else if (SelectedFormulaIndex == 1)
-            {
-                _propGridViewModel = new PropGrid.MonteCarloPropGridVM(_pillarModel);
-            }
-            // Default data View - WH View
-            else
-            {
-                _propGridViewModel = new PropGrid.PillarPropGridVM(_pillarModel);
+                case 0:
+                    {
+                        _pillarModel.MonteCarloModel = _pillarModel.MonteCarloModel = new LunderPakalnisModel();
+                        _propGridViewModel = new PropGrid.LunderPakalnisPropGridVM(_pillarModel);
+                        break;
+                    }
+                case 1:
+                    {
+                        _pillarModel.MonteCarloModel = new PowerFormulaModel(0.46f, 0.66f);
+                        _propGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
+                        break;
+                    }
+                case 2:
+                    {
+                        _pillarModel.MonteCarloModel = new PowerFormulaModel(0.5f, 0.75f);
+                        _propGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
+                        break;
+                    }
+                case 3:
+                    {
+                        _pillarModel.MonteCarloModel = new PowerFormulaModel(0.5f, 0.70f);
+                        _propGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
+                        break;
+                    }
+                case 4:
+                    {
+                        _pillarModel.MonteCarloModel = new PowerFormulaModel(0.76f, 0.36f);
+                        _propGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
+                        break;
+                    }
+                case 5:
+                    {
+                        _pillarModel.MonteCarloModel = new PowerFormulaModel(0.67f, 0.32f);
+                        _propGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
+                        break;
+                    }
+
+                default:
+                    {
+                        _pillarModel.MonteCarloModel = new PowerFormulaModel(0.67f, 0.32f);
+                        _propGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
+                        break;
+                    }
             }
 
             OnPropertyChanged(nameof(PropGridViewModel));

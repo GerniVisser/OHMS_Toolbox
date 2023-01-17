@@ -12,7 +12,6 @@ namespace PillarStability.Models
         public float Width;
         public float Length;
         public float APS;
-        public float UCS;
         public Brush Color;
         public MonteCarloModel MonteCarloModel;
 
@@ -23,20 +22,18 @@ namespace PillarStability.Models
             Width = 7;
             Length = 7;
             APS = 80.34f;
-            UCS = 111.42f;
             Color = BrushService.getRandomBrush();
             // LunderPakalnis Extendes MonteCarloModel
             MonteCarloModel = new LunderPakalnisModel();
         }
 
-        public PillarModel(string name, float height, float width, float length, float aps, float ucs)
+        public PillarModel(string name, float height, float width, float length, float aps)
         {
             Name = name;
             Height = height;
             Width = width;
             Length = length;
             APS = aps;
-            UCS = ucs;
             Color = BrushService.getRandomBrush();
             MonteCarloModel = new LunderPakalnisModel();
         }

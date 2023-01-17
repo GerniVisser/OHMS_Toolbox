@@ -1,7 +1,9 @@
 ﻿using PillarStability.Models;
 using SharedWpfLibrary.Tools;
+using Syncfusion.Windows.Shared;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +13,12 @@ namespace PillarStability.Services
     public class Confinement_Service: PillarDataService
     {
         private PillarModel _pillarModel;
+        private LunderPakalnisModel _lunderPakalnisModel;
 
         public Confinement_Service(PillarModel pillarModel) : base(pillarModel)
         {
             _pillarModel = pillarModel;
+            _lunderPakalnisModel = (LunderPakalnisModel)pillarModel.MonteCarloModel;
         }
 
         public override List<Coord> graphFail()
@@ -35,9 +39,9 @@ namespace PillarStability.Services
 
                 K = (float)(Math.Tan(Math.Acos((1 - APC) / (1 + APC))));
 
-                PS = (float)((0.44 * _pillarModel.UCS) * (0.68 + 0.52 * K));
+                PS = (float)((0.44 * _lunderPakalnisModel.UCS) * (0.68 + 0.52 * K));
 
-                FOS1 = PS / _pillarModel.UCS;
+                FOS1 = PS / _lunderPakalnisModel.UCS;
 
                 var coord = new Coord { x = APC, y = FOS1 };
 
@@ -66,9 +70,9 @@ namespace PillarStability.Services
 
                 K = (float)(Math.Tan(Math.Acos((1 - APC) / (1 + APC))));
 
-                PS = (float)((0.44 * _pillarModel.UCS) * (0.68 + 0.52 * K));
+                PS = (float)((0.44 * _lunderPakalnisModel.UCS) * (0.68 + 0.52 * K));
 
-                FOS14 = PS / (1.4f * _pillarModel.UCS);
+                FOS14 = PS / (1.4f * _lunderPakalnisModel.UCS);
 
                 var coord = new Coord { x = APC, y = FOS14 };
 

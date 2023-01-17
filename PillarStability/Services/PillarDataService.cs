@@ -42,7 +42,8 @@ namespace PillarStability.Services
 
         public float APStUCS
         {
-            get { return _pillarModel.APS / _pillarModel.UCS; }
+            // Replaced UCS with a constant for testing
+            get { return _pillarModel.APS / 100; }
         }
 
         public float APC
