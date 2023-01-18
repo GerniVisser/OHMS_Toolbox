@@ -90,6 +90,17 @@ namespace PillarStability.ViewModels.PropGrid
             }
         }
 
+        [DisplayName("Desired FOS"), Description("Desired Factor of Safety"), Category("General"), Display(Order = 0)]
+        public float DesFOS
+        {
+            get { return _pillarModel.DesiredFOS; }
+            set
+            {
+                _pillarModel.DesiredFOS = value;
+                OnPropertyChanged(nameof(DesFOS));
+            }
+        }
+
         [DisplayName("Iterations"), Description("Number of sumulation run"), Category("Monte Carlo"), Display(Order = 1)]
         public int Iterations
         {

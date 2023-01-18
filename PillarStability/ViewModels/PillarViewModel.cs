@@ -1,6 +1,8 @@
 ﻿using _SharedWpfLibrary.ViewModels;
+using PillarStability.Commands;
 using PillarStability.DataObjects;
 using PillarStability.Models;
+using PillarStability.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,6 +27,7 @@ namespace PillarStability.ViewModels
         public PillarViewModel(PillarModel pillarModel)
         {
             _pillarModel = pillarModel;
+            _calculateMonteCarlo = new DelegateCommand(Calculate);
 
             _pillarDataGridViewModel = new PillarDataGridViewModel(_pillarModel);
 
@@ -35,6 +38,13 @@ namespace PillarStability.ViewModels
 
         }
 
+        private ICommand _calculateMonteCarlo;
+
+        public ICommand CalculateMonteCarlo
+        {
+            get { return _calculateMonteCarlo; }
+        }
+
         public string Name
         {
             get { return _pillarModel.Name; }
@@ -43,14 +53,6 @@ namespace PillarStability.ViewModels
                 Name = value; 
             }
         }
-
-        private void HandlePropGridChange(object sender, PropertyChangedEventArgs e)
-        {
-            OnPropertyChanged(nameof(GraphViewModel));
-            OnPropertyChanged(nameof(PillarDataGrid));
-            OnPropertyChanged(nameof(Name));
-        }
-
 
         public ViewModelBase PropGridViewModel
         {
@@ -115,6 +117,13 @@ namespace PillarStability.ViewModels
             }
         }
 
+        private void Calculate(object obj)
+        {
+            OnPropertyChanged(nameof(GraphViewModel));
+            OnPropertyChanged(nameof(PillarDataGrid));
+            OnPropertyChanged(nameof(Name));
+        }
+
         private void SetFormulaViewModel()
         {
 
@@ -122,7 +131,7 @@ namespace PillarStability.ViewModels
             {
                 case 0:
                     {
-                        _pillarModel.MonteCarloModel = _pillarModel.MonteCarloModel = new LunderPakalnisModel();
+                        _pillarModel.MonteCarloModel = new LunderPakalnisModel();
                         _propGridViewModel = new PropGrid.LunderPakalnisPropGridVM(_pillarModel);
                         break;
                     }
@@ -166,9 +175,6 @@ namespace PillarStability.ViewModels
             }
 
             OnPropertyChanged(nameof(PropGridViewModel));
-
-            // Subscribe to PropGridModel Property Changed 
-            PropGridViewModel.PropertyChanged += HandlePropGridChange;
         }
 
 

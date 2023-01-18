@@ -60,17 +60,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-
-        <ComboBox 
-            x:Name="comboBox" 
-            Width="100" 
-            HorizontalAlignment="Left"
-            SelectedIndex="{Binding SelectedFormulaIndex, Mode=TwoWay}"
-            ItemsSource="{Binding FormulaDataSource}"
-            >
-
-        </ComboBox>
 
         <syncfusion:PropertyGrid 
             x:Name="Propgrid"
@@ -91,9 +82,19 @@
             SortDirection="{x:Null}"
             />
 
-        <Button Click="Button_Click" Content="Refresh" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="2"></Button>
+        <Button
+            Command="{Binding CalculateMonteCarlo}"
+            Grid.Column="1"
+            Grid.Row="2"
+            FontSize="15"
+            Background="#f06e3e"
+            Foreground="White"
+            VerticalAlignment="Stretch" 
+            HorizontalAlignment="Stretch">
+            Calculate
+        </Button>
 
-        <Grid Grid.Column="0" Grid.Row="1">
+        <Grid Grid.Column="0" Grid.RowSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="30"/>
@@ -148,6 +149,18 @@
                 ItemsSource="{Binding GraphViewModel.GraphPoint}"
                 />
             </chart:SfChart>
+
+            <ComboBox 
+            x:Name="comboBox" 
+            Width="150" 
+            Height="30"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            SelectedIndex="{Binding SelectedFormulaIndex, Mode=TwoWay}"
+            ItemsSource="{Binding FormulaDataSource}"
+            >
+
+            </ComboBox>
 
             <ListBox BorderThickness="0" Grid.Row="1" ItemContainerStyle="{StaticResource NavMenuStyle}" Background="#ebebeb" SelectedIndex="{Binding SelectedGraphIndex}" DisplayMemberPath="Name" >
                 <ListBox.ItemsPanel>

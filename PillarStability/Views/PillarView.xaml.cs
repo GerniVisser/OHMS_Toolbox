@@ -19,20 +19,5 @@ namespace PillarStability.Views
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Propgrid.RefreshPropertygrid();
-        }
-
-        private void Propgrid_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
-        {
-
-        }
-
-        private void Propgrid_SelectedPropertyItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
     }
 }

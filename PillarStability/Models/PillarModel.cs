@@ -12,6 +12,7 @@ namespace PillarStability.Models
         public float Width;
         public float Length;
         public float APS;
+        public float DesiredFOS;
         public Brush Color;
         public MonteCarloModel MonteCarloModel;
 
@@ -22,6 +23,7 @@ namespace PillarStability.Models
             Width = 7;
             Length = 7;
             APS = 80.34f;
+            DesiredFOS = 1f;
             Color = BrushService.getRandomBrush();
             // LunderPakalnis Extendes MonteCarloModel
             MonteCarloModel = new LunderPakalnisModel();
