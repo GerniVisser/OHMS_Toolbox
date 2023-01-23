@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace PillarStability.Views
 {
     /// <summary>
-    /// Interaction logic for MonteCarloView.xaml
+    /// Interaction logic for WH_GraphView.xaml
     /// </summary>
-    public partial class MonteCarloView : UserControl
+    public partial class WH_GraphView : UserControl
     {
-        public MonteCarloView()
+        public WH_GraphView()
         {
             InitializeComponent();
         }

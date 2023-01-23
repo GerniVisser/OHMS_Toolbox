@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PillarStability.DataObjects
 {
-    public class PillarStrengthOptions
+    public static class PillarStrengthOptions
     {
-        public List<string> Options { 
+        public static List<string> Options { 
             get 
             {
                 return new List<string>()
@@ -21,11 +21,6 @@ namespace PillarStability.DataObjects
                     "PlatMine UG2"
                 };
             }
-            set { } }
-
-        public override string ToString()
-        {
-            return base.ToString();
         }
     }
 }

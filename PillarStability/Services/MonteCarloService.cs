@@ -10,79 +10,35 @@ using System.Threading.Tasks;
 
 namespace PillarStability.Services
 {
-    public class MonteCarloService
+    public static class MonteCarloService
     {
-        private PillarModel _pillarModel;
-        private Random _random;
-
-        public MonteCarloModel MonteCarloModel
+        public static void updateMCLists(PillarModel pillarModel, PillarStrengthService pillarStrengthService)
         {
-            get { return _pillarModel.MonteCarloModel; }
-            set { _pillarModel.MonteCarloModel = value; }
-        }
+            Random random = new Random();   
 
+            MonteCarloModel monteCarloModel = pillarModel.MonteCarloModel;
+            monteCarloModel.FosList.Clear();
+            monteCarloModel.StrengthList.Clear();
 
-        private List<float> _fosList;
-
-        public List<float> Foslist
-        {
-            get 
+            for (int i = 0; i < monteCarloModel.Iterations; i++)
             {
-                if (_fosList == null)
-                {
-                    _fosList = generateFOSList();
-                }
-                return _fosList;
-            }
-        }
+                var variablePillarModelService = pillarStrengthService.generateExcelNormInvPillarStrengthService(random);
+                variablePillarModelService.calculateCurrentStrength();   
 
-        public FoSAlgoritm FoSAlgoritm
-        {
-            get 
-            {
-                if (MonteCarloModel is LunderPakalnisModel)
-                {
-                    return new LunderPakalnisService();
-                }
-                else if (MonteCarloModel is PowerFormulaModel)
-                {
-                    return new PowerFormulaService();
-                }
-                else return null;
-            }
-        }
-
-        public MonteCarloService(PillarModel pillarModel)
-        {
-            _pillarModel = pillarModel;
-            // Gernerate random seed
-            _random = new Random(Guid.NewGuid().GetHashCode());
-        }
-
-        public void CalculateMonteCarlo()
-        {
-            _fosList = generateFOSList();
-        }
-
-        private List<float> generateFOSList()
-        {
-            List<float> fosList = new List<float>();
-
-            for (int i = 0; i < MonteCarloModel.Iterations; i++)
-            {
-                float FOS = FoSAlgoritm.Calculate(getExcelNormInv, _pillarModel);
+                float Strength = variablePillarModelService.PillarStrength;
+                float FOS = variablePillarModelService.PillarFos;
 
                 if (!float.IsNaN(FOS))
                 {
-                    fosList.Add(FOS);
+                    monteCarloModel.FosList.Add(FOS);
+                    monteCarloModel.StrengthList.Add(Strength);
                 }
             }
-            return fosList;
         }
-        public List<Coord> generateMonteCarloChartLine()
+        public static List<Coord> generateMonteCarloChartLine(PillarModel pillarModel)
         {
             List<Coord> res = new List<Coord>();
-            BinsService binsService = new BinsService(Foslist, MonteCarloModel.Bins);
+            BinsService binsService = new BinsService(pillarModel.MonteCarloModel.FosList, pillarModel.MonteCarloModel.Bins);
 
             int freqSum = binsService.getSumOffrequencies();
 
@@ -103,26 +59,26 @@ namespace PillarStability.Services
             return res;
         }
 
-        public List<Coord> generateMonteCarloCumulativeChartLine()
+        public static List<Coord> generateMonteCarloCumulativeChartLine(PillarModel pillarModel)
         {
             List<Coord> res = new List<Coord>();
-            BinsService binsService = new BinsService(Foslist, MonteCarloModel.Bins);
+            BinsService binsService = new BinsService(pillarModel.MonteCarloModel.FosList, pillarModel.MonteCarloModel.Bins);
 
             int freqSum = binsService.getSumOffrequencies();
 
-            float cumNormFreq = 0f;
+            float cumnormfreq = 0f;
 
             for (int i = 0; i < binsService.BinsList.Count; i++)
             {
                 float x = binsService.BinsList[i].Min;
                 float y = (float)binsService.BinsList[i].Frequency / (float)freqSum;
 
-                cumNormFreq += y;
+                cumnormfreq += y;
 
                 Coord coord = new Coord()
                 {
                     x = x,
-                    y = cumNormFreq
+                    y = cumnormfreq
                 };
 
                 res.Add(coord);
@@ -131,7 +87,18 @@ namespace PillarStability.Services
             return res;
         }
 
-        public List<Coord> generateFos1ChartLine()
+        public static List<Coord> generateFosChartLine(float Fos)
+        {
+            List<Coord> res = new List<Coord>()
+            {
+                new Coord(){ x = Fos, y = 0 },
+                new Coord(){ x = Fos, y = 1 },
+            };
+
+            return res;
+        }
+
+        public static List<Coord> generateFos1ChartLine()
         {
             List<Coord> res = new List<Coord>()
             {
@@ -140,46 +107,6 @@ namespace PillarStability.Services
             };
 
             return res;
-        }
-
-        public List<Coord> generateFos14ChartLine()
-        {
-            List<Coord> res = new List<Coord>()
-            {
-                new Coord(){ x = 1.4, y = 0 },
-                new Coord(){ x = 1.4, y = 1 },
-            };
-
-            return res;
-        }
-
-        public MonteCarloDataObject generateMonteCarloDataObject()
-        {
-            return FoSAlgoritm.GenerateSummaryObject(_pillarModel, Foslist);
-        }
-
-        private float getExcelNormInv(float mean, float stdev)
-        {
-            float normInv = 0.0f;
-
-            if (stdev == 0.0f)
-            {
-                return mean;
-            }
-            else
-            {
-                try
-                {
-                    NormalDistribution n = new NormalDistribution(mean, stdev);
-                    normInv = (float)n.InverseLeftProbability(_random.NextDouble());
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
-
-                return normInv;
-            }
         }
     }
 }

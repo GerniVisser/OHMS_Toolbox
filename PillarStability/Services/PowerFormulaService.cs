@@ -1,5 +1,4 @@
-﻿using PillarStability.DataObjects;
-using PillarStability.Models;
+﻿using PillarStability.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,27 +7,42 @@ using System.Threading.Tasks;
 
 namespace PillarStability.Services
 {
-    public class PowerFormulaService : FoSAlgoritm
+    public class PowerFormulaService : PillarStrengthService
     {
-        public float Calculate(Func<float, float, float> getExcelNormInv, PillarModel pillarModel)
+        private PillarModel _pillarModel;
+        private PowerFormulaModel _powerFormulaModel;
+
+        public PowerFormulaService(PillarModel pillarModel) : base(pillarModel)
         {
-            PowerFormulaModel powerFormulaModel = (PowerFormulaModel)pillarModel.MonteCarloModel;
-
-            float H = getExcelNormInv(pillarModel.Height, powerFormulaModel.StdHeight);
-            float W = getExcelNormInv(pillarModel.Width, powerFormulaModel.StdWidth);
-
-            float K = getExcelNormInv(powerFormulaModel.K, powerFormulaModel.StdK);
-
-            float PS = K * MathF.Pow(W, powerFormulaModel.Alpha) / MathF.Pow(H, powerFormulaModel.Beta);
-
-            float FOS = PS / pillarModel.APS;
-
-            return FOS;
+            _pillarModel = pillarModel;
+            _powerFormulaModel = (PowerFormulaModel)pillarModel.PillarStrengthModel;
         }
 
-        public MonteCarloDataObject GenerateSummaryObject(PillarModel pillarModel, List<float> fosList)
+        public override float calculatePillarStrengthAtWH(float width, float height)
         {
-            return null;
+            float Hb = MathF.Pow(height, _powerFormulaModel.Beta);
+            float Wa = MathF.Pow(width, _powerFormulaModel.Alpha);
+            float PS = _powerFormulaModel.K * (Wa / Hb);
+
+            return PS;
+        }
+
+        public override PillarStrengthService generateExcelNormInvPillarStrengthService(Random random)
+        {
+            PowerFormulaModel basePFModel = (PowerFormulaModel)_pillarModel.PillarStrengthModel;
+            
+            PillarModel res = new PillarModel(_pillarModel.Name);
+            res.PillarStrengthModel = new PowerFormulaModel(basePFModel.Alpha, basePFModel.Beta);
+            PowerFormulaModel resL = (PowerFormulaModel)res.PillarStrengthModel;
+
+            // Generate Random values within sample size
+            res.Height = getExcelNormInv(_pillarModel.Height, basePFModel.StdHeight, random);
+            res.Width = getExcelNormInv(_pillarModel.Width, basePFModel.StdWidth, random);
+            res.Length = getExcelNormInv(_pillarModel.Length, basePFModel.StdLength, random);
+
+            resL.K = getExcelNormInv(basePFModel.K, basePFModel.StdK, random);
+
+            return new PowerFormulaService(res);
         }
     }
 }

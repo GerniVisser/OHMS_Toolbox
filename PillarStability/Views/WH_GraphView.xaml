@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="PillarStability.Views.WH_GraphView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:chart="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
+             xmlns:local="clr-namespace:PillarStability.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <chart:SfChart 
+            BorderThickness="0"
+            Grid.Row="0"
+            Header="{Binding GraphHeader}"
+            FontSize="24"
+            Background="White"
+            BorderBrush="#d6d6d6">
+            <chart:SfChart.PrimaryAxis>
+                <chart:NumericalAxis
+                    StartRangeFromZero="True"
+                    Header="{Binding xAxisHeader}"
+                    FontSize="14">
+                </chart:NumericalAxis>
+            </chart:SfChart.PrimaryAxis>
+
+            <chart:SfChart.SecondaryAxis>
+                <chart:NumericalAxis
+                    StartRangeFromZero="True"
+                    Header="{Binding yAxisHeader}"
+                    FontSize="14">
+                </chart:NumericalAxis>
+            </chart:SfChart.SecondaryAxis>
+
+            <chart:AreaSeries
+                XBindingPath="x"
+                YBindingPath="y"
+                Interior="#eef7e9"
+                StrokeThickness="2"
+                ItemsSource="{Binding GraphLineStable}"           
+                />
+
+            <chart:ScatterSeries
+                XBindingPath="x"
+                YBindingPath="y"
+                ScatterHeight="12"
+                ScatterWidth ="12"
+                Interior="{Binding GraphPointColor}"
+                ItemsSource="{Binding GraphPoint}"
+                />
+        </chart:SfChart>
+
+    </Grid>
+</UserControl>

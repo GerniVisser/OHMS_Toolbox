@@ -21,7 +21,7 @@ namespace PillarStability.ViewModels.PropGrid
         {
             _pillarModel = pillarModel;
             _monteCarloModel = pillarModel.MonteCarloModel;
-            _powerFormulaModel = (PowerFormulaModel)_pillarModel.MonteCarloModel;
+            _powerFormulaModel = (PowerFormulaModel)_pillarModel.PillarStrengthModel;
         }
 
         [DisplayName("Name"), Description("Pillar Nickname"), Category("General"), Display(Order = 0)]

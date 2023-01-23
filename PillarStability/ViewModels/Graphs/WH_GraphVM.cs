@@ -11,7 +11,7 @@ using System.Windows.Media;
 
 namespace PillarStability.ViewModels.Graphs
 {
-    public class WH_GraphVM: ViewModelBase
+    public class WH_GraphVM: GraphBaseViewModel
     {
         private PillarModel _pillarModel;
         private Wh_Service _wh_Service;
@@ -22,24 +22,34 @@ namespace PillarStability.ViewModels.Graphs
             _wh_Service = new Wh_Service(pillarModel);
         }
 
+        public override void Update()
+        {
+            if(_pillarModel.PillarStrengthModel is LunderPakalnisModel)
+            {
+                _wh_Service.PillarStrengthService = new LunderPakalnisService(_pillarModel);
+            }
+            else
+            {
+                _wh_Service.PillarStrengthService = new PowerFormulaService(_pillarModel);
+            }
+            OnPropertyChanged(nameof(GraphLineStable));
+            OnPropertyChanged(nameof(GraphPoint));
+            OnPropertyChanged(nameof(GraphPointColor));
+        }
+
         public string GraphHeader
         {
-            get { return "Width / Height Stability Graph"; }
+            get { return "Stress Analysis"; }
         }
 
         public string xAxisHeader
         {
-            get { return "Width/Height"; }
+            get { return "Width / Heigth"; }
         }
 
         public string yAxisHeader
         {
-            get { return "APS/UCS"; }
-        }
-
-        public List<Coord> GraphLineFail
-        {
-            get { return _wh_Service.graphFail(); }
+            get { return "Average Stress"; }
         }
 
         public List<Coord> GraphLineStable

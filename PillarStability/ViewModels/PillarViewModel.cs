@@ -3,6 +3,7 @@ using PillarStability.Commands;
 using PillarStability.DataObjects;
 using PillarStability.Models;
 using PillarStability.Services;
+using PillarStability.ViewModels.Graphs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,24 +19,23 @@ namespace PillarStability.ViewModels
     {
         private PillarModel _pillarModel;
         private ViewModelBase _propGridViewModel;
-        private ViewModelBase _graphViewModel;
-        private PillarDataGridViewModel _pillarDataGridViewModel;
+        private OutputGridViewModel _outputGridViewModel;
+        private PillarStrengthService _strengthService;
+        
         private int _selectedGraphIndex;
         private int _selectedFormulaIndex;
-        private PillarStrengthOptions _strengthOptions;
+
+        private List<GraphBaseViewModel> _graphViewModelList;
 
         public PillarViewModel(PillarModel pillarModel)
         {
             _pillarModel = pillarModel;
+
+            _outputGridViewModel = new OutputGridViewModel(_pillarModel);
+            setupGraphs();
+            setFormulaViewModel();
+
             _calculateMonteCarlo = new DelegateCommand(Calculate);
-
-            _pillarDataGridViewModel = new PillarDataGridViewModel(_pillarModel);
-
-            SelectedGraphIndex = 0;
-            SelectedFormulaIndex = 0;
-
-            SetFormulaViewModel();
-
         }
 
         private ICommand _calculateMonteCarlo;
@@ -45,6 +45,7 @@ namespace PillarStability.ViewModels
             get { return _calculateMonteCarlo; }
         }
 
+        // Used by PillarStabilityViewModel to determine name of pillar
         public string Name
         {
             get { return _pillarModel.Name; }
@@ -60,6 +61,35 @@ namespace PillarStability.ViewModels
             {
                 return _propGridViewModel;
             }
+            set
+            {
+                _propGridViewModel = value;
+                OnPropertyChanged(nameof(PropGridViewModel));
+            }
+        }
+
+        public OutputGridViewModel OutputGridViewModel 
+        {
+            get
+            {
+                return _outputGridViewModel;
+            }
+        }
+
+        public GraphBaseViewModel CurrentGraphViewModel
+        {
+            get 
+            {
+                return _graphViewModelList[_selectedGraphIndex]; 
+            }
+        }
+
+        public List<string> FormulaDataSource
+        {
+            get
+            {
+                return PillarStrengthOptions.Options;
+            }
         }
 
         public int SelectedGraphIndex
@@ -67,10 +97,8 @@ namespace PillarStability.ViewModels
             get { return _selectedGraphIndex; }
             set
             {
-                //if (_selectedViewIndex == value) return;
                 _selectedGraphIndex = value;
-
-                SetGraphViewModel();
+                OnPropertyChanged(nameof(CurrentGraphViewModel));
             }
         }
 
@@ -79,122 +107,87 @@ namespace PillarStability.ViewModels
             get { return _selectedFormulaIndex; }
             set
             {
-                //if (_selectedViewIndex == value) return;
                 _selectedFormulaIndex = value;
-
-                SetFormulaViewModel();
-            }
-        }
-
-        public ViewModelBase GraphViewModel
-        {
-            get { return _graphViewModel; }
-            set
-            {
-                _graphViewModel = value;
-                OnPropertyChanged(nameof(GraphViewModel));
-            }
-        }
-
-        public List<string> FormulaDataSource
-        {
-            get
-            {
-                if(_strengthOptions == null)
-                {
-                    _strengthOptions = new PillarStrengthOptions();
-                }
-                return _strengthOptions.Options;
-            }
-        }
-
-        public Collection<PillarDataGridViewModel> PillarDataGrid
-        {
-            get
-            {
-                // Could not find a better way for ObservableCollection to update the DataGrid without createing a new instance of the Collection
-                return new Collection<PillarDataGridViewModel>() { _pillarDataGridViewModel };
+                setFormulaViewModel();
             }
         }
 
         private void Calculate(object obj)
         {
-            OnPropertyChanged(nameof(GraphViewModel));
-            OnPropertyChanged(nameof(PillarDataGrid));
+            MonteCarloService.updateMCLists(_pillarModel, _strengthService);
+
             OnPropertyChanged(nameof(Name));
+            OnPropertyChanged(nameof(OutputGridViewModel));
+            
+            CurrentGraphViewModel.Update();
         }
 
-        private void SetFormulaViewModel()
+        private void setFormulaViewModel()
         {
 
             switch (SelectedFormulaIndex)
             {
                 case 0:
                     {
-                        _pillarModel.MonteCarloModel = new LunderPakalnisModel();
-                        _propGridViewModel = new PropGrid.LunderPakalnisPropGridVM(_pillarModel);
+                        _pillarModel.PillarStrengthModel = new LunderPakalnisModel();
+                        _strengthService = new LunderPakalnisService(_pillarModel);
+                        PropGridViewModel = new PropGrid.LunderPakalnisPropGridVM(_pillarModel);
                         break;
                     }
                 case 1:
                     {
-                        _pillarModel.MonteCarloModel = new PowerFormulaModel(0.46f, 0.66f);
-                        _propGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
+                        _pillarModel.PillarStrengthModel = new PowerFormulaModel(0.46f, 0.66f);
+                        _strengthService = new PowerFormulaService(_pillarModel);
+                        PropGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
                         break;
                     }
                 case 2:
                     {
-                        _pillarModel.MonteCarloModel = new PowerFormulaModel(0.5f, 0.75f);
-                        _propGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
+                        _pillarModel.PillarStrengthModel = new PowerFormulaModel(0.5f, 0.75f);
+                        _strengthService = new PowerFormulaService(_pillarModel);
+                        PropGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
                         break;
                     }
                 case 3:
                     {
-                        _pillarModel.MonteCarloModel = new PowerFormulaModel(0.5f, 0.70f);
-                        _propGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
+                        _pillarModel.PillarStrengthModel = new PowerFormulaModel(0.5f, 0.70f);
+                        _strengthService = new PowerFormulaService(_pillarModel);
+                        PropGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
                         break;
                     }
                 case 4:
                     {
-                        _pillarModel.MonteCarloModel = new PowerFormulaModel(0.76f, 0.36f);
-                        _propGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
+                        _pillarModel.PillarStrengthModel = new PowerFormulaModel(0.76f, 0.36f);
+                        _strengthService = new PowerFormulaService(_pillarModel);
+                        PropGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
                         break;
                     }
                 case 5:
                     {
-                        _pillarModel.MonteCarloModel = new PowerFormulaModel(0.67f, 0.32f);
-                        _propGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
+                        _pillarModel.PillarStrengthModel = new PowerFormulaModel(0.67f, 0.32f);
+                        _strengthService = new PowerFormulaService(_pillarModel);
+                        PropGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
                         break;
                     }
 
                 default:
                     {
-                        _pillarModel.MonteCarloModel = new PowerFormulaModel(0.67f, 0.32f);
-                        _propGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
+                        _pillarModel.PillarStrengthModel = new PowerFormulaModel(0.67f, 0.32f);
+                        _strengthService = new PowerFormulaService(_pillarModel);
+                        PropGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
                         break;
                     }
             }
 
-            OnPropertyChanged(nameof(PropGridViewModel));
+            Calculate(null);
+            OnPropertyChanged(nameof(CurrentGraphViewModel));
         }
 
-
-        private void SetGraphViewModel()
+        private void setupGraphs()
         {
-            // WH View
-            if (_selectedGraphIndex == 0)
-            {
-                GraphViewModel = new Graphs.WH_GraphVM(_pillarModel);
-            }
-            // MonteCarlo View
-            else if (_selectedGraphIndex == 1)
-            {
-                GraphViewModel = new Graphs.Confinement_GraphVM(_pillarModel);
-            }
-            // Default data View - WH View
-            else
-            {
-                GraphViewModel = new Graphs.WH_GraphVM(_pillarModel);
-            }
+            _graphViewModelList = new List<GraphBaseViewModel>();
+            _graphViewModelList.Add(new WH_GraphVM(_pillarModel));
+            _graphViewModelList.Add(new MonteCarlo_GraphVM(_pillarModel));
         }
     }
 }

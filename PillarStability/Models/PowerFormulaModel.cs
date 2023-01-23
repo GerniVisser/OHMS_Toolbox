@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PillarStability.Models
 {
-    public class PowerFormulaModel : MonteCarloModel
+    public class PowerFormulaModel : PillarStrengthModel
     {
         public float Alpha;
         public float Beta;
@@ -14,6 +14,7 @@ namespace PillarStability.Models
         public float StdK;
         public float StdWidth;
         public float StdHeight;
+        public float StdLength;
 
         public PowerFormulaModel()
         {
@@ -23,16 +24,18 @@ namespace PillarStability.Models
             StdK = 0.5f;
             StdWidth = 0.5f;
             StdHeight = 0.5f;
+            StdLength = 0.5f;
         }
 
         public PowerFormulaModel(float alpha, float beta)
         {
             Alpha = alpha;
             Beta = beta;
-            K = 0.5f;
+            K = 70f;
             StdK = 0.5f;
             StdWidth = 0.5f;
             StdHeight = 0.5f;
+            StdLength = 0.5f;
         }
     }
 }

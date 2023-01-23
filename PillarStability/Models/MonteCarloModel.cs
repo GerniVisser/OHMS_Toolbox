@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 
 namespace PillarStability.Models
 {
-    public abstract class MonteCarloModel
+    public class MonteCarloModel
     {
         public int Iterations;
         public int Bins;
+        public List<float> StrengthList;
+        public List<float> FosList;
 
-        protected MonteCarloModel()
+        public MonteCarloModel()
         {
             Iterations = 5000;
             Bins = 50;
+            StrengthList = new List<float>();
+            FosList = new List<float>();
         }
     }
 }

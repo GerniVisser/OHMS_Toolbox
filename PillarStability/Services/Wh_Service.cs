@@ -8,70 +8,38 @@ using System.Threading.Tasks;
 
 namespace PillarStability.Services
 {
-    public class Wh_Service : PillarDataService
+    public class Wh_Service
     {
         private PillarModel _pillarModel;
-        private LunderPakalnisModel _lunderPakalnisModel;
-        public Wh_Service(PillarModel pillarModel) : base(pillarModel)
+        private PillarStrengthService _pillarStrengthService;
+
+        private const float STEP_SIZE = 0.5f;
+        public Wh_Service(PillarModel pillarModel)
         {
             _pillarModel = pillarModel;
-            _lunderPakalnisModel = (LunderPakalnisModel)pillarModel.MonteCarloModel;
         }
 
-        public override List<Coord> graphFail()
+        public PillarStrengthService PillarStrengthService 
         {
-            List<Coord> Res = new List<Coord>();
-            float APC, K, PS, FOS1;
-
-            for (float wTh = 0; wTh < 30; wTh += GraphStepSize)
-            {
-                if (wTh > 3.99)
-                {
-                    APC = 0.23f + 0.017f * wTh;
-                }
-                else
-                {
-                    APC = (float)(0.34f * Math.Pow(Math.Log10(wTh + 0.75f), (1.4f / wTh)));
-                }
-
-                K = (float)(Math.Tan(Math.Acos((1 - APC) / (1 + APC))));
-
-                PS = (float)((0.44 * _lunderPakalnisModel.UCS) * (0.68 + 0.52 * K));
-
-                FOS1 = PS / _lunderPakalnisModel.UCS;
-
-                var coord = new Coord { x = wTh, y = FOS1 };
-
-                Res.Add(coord);
-            }
-
-            return Res;
+            set 
+            { 
+                _pillarStrengthService = value; 
+            } 
         }
-
         
-        public override List<Coord> graphStable()
+        public List<Coord> graphStable()
         {
             List<Coord> Res = new List<Coord>();
-            float APC, K, PS, FOS14;
+            float PS;
 
-            for (float wTh = 0; wTh < 30; wTh += GraphStepSize)
+            for (float x = 0; x < 6; x += STEP_SIZE)
             {
-                if (wTh > 3.99)
-                {
-                    APC = 0.23f + 0.017f * wTh;
-                }
-                else
-                {
-                    APC = (float)(0.34f * Math.Pow(Math.Log10(wTh + 0.75f), (1.4f / wTh)));
-                }
+                float wth = x * _pillarModel.Height;
+                PS = _pillarStrengthService.calculatePillarStrengthAtWH(wth, _pillarModel.Height);
 
-                K = (float)(Math.Tan(Math.Acos((1 - APC) / (1 + APC))));
+                float Stress = PS / _pillarModel.DesiredFOS;
 
-                PS = (float)((0.44 * _lunderPakalnisModel.UCS) * (0.68 + 0.52 * K));
-
-                FOS14 = PS / (1.4f * _lunderPakalnisModel.UCS);
-
-                var coord = new Coord { x = wTh, y = FOS14 };
+                var coord = new Coord { x = x, y = Stress };
 
                 Res.Add(coord);
             }
@@ -80,13 +48,13 @@ namespace PillarStability.Services
 
         }
 
-        public override List<Coord> graphPoint()
+        public List<Coord> graphPoint()
         {
             List<Coord> Res = new List<Coord>() 
             {
                 new Coord()
                 {
-                    x = Wth, y = APStUCS
+                    x = _pillarModel.Wth, y = _pillarModel.APS
                 }
             };
 

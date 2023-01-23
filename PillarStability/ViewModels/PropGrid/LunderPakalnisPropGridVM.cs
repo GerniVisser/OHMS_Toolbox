@@ -22,7 +22,7 @@ namespace PillarStability.ViewModels.PropGrid
         {
             _pillarModel = pillarModel;
             _monteCarloModel = pillarModel.MonteCarloModel;
-            _lunderPakalnisModel = (LunderPakalnisModel)_pillarModel.MonteCarloModel;
+            _lunderPakalnisModel = (LunderPakalnisModel)_pillarModel.PillarStrengthModel;
         }
 
         [DisplayName("Name"), Description("Pillar Nickname"), Category("General"), Display(Order = 0)]
@@ -135,28 +135,6 @@ namespace PillarStability.ViewModels.PropGrid
             }
         }
 
-        [DisplayName("Safety Factor"), Description("Limit Safety Factor"), Category("Parameters"), Display(Order = 2)]
-        public float Lsf
-        {
-            get { return _lunderPakalnisModel.Lsf; }
-            set
-            {
-                _lunderPakalnisModel.Lsf = value;
-                OnPropertyChanged(nameof(Lsf));
-            }
-        }
-
-        [DisplayName("Confinement coeff"), Description("Coefficient of pillar confinement (coeff)"), Category("Parameters"), Display(Order = 3)]
-        public float Coeff
-        {
-            get { return _lunderPakalnisModel.Coeff; }
-            set
-            {
-                _lunderPakalnisModel.Coeff = value;
-                OnPropertyChanged(nameof(Coeff));
-            }
-        }
-
         [DisplayName("Strength factor"), Description("Pillar strength size factor (K)"), Category("Parameters"), Display(Order = 4)]
         public float Psk
         {
@@ -223,28 +201,6 @@ namespace PillarStability.ViewModels.PropGrid
             }
         }
 
-        [DisplayName("Std Dev of coeff"), Description("Std Dev of coeff"), Category("Parameters")]
-        public float stdCoeff
-        {
-            get { return _lunderPakalnisModel.StdCoeff; }
-            set
-            {
-                _lunderPakalnisModel.StdCoeff = value;
-                OnPropertyChanged(nameof(stdCoeff));
-            }
-        }
-
-        [DisplayName("Std Dev of Kappa"), Description("Std Dev of Kappa"), Category("Parameters")]
-        public float stdKappa
-        {
-            get { return _lunderPakalnisModel.StdKappa; }
-            set
-            {
-                _lunderPakalnisModel.StdKappa = value;
-                OnPropertyChanged(nameof(stdKappa));
-            }
-        }
-
         [DisplayName("Std Dev of C1"), Description("Std Dev of C1"), Category("Parameters")]
         public float stdC1
         {
@@ -267,7 +223,7 @@ namespace PillarStability.ViewModels.PropGrid
             }
         }
 
-        [DisplayName("Std Dev of K"), Description("Std Dev of K"), Category("Parameters")]
+        [DisplayName("Std Dev of Psk"), Description("Std Dev of Pillar Strength Constant"), Category("Parameters")]
         public float stdPsk
         {
             get { return _lunderPakalnisModel.StdPsk; }

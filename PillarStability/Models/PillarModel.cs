@@ -1,6 +1,7 @@
 ﻿using _SharedWpfLibrary.Service;
 using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Media;
 
 namespace PillarStability.Models
@@ -15,6 +16,7 @@ namespace PillarStability.Models
         public float DesiredFOS;
         public Brush Color;
         public MonteCarloModel MonteCarloModel;
+        public PillarStrengthModel PillarStrengthModel;
 
         public PillarModel(string name)
         {
@@ -26,18 +28,24 @@ namespace PillarStability.Models
             DesiredFOS = 1f;
             Color = BrushService.getRandomBrush();
             // LunderPakalnis Extendes MonteCarloModel
-            MonteCarloModel = new LunderPakalnisModel();
+            MonteCarloModel = new MonteCarloModel();
+            PillarStrengthModel = new LunderPakalnisModel();
         }
 
-        public PillarModel(string name, float height, float width, float length, float aps)
+        public float Weff
         {
-            Name = name;
-            Height = height;
-            Width = width;
-            Length = length;
-            APS = aps;
-            Color = BrushService.getRandomBrush();
-            MonteCarloModel = new LunderPakalnisModel();
+            get
+            {
+                return (4 * (Length * Width)) / (2 * (Length + Width));
+            }
+        }
+
+        public float Wth
+        {
+            get
+            {
+                return Weff / Height;
+            }
         }
 
     }

@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace PillarStability.Models
 {
-    public class LunderPakalnisModel : MonteCarloModel
+    public class LunderPakalnisModel : PillarStrengthModel
     {
         public float UCS;
         public float StdLength;
         public float StdWidth;
         public float StdHeight;
         public float Coeff;
-        public float StdCoeff;
-        public float StdKappa;
+        public float Kappa;
         public float C1;
         public float StdC1;
         public float C2;
@@ -24,26 +23,22 @@ namespace PillarStability.Models
         public float StdPsk;
         public float StdUcs;
         public float StdAps;
-        public float Lsf;
 
         public LunderPakalnisModel()
         {
             UCS = 111.42f;
-            StdLength = 0f;
-            StdWidth = 0f;
-            StdHeight = 0f;
-            Coeff = 0.4f;
-            StdCoeff = 0f;
-            StdKappa = 0f;
+            StdLength = 0.5f;
+            StdWidth = 0.5f;
+            StdHeight = 0.5f;
+            Kappa = 0f;
             C1 = 0.68f;
-            StdC1 = 0f;
+            StdC1 = 0.1f;
             C2 = 0.52f;
-            StdC2 = 0f;
-            Psk = 0.45f;
-            StdPsk = 0f;
-            StdUcs = 0f;
-            StdAps = 0f;
-            Lsf = 1f;
+            StdC2 = 0.1f;
+            Psk = 0.44f;
+            StdPsk = 0.1f;
+            StdUcs = 0.5f;
+            StdAps = 0.5f; 
         }
     }
 }

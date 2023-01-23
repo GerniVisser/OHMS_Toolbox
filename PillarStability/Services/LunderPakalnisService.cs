@@ -8,80 +8,56 @@ using System.Threading.Tasks;
 
 namespace PillarStability.Services
 {
-    public class LunderPakalnisService : FoSAlgoritm
+    public class LunderPakalnisService: PillarStrengthService
     {
-        public float Calculate(Func<float, float, float> getExcelNormInv, PillarModel pillarModel)
+        private PillarModel _pillarModel;
+        private LunderPakalnisModel _lunderPakalnisModel;
+        public LunderPakalnisService(PillarModel pillarModel) : base(pillarModel)
         {
-            LunderPakalnisModel lunderPakalnisModel  = (LunderPakalnisModel)pillarModel.MonteCarloModel;
-            // Generate Random values within sample size
-            float H = getExcelNormInv(pillarModel.Height, lunderPakalnisModel.StdHeight);
-            float W = getExcelNormInv(pillarModel.Width, lunderPakalnisModel.StdWidth);
-            float L = getExcelNormInv(pillarModel.Length, lunderPakalnisModel.StdLength);
+            _pillarModel = pillarModel;
+            _lunderPakalnisModel = (LunderPakalnisModel)pillarModel.PillarStrengthModel;
+        }
 
-            //This C value Im unsure about wheteher it should be a constant 
-            // If so it does not make sence to simulate
-            float C1 = getExcelNormInv(lunderPakalnisModel.C1, lunderPakalnisModel.StdC1);
-            float C2 = getExcelNormInv(lunderPakalnisModel.C2, lunderPakalnisModel.StdC2);
+        public override float calculatePillarStrengthAtWH(float width, float height)
+        {
+            float wh = width / height;
 
-            float UCS = getExcelNormInv(lunderPakalnisModel.UCS, lunderPakalnisModel.StdUcs);
-            float APS = getExcelNormInv(pillarModel.APS, lunderPakalnisModel.StdAps);
-
-            float PSK = getExcelNormInv(lunderPakalnisModel.Psk, lunderPakalnisModel.StdPsk);
-
-            float area4 = W * L * 4;
-            float perimeter = (2 * W) + (2 * L);
-            float WEFF = area4 / perimeter;
-
-            float WTH = WEFF / H;
-
-            float APC;
-
-            if (WTH > 3.99)
+            if (wh > 3.99f)
             {
-                APC = 0.23f + 0.017f * WTH;
+                _lunderPakalnisModel.Coeff = 0.23f + 0.017f * wh;
             }
             else
             {
-                APC = 0.46f * MathF.Pow(MathF.Log10(WTH + 0.75f), (1.4f / WTH));
+                _lunderPakalnisModel.Coeff = 0.34f * MathF.Pow(MathF.Log10(wh + 0.75f), (1.4f / wh));
             }
 
-            float K = MathF.Tan(MathF.Acos((1 - APC) / (1 + APC)));
+            _lunderPakalnisModel.Kappa = MathF.Tan(MathF.Acos((1 - _lunderPakalnisModel.Coeff) / (1 + _lunderPakalnisModel.Coeff)));
 
-            float PS = PSK * UCS * (C1 + C2 * K);
+            float PS = _lunderPakalnisModel.Psk * _lunderPakalnisModel.UCS * (_lunderPakalnisModel.C1 + _lunderPakalnisModel.C2 * _lunderPakalnisModel.Kappa);
 
-            float FOS = PS / APS;
-
-            return FOS;
-
+            return PS;
         }
 
-        public MonteCarloDataObject GenerateSummaryObject(PillarModel pillarModel, List<float> fosList)
+        public override PillarStrengthService generateExcelNormInvPillarStrengthService(Random random)
         {
-            PillarDataService pillarDataService = new Wh_Service(pillarModel);
-            LunderPakalnisModel lunderPakalnisModel = (LunderPakalnisModel)pillarModel.MonteCarloModel;
-            BinsService binsService = new BinsService(fosList, lunderPakalnisModel.Bins);
+            PillarModel res = new PillarModel(_pillarModel.Name);
+            LunderPakalnisModel resL = (LunderPakalnisModel)res.PillarStrengthModel;
 
-            float K = MathF.Tan(MathF.Acos((1 - pillarDataService.APC) / (1 + pillarDataService.APC)));
-            float dsf = lunderPakalnisModel.Psk * lunderPakalnisModel.UCS * (lunderPakalnisModel.C1 + lunderPakalnisModel.C2 * K) / pillarModel.APS;
+            LunderPakalnisModel lunderPakalnisModel = (LunderPakalnisModel)_pillarModel.PillarStrengthModel;
+            // Generate deviation of values to account for hetrogenious nature of rock
+            res.Height = getExcelNormInv(_pillarModel.Height, lunderPakalnisModel.StdHeight, random);
+            res.Width = getExcelNormInv(_pillarModel.Width, lunderPakalnisModel.StdWidth, random);
+            res.Length = getExcelNormInv(_pillarModel.Length, lunderPakalnisModel.StdLength, random);
 
-            return new MonteCarloDataObject()
-            {
-                Pillar = pillarModel.Name,
-                DSF = dsf,
-                AveSF = fosList.Average(),
-                StandardDev = getStandardDev(fosList),
-                mfSF = MathF.Round(binsService.getMostFrequentBin().Min, 2),
-                probSF = binsService.getPercentageOfBinsBelowLimit(lunderPakalnisModel.Lsf)
-            };
-        }
+            resL.C1 = getExcelNormInv(lunderPakalnisModel.C1, lunderPakalnisModel.StdC1, random);
+            resL.C2 = getExcelNormInv(lunderPakalnisModel.C2, lunderPakalnisModel.StdC2, random);
 
-        public float getStandardDev(List<float> fosList)
-        {
-            float ave = fosList.Average();
-            float sumOfSquaresOfDiff = fosList.Select(val => (val - ave) * (val - ave)).Sum();
-            float sd = MathF.Sqrt(sumOfSquaresOfDiff / fosList.Count);
+            resL.UCS = getExcelNormInv(lunderPakalnisModel.UCS, lunderPakalnisModel.StdUcs, random);
+            res.APS = getExcelNormInv(_pillarModel.APS, lunderPakalnisModel.StdAps, random);
 
-            return sd;
+            resL.Psk = getExcelNormInv(lunderPakalnisModel.Psk, lunderPakalnisModel.StdPsk, random);
+
+            return new LunderPakalnisService(res);
         }
     }
 }

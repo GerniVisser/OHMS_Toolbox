@@ -68,8 +68,17 @@ namespace PillarStability.Services
         {
             var newList = BinsList.Where(x => x.Mid < limit).ToList();
 
-            float x = newList.Count;
-            float y = BinsList.Count;
+            float x = 0;
+            for(int i = 0; i < newList.Count; i++)
+            {
+                x += newList[i].Frequency;
+            }
+
+            float y = 0;
+            for (int i = 0; i < BinsList.Count; i++)
+            {
+                y += BinsList[i].Frequency;
+            }
 
             var res = x / y;
             return res;

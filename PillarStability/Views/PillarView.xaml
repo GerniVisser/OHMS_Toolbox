@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PillarStability.Views"
              xmlns:vm="clr-namespace:PillarStability.ViewModels"
+             xmlns:graphvm="clr-namespace:PillarStability.ViewModels.Graphs"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              xmlns:chart="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
              mc:Ignorable="d" 
@@ -25,7 +26,7 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="0"
-                                CornerRadius="0 10 0 0"
+                                CornerRadius="0 0 10 0"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
                                 SnapsToDevicePixels="true">
@@ -51,7 +52,16 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Background="White">
+    <Grid Background="#ebebeb">
+
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type graphvm:WH_GraphVM}">
+                <local:WH_GraphView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type graphvm:MonteCarlo_GraphVM}">
+                <local:MonteCarlo_GraphView/>
+            </DataTemplate>
+        </Grid.Resources>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
@@ -70,6 +80,8 @@
             Grid.Column="1"
             Grid.RowSpan="2"
             EnableGrouping="True"
+            BorderThickness="1"
+            BorderBrush="Gray"
             Background="#f0f0f0"
             FontSize="18"
             HorizontalAlignment="Stretch"
@@ -89,6 +101,7 @@
             FontSize="15"
             Background="#f06e3e"
             Foreground="White"
+            Margin="5"
             VerticalAlignment="Stretch" 
             HorizontalAlignment="Stretch">
             Calculate
@@ -96,113 +109,39 @@
 
         <Grid Grid.Column="0" Grid.RowSpan="3">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <chart:SfChart 
-            BorderThickness="0"
-            Grid.Row="0"
-            Header="{Binding GraphViewModel.GraphHeader}"
-            FontSize="24"
-            Background="White"
-            BorderBrush="#d6d6d6">
-                <chart:SfChart.PrimaryAxis>
-                    <chart:NumericalAxis
-                    StartRangeFromZero="True"
-                    Header="{Binding GraphViewModel.xAxisHeader}"
-                    FontSize="14">
-                    </chart:NumericalAxis>
-                </chart:SfChart.PrimaryAxis>
-
-                <chart:SfChart.SecondaryAxis>
-                    <chart:NumericalAxis
-                    StartRangeFromZero="True"
-                    Header="{Binding GraphViewModel.yAxisHeader}"
-                    FontSize="14">
-                    </chart:NumericalAxis>
-                </chart:SfChart.SecondaryAxis>
-
-                <chart:AreaSeries
-                XBindingPath="x"
-                YBindingPath="y"
-                Interior="#ffeded"
-                StrokeThickness="2"
-                ItemsSource="{Binding GraphViewModel.GraphLineFail}"           
-                />
-
-                <chart:AreaSeries
-                XBindingPath="x"
-                YBindingPath="y"
-                Interior="#eef7e9"
-                StrokeThickness="2"
-                ItemsSource="{Binding GraphViewModel.GraphLineStable}"           
-                />
-
-                <chart:ScatterSeries
-                XBindingPath="x"
-                YBindingPath="y"
-                ScatterHeight="12"
-                ScatterWidth ="12"
-                Interior="{Binding GraphViewModel.GraphPointColor}"
-                ItemsSource="{Binding GraphViewModel.GraphPoint}"
-                />
-            </chart:SfChart>
+            <ContentControl Content="{Binding CurrentGraphViewModel}" Grid.Column="0" Grid.Row="1"/>
 
             <ComboBox 
-            x:Name="comboBox" 
-            Width="150" 
-            Height="30"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            SelectedIndex="{Binding SelectedFormulaIndex, Mode=TwoWay}"
-            ItemsSource="{Binding FormulaDataSource}"
+                Grid.Row="0"
+                Margin="3"
+                Height="28"
+                Width="150" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                SelectedIndex="{Binding SelectedFormulaIndex, Mode=TwoWay}"
+                ItemsSource="{Binding FormulaDataSource}"
             >
 
             </ComboBox>
 
-            <ListBox BorderThickness="0" Grid.Row="1" ItemContainerStyle="{StaticResource NavMenuStyle}" Background="#ebebeb" SelectedIndex="{Binding SelectedGraphIndex}" DisplayMemberPath="Name" >
+            <ListBox Grid.Row="2" BorderThickness="0" ItemContainerStyle="{StaticResource NavMenuStyle}" Background="#ebebeb" SelectedIndex="{Binding SelectedGraphIndex}" DisplayMemberPath="Name" >
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
-                <ListBoxItem Content="Width/Height" Background="White"></ListBoxItem>
-                <ListBoxItem Content="Confinement" Background="White"></ListBoxItem>
+                <ListBoxItem Content="Stress Analysis" Background="White"></ListBoxItem>
+                <ListBoxItem Content="Simulation" Background="White"></ListBoxItem>
             </ListBox>
 
-
-            <DockPanel Grid.Row="2" Background="#ebebeb">
-                <Border Padding="10"
-                    Margin="20"
-                    BorderThickness="2"
-                    BorderBrush="DarkGray"
-                    Background="White" >
-                    <DataGrid Focusable="False"  
-                          RowBackground="White" 
-                          ColumnWidth="*" 
-                          FontWeight="Medium" 
-                          BorderThickness="0" 
-                          VerticalAlignment="Top"  
-                          ItemsSource="{Binding PillarDataGrid}" 
-                          HorizontalGridLinesBrush="Transparent" 
-                          VerticalGridLinesBrush="LightGray">
-                        <DataGrid.Resources>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="Background" Value="#f06e3e"/>
-                                <Setter Property="Foreground" Value="White"/>
-                                <Setter Property="FontSize" Value="18"/>
-                                <Setter Property="FontWeight" Value="Medium"/>
-                                <Setter Property="Padding" Value="5"/>
-                            </Style>
-                            <Style TargetType="DataGridRow">
-                                <Setter Property="FontSize" Value="15"/>
-                                <Setter Property="FontWeight" Value="Medium"/>
-                            </Style>
-                        </DataGrid.Resources>
-                    </DataGrid>
-                </Border>
+            <DockPanel Grid.Row="3">
+                <local:OutputGridView ></local:OutputGridView>
             </DockPanel>
 
         </Grid>

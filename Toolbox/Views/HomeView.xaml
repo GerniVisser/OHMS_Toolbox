@@ -47,7 +47,7 @@
 
                 <StackPanel Grid.Row="2">
                     <TextBlock Text="Deverloped by: Gerni Visser" FontSize="12" FontWeight="Medium"/>
-                    <TextBlock Text="Vesrion 1.0" FontSize="12" FontWeight="Medium"/>
+                    <TextBlock Text="Vesrion 1.1" FontSize="12" FontWeight="Medium"/>
                 </StackPanel>
             </Grid>
         </Border>
@@ -78,6 +78,27 @@
                     FontSize="20">
                     <RichTextBox.Document>
                         <FlowDocument>
+                            <Paragraph Margin="0" FontSize="24" FontWeight="Bold">
+                                <Bold>
+                                    Version - 1.1
+                                </Bold>
+                                <LineBreak/>
+                                <Run FontSize="12" FontWeight="Light">
+                                    2023/01/23
+                                </Run>
+                            </Paragraph>
+                            <Paragraph>
+                                <Run FontSize="14" FontWeight="Regular">
+                                    Introduced the Pillar Stability app to the suite
+                                </Run>
+                            </Paragraph>
+                            <List FontSize="14">
+                                <ListItem>
+                                    <Paragraph>
+                                        Added Pillar Stability tool
+                                    </Paragraph>
+                                </ListItem>
+                            </List>
                             <Paragraph Margin="0" FontSize="24" FontWeight="Bold">
                                 <Bold>
                                     Version - 1.0

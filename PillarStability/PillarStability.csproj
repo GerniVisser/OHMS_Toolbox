@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <PackageReference Include="Meta.Numerics" Version="4.1.4" />
-    <PackageReference Include="Syncfusion.Licensing" Version="20.1.0.61" />
+    <PackageReference Include="Syncfusion.Licensing" Version="20.4.0.38" />
     <PackageReference Include="Syncfusion.Pdf.Wpf" Version="20.1.0.61" />
     <PackageReference Include="Syncfusion.PdfViewer.WPF" Version="20.1.0.61" />
     <PackageReference Include="Syncfusion.PropertyGrid.WPF" Version="20.1.0.61" />
