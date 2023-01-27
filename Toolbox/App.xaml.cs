@@ -1,6 +1,6 @@
-﻿using _SharedWpfLibrary.Models;
-using _SharedWpfLibrary.Service;
-using _SharedWpfLibrary.ViewModels;
+﻿using SharedWpfLibrary.Models;
+using SharedWpfLibrary.Service;
+using SharedWpfLibrary.ViewModels;
 using System.Collections.Generic;
 using System.Windows;
 using Toolbox.Store;

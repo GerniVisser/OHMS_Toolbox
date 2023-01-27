@@ -1,5 +1,5 @@
-﻿using _SharedWpfLibrary.Models;
-using _SharedWpfLibrary.Service;
+﻿using SharedWpfLibrary.Models;
+using SharedWpfLibrary.Service;
 using PillarStability.ViewModels;
 using System.Windows;
 

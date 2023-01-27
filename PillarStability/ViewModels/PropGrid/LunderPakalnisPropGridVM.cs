@@ -1,4 +1,4 @@
-﻿using _SharedWpfLibrary.ViewModels;
+﻿using SharedWpfLibrary.ViewModels;
 using PillarStability.Models;
 using Syncfusion.Windows.PropertyGrid;
 using System;

@@ -1,4 +1,4 @@
-﻿using _SharedWpfLibrary.ViewModels;
+﻿using SharedWpfLibrary.ViewModels;
 using PillarStability.Commands;
 using PillarStability.DataObjects;
 using PillarStability.Models;

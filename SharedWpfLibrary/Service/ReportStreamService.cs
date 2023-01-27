@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace _SharedWpfLibrary.Service
+namespace SharedWpfLibrary.Service
 {
     public class ReportStreamService
     {

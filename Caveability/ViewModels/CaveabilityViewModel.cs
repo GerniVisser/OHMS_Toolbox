@@ -1,4 +1,4 @@
-﻿using _SharedWpfLibrary.ViewModels;
+﻿using SharedWpfLibrary.ViewModels;
 using Caveability.Commands;
 using Caveability.Models;
 using System;

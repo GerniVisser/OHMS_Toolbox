@@ -1,4 +1,4 @@
-﻿using _SharedWpfLibrary.ViewModels;
+﻿using SharedWpfLibrary.ViewModels;
 using SharedWpfLibrary.Tools;
 using System;
 using System.Collections.Generic;

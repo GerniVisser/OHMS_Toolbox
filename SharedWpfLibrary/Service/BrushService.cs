@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace _SharedWpfLibrary.Service
+namespace SharedWpfLibrary.Service
 {
     public static class BrushService
     {

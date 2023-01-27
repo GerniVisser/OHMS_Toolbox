@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _SharedWpfLibrary.ViewModels
+namespace SharedWpfLibrary.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

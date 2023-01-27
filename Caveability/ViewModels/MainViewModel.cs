@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using _SharedWpfLibrary.ViewModels;
+using SharedWpfLibrary.ViewModels;
 using Caveability.Models;
 using Caveability.ViewModels;
 
