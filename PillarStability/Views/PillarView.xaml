@@ -12,6 +12,13 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
+        <Style x:Key="ComboBoxButtonBackground" TargetType="ToggleButton">
+            <Setter Property="Background" Value="#f06e3e"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+        </Style>
         <Style x:Key="NavMenuStyle" TargetType="ListBoxItem">
             <Setter Property="FontWeight" Value="Light" />
             <Setter Property="FontSize" Value="12" />
@@ -117,7 +124,7 @@
 
             <ContentControl Content="{Binding CurrentGraphViewModel}" Grid.Column="0" Grid.Row="1"/>
 
-            <ComboBox 
+            <ComboBox
                 Grid.Row="0"
                 Margin="3"
                 Height="28"
@@ -125,9 +132,27 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 SelectedIndex="{Binding SelectedFormulaIndex, Mode=TwoWay}"
-                ItemsSource="{Binding FormulaDataSource}"
-            >
-
+                ItemsSource="{Binding FormulaDataSource}">
+                <ComboBox.Template>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton x:Name="ToggleButton" 
+                              Content="{TemplateBinding SelectionBoxItem}" 
+                              IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                              Style="{StaticResource ComboBoxButtonBackground}">
+                            </ToggleButton>
+                            <ContentPresenter x:Name="ContentSite"/>
+                            <Popup x:Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True" Focusable="False">
+                                <Grid x:Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder" Background="LightGray" CornerRadius="0 0 10 0"/>
+                                    <ScrollViewer x:Name="DropDownScrollViewer">
+                                        <ItemsPresenter x:Name="ItemsPresenter"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </ComboBox.Template>
             </ComboBox>
 
             <ListBox Grid.Row="2" BorderThickness="0" ItemContainerStyle="{StaticResource NavMenuStyle}" Background="#ebebeb" SelectedIndex="{Binding SelectedGraphIndex}" DisplayMemberPath="Name" >

@@ -63,6 +63,47 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Name}" Value="Combined">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <DockPanel
+                            Margin="1.5 1.5 1.5 0">
+                                    <Border 
+                                Name="Bd"
+                                Height="60"
+                                Width="230"
+                                Margin="{TemplateBinding Margin}"
+                                Background="LightGray"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                SnapsToDevicePixels="true">
+                                        <Grid>
+                                            <ContentPresenter 
+                                        x:Name="Content"
+                                        Margin="20 0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                </DockPanel>
+
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="true">
+                                        <Setter TargetName="Bd" Property="Background" Value="#f06e3e"/>
+                                        <Setter TargetName="Bd" Property="BorderBrush" Value="darkgray"/>
+                                        <Setter TargetName="Content" Property="TextElement.Foreground" Value="White"/>
+                                        <Setter TargetName="Content" Property="TextElement.FontWeight" Value="Medium"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </UserControl.Resources>
 
@@ -70,6 +111,9 @@
         <Grid.Resources>
             <DataTemplate DataType="{x:Type vm:PillarViewModel}">
                 <local:PillarView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:CombinedPillarViewModel}">
+                <local:CombinedPillarView/>
             </DataTemplate>
         </Grid.Resources>
         
@@ -80,7 +124,34 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <ListBox ItemContainerStyle="{StaticResource NavMenuStyle}" Background="#e8e8e8" ItemsSource="{Binding PillarList}" SelectedItem="{Binding SelectedPillar}" DisplayMemberPath="Name">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Menu 
+                Grid.ColumnSpan="2" 
+                Padding="15 5" 
+                FontWeight="Medium" 
+                BorderThickness="0 0 0 1" 
+                BorderBrush="LightGray" 
+                Background="#bbbbbb"
+                Height="30"
+                VerticalAlignment="Center">
+                <MenuItem Header="File">
+                    <MenuItem Header="Open" Command="{Binding Open}" />
+                    <MenuItem Header="Save as" Command="{Binding SaveAs}" />
+                    <MenuItem Header="Save" Command="{Binding Save}" />
+                </MenuItem>
+            </Menu>
+
+            <ListBox 
+                Grid.Row="2"
+                ItemContainerStyle="{StaticResource NavMenuStyle}" 
+                Background="#e8e8e8" 
+                ItemsSource="{Binding PillarList}" 
+                SelectedItem="{Binding SelectedPillar}" 
+                DisplayMemberPath="Name">
             </ListBox>
 
             <Button
@@ -97,7 +168,7 @@
                 Add Pillar
             </Button>
 
-            <ContentControl Content="{Binding PillarViewModel}" Grid.Column="1"/>
+            <ContentControl Content="{Binding ContentViewModel}" Grid.Column="1" Grid.Row="1"/>
 
         </Grid>
     </Grid>

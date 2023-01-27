@@ -1,4 +1,4 @@
-﻿using _SharedWpfLibrary.Service;
+﻿using SharedWpfLibrary.Service;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -12,9 +12,9 @@ namespace PillarStability.Models
         public float Height;
         public float Width;
         public float Length;
-        public float APS;
+        public float APS { get; set; }
         public float DesiredFOS;
-        public Brush Color;
+        public Brush Color { get; set; }
         public MonteCarloModel MonteCarloModel;
         public PillarStrengthModel PillarStrengthModel;
 
