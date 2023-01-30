@@ -32,9 +32,11 @@ namespace PillarStability.ViewModels.Graphs
             {
                 _wh_Service.PillarStrengthService = new PowerFormulaService(_pillarModel);
             }
-            OnPropertyChanged(nameof(GraphLineStable));
+            OnPropertyChanged(nameof(GraphLineDesiredFOS));
+            OnPropertyChanged(nameof(GraphLineFOS1));
             OnPropertyChanged(nameof(GraphPoint));
             OnPropertyChanged(nameof(GraphPointColor));
+            OnPropertyChanged(nameof(FosLabel));
         }
 
         public string GraphHeader
@@ -52,9 +54,19 @@ namespace PillarStability.ViewModels.Graphs
             get { return "Average Stress"; }
         }
 
-        public List<Coord> GraphLineStable
+        public List<Coord> GraphLineDesiredFOS
         {
             get { return _wh_Service.graphStable(); }
+        }
+
+        public string FosLabel
+        {
+            get { return "FOS " + _pillarModel.DesiredFOS.ToString(); }
+        }
+
+        public List<Coord> GraphLineFOS1
+        {
+            get { return _wh_Service.graphStableFos1(); }
         }
 
         public List<Coord> GraphPoint

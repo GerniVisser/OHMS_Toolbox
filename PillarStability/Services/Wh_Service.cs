@@ -13,7 +13,7 @@ namespace PillarStability.Services
         private PillarModel _pillarModel;
         private PillarStrengthService _pillarStrengthService;
 
-        private const float STEP_SIZE = 0.5f;
+        private const float STEP_SIZE = 0.1f;
         public Wh_Service(PillarModel pillarModel)
         {
             _pillarModel = pillarModel;
@@ -32,7 +32,7 @@ namespace PillarStability.Services
             List<Coord> Res = new List<Coord>();
             float PS;
 
-            for (float x = 0; x < 6; x += STEP_SIZE)
+            for (float x = 0; x < 10; x += STEP_SIZE)
             {
                 float wth = x * _pillarModel.Height;
                 PS = _pillarStrengthService.calculatePillarStrengthAtWH(wth, _pillarModel.Height);
@@ -40,6 +40,25 @@ namespace PillarStability.Services
                 float Stress = PS / _pillarModel.DesiredFOS;
 
                 var coord = new Coord { x = x, y = Stress };
+
+                Res.Add(coord);
+            }
+
+            return Res;
+
+        }
+
+        public List<Coord> graphStableFos1()
+        {
+            List<Coord> Res = new List<Coord>();
+            float PS;
+
+            for (float x = 0; x < 10; x += STEP_SIZE)
+            {
+                float wth = x * _pillarModel.Height;
+                PS = _pillarStrengthService.calculatePillarStrengthAtWH(wth, _pillarModel.Height);
+
+                var coord = new Coord { x = x, y = PS };
 
                 Res.Add(coord);
             }

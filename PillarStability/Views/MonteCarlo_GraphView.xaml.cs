@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Syncfusion.UI.Xaml.Charts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace PillarStability.Views
         public MonteCarlo_GraphView()
         {
             InitializeComponent();
+        }
+
+        private void Copy_Click(object sender, RoutedEventArgs e)
+        {
+            SharedWpfLibrary.Service.ClipboardService.CopyToClipboard(McChart, (int)(McChart.ActualWidth), (int)(McChart.ActualHeight));
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            SharedWpfLibrary.Service.ClipboardService.SaveChartToImage(McChart, (int)(McChart.ActualWidth), (int)(McChart.ActualHeight));
         }
     }
 }

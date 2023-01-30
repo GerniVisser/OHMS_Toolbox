@@ -9,6 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <chart:SfChart 
+            Name="McChart"
             Grid.Row="0"
             FontSize="24"
             Header="Frequency Distribution Graph"
@@ -86,6 +87,33 @@
                 ItemsSource="{Binding MCChartLineFos}"           
                 />
         </chart:SfChart>
-            
+
+        <StackPanel 
+            Orientation="Horizontal"
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Top">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="FontWeight" Value="Medium"/>
+                    <Setter Property="Padding" Value="3"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button 
+                Click="Copy_Click"
+                Margin="4">
+                Copy Image
+            </Button>
+
+            <Button 
+                Click="Save_Click"
+                Margin="4">
+                Save Image
+            </Button>
+        </StackPanel>
+
     </Grid>
 </UserControl>

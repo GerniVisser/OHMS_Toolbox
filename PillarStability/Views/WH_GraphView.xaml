@@ -9,6 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <chart:SfChart 
+            Name="WhChart"
             BorderThickness="0"
             Grid.Row="0"
             Header="{Binding GraphHeader}"
@@ -31,12 +32,35 @@
                 </chart:NumericalAxis>
             </chart:SfChart.SecondaryAxis>
 
+            <chart:SfChart.Legend>
+                <chart:ChartLegend
+                    IconHeight="10" IconWidth="10" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"                                    
+                    DockPosition="Top"
+                    IconVisibility="Visible"
+                    ItemMargin="3">
+                </chart:ChartLegend>
+            </chart:SfChart.Legend>
+
             <chart:AreaSeries
                 XBindingPath="x"
                 YBindingPath="y"
                 Interior="#eef7e9"
                 StrokeThickness="2"
-                ItemsSource="{Binding GraphLineStable}"           
+                LegendIcon="Circle"
+                Label="{Binding FosLabel}"
+                ItemsSource="{Binding GraphLineDesiredFOS}"           
+                />
+
+            <chart:LineSeries
+                XBindingPath="x"
+                YBindingPath="y"
+                Interior="LightPink"
+                StrokeThickness="2"
+                LegendIcon="Circle"
+                Label="FOS 1"
+                ItemsSource="{Binding GraphLineFOS1}"           
                 />
 
             <chart:ScatterSeries
@@ -44,10 +68,39 @@
                 YBindingPath="y"
                 ScatterHeight="12"
                 ScatterWidth ="12"
+                LegendIcon="None"
                 Interior="{Binding GraphPointColor}"
                 ItemsSource="{Binding GraphPoint}"
                 />
         </chart:SfChart>
+
+        <StackPanel 
+            Orientation="Horizontal"
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Top">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="FontWeight" Value="Medium"/>
+                    <Setter Property="Padding" Value="3"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button 
+                Click="Copy_Click"
+                Margin="4">
+                Copy Image
+            </Button>
+
+            <Button 
+                Click="Save_Click"
+                Margin="4">
+                Save Image
+            </Button>
+        </StackPanel>
+        
 
     </Grid>
 </UserControl>

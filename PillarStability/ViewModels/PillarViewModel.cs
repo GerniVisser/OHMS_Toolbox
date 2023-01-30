@@ -51,7 +51,7 @@ namespace PillarStability.ViewModels
             get { return _pillarModel.Name; }
             set 
             { 
-                Name = value; 
+                Name = value;
             }
         }
 
