@@ -149,7 +149,7 @@
                 Grid.Row="2"
                 ItemContainerStyle="{StaticResource NavMenuStyle}" 
                 Background="#e8e8e8" 
-                ItemsSource="{Binding PillarList}" 
+                ItemsSource="{Binding PillarTabList}" 
                 SelectedItem="{Binding SelectedPillar}" 
                 DisplayMemberPath="Name">
             </ListBox>

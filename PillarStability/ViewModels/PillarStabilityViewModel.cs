@@ -19,6 +19,7 @@ namespace PillarStability.ViewModels
     {
         private int _pillarCounter;
         private CombinedPillarViewModel _combinedPillarViewModel;
+        private PillarModel _combinedPillarModel;
         private string _filePath = "";
 
         public PillarStabilityViewModel(PillarListModel pillarListModel)
@@ -33,12 +34,12 @@ namespace PillarStability.ViewModels
             _save = new DelegateCommand(save);
             _removePillarCommand = new DelegateCommand(RemovePillar);
 
-
-            PillarList = new ObservableCollection<PillarModel>(pillarListModel.PillarModels.Prepend(new PillarModel("Combined")));
+            _combinedPillarModel = new PillarModel("Combined");
+            _pillarModelList = new ObservableCollection<PillarModel>(pillarListModel.PillarModels);
             AddPillar(null);
 
-            _combinedPillarViewModel = new CombinedPillarViewModel(PillarList);
-            SelectedPillar = PillarList[0];
+            _combinedPillarViewModel = new CombinedPillarViewModel(_pillarModelList);
+            SelectedPillar = _pillarModelList[0];
 
         }
 
@@ -77,8 +78,21 @@ namespace PillarStability.ViewModels
             get { return _save; }
         }
 
-
-        public ObservableCollection<PillarModel> PillarList { get; }
+        private ObservableCollection<PillarModel> _pillarModelList;
+        public ObservableCollection<PillarModel> PillarModelList
+        { 
+            get 
+            {
+                return _pillarModelList;
+            }
+        }
+        public List<PillarModel> PillarTabList
+        {
+            get
+            {
+                return new List<PillarModel>(_pillarModelList).Prepend(_combinedPillarModel).ToList();
+            }
+        }
 
         private PillarModel _selectedPillar;
 
@@ -86,9 +100,9 @@ namespace PillarStability.ViewModels
         {
             get 
             {
-                if (!PillarList.Contains(_selectedPillar))
+                if (!_pillarModelList.Contains(_selectedPillar))
                 {
-                    _selectedPillar = null;
+                    _selectedPillar = _combinedPillarModel;
                 }
                 return _selectedPillar; 
             }
@@ -109,9 +123,12 @@ namespace PillarStability.ViewModels
                 {
                     return _combinedPillarViewModel;
                 }
-                PillarViewModel newPVM = new PillarViewModel(_selectedPillar);
-                newPVM.PropertyChanged += HandleNameChange;
-                return newPVM;
+                else
+                {
+                    PillarViewModel newPVM = new PillarViewModel(_selectedPillar);
+                    newPVM.PropertyChanged += HandleNameChange;
+                    return newPVM;
+                }
             }
         }
 
@@ -127,15 +144,13 @@ namespace PillarStability.ViewModels
 
                 List<PillarSaveDataObject> objectlist = SaveLoadService.LoadFromCsv<PillarSaveDataObject>(filePath);
 
-                PillarList.Clear();
-                // add Combined Pillar again
-                PillarList.Add(new PillarModel("Combined"));
+                _pillarModelList.Clear();
 
-                _pillarCounter = 1;
+                _pillarCounter = 0;
 
                 foreach (var item in objectlist)
                 {
-                    PillarList.Add(
+                    _pillarModelList.Add(
                         new PillarModel("") 
                         {
                             Name = item.Name,
@@ -149,7 +164,8 @@ namespace PillarStability.ViewModels
                     );
                     _pillarCounter++;
                 }
-                SelectedPillar = PillarList[0];
+                SelectedPillar = _pillarModelList[0];
+                OnPropertyChanged(nameof(PillarTabList));
                 _filePath = filePath;
             }
 
@@ -181,11 +197,8 @@ namespace PillarStability.ViewModels
             {
                 List<PillarSaveDataObject> dataObjects = new List<PillarSaveDataObject>();
 
-                foreach (var item in PillarList)
+                foreach (var item in _pillarModelList)
                 {
-                    // Skip Combined Pillar Model
-                    if (item.Name == "Combined") continue;
-
                     var dataobject = new PillarSaveDataObject
                     {
                         Name = item.Name,
@@ -209,16 +222,16 @@ namespace PillarStability.ViewModels
 
         private void AddPillar(object obj)
         {
-            PillarList.Add(new PillarModel("Pillar " + _pillarCounter));
-            OnPropertyChanged(nameof(PillarList));
+            _pillarModelList.Add(new PillarModel("Pillar " + _pillarCounter));
             _pillarCounter++;
+            OnPropertyChanged(nameof(PillarTabList));
         }
 
         private void RemovePillar(object obj)
         {
-            PillarList.Remove((PillarModel)obj);
-            OnPropertyChanged(nameof(PillarList));
+            _pillarModelList.Remove((PillarModel)obj);
             OnPropertyChanged(nameof(SelectedPillar));
+            OnPropertyChanged(nameof(PillarTabList));
         }
 
         private void HandleNameChange(object sender, PropertyChangedEventArgs e)
@@ -226,7 +239,7 @@ namespace PillarStability.ViewModels
             // If Name of pillar is changed from Propgrid this will trigger 
             if (e.PropertyName == "Name")
             {
-                OnPropertyChanged(nameof(PillarList));
+                OnPropertyChanged(nameof(PillarListModel));
             }
         }
     }

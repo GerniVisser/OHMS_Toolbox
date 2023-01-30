@@ -16,28 +16,49 @@ namespace PillarStability.ViewModels
 {
     public class CombinedPillarViewModel : ViewModelBase
     {
-        private ObservableCollection<PillarModel> _pillarListModel;
+        private ObservableCollection<PillarModel> _pillarModelList;
         private Wh_Service _whService;
-        private int _selectedFormulaIndex;
+        private int _selectedFormulaIndex;  
         private PillarModel _currentModel;
 
-        public CombinedPillarViewModel(ObservableCollection<PillarModel> pillarListModel)
+        public CombinedPillarViewModel(ObservableCollection<PillarModel> pillarModelList)
         {
-            _pillarListModel = pillarListModel;
-            _currentModel = _pillarListModel[0];
+            _pillarModelList = pillarModelList;
+            _currentModel = _pillarModelList[0];
             _whService = new Wh_Service(_currentModel);
-            _selectedPillarIndex = -1;
             setFormulaViewModel();
         }
 
-        public ObservableCollection<PillarModel> GraphPointData
+        public ObservableCollection<PillarModel> PillarModelList
         {
-            get { return _pillarListModel; }
+            get { return _pillarModelList; }
+        }
+
+        public float FosValue
+        {
+            get { return _currentModel.DesiredFOS; }
+            set 
+            {
+                _currentModel.DesiredFOS = value; 
+                OnPropertyChanged(nameof(FosValue));
+                OnPropertyChanged(nameof(GraphLineStable));
+                OnPropertyChanged(nameof(FosLabel));
+            }
         }
 
         public List<Coord> GraphLineStable
         {
             get { return _whService.graphStable(); }
+        }
+
+        public List<Coord> GraphLineFOS1
+        {
+            get { return _whService.graphStableFos1(); }
+        }
+
+        public string FosLabel
+        {
+            get { return "FOS " + _currentModel.DesiredFOS.ToString(); }
         }
 
         public int SelectedFormulaIndex
@@ -54,7 +75,14 @@ namespace PillarStability.ViewModels
 
         public int SelectedPillarIndex
         {
-            get { return _selectedPillarIndex; }
+            get 
+            { 
+                if ( PillarModelList.Count <= 0)
+                {
+                    return -1;
+                }
+                return _selectedPillarIndex; 
+            }
             set 
             { 
                 _selectedPillarIndex = value;
@@ -122,6 +150,7 @@ namespace PillarStability.ViewModels
                     
             }
             OnPropertyChanged(nameof(GraphLineStable));
+            OnPropertyChanged(nameof(GraphLineFOS1));
         }
     }
 }

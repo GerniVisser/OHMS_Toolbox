@@ -22,5 +22,15 @@ namespace PillarStability.Views
         {
             InitializeComponent();
         }
+
+        private void Copy_Click(object sender, RoutedEventArgs e)
+        {
+            SharedWpfLibrary.Service.ClipboardService.CopyToClipboard(combined_Chart, (int)(combined_Chart.ActualWidth), (int)(combined_Chart.ActualHeight));
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            SharedWpfLibrary.Service.ClipboardService.SaveChartToImage(combined_Chart, (int)(combined_Chart.ActualWidth), (int)(combined_Chart.ActualHeight));
+        }
     }
 }

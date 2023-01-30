@@ -64,13 +64,26 @@
             </ComboBox.Template>
         </ComboBox>
 
+        <Grid Grid.Row="1" Grid.Column="2" Background="White" Margin="15 2 15 12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Content="FOS" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Slider Grid.Row="1" Orientation="Vertical" Height="170" VerticalAlignment="Center" HorizontalAlignment="Center" Width="15" Minimum="0.1" Maximum="10" Value="{Binding FosValue, UpdateSourceTrigger=PropertyChanged}" TickFrequency="0.1" IsSnapToTickEnabled="True" />
+            <Label Grid.Row="2" Content="{Binding FosValue}" HorizontalAlignment="Center" FontWeight="Bold" VerticalAlignment="Top"/>
+        </Grid>
+
         <chart:SfChart 
             Grid.Row="1"
             Grid.Column="1"
             VerticalAlignment="Stretch"
             Header="Width / Height Stability Graph"
-            Name="wh_Chart"
+            Name="combined_Chart"
             FontSize="24"
+            Margin="0 0 0 5"
             Background="White"
             BorderBrush="#d6d6d6"
             BorderThickness="2">
@@ -91,13 +104,35 @@
                 <syncfusion:ChartSelectionBehavior SelectionMode="MouseClick" EnableSegmentSelection="True">
                 </syncfusion:ChartSelectionBehavior>
             </chart:SfChart.Behaviors>
-            
-        <chart:AreaSeries
+
+            <chart:SfChart.Legend>
+                <chart:ChartLegend
+                    IconHeight="10" IconWidth="10" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"                                    
+                    DockPosition="Top"
+                    IconVisibility="Visible"
+                    ItemMargin="3">
+                </chart:ChartLegend>
+            </chart:SfChart.Legend>
+
+            <chart:AreaSeries
                 XBindingPath="x"
                 YBindingPath="y"
                 Interior="#eef7e9"
                 StrokeThickness="2"
+                Label="{Binding FosLabel}"
                 ItemsSource="{Binding GraphLineStable}"           
+                />
+
+            <chart:LineSeries
+                XBindingPath="x"
+                YBindingPath="y"
+                Interior="LightPink"
+                StrokeThickness="2"
+                LegendIcon="Circle"
+                Label="FOS 1"
+                ItemsSource="{Binding GraphLineFOS1}"           
                 />
 
             <chart:ScatterSeries
@@ -105,10 +140,11 @@
                 YBindingPath="APS"
                 ScatterHeight="12"
                 ScatterWidth ="12"
+                LegendIcon="None"
                 SegmentSelectionBrush="Green"
                 SelectedIndex="{Binding SelectedPillarIndex, Mode=TwoWay}"
                 SegmentColorPath="Color"
-                ItemsSource="{Binding GraphPointData}"
+                ItemsSource="{Binding PillarModelList}"
                 />
 
             <chart:SfChart.ContextMenu>
@@ -118,6 +154,35 @@
                 </ContextMenu>
             </chart:SfChart.ContextMenu>
         </chart:SfChart>
+
+        <StackPanel 
+            Grid.Column="1"
+            Grid.Row="1"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Top">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="FontWeight" Value="Medium"/>
+                    <Setter Property="Padding" Value="3"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button 
+                Click="Copy_Click"
+                Margin="4">
+                Copy Image
+            </Button>
+
+            <Button 
+                Click="Save_Click"
+                Margin="4">
+                Save Image
+            </Button>
+        </StackPanel>
 
         <Grid Grid.Column="1" Grid.Row="2" Background="WhiteSmoke">
             <Grid.RowDefinitions>
@@ -139,7 +204,7 @@
             </Label>
 
             <syncfusion:SfDataGrid
-                ItemsSource="{Binding GraphPointData}"
+                ItemsSource="{Binding PillarModelList}"
                 SelectedIndex="{Binding SelectedPillarIndex}"
                 Grid.Column="0"
                 Grid.Row="1"
