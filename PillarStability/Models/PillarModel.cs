@@ -1,8 +1,10 @@
-﻿using SharedWpfLibrary.Service;
+﻿using PillarStability.Services;
+using SharedWpfLibrary.Service;
 using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
+using System.Xml;
 
 namespace PillarStability.Models
 {
@@ -47,6 +49,16 @@ namespace PillarStability.Models
                 return Weff / Height;
             }
         }
+        public float CurrentFoS
+        {
+            get
+            {
+                if (MonteCarloModel.FosList.Count == 0) return float.NaN;
+                var _fosBinsService = new BinsService(MonteCarloModel.FosList, MonteCarloModel.Bins);
+                return MathF.Round(_fosBinsService.getMostFrequentBin().Min, 2);
+            }
+        }
+
 
     }
 }

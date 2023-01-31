@@ -96,7 +96,7 @@
             <chart:SfChart.SecondaryAxis>
                 <chart:NumericalAxis
                     StartRangeFromZero="True"
-                    Header="Stress"
+                    Header="Average Stress"
                     FontSize="14"/>
             </chart:SfChart.SecondaryAxis>
 
@@ -225,6 +225,10 @@
                                    VerticalAlignment="Center"/>
                     <syncfusion:GridTextColumn MappingName="APS" 
                                    HeaderText="Average Stress (MPa)"
+                                   TextAlignment="Center"  
+                                   VerticalAlignment="Center"/>
+                    <syncfusion:GridTextColumn MappingName="CurrentFoS" 
+                                   HeaderText="Average FOS"
                                    TextAlignment="Center"  
                                    VerticalAlignment="Center"/>
                 </syncfusion:SfDataGrid.Columns>

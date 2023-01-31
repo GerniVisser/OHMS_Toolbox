@@ -27,11 +27,11 @@ namespace PillarStability.Models
             StdLength = 0.5f;
         }
 
-        public PowerFormulaModel(float alpha, float beta)
+        public PowerFormulaModel(float alpha, float beta, float kappa = 70f)
         {
             Alpha = alpha;
             Beta = beta;
-            K = 70f;
+            K = kappa;
             StdK = 0.5f;
             StdWidth = 0.5f;
             StdHeight = 0.1f;

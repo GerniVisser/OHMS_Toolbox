@@ -157,14 +157,14 @@ namespace PillarStability.ViewModels
                     }
                 case 4:
                     {
-                        _pillarModel.PillarStrengthModel = new PowerFormulaModel(0.76f, 0.36f);
+                        _pillarModel.PillarStrengthModel = new PowerFormulaModel(0.76f, 0.36f, 86f);
                         _strengthService = new PowerFormulaService(_pillarModel);
                         PropGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
                         break;
                     }
                 case 5:
                     {
-                        _pillarModel.PillarStrengthModel = new PowerFormulaModel(0.67f, 0.32f);
+                        _pillarModel.PillarStrengthModel = new PowerFormulaModel(0.67f, 0.32f, 67f);
                         _strengthService = new PowerFormulaService(_pillarModel);
                         PropGridViewModel = new PropGrid.PowerFormulaPropGridVM(_pillarModel);
                         break;
