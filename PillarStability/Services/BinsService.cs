@@ -22,6 +22,18 @@ namespace PillarStability.Services
             get { return _bins; }
         }
 
+        private float _std;
+
+        public float Std
+        {
+            get 
+            { 
+                if (_std == 0) { Std = calcStandardDeviation(); }
+                return _std; 
+            }
+            set { _std = value; }
+        }
+
         private void populateBins(List<float> value, int numberOfBins)
         {
             value.Sort();
@@ -92,6 +104,29 @@ namespace PillarStability.Services
                 res = res + BinsList[i].Frequency;
             }
             return res;
+        }
+
+        public float calcMean()
+        {
+            float res = 0;
+            for (int i = 0; i < BinsList.Count - 1; i++)
+            {
+                res = res + BinsList[i].Min;
+            }
+
+            return res / (BinsList.Count - 1);
+        }
+
+        private float calcStandardDeviation()
+        {
+            float res = 0;
+            float mean = calcMean();
+
+            for (int i = 0; i < BinsList.Count - 1; i++)
+            {
+                res += MathF.Pow(mean - BinsList[i].Min, 2);
+            }
+            return MathF.Sqrt(res / (BinsList.Count - 1));
         }
     }
 

@@ -41,9 +41,14 @@ namespace PillarStability.Services
             BinsService binsService = new BinsService(pillarModel.MonteCarloModel.FosList, pillarModel.MonteCarloModel.Bins);
 
             int freqSum = binsService.getSumOffrequencies();
+            float mean = binsService.calcMean();
+            float std2 = binsService.Std * 2 ;
 
             for (int i = 0; i < binsService.BinsList.Count; i++)
             {
+                if (binsService.BinsList[i].Min < (mean - std2) || binsService.BinsList[i].Min > (mean + std2)) continue;
+                if (binsService.BinsList[i].Min > 10 || binsService.BinsList[i].Min < 0) continue;
+
                 float x = binsService.BinsList[i].Min;
                 float y = (float)binsService.BinsList[i].Frequency / (float)freqSum;
 
@@ -67,9 +72,14 @@ namespace PillarStability.Services
             int freqSum = binsService.getSumOffrequencies();
 
             float cumnormfreq = 0f;
+            float mean = binsService.calcMean();
+            float std2 = binsService.Std * 2;
 
             for (int i = 0; i < binsService.BinsList.Count; i++)
             {
+                if (binsService.BinsList[i].Min < (mean - std2) || binsService.BinsList[i].Min > (mean + std2)) continue;
+                if (binsService.BinsList[i].Min > 10 || binsService.BinsList[i].Min < 0) continue;
+
                 float x = binsService.BinsList[i].Min;
                 float y = (float)binsService.BinsList[i].Frequency / (float)freqSum;
 

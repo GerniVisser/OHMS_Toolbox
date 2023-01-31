@@ -29,7 +29,7 @@ namespace PillarStability.Models
             UCS = 111.42f;
             StdLength = 0.5f;
             StdWidth = 0.5f;
-            StdHeight = 0.5f;
+            StdHeight = 0.1f;
             Kappa = 0f;
             C1 = 0.68f;
             StdC1 = 0.1f;

@@ -34,7 +34,7 @@ namespace PillarStability.Models
             K = 70f;
             StdK = 0.5f;
             StdWidth = 0.5f;
-            StdHeight = 0.5f;
+            StdHeight = 0.1f;
             StdLength = 0.5f;
         }
     }
