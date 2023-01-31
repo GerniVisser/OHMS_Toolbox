@@ -11,8 +11,6 @@
       <ItemGroup>
         <None Remove="Icons\Borehole_white.png" />
         <None Remove="Icons\Bug_White.png" />
-        <None Remove="Icons\calculator.png" />
-        <None Remove="Icons\Calculator_white.png" />
         <None Remove="Icons\Caveability_white.png" />
         <None Remove="Icons\Home_white.png" />
         <None Remove="Icons\ohms_logo_oBF_icon.ico" />
@@ -27,12 +25,6 @@
 	  </Resource>
 	  <Resource Include="Icons\Bug_White.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Icons\calculator.png">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Icons\Calculator_white.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
 	  <Resource Include="Icons\Caveability_white.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

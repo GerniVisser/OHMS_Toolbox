@@ -136,15 +136,15 @@
                 <Image Source="\Icons\Borehole_white.png"/>
             </ListBoxItem>
         </ListBox>
-        <ListBoxItem
-            BorderThickness="0" Margin="0 0 0 10" Padding="3" Width="50" VerticalAlignment="Bottom" Background="Transparent">
-            <ListBoxItem.ToolTip>
+        <TextBlock
+            Margin="0 0 0 10" Padding="3" Width="50" VerticalAlignment="Bottom" Background="Transparent">
+            <TextBlock.ToolTip>
                 Report a Bug
-            </ListBoxItem.ToolTip>
+            </TextBlock.ToolTip>
             <Hyperlink NavigateUri="https://forms.gle/6ZsC3oaf427yXLcZA" RequestNavigate="Hyperlink_RequestNavigate">
                 <Image Source="\Icons\Bug_white.png"></Image>
             </Hyperlink>
-        </ListBoxItem>
+        </TextBlock>
         <ContentControl Content="{Binding CurrentViewModel}" Grid.Column="1"/>
     </Grid>
 </UserControl>

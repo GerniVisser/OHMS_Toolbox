@@ -4,10 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PillarStability.Views"
-             xmlns:vm="clr-namespace:PillarStability.ViewModels"
              xmlns:graphvm="clr-namespace:PillarStability.ViewModels.Graphs"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-             xmlns:chart="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -20,8 +18,6 @@
             <Setter Property="FontWeight" Value="Medium"/>
         </Style>
         <Style x:Key="NavMenuStyle" TargetType="ListBoxItem">
-            <Setter Property="FontWeight" Value="Light" />
-            <Setter Property="FontSize" Value="12" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Toolbox"
         xmlns:views="clr-namespace:Toolbox.Views"
         mc:Ignorable="d"
-        Title="OHMS Toolbox" 
+        Title="Rock Engineer's Toolbox" 
         Icon="pack://application:,,,/Icons/ohms_logo_oBF_icon.ico"
         Height="768" 
         Width="1280" 

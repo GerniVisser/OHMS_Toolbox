@@ -1,5 +1,4 @@
-﻿using Meta.Numerics.Statistics.Distributions;
-using PillarStability.DataObjects;
+﻿using PillarStability.DataObjects;
 using PillarStability.Models;
 using SharedWpfLibrary.Tools;
 using System;
