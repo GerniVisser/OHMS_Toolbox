@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Borehole.ViewModels;
+using SharedWpfLibrary.Models;
+using SharedWpfLibrary.Service;
 using System.Windows;
 
 namespace Borehole
@@ -13,5 +10,17 @@ namespace Borehole
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            MainWindow = new MainWindow()
+            {
+                DataContext = new MainViewModel(null)
+            };
+            MainWindow.Show();
+
+            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(SyncfusionLicanseModel.getSyncfusionLicanse());
+
+            base.OnStartup(e);
+        }
     }
 }

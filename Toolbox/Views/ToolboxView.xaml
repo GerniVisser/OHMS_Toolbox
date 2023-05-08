@@ -9,6 +9,8 @@
              xmlns:cavev="clr-namespace:Caveability.Views;assembly=Caveability"
              xmlns:pillarvm="clr-namespace:PillarStability.ViewModels;assembly=PillarStability"
              xmlns:pillarv="clr-namespace:PillarStability.Views;assembly=PillarStability"
+             xmlns:boreholevm="clr-namespace:Borehole.ViewModels;assembly=Borehole"
+             xmlns:boreholev="clr-namespace:Borehole.Views;assembly=Borehole"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -82,6 +84,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type pillarvm:PillarStabilityViewModel}">
                 <pillarv:PillarStabiltyView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type boreholevm:BoreholeViewModel}">
+                <boreholev:BoleholeView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type localvm:HomeViewModel}">
                 <local:HomeView/>

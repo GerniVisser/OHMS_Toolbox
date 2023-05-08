@@ -4,29 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Borehole"
+        xmlns:views="clr-namespace:Borehole.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Borehole" Height="450" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions> 
-        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Background="AliceBlue">
-            <TextBlock HorizontalAlignment="Center">Lithology</TextBlock>
-            <Border HorizontalAlignment="Stretch" Margin="20" BorderBrush="Black" BorderThickness="1">
-                <DockPanel Margin="20 10">
-                    <TextBlock MaxWidth="100" HorizontalAlignment="Left">Hello</TextBlock>
-                    <Button HorizontalAlignment="Right">Open File</Button>
-                </DockPanel>
-            </Border>
-            <DockPanel HorizontalAlignment="Center">
-                <TextBlock MaxWidth="100" HorizontalAlignment="Left">ID</TextBlock>
-                <Menu HorizontalAlignment="Right" Margin="100 0 0 0">Open File</Menu>
-            </DockPanel>
-            <DockPanel HorizontalAlignment="Center">
-                <TextBlock MaxWidth="100" HorizontalAlignment="Left">ID</TextBlock>
-                <Menu HorizontalAlignment="Right" Margin="100 0 0 0">Open File</Menu>
-            </DockPanel>
-        </StackPanel>
+        <views:BoleholeView DataContext="{Binding BoreholeViewModel}"></views:BoleholeView>
     </Grid>
 </Window>

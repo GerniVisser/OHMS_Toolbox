@@ -49,6 +49,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Borehole\Borehole.csproj" />
 	  <ProjectReference Include="..\Caveability\Caveability.csproj" />
 	  <ProjectReference Include="..\PillarStability\PillarStability.csproj" />
 	  <ProjectReference Include="..\SharedWpfLibrary\_SharedWpfLibrary.csproj" />

@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toolbox", "Toolbox\Toolbox.csproj", "{36E99518-888C-40B9-8360-54DA5B6F4773}"
+	ProjectSection(ProjectDependencies) = postProject
+		{76A96769-15DA-411D-B603-3BE64808769C} = {76A96769-15DA-411D-B603-3BE64808769C}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PillarStability", "PillarStability\PillarStability.csproj", "{3E70169D-601E-4021-B84E-29EBD15443D9}"
 EndProject
@@ -11,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_SharedWpfLibrary", "Shared
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Caveability", "Caveability\Caveability.csproj", "{1F93AD21-0A53-414A-A3BB-F530711544A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Borehole", "Borehole\Borehole.csproj", "{76A96769-15DA-411D-B603-3BE64808769C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Borehole", "Borehole\Borehole.csproj", "{76A96769-15DA-411D-B603-3BE64808769C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
